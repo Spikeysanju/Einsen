@@ -2,9 +2,9 @@ package dev.spikeysanju.einsen.components
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.material.IconButton
+import androidx.compose.material.MaterialTheme.colors
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import dev.spikeysanju.einsen.R
@@ -17,6 +17,11 @@ fun TopBar(title: String) {
             painterResource(id = R.drawable.ic_back)
         }
 
-        Text(text = title, style = typography.h4, textAlign = TextAlign.Start, color = Color.White)
+        Text(
+            text = title,
+            style = typography.h4,
+            textAlign = TextAlign.Start,
+            color = colors.onPrimary
+        )
     }
 }

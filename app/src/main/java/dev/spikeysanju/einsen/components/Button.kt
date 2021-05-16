@@ -5,14 +5,13 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Button
 import androidx.compose.material.ButtonDefaults
-import androidx.compose.material.MaterialTheme
+import androidx.compose.material.MaterialTheme.colors
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import dev.spikeysanju.einsen.ui.theme.blue200
 import dev.spikeysanju.einsen.ui.theme.typography
 
 @Composable
@@ -24,7 +23,7 @@ fun PrimaryButton(title: String, onclick: () -> Unit) {
             .padding(start = 20.dp, end = 20.dp),
         onClick = { onclick() },
         colors = ButtonDefaults.buttonColors(
-            backgroundColor = blue200,
+            backgroundColor = colors.primaryVariant,
             contentColor = Color.White
         )
     ) {
@@ -32,7 +31,7 @@ fun PrimaryButton(title: String, onclick: () -> Unit) {
             text = title,
             style = typography.subtitle2,
             textAlign = TextAlign.Center,
-            color = MaterialTheme.colors.onBackground
+            color = colors.onPrimary
         )
     }
 }

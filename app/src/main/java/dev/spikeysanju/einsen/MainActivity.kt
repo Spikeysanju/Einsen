@@ -6,6 +6,7 @@ import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material.MaterialTheme
+import androidx.compose.material.MaterialTheme.colors
 import androidx.compose.material.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -15,10 +16,7 @@ import dev.spikeysanju.einsen.components.InputTextField
 import dev.spikeysanju.einsen.components.PrimaryButton
 import dev.spikeysanju.einsen.components.Slider
 import dev.spikeysanju.einsen.ui.theme.EinsenTheme
-import dev.spikeysanju.einsen.ui.theme.blue200
-import dev.spikeysanju.einsen.ui.theme.blue300
-import dev.spikeysanju.einsen.ui.theme.blue400
-import dev.spikeysanju.einsen.ui.theme.blue500
+
 
 
 class MainActivity : ComponentActivity() {
@@ -36,10 +34,15 @@ class MainActivity : ComponentActivity() {
                         Slider()
                         InputTextField("Title")
                         PrimaryButton(title = "Save task", onclick = {})
-                        DashboardCardItem(modifier, "Important & Urgent", "12", blue200)
-                        DashboardCardItem(modifier, "Important", "03", blue300)
-                        DashboardCardItem(modifier, "Urgent", "08", blue400)
-                        DashboardCardItem(modifier, "Don't touch!", "01", blue500)
+                        DashboardCardItem(
+                            modifier,
+                            "Important & Urgent",
+                            "12",
+                            colors.primaryVariant
+                        )
+                        DashboardCardItem(modifier, "Important", "03", colors.secondary)
+                        DashboardCardItem(modifier, "Urgent", "08", colors.secondaryVariant)
+                        DashboardCardItem(modifier, "Don't touch!", "01", colors.background)
                     }
                 }
             }
