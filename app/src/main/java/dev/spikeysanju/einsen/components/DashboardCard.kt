@@ -2,6 +2,7 @@ package dev.spikeysanju.einsen.components
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -22,15 +23,17 @@ import dev.spikeysanju.einsen.ui.theme.typography
 @Composable
 fun DashboardCardItem(modifier: Modifier, title: String, count: String, color: Color) {
     val icon = painterResource(id = R.drawable.ic_arrow_right)
+
     Row(
         modifier = modifier
             .background(color)
-            .padding(16.dp),
+            .clickable { }
+            .padding(12.dp),
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.SpaceAround
     ) {
         Column(
-            modifier = Modifier
+            modifier = modifier
                 .align(Alignment.CenterVertically)
         ) {
             Text(text = title, style = typography.h6, color = Color.White)
@@ -40,5 +43,4 @@ fun DashboardCardItem(modifier: Modifier, title: String, count: String, color: C
         Spacer(modifier = Modifier.width(16.dp))
         Image(painter = icon, contentDescription = "Arrow right")
     }
-
 }
