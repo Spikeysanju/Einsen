@@ -23,7 +23,7 @@ val typography = Typography(
     ),
     h3 = TextStyle(
         fontFamily = Grotesk,
-        fontWeight = FontWeight.Medium,
+        fontWeight = FontWeight.Normal,
         fontSize = 36.sp
     ),
     h4 = TextStyle(
