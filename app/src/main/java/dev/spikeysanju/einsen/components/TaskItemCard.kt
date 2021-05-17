@@ -34,8 +34,8 @@ fun TaskItemCard(id: String, title: String, emoji: String, category: String, tim
             .height(110.dp)
             .clip(RoundedCornerShape(12.dp))
             .background(colors.secondary)
-            .padding(12.dp)
-            .clickable { },
+            .clickable { }
+            .padding(12.dp),
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.SpaceAround
     ) {

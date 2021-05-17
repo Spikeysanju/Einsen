@@ -30,6 +30,8 @@ private val LightColorPalette = lightColors(
     onSurface = success
 )
 
+// TODO: ADD MORE THEMES HERE
+
 @Composable
 fun EinsenTheme(darkTheme: Boolean = isSystemInDarkTheme(), content: @Composable() () -> Unit) {
     val colors = if (darkTheme) {

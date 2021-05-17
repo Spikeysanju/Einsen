@@ -31,3 +31,5 @@ val gray200 = Color(0xFF242424)
 val gray300 = Color(0xFF101010)
 val gray400 = Color(0xFF0A0A0A)
 val gray500 = Color(0xFF000000)
+
+// TODO: ADD MORE SHADES LIKE PURPLE AND WHITE

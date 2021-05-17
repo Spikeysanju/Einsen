@@ -3,14 +3,16 @@ package dev.spikeysanju.einsen
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.material.MaterialTheme
+import androidx.compose.material.MaterialTheme.colors
 import androidx.compose.material.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import dev.spikeysanju.einsen.components.TaskItemCard
+import dev.spikeysanju.einsen.components.MySlider
 import dev.spikeysanju.einsen.ui.theme.EinsenTheme
 
 
@@ -20,19 +22,31 @@ class MainActivity : ComponentActivity() {
         setContent {
             EinsenTheme {
                 // A surface container using the 'background' color from the theme
-                Surface(color = MaterialTheme.colors.background) {
-                    Column {
+                Surface(color = colors.background) {
+                    Column(
+                        modifier = Modifier
+                            .fillMaxSize()
+                            .background(colors.background)
+                    ) {
                         val modifier = Modifier
                             .fillMaxWidth()
                             .weight(1f)
 
-                        TaskItemCard(
-                            id = "1",
-                            title = "OneFeed App",
-                            emoji = "📮",
-                            category = "Open Source",
-                            timer = "15:00"
-                        )
+                        MySlider()
+
+//                        LazyColumn() {
+//                            items(10){
+//                                Spacer(modifier = Modifier.height(12.dp))
+//                                TaskItemCard(
+//                                    id = "1",
+//                                    title = "OneFeed App",
+//                                    emoji = "📮",
+//                                    category = "Open Source",
+//                                    timer = "15:00"
+//                                )
+//                            }
+//                        }
+
 //                        Slider()
 //                        InputTextField("Title")
 //                        PrimaryButton(title = "Save task", onclick = {})

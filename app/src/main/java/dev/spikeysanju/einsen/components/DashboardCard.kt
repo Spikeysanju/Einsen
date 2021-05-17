@@ -20,7 +20,7 @@ import androidx.compose.ui.unit.dp
 import dev.spikeysanju.einsen.R
 import dev.spikeysanju.einsen.ui.theme.typography
 
-
+// TODO: WRAP PARAMS INTO DATA CLASS
 @Composable
 fun DashboardCardItem(modifier: Modifier, title: String, count: String, color: Color) {
     val icon = painterResource(id = R.drawable.ic_arrow_right)
