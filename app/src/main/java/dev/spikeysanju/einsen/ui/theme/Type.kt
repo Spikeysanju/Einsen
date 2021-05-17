@@ -16,6 +16,16 @@ private val Grotesk = FontFamily(
 
 // Set of Material typography styles to start with
 val typography = Typography(
+    h2 = TextStyle(
+        fontFamily = Grotesk,
+        fontWeight = FontWeight.W600,
+        fontSize = 48.sp
+    ),
+    h3 = TextStyle(
+        fontFamily = Grotesk,
+        fontWeight = FontWeight.Medium,
+        fontSize = 36.sp
+    ),
     h4 = TextStyle(
         fontFamily = Grotesk,
         fontWeight = FontWeight.W600,
