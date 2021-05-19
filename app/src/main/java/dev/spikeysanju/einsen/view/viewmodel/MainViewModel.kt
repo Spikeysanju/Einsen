@@ -1,5 +1,9 @@
 package dev.spikeysanju.einsen.view.viewmodel
 
-import androidx.lifecycle.ViewModel
+import android.app.Application
+import androidx.lifecycle.AndroidViewModel
+import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 
-class MainViewModel : ViewModel()
+@HiltViewModel
+class MainViewModel @Inject constructor(application: Application) : AndroidViewModel(application)

@@ -76,8 +76,8 @@ fun TaskItemCard(id: String, title: String, emoji: String, category: String, tim
             color = colors.onPrimary,
             modifier = Modifier.padding(end = 20.dp)
         )
-
     }
+    Spacer(modifier = Modifier.height(12.dp))
 }
 
 @Composable

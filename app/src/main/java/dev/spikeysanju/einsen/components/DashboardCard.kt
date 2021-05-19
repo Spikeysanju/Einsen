@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
+import androidx.compose.material.MaterialTheme.colors
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -37,9 +38,9 @@ fun DashboardCardItem(modifier: Modifier, title: String, count: String, color: C
             modifier = modifier
                 .align(Alignment.CenterVertically)
         ) {
-            Text(text = title, style = typography.h6, color = Color.White)
+            Text(text = title, style = typography.h6, color = colors.onPrimary)
             Spacer(modifier = Modifier.height(16.dp))
-            Text(text = count, style = typography.h2, color = Color.White)
+            Text(text = count, style = typography.h2, color = colors.onPrimary)
         }
         Spacer(modifier = Modifier.width(16.dp))
         Image(painter = icon, contentDescription = "Arrow right")

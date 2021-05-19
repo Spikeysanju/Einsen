@@ -1,9 +1,11 @@
 package dev.spikeysanju.einsen.components
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
 import androidx.compose.material.MaterialTheme.colors
@@ -22,11 +24,14 @@ fun TopBar(title: String) {
     Box(
         modifier = Modifier
             .fillMaxWidth()
-            .height(50.dp), contentAlignment = Alignment.CenterStart
+            .height(50.dp)
+            .background(colors.primary)
+            .padding(start = 16.dp),
+        contentAlignment = Alignment.CenterStart
     ) {
         Text(
             text = title,
-            style = typography.h4,
+            style = typography.h5,
             textAlign = TextAlign.Start,
             color = colors.onPrimary
         )
