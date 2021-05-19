@@ -32,4 +32,30 @@ val gray300 = Color(0xFF101010)
 val gray400 = Color(0xFF0A0A0A)
 val gray500 = Color(0xFF000000)
 
-// TODO: ADD MORE SHADES LIKE PURPLE AND WHITE
+// shades of purple
+val purple100 = Color(0xFF913AFF)
+val purple200 = Color(0xFF6D00F8)
+val purple300 = Color(0xFF5000D3)
+val purple400 = Color(0xFF3400A2)
+val purple500 = Color(0xFF220069)
+
+// shades of oliver
+val oliver100 = Color(0xFFCEBA00)
+val oliver200 = Color(0xFFB1A000)
+val oliver300 = Color(0xFF9A8B00)
+val oliver400 = Color(0xFF776B00)
+val oliver500 = Color(0xFF554D00)
+
+// shades of red
+val red100 = Color(0xFFEA3E3C)
+val red200 = Color(0xFFC1273B)
+val red300 = Color(0xFF74152F)
+val red400 = Color(0xFF470E2B)
+val red500 = Color(0xFF281426)
+
+// shades of white
+val white100 = Color(0xFF303030)
+val white200 = Color(0xFF242424)
+val white300 = Color(0xFF101010)
+val white400 = Color(0xFF0A0A0A)
+val white500 = Color(0xFF000000)

@@ -16,6 +16,7 @@ import dev.spikeysanju.einsen.ui.theme.typography
 
 @Composable
 fun PrimaryButton(title: String, onclick: () -> Unit) {
+
     Button(
         modifier = Modifier
             .fillMaxWidth()
