@@ -11,11 +11,11 @@ import kotlinx.coroutines.flow.map
 import java.io.IOException
 import javax.inject.Singleton
 
-val Context.uiModePrefDataStore by preferencesDataStore("ui_mode_pref")
+val Context.themePrefDataStore by preferencesDataStore("ui_mode_pref")
 
-class PreferenceManagerImpl(context: Context) : PreferenceManager {
+class ThemeManagerImpl(context: Context) : ThemeManager {
 
-    private val dataStore = context.uiModePrefDataStore
+    private val dataStore = context.themePrefDataStore
 
     override val uiModeFlow: Flow<Boolean> = dataStore.data
         .catch {
@@ -39,7 +39,7 @@ class PreferenceManagerImpl(context: Context) : PreferenceManager {
 }
 
 @Singleton
-interface PreferenceManager {
+interface ThemeManager {
     val uiModeFlow: Flow<Boolean>
     suspend fun setDarkMode(enable: Boolean)
 }

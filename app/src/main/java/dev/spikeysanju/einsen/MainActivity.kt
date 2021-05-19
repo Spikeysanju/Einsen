@@ -15,7 +15,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.lifecycleScope
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import dagger.hilt.android.AndroidEntryPoint
-import dev.spikeysanju.einsen.data.datastore.PreferenceManager
+import dev.spikeysanju.einsen.data.datastore.ThemeManager
 import dev.spikeysanju.einsen.navigation.NavGraph
 import dev.spikeysanju.einsen.ui.theme.EinsenTheme
 import kotlinx.coroutines.flow.collect
@@ -26,7 +26,7 @@ import javax.inject.Inject
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     @Inject
-    lateinit var preferenceManager: PreferenceManager
+    lateinit var themeManager: ThemeManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,12 +41,12 @@ class MainActivity : ComponentActivity() {
     fun EinsenMain() {
 
         // check UI mode
-        val darkMode by preferenceManager.uiModeFlow.collectAsState(initial = isSystemInDarkTheme())
+        val darkMode by themeManager.uiModeFlow.collectAsState(initial = isSystemInDarkTheme())
 
         // set UI mode accordingly
         val toggleTheme: () -> Unit = {
             lifecycleScope.launch {
-                preferenceManager.setDarkMode(!darkMode)
+                themeManager.setDarkMode(!darkMode)
             }
         }
 
@@ -61,7 +61,7 @@ class MainActivity : ComponentActivity() {
 
     private fun observeUIMode() {
         lifecycleScope.launchWhenStarted {
-            preferenceManager.uiModeFlow.collect {
+            themeManager.uiModeFlow.collect {
                 val mode = when (it) {
                     true -> AppCompatDelegate.MODE_NIGHT_YES
                     false -> AppCompatDelegate.MODE_NIGHT_NO

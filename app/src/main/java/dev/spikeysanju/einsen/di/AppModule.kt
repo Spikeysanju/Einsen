@@ -5,8 +5,8 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
-import dev.spikeysanju.einsen.data.datastore.PreferenceManager
-import dev.spikeysanju.einsen.data.datastore.PreferenceManagerImpl
+import dev.spikeysanju.einsen.data.datastore.ThemeManager
+import dev.spikeysanju.einsen.data.datastore.ThemeManagerImpl
 import javax.inject.Singleton
 
 @Module
@@ -14,7 +14,7 @@ import javax.inject.Singleton
 object AppModule {
     @Singleton
     @Provides
-    fun providePreferenceManager(application: Application): PreferenceManager {
-        return PreferenceManagerImpl(application)
+    fun providePreferenceManager(application: Application): ThemeManager {
+        return ThemeManagerImpl(application)
     }
 }
