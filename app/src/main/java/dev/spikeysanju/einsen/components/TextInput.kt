@@ -41,6 +41,8 @@ fun InputTextField(title: String) {
         colors = TextFieldDefaults.textFieldColors(
             textColor = colors.onPrimary,
             focusedLabelColor = colors.onPrimary,
+            focusedIndicatorColor = colors.primary,
+            unfocusedIndicatorColor = colors.secondaryVariant,
             cursorColor = colors.onPrimary,
             placeholderColor = colors.primaryVariant,
             disabledPlaceholderColor = colors.secondary

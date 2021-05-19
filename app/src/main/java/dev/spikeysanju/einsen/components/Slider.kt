@@ -3,7 +3,9 @@ package dev.spikeysanju.einsen.components
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.MaterialTheme.colors
 import androidx.compose.material.Slider
@@ -18,7 +20,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import dev.spikeysanju.einsen.ui.theme.typography
-import dev.spikeysanju.einsen.utils.makeValueRound
 
 
 @Composable
@@ -29,13 +30,12 @@ fun Slider() {
     Column(
         Modifier
             .fillMaxWidth()
-            .padding(16.dp)
     ) {
-        Text(
-            text = makeValueRound(sliderState).toString(),
-            style = typography.subtitle1,
-            color = colors.onPrimary
-        )
+//        Text(
+//            text = makeValueRound(sliderState).toString(),
+//            style = typography.subtitle1,
+//            color = colors.onPrimary
+//        )
         Slider(
             value = sliderState,
             onValueChange = { sliderState = it },
@@ -61,5 +61,15 @@ fun Slider() {
                 )
             }
         }
+    }
+}
+
+
+@Composable
+fun SliderWithTitle(title: String) {
+    Column(modifier = Modifier.padding(16.dp)) {
+        Text(text = title, style = typography.subtitle1, color = colors.onPrimary)
+        Spacer(modifier = Modifier.height(12.dp))
+        Slider()
     }
 }
