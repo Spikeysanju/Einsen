@@ -33,8 +33,8 @@ class MainActivity : ComponentActivity() {
         setContent {
             EinsenMain()
         }
-        // fetch theme name
-        observeUIMode()
+        // fetch theme mode
+        observeThemeMode()
     }
 
     @Composable
@@ -59,7 +59,7 @@ class MainActivity : ComponentActivity() {
     }
 
 
-    private fun observeUIMode() {
+    private fun observeThemeMode() {
         lifecycleScope.launchWhenStarted {
             themeManager.uiModeFlow.collect {
                 val mode = when (it) {
