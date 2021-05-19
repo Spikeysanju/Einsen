@@ -53,7 +53,8 @@ fun TopBarWithBack(title: String, upPress: () -> Unit) {
             text = title,
             style = typography.h3,
             textAlign = TextAlign.Start,
-            color = colors.onPrimary
+            color = colors.onPrimary,
+            modifier = Modifier.padding(start = 16.dp)
         )
     }
 }
