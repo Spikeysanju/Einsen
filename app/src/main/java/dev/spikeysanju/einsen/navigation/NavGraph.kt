@@ -7,10 +7,8 @@ import androidx.hilt.navigation.HiltViewModelFactory
 import androidx.hilt.navigation.compose.hiltNavGraphViewModel
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
-import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import androidx.navigation.compose.navArgument
 import androidx.navigation.compose.navigate
 import androidx.navigation.compose.rememberNavController
 import dev.spikeysanju.einsen.view.add.AddTaskScreen
@@ -29,7 +27,7 @@ fun NavGraph(toggleTheme: () -> Unit) {
     val navController = rememberNavController()
     val actions = remember(navController) { MainActions(navController) }
 
-    NavHost(navController, startDestination = Screen.Home.route) {
+    NavHost(navController, startDestination = Screen.TaskDetails.route) {
         composable(Screen.Home.route) {
             val viewModel: MainViewModel = viewModel(
                 factory = HiltViewModelFactory(LocalContext.current, it)
@@ -47,15 +45,20 @@ fun NavGraph(toggleTheme: () -> Unit) {
             AllTaskScreen(navController, viewModel, actions)
         }
 
-        composable(
-            "${Screen.TaskDetails.route}/{id}",
-            arguments = listOf(navArgument(EndPoints.ID) { type = NavType.IntType })
-        ) {
-            TaskDetailsScreen(
-                navController,
-                actions,
-                it.arguments?.getInt(EndPoints.ID) ?: "",
-            )
+//        composable(
+//            "${Screen.TaskDetails.route}/{id}",
+//            arguments = listOf(navArgument(EndPoints.ID) { type = NavType.IntType })
+//        ) {
+//            TaskDetailsScreen(
+//                navController,
+//                actions,
+//                it.arguments?.getInt(EndPoints.ID) ?: 0,
+//            )
+//        }
+
+        composable(Screen.TaskDetails.route) {
+            val viewModel = hiltNavGraphViewModel<MainViewModel>(backStackEntry = it)
+            TaskDetailsScreen(navController, actions)
         }
 
         composable(Screen.Settings.route) {
