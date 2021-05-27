@@ -69,6 +69,11 @@ dependencies {
     // Preferences DataStore
     implementation("androidx.datastore:datastore-preferences:${rootProject.extra["dataStoreVersion"]}")
 
+    // Room
+    implementation("androidx.room:room-runtime:${rootProject.extra["roomVersion"]}")
+    kapt("androidx.room:room-compiler:${rootProject.extra["roomVersion"]}")
+    implementation("androidx.room:room-ktx:${rootProject.extra["roomVersion"]}")
+
     // System UI Controller
     implementation("com.google.accompanist:accompanist-systemuicontroller:0.8.1")
 
