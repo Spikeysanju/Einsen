@@ -10,12 +10,10 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material.MaterialTheme
-import androidx.compose.material.OutlinedTextField
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Slider
 import androidx.compose.material.SliderDefaults
 import androidx.compose.material.Text
-import androidx.compose.material.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -25,7 +23,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import dev.spikeysanju.einsen.components.LabelView
+import dev.spikeysanju.einsen.components.InputTextField
 import dev.spikeysanju.einsen.components.PrimaryButton
 import dev.spikeysanju.einsen.components.TopBarWithBack
 import dev.spikeysanju.einsen.model.Task
@@ -44,6 +42,7 @@ fun AddTaskScreen(viewModel: MainViewModel, actions: MainActions) {
         var title by remember { mutableStateOf("") }
         var description by remember { mutableStateOf("") }
         var category by remember { mutableStateOf("") }
+        var tags by remember { mutableStateOf("") }
         val listState = rememberLazyListState()
         var urgencyState by remember { mutableStateOf(0F) }
         var importanceState by remember { mutableStateOf(0F) }
@@ -53,55 +52,23 @@ fun AddTaskScreen(viewModel: MainViewModel, actions: MainActions) {
 
             item {
                 Spacer(modifier = Modifier.height(16.dp))
-
-                OutlinedTextField(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(start = 20.dp, end = 20.dp),
-                    value = title,
-                    onValueChange = {
-                        title = it
-                    },
-                    label = { LabelView(title = "Title") },
-                    textStyle = typography.body1,
-                    colors = textFieldColors()
-                )
+                InputTextField(title = "Title", value = title) {
+                    title = it
+                }
             }
 
             item {
                 Spacer(modifier = Modifier.height(16.dp))
-                Spacer(modifier = Modifier.height(16.dp))
-                OutlinedTextField(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(start = 20.dp, end = 20.dp),
-                    value = description,
-                    onValueChange = {
-                        description = it
-                    },
-
-                    label = { LabelView(title = "Description") },
-                    textStyle = typography.body1,
-                    colors = textFieldColors()
-                )
+                InputTextField(title = "Description", value = description) {
+                    description = it
+                }
             }
 
             item {
                 Spacer(modifier = Modifier.height(16.dp))
-                Spacer(modifier = Modifier.height(16.dp))
-                OutlinedTextField(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(start = 20.dp, end = 20.dp),
-                    value = category,
-                    onValueChange = {
-                        category = it
-                    },
-
-                    label = { LabelView(title = "Category") },
-                    textStyle = typography.body1,
-                    colors = textFieldColors()
-                )
+                InputTextField(title = "Category", value = category) {
+                    category = it
+                }
             }
 
             item {
@@ -207,19 +174,8 @@ fun AddTaskScreen(viewModel: MainViewModel, actions: MainActions) {
                 }
             }
         }
-    }
 
 
 }
 
 
-@Composable
-private fun textFieldColors() = TextFieldDefaults.textFieldColors(
-    textColor = MaterialTheme.colors.onPrimary,
-    focusedLabelColor = MaterialTheme.colors.onPrimary,
-    focusedIndicatorColor = MaterialTheme.colors.primary,
-    unfocusedIndicatorColor = MaterialTheme.colors.secondaryVariant,
-    cursorColor = MaterialTheme.colors.onPrimary,
-    placeholderColor = MaterialTheme.colors.primaryVariant,
-    disabledPlaceholderColor = MaterialTheme.colors.secondary
-)

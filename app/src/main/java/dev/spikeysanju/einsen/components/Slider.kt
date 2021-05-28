@@ -61,7 +61,7 @@ fun Slider() {
 
 
 @Composable
-fun SliderWithTitle(title: String) {
+fun SliderWithTitle(title: String, sliderState: Float) {
     Column(modifier = Modifier.padding(16.dp)) {
         Text(text = title, style = typography.subtitle1, color = colors.onPrimary)
         Spacer(modifier = Modifier.height(12.dp))
