@@ -35,7 +35,10 @@ fun InputTextField(title: String) {
             .fillMaxWidth()
             .padding(start = 20.dp, end = 20.dp),
         value = text,
-        onValueChange = { text = it },
+        onValueChange = {
+            text = it
+        },
+
         label = { LabelView(title = title) },
         textStyle = typography.body1,
         colors = TextFieldDefaults.textFieldColors(

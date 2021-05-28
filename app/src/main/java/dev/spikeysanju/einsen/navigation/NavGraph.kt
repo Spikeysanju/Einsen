@@ -27,7 +27,7 @@ fun NavGraph(toggleTheme: () -> Unit) {
     val navController = rememberNavController()
     val actions = remember(navController) { MainActions(navController) }
 
-    NavHost(navController, startDestination = Screen.TaskDetails.route) {
+    NavHost(navController, startDestination = Screen.AddTask.route) {
         composable(Screen.Home.route) {
             val viewModel: MainViewModel = viewModel(
                 factory = HiltViewModelFactory(LocalContext.current, it)

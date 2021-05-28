@@ -31,11 +31,6 @@ fun Slider() {
         Modifier
             .fillMaxWidth()
     ) {
-//        Text(
-//            text = makeValueRound(sliderState).toString(),
-//            style = typography.subtitle1,
-//            color = colors.onPrimary
-//        )
         Slider(
             value = sliderState,
             onValueChange = { sliderState = it },
