@@ -1,18 +1,13 @@
 package dev.spikeysanju.einsen.view.add
 
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Scaffold
-import androidx.compose.material.Slider
-import androidx.compose.material.SliderDefaults
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -21,10 +16,10 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import dev.spikeysanju.einsen.components.InputTextField
 import dev.spikeysanju.einsen.components.PrimaryButton
+import dev.spikeysanju.einsen.components.StepSlider
 import dev.spikeysanju.einsen.components.TopBarWithBack
 import dev.spikeysanju.einsen.model.Task
 import dev.spikeysanju.einsen.navigation.MainActions
@@ -50,6 +45,7 @@ fun AddTaskScreen(viewModel: MainViewModel, actions: MainActions) {
 
         LazyColumn(state = listState) {
 
+            // Title
             item {
                 Spacer(modifier = Modifier.height(16.dp))
                 InputTextField(title = "Title", value = title) {
@@ -57,6 +53,7 @@ fun AddTaskScreen(viewModel: MainViewModel, actions: MainActions) {
                 }
             }
 
+            // Description
             item {
                 Spacer(modifier = Modifier.height(16.dp))
                 InputTextField(title = "Description", value = description) {
@@ -64,6 +61,7 @@ fun AddTaskScreen(viewModel: MainViewModel, actions: MainActions) {
                 }
             }
 
+            // Category
             item {
                 Spacer(modifier = Modifier.height(16.dp))
                 InputTextField(title = "Category", value = category) {
@@ -71,6 +69,7 @@ fun AddTaskScreen(viewModel: MainViewModel, actions: MainActions) {
                 }
             }
 
+            // Urgency
             item {
                 Spacer(modifier = Modifier.height(16.dp))
                 Column(modifier = Modifier.padding(16.dp)) {
@@ -80,39 +79,13 @@ fun AddTaskScreen(viewModel: MainViewModel, actions: MainActions) {
                         color = MaterialTheme.colors.onPrimary
                     )
                     Spacer(modifier = Modifier.height(12.dp))
-                    Column(
-                        Modifier
-                            .fillMaxWidth()
-                    ) {
-                        Slider(
-                            value = urgencyState,
-                            onValueChange = { urgencyState = it },
-                            valueRange = 0f..4f,
-                            steps = 4,
-                            colors = SliderDefaults.colors(
-                                thumbColor = MaterialTheme.colors.primary,
-                                activeTrackColor = MaterialTheme.colors.primary,
-                                inactiveTrackColor = MaterialTheme.colors.primaryVariant,
-                                disabledThumbColor = MaterialTheme.colors.secondaryVariant
-                            )
-                        )
-                        Row(
-                            Modifier.fillMaxWidth(),
-                            horizontalArrangement = Arrangement.SpaceBetween
-                        ) {
-                            for (i in 0..stepCount) {
-                                Text(
-                                    i.toString(),
-                                    style = typography.subtitle1,
-                                    textAlign = TextAlign.Center,
-                                    color = MaterialTheme.colors.onPrimary
-                                )
-                            }
-                        }
+                    StepSlider(stepCount = stepCount, value = urgencyState) {
+                        urgencyState = it
                     }
                 }
             }
 
+            // Importance
             item {
                 Spacer(modifier = Modifier.height(16.dp))
                 Column(modifier = Modifier.padding(16.dp)) {
@@ -122,40 +95,13 @@ fun AddTaskScreen(viewModel: MainViewModel, actions: MainActions) {
                         color = MaterialTheme.colors.onPrimary
                     )
                     Spacer(modifier = Modifier.height(12.dp))
-                    Column(
-                        Modifier
-                            .fillMaxWidth()
-                    ) {
-                        Slider(
-                            value = importanceState,
-                            onValueChange = { importanceState = it },
-                            valueRange = 0f..4f,
-                            steps = 4,
-                            colors = SliderDefaults.colors(
-                                thumbColor = MaterialTheme.colors.primary,
-                                activeTrackColor = MaterialTheme.colors.primary,
-                                inactiveTrackColor = MaterialTheme.colors.primaryVariant,
-                                disabledThumbColor = MaterialTheme.colors.secondaryVariant
-                            )
-                        )
-                        Row(
-                            Modifier.fillMaxWidth(),
-                            horizontalArrangement = Arrangement.SpaceBetween
-                        ) {
-                            for (i in 0..stepCount) {
-                                Text(
-                                    i.toString(),
-                                    style = typography.subtitle1,
-                                    textAlign = TextAlign.Center,
-                                    color = MaterialTheme.colors.onPrimary
-                                )
-                            }
-                        }
+                    StepSlider(stepCount = stepCount, value = importanceState) {
+                        importanceState = it
                     }
                 }
             }
 
-
+            // Save Task
             item {
                 Spacer(modifier = Modifier.height(24.dp))
                 PrimaryButton(title = "Save Task") {
@@ -175,7 +121,7 @@ fun AddTaskScreen(viewModel: MainViewModel, actions: MainActions) {
             }
         }
 
-
+    }
 }
 
 
