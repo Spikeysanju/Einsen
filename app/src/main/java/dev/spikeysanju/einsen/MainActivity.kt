@@ -11,6 +11,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.SideEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.lifecycleScope
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
@@ -23,6 +24,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 
+@ExperimentalComposeUiApi
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     @Inject

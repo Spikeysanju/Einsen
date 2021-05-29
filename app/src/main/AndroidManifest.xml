@@ -12,6 +12,7 @@
         android:theme="@style/Theme.Einsen">
         <activity
             android:name=".MainActivity"
+            android:configChanges="colorMode|density|fontScale|keyboard|keyboardHidden|layoutDirection|locale|mcc|mnc|navigation|orientation|screenLayout|screenSize|smallestScreenSize|touchscreen|uiMode"
             android:exported="true"
             android:label="@string/app_name"
             android:theme="@style/Theme.Einsen.NoActionBar">
