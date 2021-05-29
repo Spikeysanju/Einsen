@@ -5,4 +5,10 @@
     <string name="text_allTask">All Task</string>
     <string name="text_taskDetails">Task Details</string>
     <string name="text_settings">Settings</string>
+    <string name="text_title">Title</string>
+    <string name="text_description">Description</string>
+    <string name="text_category">Category</string>
+    <string name="text_urgency">Urgency</string>
+    <string name="text_importance">Importance</string>
+    <string name="text_save_task">Save Task</string>
 </resources>
