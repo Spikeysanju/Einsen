@@ -14,6 +14,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
@@ -26,9 +27,10 @@ import dev.spikeysanju.einsen.components.TopBarWithBack
 import dev.spikeysanju.einsen.model.Task
 import dev.spikeysanju.einsen.navigation.MainActions
 import dev.spikeysanju.einsen.ui.theme.typography
-import dev.spikeysanju.einsen.utils.toast
+import dev.spikeysanju.einsen.utils.showToast
 import dev.spikeysanju.einsen.view.viewmodel.MainViewModel
 
+@ExperimentalComposeUiApi
 @Composable
 fun AddTaskScreen(viewModel: MainViewModel, actions: MainActions) {
     Scaffold(topBar = {
@@ -118,8 +120,14 @@ fun AddTaskScreen(viewModel: MainViewModel, actions: MainActions) {
                         timer = 25F,
                         isCompleted = false
                     )
-                    viewModel.insertTask(task).run {
-                        context.toast("Task Added Successfully!")
+
+                    when {
+                        title.isEmpty() -> showToast(context, "Title is Empty!")
+                        description.isEmpty() -> showToast(context, "Description is Empty!")
+                        category.isEmpty() -> showToast(context, "Category is Empty!")
+                        else -> viewModel.insertTask(task).run {
+                            showToast(context, "Task Added Successfully!")
+                        }
                     }
                 }
             }
@@ -127,5 +135,6 @@ fun AddTaskScreen(viewModel: MainViewModel, actions: MainActions) {
 
     }
 }
+
 
 

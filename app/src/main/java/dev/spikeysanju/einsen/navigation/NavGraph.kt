@@ -2,6 +2,7 @@ package dev.spikeysanju.einsen.navigation
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
+import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.platform.LocalContext
 import androidx.hilt.navigation.HiltViewModelFactory
 import androidx.hilt.navigation.compose.hiltNavGraphViewModel
@@ -22,6 +23,7 @@ object EndPoints {
     const val ID = "id"
 }
 
+@ExperimentalComposeUiApi
 @Composable
 fun NavGraph(toggleTheme: () -> Unit) {
     val navController = rememberNavController()
