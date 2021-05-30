@@ -1,16 +1,20 @@
 package dev.spikeysanju.einsen.view.task
 
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.material.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
+import dev.spikeysanju.einsen.components.ExpandedTaskItemCard
 import dev.spikeysanju.einsen.components.TaskItemCard
 import dev.spikeysanju.einsen.components.TopBarWithBack
+import dev.spikeysanju.einsen.model.Task
 import dev.spikeysanju.einsen.navigation.MainActions
 import dev.spikeysanju.einsen.utils.ViewState
 import dev.spikeysanju.einsen.view.viewmodel.MainViewModel
@@ -34,14 +38,14 @@ fun AllTaskScreen(
             }
             is ViewState.Success -> {
                 LazyColumn(modifier = Modifier.padding(start = 16.dp, end = 16.dp)) {
-                    items(result.task) { task ->
-                        TaskItemCard(
-                            id = task.id.toString(),
-                            title = task.title,
-                            emoji = "📮",
-                            category = task.category,
-                            timer = task.timer.toString()
-                        )
+                    itemsIndexed(result.task) { index: Int, item: Task ->
+                        if (index == 0) {
+                            ExpandedTaskItemCard(viewModel, item)
+                            Spacer(modifier = Modifier.height(12.dp))
+                        }
+                    }
+                    itemsIndexed(result.task) { index: Int, item: Task ->
+                        TaskItemCard(item)
                     }
                 }
             }
