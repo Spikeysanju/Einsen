@@ -12,7 +12,6 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
@@ -23,7 +22,6 @@ import dev.spikeysanju.einsen.model.Task
 import dev.spikeysanju.einsen.navigation.MainActions
 import dev.spikeysanju.einsen.utils.ViewState
 import dev.spikeysanju.einsen.view.viewmodel.MainViewModel
-import kotlinx.coroutines.launch
 
 @Composable
 fun AllTaskScreen(
@@ -50,8 +48,6 @@ fun AllTaskScreen(
         }
     }) {
 
-        viewModel.getAllTask()
-
         when (val result = viewModel.feed.collectAsState().value) {
             ViewState.Loading -> {
             }
@@ -62,7 +58,13 @@ fun AllTaskScreen(
                     itemsIndexed(result.task) { index: Int, item: Task ->
                         TaskItemCard(item, onTap = {
                             actions.gotoTaskDetails(item.id)
-                        })
+                        },
+                            onDoubleTap = {
+                                viewModel.deleteTaskByID(id = item.id)
+                            },
+                            onLongPress = {
+
+                            })
                     }
                 }
             }
@@ -73,10 +75,3 @@ fun AllTaskScreen(
     }
 }
 
-@Composable
-fun LoadTask(viewModel: MainViewModel) {
-    val scope = rememberCoroutineScope()
-    scope.launch {
-        viewModel.getAllTask()
-    }
-}

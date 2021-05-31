@@ -36,7 +36,7 @@ fun NavGraph(toggleTheme: () -> Unit) {
             val viewModel: MainViewModel = viewModel(
                 factory = HiltViewModelFactory(LocalContext.current, it)
             )
-            HomeScreen(navController, viewModel, actions)
+            HomeScreen(viewModel, actions)
         }
 
         composable(Screen.AddTask.route) {
@@ -46,6 +46,7 @@ fun NavGraph(toggleTheme: () -> Unit) {
 
         composable(Screen.AllTask.route) {
             val viewModel = hiltNavGraphViewModel<MainViewModel>(backStackEntry = it)
+            viewModel.getAllTask()
             AllTaskScreen(viewModel, actions)
         }
 

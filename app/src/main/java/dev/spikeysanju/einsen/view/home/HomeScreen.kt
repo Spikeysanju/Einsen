@@ -6,7 +6,6 @@ import androidx.compose.material.MaterialTheme.colors
 import androidx.compose.material.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.navigation.NavHostController
 import dev.spikeysanju.einsen.components.DashboardCardItem
 import dev.spikeysanju.einsen.components.TopBar
 import dev.spikeysanju.einsen.navigation.MainActions
@@ -14,7 +13,6 @@ import dev.spikeysanju.einsen.view.viewmodel.MainViewModel
 
 @Composable
 fun HomeScreen(
-    navController: NavHostController,
     viewModel: MainViewModel,
     actions: MainActions
 ) {

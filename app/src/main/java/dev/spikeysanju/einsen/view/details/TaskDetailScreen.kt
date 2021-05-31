@@ -1,6 +1,5 @@
 package dev.spikeysanju.einsen.view.details
 
-import android.annotation.SuppressLint
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -14,7 +13,6 @@ import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
@@ -26,8 +24,6 @@ import dev.spikeysanju.einsen.navigation.MainActions
 import dev.spikeysanju.einsen.ui.theme.typography
 import dev.spikeysanju.einsen.utils.SingleViewState
 import dev.spikeysanju.einsen.view.viewmodel.MainViewModel
-import kotlinx.coroutines.Dispatchers.IO
-import kotlinx.coroutines.launch
 
 @Composable
 fun TaskDetailsScreen(viewModel: MainViewModel, action: MainActions) {
@@ -104,15 +100,5 @@ fun TaskDetailsScreen(viewModel: MainViewModel, action: MainActions) {
             }
         }
 
-    }
-}
-
-
-@SuppressLint("CoroutineCreationDuringComposition")
-@Composable
-fun LoadSingleTask(viewModel: MainViewModel, taskID: Long) {
-    val scope = rememberCoroutineScope()
-    scope.launch(IO) {
-        viewModel.findTaskByID(taskID)
     }
 }

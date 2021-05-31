@@ -2,6 +2,7 @@ package dev.spikeysanju.einsen.components
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -19,21 +20,33 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import dev.spikeysanju.einsen.model.Task
 import dev.spikeysanju.einsen.ui.theme.typography
 import dev.spikeysanju.einsen.ui.theme.white
+import kotlinx.coroutines.coroutineScope
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 
 @Composable
-fun TaskItemCard(task: Task, onTap: () -> Unit) {
+fun TaskItemCard(task: Task, onTap: () -> Unit, onDoubleTap: () -> Unit, onLongPress: () -> Unit) {
     // Emoji + (title + category)
     Row(
         modifier = Modifier
             .fillMaxWidth()
-            .clickable { onTap() },
+            .pointerInput(Unit) {
+                coroutineScope {
+                    launch {
+                        delay(100)
+                        detectTapGestures(
+                            onTap = { onTap() })
+                    }
+                }
+            },
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.Start
     ) {
