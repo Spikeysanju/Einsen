@@ -72,18 +72,19 @@ fun TaskDetailsScreen(viewModel: MainViewModel, action: MainActions) {
                     item {
                         Spacer(modifier = Modifier.height(24.dp))
                         Row(
-                            modifier = Modifier
-                                .fillMaxWidth(),
-                            horizontalArrangement = Arrangement.SpaceBetween
+                            modifier = Modifier.fillMaxWidth(),
+                            horizontalArrangement = Arrangement.SpaceAround
                         ) {
+                            val weight = Modifier.weight(1f)
                             InfoCard(
                                 title = stringResource(R.string.text_urgency),
-                                value = task.urgency.toString()
+                                value = task.urgency.toString(),
+                                weight
                             )
-
                             InfoCard(
                                 title = stringResource(R.string.text_importance),
-                                value = task.importance.toString()
+                                value = task.importance.toString(),
+                                weight = weight
                             )
                         }
                     }
