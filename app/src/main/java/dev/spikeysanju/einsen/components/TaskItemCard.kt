@@ -31,47 +31,42 @@ import dev.spikeysanju.einsen.ui.theme.white
 
 @Composable
 fun TaskItemCard(task: Task, onTap: () -> Unit, onDoubleTap: () -> Unit, onLongPress: () -> Unit) {
+    // Emoji + (title + category)
     Row(
         modifier = Modifier
             .fillMaxWidth()
             .pointerInput(Unit) {
                 detectTapGestures(
-                    onDoubleTap = { onTap() },
-                    onLongPress = { onDoubleTap() },
-                    onTap = { onLongPress() }
+                    onDoubleTap = { onDoubleTap() },
+                    onLongPress = { onLongPress() },
+                    onTap = { onTap() }
                 )
             },
         verticalAlignment = Alignment.CenterVertically,
-        horizontalArrangement = Arrangement.SpaceAround
+        horizontalArrangement = Arrangement.Start
     ) {
-        // Emoji + (title + category)
-        Row(
-            verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.Start
-        ) {
-            // Emoji Text View
-            EmojiTextView(emoji = task.emoji)
-            Spacer(modifier = Modifier.width(12.dp))
+        // Emoji Text View
+        EmojiTextView(emoji = task.emoji)
+        Spacer(modifier = Modifier.width(12.dp))
 
-            // Title + Content
-            Column(
-                modifier = Modifier
-                    .align(Alignment.CenterVertically),
-            ) {
-                Text(
-                    text = task.title,
-                    style = typography.subtitle1,
-                    color = colors.onPrimary,
-                    maxLines = 1,
-                    overflow = TextOverflow.Ellipsis
-                )
-                Spacer(modifier = Modifier.height(12.dp))
-                Text(
-                    text = task.category,
-                    style = typography.caption,
-                    color = colors.onPrimary.copy(.7f)
-                )
-            }
+        // Title + Content
+        Column(
+            modifier = Modifier
+                .align(Alignment.CenterVertically),
+        ) {
+            Text(
+                text = task.title,
+                style = typography.subtitle1,
+                color = colors.onPrimary,
+                maxLines = 1,
+                overflow = TextOverflow.Ellipsis
+            )
+            Spacer(modifier = Modifier.height(12.dp))
+            Text(
+                text = task.category,
+                style = typography.caption,
+                color = colors.onPrimary.copy(.7f)
+            )
         }
     }
 }
