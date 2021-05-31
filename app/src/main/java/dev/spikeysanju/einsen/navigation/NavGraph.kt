@@ -54,10 +54,13 @@ fun NavGraph(toggleTheme: () -> Unit) {
             arguments = listOf(navArgument(EndPoints.ID) { type = NavType.LongType })
         ) {
             val viewModel = hiltNavGraphViewModel<MainViewModel>(backStackEntry = it)
-            TaskDetailsScreen(
-                viewModel, it.arguments?.getLong(EndPoints.ID) ?: 0,
-                actions
-            )
+
+            val taskID = it.arguments?.getLong(EndPoints.ID)
+                ?: throw IllegalStateException("'task ID' shouldn't be null")
+
+            viewModel.findTaskByID(taskID)
+
+            TaskDetailsScreen(viewModel, actions)
         }
 
         composable(Screen.Settings.route) {

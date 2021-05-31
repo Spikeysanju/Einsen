@@ -7,6 +7,7 @@ import dev.spikeysanju.einsen.model.Task
 import dev.spikeysanju.einsen.repository.MainRepository
 import dev.spikeysanju.einsen.utils.SingleViewState
 import dev.spikeysanju.einsen.utils.ViewState
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.collect
@@ -26,7 +27,7 @@ class MainViewModel @Inject constructor(private val repo: MainRepository) : View
     val singleTask = _singleViewState.asStateFlow()
 
     // get all task
-    fun getAllTask() = viewModelScope.launch {
+    fun getAllTask() = viewModelScope.launch(Dispatchers.IO) {
         repo.getAllTask().distinctUntilChanged().collect { result ->
             try {
                 if (result.isNullOrEmpty()) {
@@ -57,7 +58,7 @@ class MainViewModel @Inject constructor(private val repo: MainRepository) : View
     }
 
     // find task by id
-    fun findTaskByID(id: Long) = viewModelScope.launch {
+    fun findTaskByID(id: Long) = viewModelScope.launch(Dispatchers.IO) {
         repo.find(id).distinctUntilChanged().collect { result ->
             try {
                 if (result.title.isEmpty()) {
