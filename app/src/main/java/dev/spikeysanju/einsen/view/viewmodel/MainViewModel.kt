@@ -52,4 +52,9 @@ class MainViewModel @Inject constructor(private val repo: MainRepository) : View
     fun updateTask(task: Task) = viewModelScope.launch {
         repo.update(task)
     }
+
+    // find task by id
+    fun findTaskByID(id: Long) = viewModelScope.launch {
+        repo.find(id)
+    }
 }
