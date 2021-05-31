@@ -73,6 +73,10 @@ class MainActions(navController: NavController) {
         navController.navigateUp()
     }
 
+    val gotoAddTask: () -> Unit = {
+        navController.navigate(Screen.AddTask.route)
+    }
+
     val gotoAllTask: () -> Unit = {
         navController.navigate(Screen.AllTask.route)
     }

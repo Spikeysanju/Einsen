@@ -3,7 +3,13 @@ package dev.spikeysanju.einsen.view.task
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
+import androidx.compose.material.FloatingActionButton
+import androidx.compose.material.FloatingActionButtonDefaults
+import androidx.compose.material.Icon
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Scaffold
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Add
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
@@ -24,6 +30,22 @@ fun AllTaskScreen(
 ) {
     Scaffold(topBar = {
         TopBarWithBack(title = stringResource(R.string.text_allTask), actions.upPress)
+    }, floatingActionButton = {
+        FloatingActionButton(
+            modifier = Modifier.padding(30.dp),
+            onClick = {
+                actions.gotoAddTask.invoke()
+            },
+            backgroundColor = MaterialTheme.colors.onPrimary,
+            contentColor = MaterialTheme.colors.background,
+            elevation = FloatingActionButtonDefaults.elevation(8.dp)
+        ) {
+            Icon(
+                Icons.Filled.Add,
+                contentDescription = stringResource(id = R.string.text_addTask),
+                tint = MaterialTheme.colors.onBackground
+            )
+        }
     }) {
 
         viewModel.getAllTask()
