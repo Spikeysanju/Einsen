@@ -44,7 +44,7 @@ class MainViewModel @Inject constructor(private val repo: MainRepository) : View
     }
 
     // delete source
-    fun deleteTaskByID(id: Int) = viewModelScope.launch {
+    fun deleteTaskByID(id: Long) = viewModelScope.launch {
         repo.delete(id)
     }
 

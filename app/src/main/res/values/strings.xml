@@ -11,4 +11,8 @@
     <string name="text_urgency">Urgency</string>
     <string name="text_importance">Importance</string>
     <string name="text_save_task">Save Task</string>
+    <string name="text_delete">Delete</string>
+    <string name="text_reset">Reset</string>
+    <string name="text_complete">Complete</string>
+    <string name="text_timer">25:00</string>
 </resources>
