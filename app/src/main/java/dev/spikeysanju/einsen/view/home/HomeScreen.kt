@@ -6,7 +6,6 @@ import androidx.compose.material.MaterialTheme.colors
 import androidx.compose.material.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.navigation.NavHostController
 import dev.spikeysanju.einsen.components.DashboardCardItem
 import dev.spikeysanju.einsen.components.TopBar
 import dev.spikeysanju.einsen.navigation.MainActions
@@ -14,7 +13,6 @@ import dev.spikeysanju.einsen.view.viewmodel.MainViewModel
 
 @Composable
 fun HomeScreen(
-    navController: NavHostController,
     viewModel: MainViewModel,
     actions: MainActions
 ) {
@@ -31,28 +29,32 @@ fun HomeScreen(
                 modifier = modifier,
                 title = "Important & Urgent",
                 count = "07",
-                color = colors.primary
+                color = colors.primary,
+                actions
             )
 
             DashboardCardItem(
                 modifier = modifier,
                 title = "Important",
                 count = "12",
-                color = colors.primaryVariant
+                color = colors.primaryVariant,
+                actions
             )
 
             DashboardCardItem(
                 modifier = modifier,
                 title = "Urgent",
                 count = "13",
-                color = colors.secondary
+                color = colors.secondary,
+                actions
             )
 
             DashboardCardItem(
                 modifier = modifier,
                 title = "Dont't touch!",
                 count = "04",
-                color = colors.secondaryVariant
+                color = colors.secondaryVariant,
+                actions
             )
         }
 

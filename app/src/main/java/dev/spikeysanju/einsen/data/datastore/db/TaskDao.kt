@@ -22,4 +22,7 @@ interface TaskDao {
 
     @Update(onConflict = OnConflictStrategy.REPLACE)
     suspend fun updateTask(task: Task)
+
+    @Query("SELECT * FROM task where id=:id")
+    fun findByID(id: Long): Flow<Task>
 }

@@ -8,7 +8,6 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.MaterialTheme.colors
@@ -23,10 +22,9 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 
 @Composable
-fun InfoCard(title: String, value: String) {
+fun InfoCard(title: String, value: String, weight: Modifier) {
     Box(
-        modifier = Modifier
-            .size(90.dp)
+        modifier = weight
             .clip(RoundedCornerShape(12.dp))
             .background(color = colors.secondaryVariant)
             .padding(12.dp),

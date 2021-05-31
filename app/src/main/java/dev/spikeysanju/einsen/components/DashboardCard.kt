@@ -19,18 +19,28 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import dev.spikeysanju.einsen.R
+import dev.spikeysanju.einsen.navigation.MainActions
 import dev.spikeysanju.einsen.ui.theme.typography
 
 // TODO: WRAP PARAMS INTO DATA CLASS
 @Composable
-fun DashboardCardItem(modifier: Modifier, title: String, count: String, color: Color) {
+fun DashboardCardItem(
+    modifier: Modifier,
+    title: String,
+    count: String,
+    color: Color,
+    mainActions: MainActions
+) {
     val icon = painterResource(id = R.drawable.ic_arrow_right)
 
     Row(
         modifier = modifier
             .background(color)
             .clickable { }
-            .padding(12.dp),
+            .padding(12.dp)
+            .clickable {
+                mainActions.gotoAllTask.invoke()
+            },
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.SpaceAround
     ) {
