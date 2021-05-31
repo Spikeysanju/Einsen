@@ -25,6 +25,7 @@ import dev.spikeysanju.einsen.components.PrimaryButton
 import dev.spikeysanju.einsen.components.StepSlider
 import dev.spikeysanju.einsen.components.TopBarWithBack
 import dev.spikeysanju.einsen.model.Task
+import dev.spikeysanju.einsen.model.TaskStatus
 import dev.spikeysanju.einsen.navigation.MainActions
 import dev.spikeysanju.einsen.ui.theme.typography
 import dev.spikeysanju.einsen.utils.showToast
@@ -115,10 +116,11 @@ fun AddTaskScreen(viewModel: MainViewModel, actions: MainActions) {
                         title = title,
                         description = description,
                         category = category,
+                        emoji = "🚀",
                         urgency = urgencyState,
                         importance = importanceState,
-                        timer = 25F,
-                        isCompleted = false
+                        due = "18/12/2021",
+                        status = TaskStatus.TODO
                     )
 
                     when {

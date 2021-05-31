@@ -14,14 +14,14 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import androidx.navigation.NavHostController
 import dev.spikeysanju.einsen.components.InfoCard
 import dev.spikeysanju.einsen.components.TopBarWithBack
 import dev.spikeysanju.einsen.navigation.MainActions
 import dev.spikeysanju.einsen.ui.theme.typography
+import dev.spikeysanju.einsen.view.viewmodel.MainViewModel
 
 @Composable
-fun TaskDetailsScreen(navController: NavHostController, action: MainActions) {
+fun TaskDetailsScreen(viewModel: MainViewModel, taskID: Long, action: MainActions) {
     Scaffold(topBar = {
         TopBarWithBack(title = "Task Details", action.upPress)
     }) {
