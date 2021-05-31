@@ -25,57 +25,61 @@ fun TaskDetailsScreen(viewModel: MainViewModel, taskID: Long, action: MainAction
     Scaffold(topBar = {
         TopBarWithBack(title = "Task Details", action.upPress)
     }) {
-        LazyColumn(modifier = Modifier.padding(start = 16.dp, end = 16.dp)) {
+        viewModel.findTaskByID(id = taskID)
 
-            item {
-                Spacer(modifier = Modifier.height(24.dp))
-                Text(
-                    text = "Open Source",
-                    style = typography.subtitle1,
-                    textAlign = TextAlign.Start,
-                    color = colors.onPrimary
-                )
-            }
+        val result =
 
-            item {
-                Spacer(modifier = Modifier.height(16.dp))
-                Text(
-                    text = "Your Title here",
-                    style = typography.h5,
-                    textAlign = TextAlign.Start,
-                    color = colors.onPrimary
-                )
-            }
+            LazyColumn(modifier = Modifier.padding(start = 16.dp, end = 16.dp)) {
 
-            item {
-                Spacer(modifier = Modifier.height(24.dp))
-                Text(
-                    text = "DataStore Part of Android Jetpack. Jetpack DataStore is a data storage solution that allows you to store key-value pairs or typed objects with protocol buffers.\n" +
-                            "\n" +
-                            "DataStore Part of Android Jetpack. Jetpack DataStore is a data storage solution that allows you to store key-value pairs or typed objects with protocol buffers.\n" +
-                            "\n" +
-                            "DataStore Part of Android Jetpack. Jetpack DataStore is a data storage solution that allows you to store key-value pairs or typed objects with protocol buffers.\n" +
-                            "\n" +
-                            "DataStore Part of Android Jetpack. Jetpack DataStore is a data storage solution that allows you to store key-value pairs or typed objects with protocol buffers.",
-                    style = typography.body1,
-                    textAlign = TextAlign.Start,
-                    color = colors.onPrimary
-                )
-            }
-
-            item {
-                Spacer(modifier = Modifier.height(24.dp))
-                Row(
-                    modifier = Modifier
-                        .fillMaxWidth(),
-                    horizontalArrangement = Arrangement.SpaceBetween
-                ) {
-                    InfoCard(title = "Timer", value = "15m")
-                    InfoCard(title = "Urgency", value = "05")
-                    InfoCard(title = "Priority", value = "03")
+                item {
+                    Spacer(modifier = Modifier.height(24.dp))
+                    Text(
+                        text = "Open Source",
+                        style = typography.subtitle1,
+                        textAlign = TextAlign.Start,
+                        color = colors.onPrimary
+                    )
                 }
-            }
 
-        }
+                item {
+                    Spacer(modifier = Modifier.height(16.dp))
+                    Text(
+                        text = "Your Title here",
+                        style = typography.h5,
+                        textAlign = TextAlign.Start,
+                        color = colors.onPrimary
+                    )
+                }
+
+                item {
+                    Spacer(modifier = Modifier.height(24.dp))
+                    Text(
+                        text = "DataStore Part of Android Jetpack. Jetpack DataStore is a data storage solution that allows you to store key-value pairs or typed objects with protocol buffers.\n" +
+                                "\n" +
+                                "DataStore Part of Android Jetpack. Jetpack DataStore is a data storage solution that allows you to store key-value pairs or typed objects with protocol buffers.\n" +
+                                "\n" +
+                                "DataStore Part of Android Jetpack. Jetpack DataStore is a data storage solution that allows you to store key-value pairs or typed objects with protocol buffers.\n" +
+                                "\n" +
+                                "DataStore Part of Android Jetpack. Jetpack DataStore is a data storage solution that allows you to store key-value pairs or typed objects with protocol buffers.",
+                        style = typography.body1,
+                        textAlign = TextAlign.Start,
+                        color = colors.onPrimary
+                    )
+                }
+
+                item {
+                    Spacer(modifier = Modifier.height(24.dp))
+                    Row(
+                        modifier = Modifier
+                            .fillMaxWidth(),
+                        horizontalArrangement = Arrangement.SpaceBetween
+                    ) {
+                        InfoCard(title = "Timer", value = "15m")
+                        InfoCard(title = "Urgency", value = "05")
+                        InfoCard(title = "Priority", value = "03")
+                    }
+                }
+
+            }
     }
 }
