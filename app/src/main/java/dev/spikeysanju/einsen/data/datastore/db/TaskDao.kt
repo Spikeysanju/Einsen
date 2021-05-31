@@ -24,5 +24,5 @@ interface TaskDao {
     suspend fun updateTask(task: Task)
 
     @Query("SELECT * FROM task where id=:id")
-    suspend fun findByID(id: Long): Flow<Task>
+    fun findByID(id: Long): Flow<Task>
 }

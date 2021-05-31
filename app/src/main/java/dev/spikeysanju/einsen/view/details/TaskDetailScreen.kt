@@ -11,75 +11,91 @@ import androidx.compose.material.MaterialTheme.colors
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import dev.spikeysanju.einsen.R
 import dev.spikeysanju.einsen.components.InfoCard
 import dev.spikeysanju.einsen.components.TopBarWithBack
 import dev.spikeysanju.einsen.navigation.MainActions
 import dev.spikeysanju.einsen.ui.theme.typography
+import dev.spikeysanju.einsen.utils.SingleViewState
 import dev.spikeysanju.einsen.view.viewmodel.MainViewModel
 
 @Composable
 fun TaskDetailsScreen(viewModel: MainViewModel, taskID: Long, action: MainActions) {
     Scaffold(topBar = {
-        TopBarWithBack(title = "Task Details", action.upPress)
+        TopBarWithBack(title = stringResource(id = R.string.text_taskDetails), action.upPress)
     }) {
         viewModel.findTaskByID(id = taskID)
 
-        val result =
+        when (val result = viewModel.singleTask.collectAsState().value) {
 
-            LazyColumn(modifier = Modifier.padding(start = 16.dp, end = 16.dp)) {
+            is SingleViewState.Success -> {
+                LazyColumn(modifier = Modifier.padding(start = 16.dp, end = 16.dp)) {
 
-                item {
-                    Spacer(modifier = Modifier.height(24.dp))
-                    Text(
-                        text = "Open Source",
-                        style = typography.subtitle1,
-                        textAlign = TextAlign.Start,
-                        color = colors.onPrimary
-                    )
-                }
-
-                item {
-                    Spacer(modifier = Modifier.height(16.dp))
-                    Text(
-                        text = "Your Title here",
-                        style = typography.h5,
-                        textAlign = TextAlign.Start,
-                        color = colors.onPrimary
-                    )
-                }
-
-                item {
-                    Spacer(modifier = Modifier.height(24.dp))
-                    Text(
-                        text = "DataStore Part of Android Jetpack. Jetpack DataStore is a data storage solution that allows you to store key-value pairs or typed objects with protocol buffers.\n" +
-                                "\n" +
-                                "DataStore Part of Android Jetpack. Jetpack DataStore is a data storage solution that allows you to store key-value pairs or typed objects with protocol buffers.\n" +
-                                "\n" +
-                                "DataStore Part of Android Jetpack. Jetpack DataStore is a data storage solution that allows you to store key-value pairs or typed objects with protocol buffers.\n" +
-                                "\n" +
-                                "DataStore Part of Android Jetpack. Jetpack DataStore is a data storage solution that allows you to store key-value pairs or typed objects with protocol buffers.",
-                        style = typography.body1,
-                        textAlign = TextAlign.Start,
-                        color = colors.onPrimary
-                    )
-                }
-
-                item {
-                    Spacer(modifier = Modifier.height(24.dp))
-                    Row(
-                        modifier = Modifier
-                            .fillMaxWidth(),
-                        horizontalArrangement = Arrangement.SpaceBetween
-                    ) {
-                        InfoCard(title = "Timer", value = "15m")
-                        InfoCard(title = "Urgency", value = "05")
-                        InfoCard(title = "Priority", value = "03")
+                    val task = result.task
+                    item {
+                        Spacer(modifier = Modifier.height(24.dp))
+                        Text(
+                            text = task.category,
+                            style = typography.subtitle1,
+                            textAlign = TextAlign.Start,
+                            color = colors.onPrimary
+                        )
                     }
-                }
 
+                    item {
+                        Spacer(modifier = Modifier.height(16.dp))
+                        Text(
+                            text = task.title,
+                            style = typography.h5,
+                            textAlign = TextAlign.Start,
+                            color = colors.onPrimary
+                        )
+                    }
+
+                    item {
+                        Spacer(modifier = Modifier.height(24.dp))
+                        Text(
+                            text = task.description,
+                            style = typography.body1,
+                            textAlign = TextAlign.Start,
+                            color = colors.onPrimary
+                        )
+                    }
+
+                    item {
+                        Spacer(modifier = Modifier.height(24.dp))
+                        Row(
+                            modifier = Modifier
+                                .fillMaxWidth(),
+                            horizontalArrangement = Arrangement.SpaceBetween
+                        ) {
+                            InfoCard(
+                                title = stringResource(R.string.text_urgency),
+                                value = task.urgency.toString()
+                            )
+                            InfoCard(
+                                title = stringResource(R.string.text_importance),
+                                value = task.importance.toString()
+                            )
+                        }
+                    }
+
+                }
             }
+            SingleViewState.Empty -> {
+                Text(text = "Empty")
+            }
+            is SingleViewState.Error -> {
+                Text(text = "Error ${result.exception}")
+            }
+            SingleViewState.Loading -> {
+            }
+        }
+
     }
 }
