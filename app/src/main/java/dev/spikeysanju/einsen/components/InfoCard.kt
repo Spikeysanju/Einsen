@@ -22,9 +22,9 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 
 @Composable
-fun InfoCard(title: String, value: String, weight: Modifier) {
+fun InfoCard(title: String, value: String, modifier: Modifier) {
     Box(
-        modifier = weight
+        modifier = modifier
             .clip(RoundedCornerShape(12.dp))
             .background(color = colors.secondaryVariant)
             .padding(12.dp),

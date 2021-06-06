@@ -86,7 +86,7 @@ fun EinsenTheme(darkTheme: Boolean = isSystemInDarkTheme(), content: @Composable
     val colors = if (darkTheme) {
         GrayColorPalette
     } else {
-        GrayColorPalette
+        BlueColorPalette
     }
 
     MaterialTheme(

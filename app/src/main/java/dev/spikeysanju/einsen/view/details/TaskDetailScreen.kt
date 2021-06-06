@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material.MaterialTheme.colors
@@ -73,18 +74,21 @@ fun TaskDetailsScreen(viewModel: MainViewModel, action: MainActions) {
                         Spacer(modifier = Modifier.height(24.dp))
                         Row(
                             modifier = Modifier.fillMaxWidth(),
-                            horizontalArrangement = Arrangement.SpaceAround
+                            horizontalArrangement = Arrangement.SpaceBetween
                         ) {
                             val weight = Modifier.weight(1f)
                             InfoCard(
                                 title = stringResource(R.string.text_urgency),
                                 value = task.urgency.toString(),
-                                weight
+                                modifier = weight
                             )
+
+                            Spacer(modifier = Modifier.width(12.dp))
+
                             InfoCard(
                                 title = stringResource(R.string.text_importance),
                                 value = task.importance.toString(),
-                                weight = weight
+                                modifier = weight
                             )
                         }
                     }

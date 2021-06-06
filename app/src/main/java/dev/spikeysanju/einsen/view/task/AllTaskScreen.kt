@@ -1,5 +1,7 @@
 package dev.spikeysanju.einsen.view.task
 
+import androidx.compose.foundation.ExperimentalFoundationApi
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
@@ -30,8 +32,8 @@ import dev.spikeysanju.einsen.model.Task
 import dev.spikeysanju.einsen.navigation.MainActions
 import dev.spikeysanju.einsen.utils.ViewState
 import dev.spikeysanju.einsen.view.viewmodel.MainViewModel
-import kotlinx.coroutines.launch
 
+@ExperimentalFoundationApi
 @ExperimentalMaterialApi
 @Composable
 fun AllTaskScreen(
@@ -85,20 +87,25 @@ fun AllTaskScreen(
                 ViewState.Empty -> {
                 }
                 is ViewState.Success -> {
-                    LazyColumn(modifier = Modifier.padding(start = 16.dp, end = 16.dp)) {
+                    LazyColumn(
+                        contentPadding = PaddingValues(
+                            start = 16.dp,
+                            top = 16.dp,
+                            end = 16.dp
+                        )
+                    ) {
                         itemsIndexed(result.task) { index: Int, item: Task ->
                             TaskItemCard(item,
-                                onTap = {
+                                onClick = {
                                     actions.gotoTaskDetails(item.id)
                                 },
                                 onDoubleTap = {
                                     viewModel.deleteTaskByID(id = item.id)
                                 },
-                                onLongPress = {
-                                    scope.launch {
-                                        state.show()
-                                    }
-                                })
+                                onLongClick = {
+
+                                }
+                            )
                         }
                     }
                 }
