@@ -43,7 +43,11 @@ fun TaskItemCard(task: Task, onTap: () -> Unit, onDoubleTap: () -> Unit, onLongP
                     launch {
                         delay(100)
                         detectTapGestures(
-                            onTap = { onTap() })
+                            onTap = {
+                                onTap()
+                            },
+                            onDoubleTap = { onDoubleTap() },
+                            onLongPress = { onLongPress() })
                     }
                 }
             },

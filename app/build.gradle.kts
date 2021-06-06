@@ -37,34 +37,32 @@ android {
     }
     kotlinOptions {
         jvmTarget = "11"
-        useIR = true
     }
     buildFeatures {
         compose = true
     }
     composeOptions {
         kotlinCompilerExtensionVersion = rootProject.extra["compose_version"] as String
-        kotlinCompilerVersion = rootProject.extra["kotlinVersion"] as String
     }
 }
-
 dependencies {
 
-    implementation("androidx.core:core-ktx:1.3.2")
-    implementation("androidx.appcompat:appcompat:1.2.0")
-    implementation("com.google.android.material:material:1.3.0")
+    implementation("androidx.core:core-ktx:${rootProject.extra["ktxCoreVersion"]}")
+    implementation("androidx.appcompat:appcompat:${rootProject.extra["materialVersion"]}")
+    implementation("com.google.android.material:material:${rootProject.extra["materialVersion"]}")
     implementation("androidx.compose.ui:ui:${rootProject.extra["compose_version"]}")
     implementation("androidx.compose.material:material:${rootProject.extra["compose_version"]}")
     implementation("androidx.compose.ui:ui-tooling:${rootProject.extra["compose_version"]}")
-    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.3.1")
-    implementation("androidx.activity:activity-compose:1.3.0-alpha07")
+    implementation("androidx.lifecycle:lifecycle-runtime-ktx:${rootProject.extra["lifeCycleVersion"]}")
+    implementation("androidx.activity:activity-compose:${rootProject.extra["composeActivityVersion"]}")
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.2")
-    androidTestImplementation("androidx.test.espresso:espresso-core:3.3.0")
+    androidTestImplementation("androidx.test.espresso:espresso-core:${rootProject.extra["expressoVersion"]}")
     androidTestImplementation("androidx.compose.ui:ui-test-junit4:${rootProject.extra["compose_version"]}")
 
     // compose navigation
     implementation("androidx.navigation:navigation-compose:${rootProject.extra["composeNavigationVersion"]}")
+    implementation("androidx.hilt:hilt-navigation-compose:${rootProject.extra["hiltComposeNavVersion"]}")
 
     // Preferences DataStore
     implementation("androidx.datastore:datastore-preferences:${rootProject.extra["dataStoreVersion"]}")
@@ -75,7 +73,7 @@ dependencies {
     implementation("androidx.room:room-ktx:${rootProject.extra["roomVersion"]}")
 
     // System UI Controller
-    implementation("com.google.accompanist:accompanist-systemuicontroller:0.8.1")
+    implementation("com.google.accompanist:accompanist-systemuicontroller:${rootProject.extra["systemUIControllerVersion"]}")
 
     // Coroutines
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:${rootProject.extra["coroutinesVersion"]}")
@@ -89,5 +87,9 @@ dependencies {
     implementation("androidx.hilt:hilt-navigation-compose:${rootProject.extra["hiltComposeVersion"]}")
     implementation("androidx.hilt:hilt-common:${rootProject.extra["hiltCompilerVersion"]}")
     kapt("com.google.dagger:hilt-compiler:${rootProject.extra["hiltVersion"]}")
+
+    // Moshi
+    implementation("com.squareup.moshi:moshi-kotlin${rootProject.extra["moshiVersion"]}")
+
 
 }
