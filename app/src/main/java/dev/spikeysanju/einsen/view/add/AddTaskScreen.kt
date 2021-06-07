@@ -1,20 +1,15 @@
 package dev.spikeysanju.einsen.view.add
 
 import androidx.compose.foundation.ExperimentalFoundationApi
-import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.GridCells
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyVerticalGrid
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.ModalBottomSheetLayout
@@ -29,15 +24,15 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import dev.spikeysanju.einsen.R
+import dev.spikeysanju.einsen.components.EmojiPlaceHolder
+import dev.spikeysanju.einsen.components.EmojiPlaceHolderSmall
 import dev.spikeysanju.einsen.components.InputTextField
 import dev.spikeysanju.einsen.components.Message
 import dev.spikeysanju.einsen.components.PrimaryButton
@@ -73,7 +68,7 @@ fun AddTaskScreen(viewModel: MainViewModel, actions: MainActions) {
     ModalBottomSheetLayout(sheetState = bottomSheetState, sheetContent = {
 
         LazyVerticalGrid(
-            cells = GridCells.Adaptive(minSize = 128.dp)
+            cells = GridCells.Adaptive(minSize = 60.dp)
         ) {
             // get all emoji
             viewModel.getAllEmoji(context)
@@ -195,7 +190,7 @@ fun AddTaskScreen(viewModel: MainViewModel, actions: MainActions) {
                             title = title,
                             description = description,
                             category = category,
-                            emoji = "🚀",
+                            emoji = emojiState,
                             urgency = urgencyState,
                             importance = importanceState,
                             due = "18/12/2021",
@@ -217,45 +212,17 @@ fun AddTaskScreen(viewModel: MainViewModel, actions: MainActions) {
         }
 
     }
-
 }
 
 @Composable
-fun EmojiPlaceHolder(emoji: String, onTap: () -> Unit) {
-    Box(
-        modifier = Modifier
-            .size(100.dp)
-            .clip(CircleShape)
-            .clickable { onTap() }
-            .background(color = MaterialTheme.colors.onPrimary), contentAlignment = Alignment.Center
-    ) {
-        Text(
-            text = emoji,
-            style = typography.h3,
-            textAlign = TextAlign.Center,
-            color = MaterialTheme.colors.onSecondary
-        )
-    }
+private fun BottomSheetTitle() {
+    Spacer(modifier = Modifier.height(24.dp))
+    Text(
+        text = stringResource(R.string.tetxt_choose_emoji),
+        style = typography.h5,
+        textAlign = TextAlign.Start,
+        color = MaterialTheme.colors.onPrimary
+    )
+    Spacer(modifier = Modifier.height(16.dp))
 }
-
-@Composable
-fun EmojiPlaceHolderSmall(emoji: String, onSelect: (String) -> Unit) {
-    Box(
-        modifier = Modifier
-            .size(50.dp)
-            .clip(CircleShape)
-            .clickable { onSelect(emoji) }
-            .background(color = MaterialTheme.colors.onPrimary), contentAlignment = Alignment.Center
-    ) {
-        Text(
-            text = emoji,
-            style = typography.h5,
-            textAlign = TextAlign.Center,
-            color = MaterialTheme.colors.background
-        )
-    }
-}
-
-
-
 
