@@ -59,6 +59,14 @@ fun AddTaskScreen(viewModel: MainViewModel, actions: MainActions) {
     val state = rememberModalBottomSheetState(ModalBottomSheetValue.Hidden)
     var emojiState by remember { mutableStateOf(5) }
     val scope = rememberCoroutineScope()
+    val context = LocalContext.current
+    var title by remember { mutableStateOf("") }
+    var description by remember { mutableStateOf("") }
+    var category by remember { mutableStateOf("") }
+    val listState = rememberLazyListState()
+    var urgencyState by remember { mutableStateOf(0F) }
+    var importanceState by remember { mutableStateOf(0F) }
+    val stepCount by remember { mutableStateOf(5) }
 
     ModalBottomSheetLayout(sheetState = state, sheetContent = {
 
@@ -76,15 +84,6 @@ fun AddTaskScreen(viewModel: MainViewModel, actions: MainActions) {
         Scaffold(topBar = {
             TopBarWithBack(title = stringResource(R.string.text_addTask), actions.upPress)
         }) {
-
-            val context = LocalContext.current
-            var title by remember { mutableStateOf("") }
-            var description by remember { mutableStateOf("") }
-            var category by remember { mutableStateOf("") }
-            val listState = rememberLazyListState()
-            var urgencyState by remember { mutableStateOf(0F) }
-            var importanceState by remember { mutableStateOf(0F) }
-            val stepCount by remember { mutableStateOf(5) }
 
 
             LazyColumn(state = listState) {
@@ -207,7 +206,7 @@ fun EmojiPlaceHolder(emoji: Int, onTap: () -> Unit) {
             text = getEmoji(emoji),
             style = typography.h3,
             textAlign = TextAlign.Center,
-            color = MaterialTheme.colors.background
+            color = MaterialTheme.colors.onSecondary
         )
     }
 }
