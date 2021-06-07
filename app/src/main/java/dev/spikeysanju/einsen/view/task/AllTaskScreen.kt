@@ -21,7 +21,6 @@ import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
@@ -41,8 +40,6 @@ fun AllTaskScreen(
     actions: MainActions
 ) {
     val state = rememberModalBottomSheetState(ModalBottomSheetValue.Hidden)
-    val scope = rememberCoroutineScope()
-
     ModalBottomSheetLayout(sheetState = state, sheetContent = {
 
         LazyColumn {
@@ -76,7 +73,7 @@ fun AllTaskScreen(
                 Icon(
                     Icons.Filled.Add,
                     contentDescription = stringResource(id = R.string.text_addTask),
-                    tint = MaterialTheme.colors.onBackground
+                    tint = MaterialTheme.colors.onSecondary
                 )
             }
         }) {
@@ -114,9 +111,6 @@ fun AllTaskScreen(
                 }
             }
         }
-
     }
-
-
 }
 

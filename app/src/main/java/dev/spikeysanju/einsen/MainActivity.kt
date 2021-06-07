@@ -81,7 +81,7 @@ class MainActivity : ComponentActivity() {
 fun SetStatusBarColor() {
     // Remember a SystemUiController
     val systemUiController = rememberSystemUiController()
-    val useDarkIcons = false
+    val useDarkIcons = true
     val color = colors.background
 
     SideEffect {

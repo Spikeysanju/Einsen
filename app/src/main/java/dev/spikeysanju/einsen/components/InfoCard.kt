@@ -26,7 +26,7 @@ fun InfoCard(title: String, value: String, modifier: Modifier) {
     Box(
         modifier = modifier
             .clip(RoundedCornerShape(12.dp))
-            .background(color = colors.secondaryVariant)
+            .background(color = colors.onSecondary)
             .padding(12.dp),
         contentAlignment = Alignment.Center
     ) {

@@ -44,14 +44,15 @@ fun TaskItemCard(
         modifier = Modifier
             .fillMaxWidth()
             .clip(shape = shapes.large)
-            .background(colors.primary)
+            .background(colors.onSecondary)
             .combinedClickable(onClick = {
-                onClick()
+                onClick()   // go to task details
             }, onDoubleClick = {
-                onDoubleTap()
+                onDoubleTap()   // delete task
             }, onLongClick = {
-                onLongClick()
+                onLongClick()   // show bottom sheet
             }),
+
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.Start
     ) {
@@ -87,10 +88,10 @@ fun EmojiTextView(emoji: String) {
     Box(
         modifier = Modifier
             .size(80.dp)
-            .padding(start = 12.dp, top = 12.dp, end = 12.dp, bottom = 12.dp)
+            .padding(12.dp)
             .clip(CircleShape)
             .clickable { }
-            .background(colors.onPrimary)
+            .background(colors.background)
     ) {
         Text(
             text = emoji,
