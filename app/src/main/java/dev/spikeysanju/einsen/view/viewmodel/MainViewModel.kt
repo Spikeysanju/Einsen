@@ -3,10 +3,6 @@ package dev.spikeysanju.einsen.view.viewmodel
 import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.squareup.moshi.JsonAdapter
-import com.squareup.moshi.Moshi
-import com.squareup.moshi.Types
-import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dev.spikeysanju.einsen.model.EmojiItem
 import dev.spikeysanju.einsen.model.Task
@@ -75,26 +71,6 @@ class MainViewModel @Inject constructor(private val repo: MainRepository) : View
             _emojiViewState.value = EmojiViewState.Error(exception = e)
         }
 
-    }
-
-    // get all list of emoji from JSON
-    fun getEmoji(context: Context) = viewModelScope.launch {
-        try {
-            val moshi = Moshi.Builder()
-                .add(KotlinJsonAdapterFactory())
-                .build()
-            val listType = Types.newParameterizedType(List::class.java, EmojiItem::class.java)
-            val adapter: JsonAdapter<List<EmojiItem>> = moshi.adapter(listType)
-            val myJson = context.assets.open("emoji_small.json").bufferedReader().use {
-                it.readText()
-            }
-
-            val emojiList = adapter.fromJson(myJson)
-            _emojiViewState.value = EmojiViewState.Success(emojiItem = emojiList ?: emptyList())
-
-        } catch (e: Exception) {
-            _emojiViewState.value = EmojiViewState.Error(exception = e)
-        }
     }
 
     // insert source

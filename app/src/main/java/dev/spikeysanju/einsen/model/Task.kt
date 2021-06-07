@@ -33,3 +33,9 @@ data class Task(
     val id: Long = 0
 )
 
+
+enum class TaskStatus(status: String) {
+    TODO("Todo"),
+    DOING("Doing"),
+    DONE("Done")
+}

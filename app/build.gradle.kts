@@ -88,10 +88,8 @@ dependencies {
     implementation("androidx.hilt:hilt-navigation-compose:${rootProject.extra["hiltComposeVersion"]}")
     implementation("androidx.hilt:hilt-common:${rootProject.extra["hiltCompilerVersion"]}")
     kapt("com.google.dagger:hilt-compiler:${rootProject.extra["hiltVersion"]}")
-    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.2.1")
 
-    // Moshi
-    implementation("com.squareup.moshi:moshi-kotlin${rootProject.extra["moshiVersion"]}")
-
+    // KotlinX Serialization
+    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:${rootProject.extra["kotlinSerializationVersion"]}")
 
 }
