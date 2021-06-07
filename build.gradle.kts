@@ -18,6 +18,7 @@ buildscript {
     val moshiVersion by extra(":1.11.0")
     val systemUIControllerVersion by extra("0.11.1")
     val expressoVersion by extra("3.3.0")
+    val kotlinSerializationVersion by extra("1.2.1")
 
     repositories {
         google()

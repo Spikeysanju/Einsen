@@ -23,6 +23,7 @@ import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
 import androidx.compose.material.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -38,15 +39,15 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import dev.spikeysanju.einsen.R
 import dev.spikeysanju.einsen.components.InputTextField
+import dev.spikeysanju.einsen.components.Message
 import dev.spikeysanju.einsen.components.PrimaryButton
 import dev.spikeysanju.einsen.components.StepSlider
 import dev.spikeysanju.einsen.components.TopBarWithBack
-import dev.spikeysanju.einsen.data.datastore.fakedata.EmojiList
 import dev.spikeysanju.einsen.model.Task
 import dev.spikeysanju.einsen.model.TaskStatus
 import dev.spikeysanju.einsen.navigation.MainActions
 import dev.spikeysanju.einsen.ui.theme.typography
-import dev.spikeysanju.einsen.utils.getEmoji
+import dev.spikeysanju.einsen.utils.EmojiViewState
 import dev.spikeysanju.einsen.utils.showToast
 import dev.spikeysanju.einsen.view.viewmodel.MainViewModel
 import kotlinx.coroutines.launch
@@ -56,8 +57,8 @@ import kotlinx.coroutines.launch
 @ExperimentalComposeUiApi
 @Composable
 fun AddTaskScreen(viewModel: MainViewModel, actions: MainActions) {
-    val state = rememberModalBottomSheetState(ModalBottomSheetValue.Hidden)
-    var emojiState by remember { mutableStateOf(5) }
+    val bottomSheetState = rememberModalBottomSheetState(ModalBottomSheetValue.Hidden)
+    var emojiState by remember { mutableStateOf("") }
     val scope = rememberCoroutineScope()
     val context = LocalContext.current
     var title by remember { mutableStateOf("") }
@@ -67,24 +68,50 @@ fun AddTaskScreen(viewModel: MainViewModel, actions: MainActions) {
     var urgencyState by remember { mutableStateOf(0F) }
     var importanceState by remember { mutableStateOf(0F) }
     val stepCount by remember { mutableStateOf(5) }
+    val result = viewModel.emoji.collectAsState().value
 
-    ModalBottomSheetLayout(sheetState = state, sheetContent = {
+    ModalBottomSheetLayout(sheetState = bottomSheetState, sheetContent = {
 
         LazyVerticalGrid(
             cells = GridCells.Adaptive(minSize = 128.dp)
         ) {
-            items(EmojiList.list) { emoji ->
-                EmojiPlaceHolderSmall(emoji = emoji, onSelect = {
-                    emojiState = it
-                })
+            // get all emoji
+            viewModel.getAllEmoji(context)
+            // parse emoji into ViewStates
+            when (result) {
+                EmojiViewState.Empty -> {
+                    item {
+                        Message(title = "Empty")
+                    }
+                }
+                is EmojiViewState.Error -> {
+                    item {
+                        Message("Error ${result.exception}")
+                    }
+                }
+                EmojiViewState.Loading -> {
+                    item {
+                        Message("Loading")
+                    }
+                }
+                is EmojiViewState.Success -> {
+                    items(result.emojiItem) { emoji ->
+                        EmojiPlaceHolderSmall(emoji = emoji.emoji, onSelect = {
+                            scope.launch {
+                                emojiState = it
+                                bottomSheetState.hide()
+                            }
+                        })
+                    }
+                }
             }
+
         }
 
     }) {
         Scaffold(topBar = {
             TopBarWithBack(title = stringResource(R.string.text_addTask), actions.upPress)
         }) {
-
 
             LazyColumn(state = listState) {
 
@@ -93,7 +120,7 @@ fun AddTaskScreen(viewModel: MainViewModel, actions: MainActions) {
                     Spacer(modifier = Modifier.height(16.dp))
                     EmojiPlaceHolder(emoji = emojiState, onTap = {
                         scope.launch {
-                            state.show()
+                            bottomSheetState.show()
                         }
                     })
                 }
@@ -194,7 +221,7 @@ fun AddTaskScreen(viewModel: MainViewModel, actions: MainActions) {
 }
 
 @Composable
-fun EmojiPlaceHolder(emoji: Int, onTap: () -> Unit) {
+fun EmojiPlaceHolder(emoji: String, onTap: () -> Unit) {
     Box(
         modifier = Modifier
             .size(100.dp)
@@ -203,7 +230,7 @@ fun EmojiPlaceHolder(emoji: Int, onTap: () -> Unit) {
             .background(color = MaterialTheme.colors.onPrimary), contentAlignment = Alignment.Center
     ) {
         Text(
-            text = getEmoji(emoji),
+            text = emoji,
             style = typography.h3,
             textAlign = TextAlign.Center,
             color = MaterialTheme.colors.onSecondary
@@ -211,9 +238,8 @@ fun EmojiPlaceHolder(emoji: Int, onTap: () -> Unit) {
     }
 }
 
-
 @Composable
-fun EmojiPlaceHolderSmall(emoji: Int, onSelect: (Int) -> Unit) {
+fun EmojiPlaceHolderSmall(emoji: String, onSelect: (String) -> Unit) {
     Box(
         modifier = Modifier
             .size(50.dp)
@@ -222,7 +248,7 @@ fun EmojiPlaceHolderSmall(emoji: Int, onSelect: (Int) -> Unit) {
             .background(color = MaterialTheme.colors.onPrimary), contentAlignment = Alignment.Center
     ) {
         Text(
-            text = getEmoji(emoji),
+            text = emoji,
             style = typography.h5,
             textAlign = TextAlign.Center,
             color = MaterialTheme.colors.background

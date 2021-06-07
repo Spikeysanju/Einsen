@@ -3,6 +3,7 @@ plugins {
     id("kotlin-android")
     id("kotlin-kapt")
     id("dagger.hilt.android.plugin")
+    kotlin("plugin.serialization") version "1.4.0"
 }
 
 android {
@@ -87,6 +88,7 @@ dependencies {
     implementation("androidx.hilt:hilt-navigation-compose:${rootProject.extra["hiltComposeVersion"]}")
     implementation("androidx.hilt:hilt-common:${rootProject.extra["hiltCompilerVersion"]}")
     kapt("com.google.dagger:hilt-compiler:${rootProject.extra["hiltVersion"]}")
+    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.2.1")
 
     // Moshi
     implementation("com.squareup.moshi:moshi-kotlin${rootProject.extra["moshiVersion"]}")

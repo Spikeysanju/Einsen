@@ -20,6 +20,8 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.launch
+import kotlinx.serialization.decodeFromString
+import kotlinx.serialization.json.Json
 import javax.inject.Inject
 
 @HiltViewModel
@@ -51,6 +53,29 @@ class MainViewModel @Inject constructor(private val repo: MainRepository) : View
         }
     }
 
+    // get all list of emoji from Json
+    fun getAllEmoji(context: Context) = viewModelScope.launch {
+        try {
+            // read JSON file
+            val myJson = context.assets.open("emoji.json").bufferedReader().use {
+                it.readText()
+            }
+
+            // format JSON
+            val format = Json {
+                ignoreUnknownKeys = true
+                prettyPrint = true
+                isLenient = true
+            }
+
+            val decodedEmoji = format.decodeFromString<List<EmojiItem>>(myJson)
+            _emojiViewState.value = EmojiViewState.Success(decodedEmoji)
+
+        } catch (e: Exception) {
+            _emojiViewState.value = EmojiViewState.Error(exception = e)
+        }
+
+    }
 
     // get all list of emoji from JSON
     fun getEmoji(context: Context) = viewModelScope.launch {
@@ -60,16 +85,12 @@ class MainViewModel @Inject constructor(private val repo: MainRepository) : View
                 .build()
             val listType = Types.newParameterizedType(List::class.java, EmojiItem::class.java)
             val adapter: JsonAdapter<List<EmojiItem>> = moshi.adapter(listType)
-            val myJson = context.assets.open("allEmoji.json").bufferedReader().use {
+            val myJson = context.assets.open("emoji_small.json").bufferedReader().use {
                 it.readText()
             }
 
             val emojiList = adapter.fromJson(myJson)
-            if (emojiList.isNullOrEmpty()) {
-                _emojiViewState.value = EmojiViewState.Empty
-            } else {
-                _emojiViewState.value = EmojiViewState.Success(emojiItem = emojiList)
-            }
+            _emojiViewState.value = EmojiViewState.Success(emojiItem = emojiList ?: emptyList())
 
         } catch (e: Exception) {
             _emojiViewState.value = EmojiViewState.Error(exception = e)
