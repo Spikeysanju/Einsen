@@ -17,4 +17,8 @@
     <string name="text_urgency">Urgency</string>
     <string name="text_priority">Priority</string>
     <string name="tetxt_choose_emoji">Choose Emoji</string>
+    <string name="text_edit_button">Edit Button</string>
+    <string name="text_delete_button">Delete Button</string>
+    <string name="text_share_button">Share Button</string>
+    <string name="text_complete_task">Complete Task</string>
 </resources>
