@@ -1,8 +1,9 @@
 package dev.spikeysanju.einsen.components
 
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.gestures.detectTapGestures
+import androidx.compose.foundation.combinedClickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -15,38 +16,43 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.MaterialTheme.colors
+import androidx.compose.material.MaterialTheme.shapes
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import dev.spikeysanju.einsen.model.Task
 import dev.spikeysanju.einsen.ui.theme.typography
 import dev.spikeysanju.einsen.ui.theme.white
-import kotlinx.coroutines.coroutineScope
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
 
 
+@ExperimentalFoundationApi
 @Composable
-fun TaskItemCard(task: Task, onTap: () -> Unit, onDoubleTap: () -> Unit, onLongPress: () -> Unit) {
+fun TaskItemCard(
+    task: Task,
+    onClick: () -> Unit,
+    onDoubleTap: () -> Unit,
+    onLongClick: () -> Unit
+) {
+    Spacer(modifier = Modifier.height(12.dp))
     // Emoji + (title + category)
     Row(
         modifier = Modifier
             .fillMaxWidth()
-            .pointerInput(Unit) {
-                coroutineScope {
-                    launch {
-                        delay(100)
-                        detectTapGestures(
-                            onTap = { onTap() })
-                    }
-                }
-            },
+            .clip(shape = shapes.large)
+            .background(colors.onSecondary)
+            .combinedClickable(onClick = {
+                onClick()   // go to task details
+            }, onDoubleClick = {
+                onDoubleTap()   // delete task
+            }, onLongClick = {
+                onLongClick()   // show bottom sheet
+            }),
+
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.Start
     ) {
@@ -82,10 +88,10 @@ fun EmojiTextView(emoji: String) {
     Box(
         modifier = Modifier
             .size(80.dp)
-            .padding(start = 12.dp, top = 12.dp, end = 12.dp, bottom = 12.dp)
+            .padding(12.dp)
             .clip(CircleShape)
             .clickable { }
-            .background(colors.onPrimary)
+            .background(colors.background)
     ) {
         Text(
             text = emoji,

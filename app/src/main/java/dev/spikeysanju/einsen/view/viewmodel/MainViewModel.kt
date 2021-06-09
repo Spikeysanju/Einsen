@@ -1,10 +1,13 @@
 package dev.spikeysanju.einsen.view.viewmodel
 
+import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
+import dev.spikeysanju.einsen.model.EmojiItem
 import dev.spikeysanju.einsen.model.Task
 import dev.spikeysanju.einsen.repository.MainRepository
+import dev.spikeysanju.einsen.utils.EmojiViewState
 import dev.spikeysanju.einsen.utils.SingleViewState
 import dev.spikeysanju.einsen.utils.ViewState
 import kotlinx.coroutines.Dispatchers
@@ -13,6 +16,8 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.launch
+import kotlinx.serialization.decodeFromString
+import kotlinx.serialization.json.Json
 import javax.inject.Inject
 
 @HiltViewModel
@@ -21,10 +26,12 @@ class MainViewModel @Inject constructor(private val repo: MainRepository) : View
     // Backing property to avoid state updates from other classes
     private val _viewState = MutableStateFlow<ViewState>(ViewState.Loading)
     private val _singleViewState = MutableStateFlow<SingleViewState>(SingleViewState.Loading)
+    private val _emojiViewState = MutableStateFlow<EmojiViewState>(EmojiViewState.Loading)
 
     // The UI collects from this StateFlow to get its state update
     val feed = _viewState.asStateFlow()
     val singleTask = _singleViewState.asStateFlow()
+    val emoji = _emojiViewState.asStateFlow()
 
     // get all task
     fun getAllTask() = viewModelScope.launch(Dispatchers.IO) {
@@ -40,6 +47,30 @@ class MainViewModel @Inject constructor(private val repo: MainRepository) : View
                 _viewState.value = ViewState.Error(e)
             }
         }
+    }
+
+    // get all list of emoji from Json
+    fun getAllEmoji(context: Context) = viewModelScope.launch {
+        try {
+            // read JSON file
+            val myJson = context.assets.open("emoji.json").bufferedReader().use {
+                it.readText()
+            }
+
+            // format JSON
+            val format = Json {
+                ignoreUnknownKeys = true
+                prettyPrint = true
+                isLenient = true
+            }
+
+            val decodedEmoji = format.decodeFromString<List<EmojiItem>>(myJson)
+            _emojiViewState.value = EmojiViewState.Success(decodedEmoji)
+
+        } catch (e: Exception) {
+            _emojiViewState.value = EmojiViewState.Error(exception = e)
+        }
+
     }
 
     // insert source

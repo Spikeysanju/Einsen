@@ -4,7 +4,9 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.appcompat.app.AppCompatDelegate
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.isSystemInDarkTheme
+import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.MaterialTheme.colors
 import androidx.compose.material.Surface
 import androidx.compose.runtime.Composable
@@ -23,7 +25,8 @@ import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-
+@ExperimentalFoundationApi
+@ExperimentalMaterialApi
 @ExperimentalComposeUiApi
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
@@ -78,7 +81,7 @@ class MainActivity : ComponentActivity() {
 fun SetStatusBarColor() {
     // Remember a SystemUiController
     val systemUiController = rememberSystemUiController()
-    val useDarkIcons = false
+    val useDarkIcons = true
     val color = colors.background
 
     SideEffect {

@@ -16,4 +16,5 @@
     <string name="text_timer">25:00</string>
     <string name="text_urgency">Urgency</string>
     <string name="text_priority">Priority</string>
+    <string name="tetxt_choose_emoji">Choose Emoji</string>
 </resources>
