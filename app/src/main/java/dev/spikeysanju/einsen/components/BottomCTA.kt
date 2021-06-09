@@ -3,8 +3,9 @@ package dev.spikeysanju.einsen.components
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
 import androidx.compose.material.MaterialTheme
@@ -16,19 +17,21 @@ import androidx.compose.ui.unit.dp
 import dev.spikeysanju.einsen.R
 
 @Composable
-fun BottomCTA() {
-    Row {
-        ActionIcons(onEdit = { }, onDelete = { }, onShare = {})
+fun BottomCTA(onEdit: () -> Unit, onDelete: () -> Unit, onShare: () -> Unit) {
+    Row(
+        modifier = Modifier.padding(top = 12.dp, bottom = 12.dp, start = 16.dp, end = 16.dp),
+        horizontalArrangement = Arrangement.SpaceEvenly
+    ) {
+        ActionIcons(onEdit = { onEdit() }, onDelete = { onDelete() }, onShare = { onShare() })
         Spacer(modifier = Modifier.width(12.dp))
         PrimaryButtonWithIcon("Complete", onclick = {
-
         })
     }
 }
 
 @Composable
 fun ActionIcons(onEdit: () -> Unit, onDelete: () -> Unit, onShare: () -> Unit) {
-    Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceAround) {
+    Row(modifier = Modifier.wrapContentWidth(), horizontalArrangement = Arrangement.SpaceAround) {
 
         IconButton(onClick = { onEdit.invoke() }) {
             Icon(

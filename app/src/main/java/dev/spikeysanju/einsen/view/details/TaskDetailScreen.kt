@@ -19,6 +19,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import dev.spikeysanju.einsen.R
+import dev.spikeysanju.einsen.components.BottomCTA
 import dev.spikeysanju.einsen.components.InfoCard
 import dev.spikeysanju.einsen.components.TopBarWithBack
 import dev.spikeysanju.einsen.navigation.MainActions
@@ -30,6 +31,9 @@ import dev.spikeysanju.einsen.view.viewmodel.MainViewModel
 fun TaskDetailsScreen(viewModel: MainViewModel, action: MainActions) {
     Scaffold(topBar = {
         TopBarWithBack(title = stringResource(id = R.string.text_taskDetails), action.upPress)
+    }, bottomBar = {
+        BottomCTA(onEdit = {}, onDelete = {}, onShare = {})
+
     }) {
 
         val listState = rememberLazyListState()
