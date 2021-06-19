@@ -3,6 +3,7 @@ package dev.spikeysanju.einsen.components
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentWidth
@@ -20,12 +21,16 @@ import dev.spikeysanju.einsen.R
 fun BottomCTA(onEdit: () -> Unit, onDelete: () -> Unit, onShare: () -> Unit) {
     Row(
         modifier = Modifier.padding(top = 12.dp, bottom = 12.dp, start = 16.dp, end = 16.dp),
-        horizontalArrangement = Arrangement.SpaceEvenly
+        horizontalArrangement = Arrangement.SpaceAround
     ) {
         ActionIcons(onEdit = { onEdit() }, onDelete = { onDelete() }, onShare = { onShare() })
         Spacer(modifier = Modifier.width(12.dp))
-        PrimaryButtonWithIcon("Complete", onclick = {
-        })
+
+        Row(modifier = Modifier.fillMaxWidth(), Arrangement.End) {
+            PrimaryButtonWithIcon(stringResource(R.string.text_complete), onclick = {
+                // TODO - ON COMPLETE
+            })
+        }
     }
 }
 

@@ -12,7 +12,6 @@
     <string name="text_save_task">Save Task</string>
     <string name="text_delete">Delete</string>
     <string name="text_reset">Reset</string>
-    <string name="text_complete">Complete</string>
     <string name="text_timer">25:00</string>
     <string name="text_urgency">Urgency</string>
     <string name="text_priority">Priority</string>
@@ -21,4 +20,5 @@
     <string name="text_delete_button">Delete Button</string>
     <string name="text_share_button">Share Button</string>
     <string name="text_complete_task">Complete Task</string>
+    <string name="text_complete">Complete</string>
 </resources>
