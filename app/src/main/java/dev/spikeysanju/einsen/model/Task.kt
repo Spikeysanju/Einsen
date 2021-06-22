@@ -21,8 +21,8 @@ data class Task(
     val importance: Float = 0F,
     @ColumnInfo(name = "timer")
     val due: String = "",
-    @ColumnInfo(name = "status")
-    val status: TaskStatus,
+    @ColumnInfo(name = "isCompleted")
+    val isCompleted: Boolean,
     @ColumnInfo(name = "createdAt")
     val createdAt: Long = System.currentTimeMillis(),
     @ColumnInfo(name = "updatedAt")
