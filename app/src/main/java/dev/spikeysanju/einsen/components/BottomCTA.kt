@@ -6,6 +6,7 @@ import androidx.compose.material.IconButton
 import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
@@ -14,6 +15,7 @@ import dev.spikeysanju.einsen.R
 @Composable
 fun BottomCTA(
     title: String,
+    icon: Painter,
     onEdit: () -> Unit,
     onDelete: () -> Unit,
     onShare: () -> Unit,
@@ -29,7 +31,7 @@ fun BottomCTA(
         Row(modifier = Modifier.fillMaxWidth(), Arrangement.End) {
             PrimaryButtonWithIcon(title = title, onclick = {
                 onButtonChange()
-            })
+            }, icon = icon)
         }
     }
 }

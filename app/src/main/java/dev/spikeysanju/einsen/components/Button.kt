@@ -13,11 +13,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import dev.spikeysanju.einsen.R
 import dev.spikeysanju.einsen.ui.theme.Shapes
 import dev.spikeysanju.einsen.ui.theme.typography
 
@@ -46,7 +44,7 @@ fun PrimaryButton(title: String, onclick: () -> Unit) {
 }
 
 @Composable
-fun PrimaryButtonWithIcon(title: String, onclick: () -> Unit) {
+fun PrimaryButtonWithIcon(title: String, icon: Painter, onclick: () -> Unit) {
 
     Row(
         modifier = Modifier
@@ -61,8 +59,8 @@ fun PrimaryButtonWithIcon(title: String, onclick: () -> Unit) {
     ) {
 
         Icon(
-            painter = painterResource(id = R.drawable.ic_check),
-            contentDescription = stringResource(R.string.text_complete_task),
+            painter = icon,
+            contentDescription = title,
             tint = colors.primary
         )
 
