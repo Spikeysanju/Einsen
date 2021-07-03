@@ -8,7 +8,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
 import dev.spikeysanju.einsen.R
 
-private val Grotesk = FontFamily(
+val Grotesk = FontFamily(
     Font(R.font.grotesk_regular),
     Font(R.font.grotesk_medium, FontWeight.W500),
     Font(R.font.grotesk_bold, FontWeight.Bold)

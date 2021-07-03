@@ -171,7 +171,7 @@ fun AddTaskScreen(viewModel: MainViewModel, actions: MainActions) {
                             urgency = urgencyState,
                             importance = importanceState,
                             due = "18/12/2021",
-                            isCompleted = false
+                            isCompleted = true
                         )
 
                         when {

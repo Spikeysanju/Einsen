@@ -85,12 +85,6 @@ fun AllTaskScreen(
                             TaskItemCard(item,
                                 onClick = {
                                     actions.gotoTaskDetails(item.id)
-                                },
-                                onDoubleTap = {
-                                    viewModel.deleteTaskByID(id = item.id)
-                                },
-                                onLongClick = {
-
                                 })
                         }
                     }
