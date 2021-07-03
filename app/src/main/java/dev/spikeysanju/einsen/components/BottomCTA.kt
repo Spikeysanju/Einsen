@@ -13,11 +13,11 @@ import dev.spikeysanju.einsen.R
 
 @Composable
 fun BottomCTA(
-    buttonState: Boolean,
+    title: String,
     onEdit: () -> Unit,
     onDelete: () -> Unit,
     onShare: () -> Unit,
-    onButtonChange: (Boolean) -> Unit
+    onButtonChange: () -> Unit
 ) {
     Row(
         modifier = Modifier.padding(top = 12.dp, bottom = 12.dp, start = 16.dp, end = 16.dp),
@@ -27,15 +27,8 @@ fun BottomCTA(
         Spacer(modifier = Modifier.width(12.dp))
 
         Row(modifier = Modifier.fillMaxWidth(), Arrangement.End) {
-
-            // check if task is already completed
-            val buttonTitle = when (buttonState) {
-                true -> stringResource(R.string.text_incomplete)
-                false -> stringResource(R.string.text_complete)
-            }
-
-            PrimaryButtonWithIcon(buttonTitle, onclick = {
-                onButtonChange(!buttonState)
+            PrimaryButtonWithIcon(title = title, onclick = {
+                onButtonChange()
             })
         }
     }

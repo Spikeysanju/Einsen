@@ -25,9 +25,6 @@ import dev.spikeysanju.einsen.view.viewmodel.MainViewModel
 
 @Composable
 fun TaskDetailsScreen(viewModel: MainViewModel, action: MainActions) {
-    val buttonState = remember {
-        mutableStateOf(false)
-    }
     val taskState = remember {
         mutableStateOf(
             Task(
@@ -48,6 +45,13 @@ fun TaskDetailsScreen(viewModel: MainViewModel, action: MainActions) {
     Scaffold(topBar = {
         TopBarWithBack(title = stringResource(id = R.string.text_taskDetails), action.upPress)
     }, bottomBar = {
+
+        // check if task is already completed
+        val buttonTitle = when (taskState.value.isCompleted) {
+            true -> stringResource(R.string.text_incomplete)
+            false -> stringResource(R.string.text_complete)
+        }
+
         BottomCTA(onEdit = {
             // Todo edit notes
         }, onDelete = {
@@ -56,8 +60,7 @@ fun TaskDetailsScreen(viewModel: MainViewModel, action: MainActions) {
             //Todo share notes
         }, onButtonChange = {
             viewModel.updateStatus(taskState.value.id, !taskState.value.isCompleted)
-            buttonState.value = !taskState.value.isCompleted
-        }, buttonState = buttonState.value)
+        }, title = buttonTitle)
 
     }) {
 
