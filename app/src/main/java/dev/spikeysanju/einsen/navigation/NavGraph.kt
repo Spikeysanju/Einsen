@@ -59,10 +59,10 @@ fun NavGraph(toggleTheme: () -> Unit) {
         // Task Details
         composable(
             "${Screen.TaskDetails.route}/{id}",
-            arguments = listOf(navArgument(EndPoints.ID) { type = NavType.LongType })
+            arguments = listOf(navArgument(EndPoints.ID) { type = NavType.IntType })
         ) {
             val viewModel = hiltViewModel<MainViewModel>(it)
-            val taskID = it.arguments?.getLong(EndPoints.ID)
+            val taskID = it.arguments?.getInt(EndPoints.ID)
                 ?: throw IllegalStateException("'task ID' shouldn't be null")
 
             viewModel.findTaskByID(taskID)
@@ -91,7 +91,7 @@ class MainActions(navController: NavController) {
         navController.navigate(Screen.AllTask.route)
     }
 
-    val gotoTaskDetails: (id: Long) -> Unit = { id ->
+    val gotoTaskDetails: (id: Int) -> Unit = { id ->
         navController.navigate("${Screen.TaskDetails.route}/$id")
     }
 

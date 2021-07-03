@@ -23,7 +23,7 @@ fun ChipView(title: String) {
     ) {
         Text(
             text = title, modifier = Modifier.padding(12.dp, 6.dp, 12.dp, 6.dp),
-            style = MaterialTheme.typography.caption,
+            style = MaterialTheme.typography.overline,
             color = MaterialTheme.colors.primary
         )
     }
