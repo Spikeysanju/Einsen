@@ -88,6 +88,11 @@ class MainViewModel @Inject constructor(private val repo: MainRepository) : View
         repo.update(task)
     }
 
+    // update status
+    fun updateStatus(id: Int, isCompleted: Boolean) = viewModelScope.launch {
+        repo.updateStatus(id, isCompleted)
+    }
+
     // find task by id
     fun findTaskByID(id: Int) = viewModelScope.launch(Dispatchers.IO) {
         repo.find(id).distinctUntilChanged().collect { result ->

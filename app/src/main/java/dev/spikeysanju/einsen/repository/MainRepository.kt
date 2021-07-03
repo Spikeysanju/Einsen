@@ -17,4 +17,6 @@ class MainRepository @Inject constructor(private val taskDao: TaskDao) {
     suspend fun update(task: Task) = taskDao.insertSource(task)
     suspend fun delete(id: Int) = taskDao.deleteByID(id)
     fun find(id: Int) = taskDao.findByID(id).flowOn(Dispatchers.IO).conflate()
+    suspend fun updateStatus(id: Int, isCompleted: Boolean) =
+        taskDao.updateStatus(id = id, isCompleted = isCompleted)
 }

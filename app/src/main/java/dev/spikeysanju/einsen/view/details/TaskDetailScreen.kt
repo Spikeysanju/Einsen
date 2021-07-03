@@ -25,6 +25,9 @@ import dev.spikeysanju.einsen.view.viewmodel.MainViewModel
 
 @Composable
 fun TaskDetailsScreen(viewModel: MainViewModel, action: MainActions) {
+    val buttonState = remember {
+        mutableStateOf(false)
+    }
     val taskState = remember {
         mutableStateOf(
             Task(
@@ -51,7 +54,10 @@ fun TaskDetailsScreen(viewModel: MainViewModel, action: MainActions) {
             viewModel.deleteTaskByID(taskState.value.id)
         }, onShare = {
             //Todo share notes
-        })
+        }, onButtonChange = {
+            viewModel.updateStatus(taskState.value.id, !taskState.value.isCompleted)
+            buttonState.value = !taskState.value.isCompleted
+        }, buttonState = buttonState.value)
 
     }) {
 
