@@ -10,6 +10,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
@@ -64,18 +65,26 @@ fun TaskDetailsScreen(viewModel: MainViewModel, action: MainActions) {
                     state = listState
                 ) {
 
+                    // update the task state with lates value
                     val task = result.task
-
                     taskState.value = result.task
 
 
+                    // Emoji placeholder
                     item {
                         Spacer(modifier = Modifier.height(24.dp))
-                        EmojiPlaceHolder(emoji = task.emoji, onTap = {
 
-                        })
+                        Box(
+                            modifier = Modifier.fillMaxWidth(),
+                            contentAlignment = Alignment.Center
+                        ) {
+                            EmojiPlaceHolder(emoji = task.emoji, onTap = {
+
+                            })
+                        }
                     }
 
+                    // Category + Title + Description
                     item {
 
                         Spacer(modifier = Modifier.height(16.dp))
