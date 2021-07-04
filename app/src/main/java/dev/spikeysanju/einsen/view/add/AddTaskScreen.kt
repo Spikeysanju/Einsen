@@ -181,6 +181,7 @@ fun AddTaskScreen(viewModel: MainViewModel, actions: MainActions) {
                             category.isEmpty() -> showToast(context, "Category is Empty!")
                             else -> viewModel.insertTask(task).run {
                                 showToast(context, "Task Added Successfully!")
+                                actions.upPress.invoke()
                             }
                         }
                     }
