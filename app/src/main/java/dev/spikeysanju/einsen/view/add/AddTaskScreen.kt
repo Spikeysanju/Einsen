@@ -20,6 +20,7 @@ import dev.spikeysanju.einsen.model.Task
 import dev.spikeysanju.einsen.navigation.MainActions
 import dev.spikeysanju.einsen.ui.theme.typography
 import dev.spikeysanju.einsen.utils.EmojiViewState
+import dev.spikeysanju.einsen.utils.makeValueRound
 import dev.spikeysanju.einsen.utils.showToast
 import dev.spikeysanju.einsen.view.viewmodel.MainViewModel
 import kotlinx.coroutines.launch
@@ -168,8 +169,8 @@ fun AddTaskScreen(viewModel: MainViewModel, actions: MainActions) {
                             description = description,
                             category = category,
                             emoji = emojiState,
-                            urgency = urgencyState,
-                            importance = importanceState,
+                            urgency = makeValueRound(urgencyState),
+                            importance = makeValueRound(importanceState),
                             due = "18/12/2021",
                             isCompleted = true
                         )
