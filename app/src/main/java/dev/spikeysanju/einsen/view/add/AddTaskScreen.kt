@@ -44,7 +44,7 @@ fun AddTaskScreen(viewModel: MainViewModel, actions: MainActions) {
     val result = viewModel.emoji.collectAsState().value
 
     ModalBottomSheetLayout(sheetState = bottomSheetState, sheetContent = {
-
+        BottomSheetTitle()
         LazyVerticalGrid(
             cells = GridCells.Adaptive(minSize = 60.dp)
         ) {
@@ -131,7 +131,7 @@ fun AddTaskScreen(viewModel: MainViewModel, actions: MainActions) {
                 // Urgency
                 item {
                     Spacer(modifier = Modifier.height(16.dp))
-                    Column(modifier = Modifier.padding(16.dp)) {
+                    Column(modifier = Modifier.padding(start = 24.dp, end = 24.dp)) {
                         Text(
                             text = stringResource(R.string.text_urgency),
                             style = typography.subtitle1,
@@ -147,7 +147,7 @@ fun AddTaskScreen(viewModel: MainViewModel, actions: MainActions) {
                 // Importance
                 item {
                     Spacer(modifier = Modifier.height(16.dp))
-                    Column(modifier = Modifier.padding(16.dp)) {
+                    Column(modifier = Modifier.padding(start = 24.dp, end = 24.dp)) {
                         Text(
                             text = stringResource(R.string.text_importance),
                             style = typography.subtitle1,
@@ -195,13 +195,12 @@ fun AddTaskScreen(viewModel: MainViewModel, actions: MainActions) {
 
 @Composable
 private fun BottomSheetTitle() {
-    Spacer(modifier = Modifier.height(24.dp))
     Text(
+        modifier = Modifier.padding(start = 16.dp, top = 16.dp, bottom = 24.dp),
         text = stringResource(R.string.tetxt_choose_emoji),
         style = typography.h5,
         textAlign = TextAlign.Start,
         color = MaterialTheme.colors.onPrimary
     )
-    Spacer(modifier = Modifier.height(16.dp))
 }
 
