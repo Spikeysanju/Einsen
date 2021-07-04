@@ -33,7 +33,8 @@ import dev.spikeysanju.einsen.ui.theme.white
 @Composable
 fun TaskItemCard(
     task: Task,
-    onClick: () -> Unit
+    onClick: () -> Unit,
+    onValueChanged: (Boolean) -> Unit
 ) {
 
     Spacer(modifier = Modifier.height(12.dp))
@@ -48,6 +49,7 @@ fun TaskItemCard(
         // Checkbox
         EisenCheckBox(value = status.value, onValueChanged = {
             status.value = it
+            onValueChanged(status.value)
 
         })
 

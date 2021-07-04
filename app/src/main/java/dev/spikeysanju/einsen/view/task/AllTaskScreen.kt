@@ -85,6 +85,8 @@ fun AllTaskScreen(
                             TaskItemCard(item,
                                 onClick = {
                                     actions.gotoTaskDetails(item.id)
+                                }, onValueChanged = {
+                                    viewModel.updateStatus(item.id, it)
                                 })
                         }
                     }
