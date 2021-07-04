@@ -85,7 +85,7 @@ fun AllTaskScreen(
                             TaskItemCard(item,
                                 onClick = {
                                     actions.gotoTaskDetails(item.id)
-                                }, onValueChanged = {
+                                }, onCheckboxChange = {
                                     viewModel.updateStatus(item.id, it)
                                 })
                         }
