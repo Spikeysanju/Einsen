@@ -8,7 +8,6 @@ import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
-import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
@@ -29,25 +28,6 @@ fun AllTaskScreen(
     viewModel: MainViewModel,
     actions: MainActions
 ) {
-    val state = rememberModalBottomSheetState(ModalBottomSheetValue.Hidden)
-    ModalBottomSheetLayout(sheetState = state, sheetContent = {
-
-        LazyColumn {
-            items(50) {
-                ListItem(
-                    text = { Text("Item $it") },
-                    icon = {
-                        Icon(
-                            Icons.Default.Favorite,
-                            contentDescription = "Localized description"
-                        )
-                    }
-                )
-            }
-        }
-
-    }) {
-
         Scaffold(topBar = {
             TopBarWithBack(title = stringResource(R.string.text_allTask), actions.upPress)
         }, floatingActionButton = {
@@ -58,7 +38,7 @@ fun AllTaskScreen(
                 },
                 backgroundColor = MaterialTheme.colors.onPrimary,
                 contentColor = MaterialTheme.colors.background,
-                elevation = FloatingActionButtonDefaults.elevation(8.dp)
+                elevation = FloatingActionButtonDefaults.elevation(12.dp)
             ) {
                 Icon(
                     Icons.Filled.Add,
@@ -96,6 +76,5 @@ fun AllTaskScreen(
                 }
             }
         }
-    }
 }
 

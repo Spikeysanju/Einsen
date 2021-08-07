@@ -22,4 +22,7 @@
     <string name="text_complete_task">Complete Task</string>
     <string name="text_complete">Complete</string>
     <string name="text_incomplete">Incomplete</string>
+    <string name="text_todo">Todo</string>
+    <string name="text_doing">Doing</string>
+    <string name="text_done">Done</string>
 </resources>

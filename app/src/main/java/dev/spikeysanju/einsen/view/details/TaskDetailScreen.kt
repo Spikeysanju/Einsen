@@ -105,7 +105,9 @@ fun TaskDetailsScreen(viewModel: MainViewModel, action: MainActions) {
                     item {
 
                         Spacer(modifier = Modifier.height(16.dp))
-                        ChipView(title = task.category)
+                        ChipView(title = task.category, onClick = {
+
+                        })
 
                         Spacer(modifier = Modifier.height(16.dp))
                         Text(

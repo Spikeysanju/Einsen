@@ -1,6 +1,8 @@
 package dev.spikeysanju.einsen.components
 
+import androidx.compose.animation.animateContentSize
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentWidth
@@ -14,10 +16,12 @@ import androidx.compose.ui.unit.dp
 
 
 @Composable
-fun ChipView(title: String) {
+fun ChipView(title: String, onClick: () -> Unit) {
     Box(
         modifier = Modifier
             .wrapContentWidth()
+            .animateContentSize()
+            .clickable(onClick = onClick)
             .clip(RoundedCornerShape(12.dp))
             .background(MaterialTheme.colors.onPrimary)
     ) {

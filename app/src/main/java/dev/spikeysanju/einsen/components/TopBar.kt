@@ -1,11 +1,7 @@
 package dev.spikeysanju.einsen.components
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.*
 import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
 import androidx.compose.material.MaterialTheme.colors
@@ -41,6 +37,28 @@ fun TopBar(title: String) {
 @Composable
 fun TopBarWithBack(title: String, upPress: () -> Unit) {
     Column {
+        IconButton(onClick = { upPress.invoke() }) {
+            Icon(
+                painter = painterResource(id = R.drawable.ic_back),
+                contentDescription = "Back Button",
+                tint = colors.onPrimary
+            )
+        }
+
+        Text(
+            text = title,
+            style = typography.h3,
+            textAlign = TextAlign.Start,
+            color = colors.onPrimary,
+            modifier = Modifier.padding(start = 16.dp)
+        )
+    }
+}
+
+
+@Composable
+fun TopBarDetailsWithBack(title: String, upPress: () -> Unit) {
+    Row(horizontalArrangement = Arrangement.Center) {
         IconButton(onClick = { upPress.invoke() }) {
             Icon(
                 painter = painterResource(id = R.drawable.ic_back),

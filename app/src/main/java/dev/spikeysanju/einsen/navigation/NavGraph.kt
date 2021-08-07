@@ -1,5 +1,6 @@
 package dev.spikeysanju.einsen.navigation
 
+import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.runtime.Composable
@@ -11,10 +12,10 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import androidx.navigation.NavType
-import androidx.navigation.compose.NavHost
-import androidx.navigation.compose.composable
 import androidx.navigation.compose.navArgument
-import androidx.navigation.compose.rememberNavController
+import com.google.accompanist.navigation.animation.AnimatedNavHost
+import com.google.accompanist.navigation.animation.composable
+import com.google.accompanist.navigation.animation.rememberAnimatedNavController
 import dev.spikeysanju.einsen.view.add.AddTaskScreen
 import dev.spikeysanju.einsen.view.details.TaskDetailsScreen
 import dev.spikeysanju.einsen.view.home.HomeScreen
@@ -26,17 +27,20 @@ object EndPoints {
     const val ID = "id"
 }
 
+@ExperimentalAnimationApi
 @ExperimentalMaterialApi
 @ExperimentalFoundationApi
 @ExperimentalComposeUiApi
 @Composable
 fun NavGraph(toggleTheme: () -> Unit) {
-    val navController = rememberNavController()
+    val navController = rememberAnimatedNavController()
     val actions = remember(navController) { MainActions(navController) }
 
-    NavHost(navController, startDestination = Screen.Home.route) {
+    AnimatedNavHost(navController, startDestination = Screen.Home.route) {
         // Home
-        composable(Screen.Home.route) {
+        composable(
+            Screen.Home.route
+        ) {
             val viewModel: MainViewModel = viewModel(
                 factory = HiltViewModelFactory(LocalContext.current, it)
             )
@@ -44,7 +48,9 @@ fun NavGraph(toggleTheme: () -> Unit) {
         }
 
         // Add Task
-        composable(Screen.AddTask.route) {
+        composable(
+            Screen.AddTask.route
+        ) {
             val viewModel = hiltViewModel<MainViewModel>(it)
             AddTaskScreen(viewModel, actions)
         }
@@ -74,6 +80,7 @@ fun NavGraph(toggleTheme: () -> Unit) {
             val viewModel = hiltViewModel<MainViewModel>(it)
             SettingsScreen(viewModel, actions)
         }
+
     }
 }
 

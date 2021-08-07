@@ -93,4 +93,7 @@ dependencies {
     // KotlinX Serialization
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:${rootProject.extra["kotlinSerializationVersion"]}")
 
+    implementation("com.google.accompanist:accompanist-navigation-animation:${rootProject.extra["navigationAnimation"]}")
+
+
 }

@@ -1,13 +1,11 @@
 package dev.spikeysanju.einsen.view.add
 
 import androidx.compose.foundation.ExperimentalFoundationApi
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.*
 import androidx.compose.material.*
 import androidx.compose.runtime.*
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
@@ -86,16 +84,21 @@ fun AddTaskScreen(viewModel: MainViewModel, actions: MainActions) {
             TopBarWithBack(title = stringResource(R.string.text_addTask), actions.upPress)
         }) {
 
-            LazyColumn(state = listState) {
+            LazyColumn(state = listState, contentPadding = PaddingValues(bottom = 24.dp)) {
 
                 // Emoji
                 item {
-                    Spacer(modifier = Modifier.height(16.dp))
-                    EmojiPlaceHolder(emoji = emojiState, onTap = {
-                        scope.launch {
-                            bottomSheetState.show()
-                        }
-                    })
+                    Spacer(modifier = Modifier.height(24.dp))
+                    Box(
+                        modifier = Modifier.fillMaxWidth(),
+                        contentAlignment = Alignment.Center
+                    ) {
+                        EmojiPlaceHolder(emoji = emojiState, onTap = {
+                            scope.launch {
+                                bottomSheetState.show()
+                            }
+                        })
+                    }
                 }
 
                 // Title
@@ -162,7 +165,7 @@ fun AddTaskScreen(viewModel: MainViewModel, actions: MainActions) {
 
                 // Save Task
                 item {
-                    Spacer(modifier = Modifier.height(24.dp))
+                    Spacer(modifier = Modifier.height(36.dp))
                     PrimaryButton(title = stringResource(R.string.text_save_task)) {
                         val task = Task(
                             title = title,
