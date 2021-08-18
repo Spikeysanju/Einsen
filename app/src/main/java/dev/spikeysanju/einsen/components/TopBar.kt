@@ -22,7 +22,7 @@ fun TopBar(title: String) {
             .fillMaxWidth()
             .height(50.dp)
             .background(colors.primary)
-            .padding(start = 16.dp),
+            .padding(start = 16.dp, top = 12.dp),
         contentAlignment = Alignment.CenterStart
     ) {
         Text(
