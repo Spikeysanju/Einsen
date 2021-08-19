@@ -49,7 +49,7 @@ val typography = Typography(
     ),
     subtitle1 = TextStyle(
         fontFamily = Avenir,
-        fontWeight = FontWeight.Normal,
+        fontWeight = FontWeight.SemiBold,
         fontSize = 16.sp
     ),
     subtitle2 = TextStyle(

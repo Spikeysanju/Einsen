@@ -24,7 +24,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import dev.spikeysanju.einsen.model.Task
-import dev.spikeysanju.einsen.ui.theme.Grotesk
+import dev.spikeysanju.einsen.ui.theme.Avenir
 import dev.spikeysanju.einsen.ui.theme.typography
 import dev.spikeysanju.einsen.ui.theme.white
 
@@ -74,8 +74,8 @@ fun TaskItemCard(
                 true -> TextStyle(
                     textDecoration = TextDecoration.LineThrough,
                     fontSize = 16.sp,
-                    fontFamily = Grotesk,
-                    fontWeight = FontWeight.Medium
+                    fontFamily = Avenir,
+                    fontWeight = FontWeight.SemiBold
                 )
                 false -> typography.subtitle1
             }
@@ -84,7 +84,7 @@ fun TaskItemCard(
                 true -> TextStyle(
                     textDecoration = TextDecoration.LineThrough,
                     fontSize = 12.sp,
-                    fontFamily = Grotesk,
+                    fontFamily = Avenir,
                     fontWeight = FontWeight.Normal
                 )
                 false -> typography.caption

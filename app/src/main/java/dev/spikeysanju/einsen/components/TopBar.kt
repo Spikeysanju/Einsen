@@ -36,7 +36,10 @@ fun TopBar(title: String) {
 
 @Composable
 fun TopBarWithBack(title: String, upPress: () -> Unit) {
-    Column {
+    Row(
+        verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.Center
+    ) {
         IconButton(onClick = { upPress.invoke() }) {
             Icon(
                 painter = painterResource(id = R.drawable.ic_back),
@@ -47,29 +50,7 @@ fun TopBarWithBack(title: String, upPress: () -> Unit) {
 
         Text(
             text = title,
-            style = typography.h3,
-            textAlign = TextAlign.Start,
-            color = colors.onPrimary,
-            modifier = Modifier.padding(start = 16.dp)
-        )
-    }
-}
-
-
-@Composable
-fun TopBarDetailsWithBack(title: String, upPress: () -> Unit) {
-    Row(horizontalArrangement = Arrangement.Center) {
-        IconButton(onClick = { upPress.invoke() }) {
-            Icon(
-                painter = painterResource(id = R.drawable.ic_back),
-                contentDescription = "Back Button",
-                tint = colors.onPrimary
-            )
-        }
-
-        Text(
-            text = title,
-            style = typography.h3,
+            style = typography.h6,
             textAlign = TextAlign.Start,
             color = colors.onPrimary,
             modifier = Modifier.padding(start = 16.dp)

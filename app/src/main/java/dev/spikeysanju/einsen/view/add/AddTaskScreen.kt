@@ -10,12 +10,16 @@ import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import dev.spikeysanju.einsen.R
 import dev.spikeysanju.einsen.components.*
 import dev.spikeysanju.einsen.model.Task
 import dev.spikeysanju.einsen.navigation.MainActions
+import dev.spikeysanju.einsen.ui.theme.Avenir
 import dev.spikeysanju.einsen.ui.theme.typography
 import dev.spikeysanju.einsen.utils.EmojiViewState
 import dev.spikeysanju.einsen.utils.makeValueRound
@@ -103,7 +107,7 @@ fun AddTaskScreen(viewModel: MainViewModel, actions: MainActions) {
 
                 // Title
                 item {
-                    Spacer(modifier = Modifier.height(16.dp))
+                    Spacer(modifier = Modifier.height(24.dp))
                     InputTextField(title = stringResource(R.string.text_title), value = title) {
                         title = it
                     }
@@ -111,7 +115,7 @@ fun AddTaskScreen(viewModel: MainViewModel, actions: MainActions) {
 
                 // Description
                 item {
-                    Spacer(modifier = Modifier.height(16.dp))
+                    Spacer(modifier = Modifier.height(24.dp))
                     InputTextField(
                         title = stringResource(R.string.text_description),
                         value = description
@@ -122,7 +126,7 @@ fun AddTaskScreen(viewModel: MainViewModel, actions: MainActions) {
 
                 // Category
                 item {
-                    Spacer(modifier = Modifier.height(16.dp))
+                    Spacer(modifier = Modifier.height(24.dp))
                     InputTextField(
                         title = stringResource(R.string.text_category),
                         value = category
@@ -131,13 +135,19 @@ fun AddTaskScreen(viewModel: MainViewModel, actions: MainActions) {
                     }
                 }
 
+                val titleStyle = TextStyle(
+                    fontSize = 16.sp,
+                    fontFamily = Avenir,
+                    fontWeight = FontWeight.Bold
+                )
+
                 // Urgency
                 item {
-                    Spacer(modifier = Modifier.height(16.dp))
+                    Spacer(modifier = Modifier.height(24.dp))
                     Column(modifier = Modifier.padding(start = 24.dp, end = 24.dp)) {
                         Text(
                             text = stringResource(R.string.text_urgency),
-                            style = typography.subtitle1,
+                            style = titleStyle,
                             color = MaterialTheme.colors.onPrimary
                         )
                         Spacer(modifier = Modifier.height(12.dp))
@@ -149,11 +159,11 @@ fun AddTaskScreen(viewModel: MainViewModel, actions: MainActions) {
 
                 // Importance
                 item {
-                    Spacer(modifier = Modifier.height(16.dp))
+                    Spacer(modifier = Modifier.height(24.dp))
                     Column(modifier = Modifier.padding(start = 24.dp, end = 24.dp)) {
                         Text(
                             text = stringResource(R.string.text_importance),
-                            style = typography.subtitle1,
+                            style = titleStyle,
                             color = MaterialTheme.colors.onPrimary
                         )
                         Spacer(modifier = Modifier.height(12.dp))
