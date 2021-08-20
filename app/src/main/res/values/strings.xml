@@ -2,6 +2,7 @@
     <string name="app_name">Einsen</string>
     <string name="text_home">Home</string>
     <string name="text_addTask">Add Task</string>
+    <string name="text_editTask">Edit Task</string>
     <string name="text_allTask">All Task</string>
     <string name="text_taskDetails">Task Details</string>
     <string name="text_settings">Settings</string>

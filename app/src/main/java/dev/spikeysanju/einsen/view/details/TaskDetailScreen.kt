@@ -59,7 +59,7 @@ fun TaskDetailsScreen(viewModel: MainViewModel, action: MainActions) {
         }
 
         BottomCTA(onEdit = {
-            // Todo edit notes
+            action.gotoEditTask(taskState.value.id)
         }, onDelete = {
             viewModel.deleteTaskByID(taskState.value.id).run {
                 action.upPress.invoke()

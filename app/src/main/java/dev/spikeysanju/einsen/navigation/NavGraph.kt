@@ -1,10 +1,7 @@
 package dev.spikeysanju.einsen.navigation
 
-import androidx.compose.animation.ExperimentalAnimationApi
-import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
-import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.platform.LocalContext
 import androidx.hilt.navigation.HiltViewModelFactory
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -17,6 +14,7 @@ import com.google.accompanist.navigation.animation.composable
 import com.google.accompanist.navigation.animation.rememberAnimatedNavController
 import dev.spikeysanju.einsen.view.add.AddTaskScreen
 import dev.spikeysanju.einsen.view.details.TaskDetailsScreen
+import dev.spikeysanju.einsen.view.edit.EditTaskScreen
 import dev.spikeysanju.einsen.view.home.HomeScreen
 import dev.spikeysanju.einsen.view.settings.SettingsScreen
 import dev.spikeysanju.einsen.view.task.AllTaskScreen
@@ -26,9 +24,6 @@ object EndPoints {
     const val ID = "id"
 }
 
-@ExperimentalAnimationApi
-@ExperimentalFoundationApi
-@ExperimentalComposeUiApi
 @Composable
 fun NavGraph(toggleTheme: () -> Unit) {
     val navController = rememberAnimatedNavController()
@@ -73,6 +68,19 @@ fun NavGraph(toggleTheme: () -> Unit) {
             TaskDetailsScreen(viewModel, actions)
         }
 
+        // Edit Task
+        composable(
+            "${Screen.EditTask.route}/{id}",
+            arguments = listOf(navArgument(EndPoints.ID) { type = NavType.IntType })
+        ) {
+            val viewModel = hiltViewModel<MainViewModel>(it)
+            val taskID = it.arguments?.getInt(EndPoints.ID)
+                ?: throw IllegalStateException("'task ID' shouldn't be null")
+
+            viewModel.findTaskByID(taskID)
+            EditTaskScreen(viewModel, actions)
+        }
+
         // Settings
         composable(Screen.Settings.route) {
             val viewModel = hiltViewModel<MainViewModel>(it)
@@ -98,6 +106,10 @@ class MainActions(navController: NavController) {
 
     val gotoTaskDetails: (id: Int) -> Unit = { id ->
         navController.navigate("${Screen.TaskDetails.route}/$id")
+    }
+
+    val gotoEditTask: (id: Int) -> Unit = { id ->
+        navController.navigate("${Screen.EditTask.route}/$id")
     }
 
     val gotoSettings: () -> Unit = {

@@ -1,12 +1,10 @@
 package dev.spikeysanju.einsen.view.add
 
-import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.*
 import androidx.compose.material.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
-import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
@@ -27,9 +25,6 @@ import dev.spikeysanju.einsen.utils.showToast
 import dev.spikeysanju.einsen.view.viewmodel.MainViewModel
 import kotlinx.coroutines.launch
 
-@ExperimentalFoundationApi
-@ExperimentalMaterialApi
-@ExperimentalComposeUiApi
 @Composable
 fun AddTaskScreen(viewModel: MainViewModel, actions: MainActions) {
     val bottomSheetState = rememberModalBottomSheetState(ModalBottomSheetValue.Hidden)

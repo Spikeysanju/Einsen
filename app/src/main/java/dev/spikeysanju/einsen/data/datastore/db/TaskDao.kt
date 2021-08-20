@@ -11,7 +11,7 @@ interface TaskDao {
     fun getAllTask(): Flow<List<Task>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertSource(task: Task)
+    suspend fun insertTask(task: Task)
 
     @Query("DELETE FROM task where id =:id")
     suspend fun deleteByID(id: Int)
