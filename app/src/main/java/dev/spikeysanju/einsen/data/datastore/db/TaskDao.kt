@@ -1,10 +1,6 @@
 package dev.spikeysanju.einsen.data.datastore.db
 
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.OnConflictStrategy
-import androidx.room.Query
-import androidx.room.Update
+import androidx.room.*
 import dev.spikeysanju.einsen.model.Task
 import kotlinx.coroutines.flow.Flow
 
@@ -15,14 +11,17 @@ interface TaskDao {
     fun getAllTask(): Flow<List<Task>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertSource(task: Task)
+    suspend fun insertTask(task: Task)
 
     @Query("DELETE FROM task where id =:id")
-    suspend fun deleteByID(id: Long)
+    suspend fun deleteByID(id: Int)
 
     @Update(onConflict = OnConflictStrategy.REPLACE)
     suspend fun updateTask(task: Task)
 
     @Query("SELECT * FROM task where id=:id")
-    fun findByID(id: Long): Flow<Task>
+    fun findByID(id: Int): Flow<Task>
+
+    @Query("UPDATE task set isCompleted= :isCompleted where id=:id")
+    suspend fun updateStatus(id: Int, isCompleted: Boolean)
 }

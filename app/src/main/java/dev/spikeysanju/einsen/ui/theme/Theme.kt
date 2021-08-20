@@ -6,6 +6,8 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.darkColors
 import androidx.compose.material.lightColors
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.ReadOnlyComposable
+import androidx.compose.runtime.staticCompositionLocalOf
 
 private val DarkColorPalette = darkColors(
     primary = gray100,
@@ -32,17 +34,41 @@ private val LightColorPalette = lightColors(
     onSurface = success
 )
 
+private val LightColors = MyColors(
+    material = LightColorPalette,
+    warning = warning,
+    success = success,
+    err = error,
+    calm = calm
+)
+
+private val DarkColors = MyColors(
+    material = DarkColorPalette,
+    warning = warning,
+    success = success,
+    err = error,
+    calm = calm
+)
+
+private val LocalColors = staticCompositionLocalOf { LightColors }
+
+
+val myColors: MyColors
+    @Composable
+    @ReadOnlyComposable
+    get() = LocalColors.current
+
 @Composable
 fun EinsenTheme(darkTheme: Boolean = isSystemInDarkTheme(), content: @Composable() () -> Unit) {
 
     val colors = if (darkTheme) {
-        DarkColorPalette
+        DarkColors
     } else {
-        LightColorPalette
+        LightColors
     }
 
     MaterialTheme(
-        colors = colors,
+        colors = colors.material,
         typography = typography,
         shapes = Shapes,
         content = content

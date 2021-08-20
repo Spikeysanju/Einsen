@@ -13,8 +13,10 @@ class MainRepository @Inject constructor(private val taskDao: TaskDao) {
     fun getAllTask(): Flow<List<Task>> =
         taskDao.getAllTask().flowOn(Dispatchers.IO).conflate()
 
-    suspend fun insert(task: Task) = taskDao.insertSource(task)
-    suspend fun update(task: Task) = taskDao.insertSource(task)
-    suspend fun delete(id: Long) = taskDao.deleteByID(id)
-    fun find(id: Long) = taskDao.findByID(id).flowOn(Dispatchers.IO).conflate()
+    suspend fun insert(task: Task) = taskDao.insertTask(task)
+    suspend fun update(task: Task) = taskDao.updateTask(task)
+    suspend fun delete(id: Int) = taskDao.deleteByID(id)
+    fun find(id: Int) = taskDao.findByID(id).flowOn(Dispatchers.IO).conflate()
+    suspend fun updateStatus(id: Int, isCompleted: Boolean) =
+        taskDao.updateStatus(id = id, isCompleted = isCompleted)
 }

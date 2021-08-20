@@ -2,42 +2,38 @@ package dev.spikeysanju.einsen.components
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
-import androidx.compose.material.Icon
+import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.MaterialTheme.colors
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
-import dev.spikeysanju.einsen.R
 import dev.spikeysanju.einsen.navigation.MainActions
 import dev.spikeysanju.einsen.ui.theme.typography
 
 // TODO: WRAP PARAMS INTO DATA CLASS
 @Composable
 fun DashboardCardItem(
-    modifier: Modifier,
     title: String,
+    description: String,
     count: String,
     color: Color,
     mainActions: MainActions
 ) {
-    val icon = painterResource(id = R.drawable.ic_arrow_right)
+    val gradientBrush = Brush.verticalGradient(listOf(color.copy(.8F), color), startY = 10F)
 
+    Spacer(modifier = Modifier.height(24.dp))
     Row(
-        modifier = modifier
-            .background(color)
-            .clickable { }
-            .padding(12.dp)
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(start = 16.dp, end = 16.dp)
+            .clip(RoundedCornerShape(24.dp))
+            .background(brush = gradientBrush)
             .clickable {
                 mainActions.gotoAllTask.invoke()
             },
@@ -45,15 +41,18 @@ fun DashboardCardItem(
         horizontalArrangement = Arrangement.SpaceAround
     ) {
         Column(
-            modifier = modifier
+            modifier = Modifier
+                .wrapContentWidth()
+                .padding(top = 36.dp, bottom = 36.dp)
                 .align(Alignment.CenterVertically)
         ) {
-            Text(text = title, style = typography.h6, color = colors.onPrimary)
+            Text(text = title, style = typography.h6, color = colors.primary)
             Spacer(modifier = Modifier.height(16.dp))
-            Text(text = count, style = typography.h2, color = colors.onPrimary)
+            Text(text = description, style = typography.subtitle1, color = colors.primary)
         }
         Spacer(modifier = Modifier.width(16.dp))
-        Icon(painter = icon, tint = colors.onPrimary, contentDescription = "Arrow right")
+        Text(text = count, style = typography.h2, color = colors.primary)
+
     }
 }
 

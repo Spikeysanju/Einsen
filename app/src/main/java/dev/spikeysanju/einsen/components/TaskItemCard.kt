@@ -16,10 +16,15 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import dev.spikeysanju.einsen.model.Task
+import dev.spikeysanju.einsen.ui.theme.Avenir
 import dev.spikeysanju.einsen.ui.theme.typography
 import dev.spikeysanju.einsen.ui.theme.white
 
@@ -29,8 +34,7 @@ import dev.spikeysanju.einsen.ui.theme.white
 fun TaskItemCard(
     task: Task,
     onClick: () -> Unit,
-    onDoubleTap: () -> Unit,
-    onLongClick: () -> Unit
+    onCheckboxChange: (Boolean) -> Unit
 ) {
 
     Spacer(modifier = Modifier.height(12.dp))
@@ -45,6 +49,8 @@ fun TaskItemCard(
         // Checkbox
         EisenCheckBox(value = status.value, onValueChanged = {
             status.value = it
+            onCheckboxChange(status.value)
+
         })
 
         Spacer(modifier = Modifier.width(12.dp))
@@ -58,9 +64,31 @@ fun TaskItemCard(
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.Start
         ) {
+
             // Emoji Text View
             EmojiTextView(emoji = task.emoji)
             Spacer(modifier = Modifier.width(12.dp))
+
+            // condition check if the task is marked as completed the make it as strikethrough
+            val titleStyle = when (task.isCompleted) {
+                true -> TextStyle(
+                    textDecoration = TextDecoration.LineThrough,
+                    fontSize = 16.sp,
+                    fontFamily = Avenir,
+                    fontWeight = FontWeight.SemiBold
+                )
+                false -> typography.subtitle1
+            }
+
+            val categoryStyle = when (task.isCompleted) {
+                true -> TextStyle(
+                    textDecoration = TextDecoration.LineThrough,
+                    fontSize = 12.sp,
+                    fontFamily = Avenir,
+                    fontWeight = FontWeight.Normal
+                )
+                false -> typography.caption
+            }
 
             // Title + Content
             Column(
@@ -69,15 +97,16 @@ fun TaskItemCard(
             ) {
                 Text(
                     text = task.title,
-                    style = typography.subtitle1,
+                    style = titleStyle,
                     color = colors.onPrimary,
                     maxLines = 1,
                     overflow = TextOverflow.Ellipsis
                 )
+
                 Spacer(modifier = Modifier.height(12.dp))
                 Text(
                     text = task.category,
-                    style = typography.caption,
+                    style = categoryStyle,
                     color = colors.onPrimary.copy(.7f)
                 )
             }

@@ -3,9 +3,10 @@ package dev.spikeysanju.einsen.ui.theme
 import androidx.compose.ui.graphics.Color
 
 // state colors
-val error = Color(0xFFFF533B)
-val waiting = Color(0xFFFFA93B)
-val success = Color(0xFF21B383)
+val error = Color(0xFFEB5757)
+val warning = Color(0xFFFFA93B)
+val success = Color(0xFF6FCF97)
+val calm = Color(0xFF006AF6)
 
 // neutral colors
 val black = Color(0xFF000000)

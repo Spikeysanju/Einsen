@@ -2,6 +2,7 @@
     <string name="app_name">Einsen</string>
     <string name="text_home">Home</string>
     <string name="text_addTask">Add Task</string>
+    <string name="text_editTask">Edit Task</string>
     <string name="text_allTask">All Task</string>
     <string name="text_taskDetails">Task Details</string>
     <string name="text_settings">Settings</string>
@@ -21,4 +22,8 @@
     <string name="text_share_button">Share Button</string>
     <string name="text_complete_task">Complete Task</string>
     <string name="text_complete">Complete</string>
+    <string name="text_incomplete">Incomplete</string>
+    <string name="text_todo">Todo</string>
+    <string name="text_doing">Doing</string>
+    <string name="text_done">Done</string>
 </resources>

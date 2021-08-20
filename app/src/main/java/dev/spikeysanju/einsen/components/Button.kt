@@ -1,14 +1,8 @@
 package dev.spikeysanju.einsen.components
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.layout.wrapContentWidth
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Button
 import androidx.compose.material.ButtonDefaults
@@ -19,11 +13,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import dev.spikeysanju.einsen.R
 import dev.spikeysanju.einsen.ui.theme.Shapes
 import dev.spikeysanju.einsen.ui.theme.typography
 
@@ -52,12 +44,13 @@ fun PrimaryButton(title: String, onclick: () -> Unit) {
 }
 
 @Composable
-fun PrimaryButtonWithIcon(title: String, onclick: () -> Unit) {
+fun PrimaryButtonWithIcon(title: String, icon: Painter, onclick: () -> Unit) {
 
     Row(
         modifier = Modifier
             .wrapContentWidth()
             .height(48.dp)
+            .clickable { onclick() }
             .clip(Shapes.large)
             .background(colors.onPrimary)
             .padding(start = 16.dp, end = 16.dp, top = 8.dp, bottom = 8.dp),
@@ -66,8 +59,8 @@ fun PrimaryButtonWithIcon(title: String, onclick: () -> Unit) {
     ) {
 
         Icon(
-            painter = painterResource(id = R.drawable.ic_check),
-            contentDescription = stringResource(R.string.text_complete_task),
+            painter = icon,
+            contentDescription = title,
             tint = colors.primary
         )
 

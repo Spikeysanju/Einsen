@@ -1,24 +1,26 @@
 package dev.spikeysanju.einsen.components
 
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.layout.wrapContentWidth
+import androidx.compose.foundation.layout.*
 import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
 import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import dev.spikeysanju.einsen.R
 
 @Composable
-fun BottomCTA(onEdit: () -> Unit, onDelete: () -> Unit, onShare: () -> Unit) {
+fun BottomCTA(
+    title: String,
+    icon: Painter,
+    onEdit: () -> Unit,
+    onDelete: () -> Unit,
+    onShare: () -> Unit,
+    onButtonChange: () -> Unit
+) {
     Row(
         modifier = Modifier.padding(top = 12.dp, bottom = 12.dp, start = 16.dp, end = 16.dp),
         horizontalArrangement = Arrangement.SpaceAround
@@ -27,9 +29,9 @@ fun BottomCTA(onEdit: () -> Unit, onDelete: () -> Unit, onShare: () -> Unit) {
         Spacer(modifier = Modifier.width(12.dp))
 
         Row(modifier = Modifier.fillMaxWidth(), Arrangement.End) {
-            PrimaryButtonWithIcon(stringResource(R.string.text_complete), onclick = {
-                // TODO - ON COMPLETE
-            })
+            PrimaryButtonWithIcon(title = title, onclick = {
+                onButtonChange()
+            }, icon = icon)
         }
     }
 }

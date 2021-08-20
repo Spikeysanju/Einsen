@@ -22,7 +22,7 @@ fun EmojiPlaceHolder(emoji: String, onTap: () -> Unit) {
             .size(100.dp)
             .clip(CircleShape)
             .clickable { onTap() }
-            .background(color = MaterialTheme.colors.background),
+            .background(color = MaterialTheme.colors.onSecondary),
         contentAlignment = Alignment.Center
     ) {
         Text(

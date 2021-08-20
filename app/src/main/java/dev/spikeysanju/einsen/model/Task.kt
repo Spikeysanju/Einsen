@@ -30,7 +30,7 @@ data class Task(
     @NonNull
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "id")
-    val id: Long = 0
+    val id: Int = 0
 )
 
 

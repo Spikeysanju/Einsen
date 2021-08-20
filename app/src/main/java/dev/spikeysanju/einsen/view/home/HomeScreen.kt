@@ -1,14 +1,13 @@
 package dev.spikeysanju.einsen.view.home
 
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.material.MaterialTheme.colors
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material.Scaffold
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
 import dev.spikeysanju.einsen.components.DashboardCardItem
 import dev.spikeysanju.einsen.components.TopBar
 import dev.spikeysanju.einsen.navigation.MainActions
+import dev.spikeysanju.einsen.ui.theme.myColors
 import dev.spikeysanju.einsen.view.viewmodel.MainViewModel
 
 @Composable
@@ -17,45 +16,53 @@ fun HomeScreen(
     actions: MainActions
 ) {
     Scaffold(topBar = {
-        TopBar(title = "Dashboard")
-    }) {
+        TopBar(title = "My Dashboard")
+    }, backgroundColor = myColors.primary) {
 
-        Column {
-            val modifier = Modifier
-                .fillMaxWidth()
-                .weight(1f)
+        val listState = rememberLazyListState()
+        LazyColumn(state = listState) {
 
-            DashboardCardItem(
-                modifier = modifier,
-                title = "Important & Urgent",
-                count = "07",
-                color = colors.primary,
-                actions
-            )
+            item {
+                DashboardCardItem(
+                    title = "Do it now",
+                    description = "Urgent and Important",
+                    count = "07",
+                    color = myColors.success,
+                    actions
+                )
 
-            DashboardCardItem(
-                modifier = modifier,
-                title = "Important",
-                count = "12",
-                color = colors.primaryVariant,
-                actions
-            )
+            }
 
-            DashboardCardItem(
-                modifier = modifier,
-                title = "Urgent",
-                count = "13",
-                color = colors.secondary,
-                actions
-            )
+            item {
+                DashboardCardItem(
+                    title = "Decide when to do",
+                    description = "Important Not Urgent",
+                    count = "12",
+                    color = myColors.calm,
+                    actions
+                )
+            }
 
-            DashboardCardItem(
-                modifier = modifier,
-                title = "Dont't touch!",
-                count = "04",
-                color = colors.secondaryVariant,
-                actions
-            )
+            item {
+                DashboardCardItem(
+                    title = "Delegate it",
+                    description = "Urgent Not Important",
+                    count = "13",
+                    color = myColors.err,
+                    actions
+                )
+            }
+
+            item {
+                DashboardCardItem(
+                    title = "Dump it!",
+                    description = "Not Important Not Urgent",
+                    count = "04",
+                    color = myColors.warning,
+                    actions
+                )
+            }
+
         }
 
     }
