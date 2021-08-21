@@ -6,6 +6,7 @@ import androidx.compose.material.Scaffold
 import androidx.compose.runtime.Composable
 import dev.spikeysanju.einsen.components.DashboardCardItem
 import dev.spikeysanju.einsen.components.TopBar
+import dev.spikeysanju.einsen.model.Priority
 import dev.spikeysanju.einsen.navigation.MainActions
 import dev.spikeysanju.einsen.ui.theme.myColors
 import dev.spikeysanju.einsen.view.viewmodel.MainViewModel
@@ -28,7 +29,9 @@ fun HomeScreen(
                     description = "Urgent and Important",
                     count = "07",
                     color = myColors.success,
-                    actions
+                    onClick = {
+                        actions.gotoAllTask(Priority.URGENT)
+                    }
                 )
 
             }
@@ -39,7 +42,9 @@ fun HomeScreen(
                     description = "Important Not Urgent",
                     count = "12",
                     color = myColors.calm,
-                    actions
+                    onClick = {
+                        actions.gotoAllTask(Priority.IMPORTANT)
+                    }
                 )
             }
 
@@ -49,7 +54,9 @@ fun HomeScreen(
                     description = "Urgent Not Important",
                     count = "13",
                     color = myColors.err,
-                    actions
+                    onClick = {
+                        actions.gotoAllTask(Priority.DELEGATE)
+                    }
                 )
             }
 
@@ -59,7 +66,9 @@ fun HomeScreen(
                     description = "Not Important Not Urgent",
                     count = "04",
                     color = myColors.warning,
-                    actions
+                    onClick = {
+                        actions.gotoAllTask(Priority.DUMP)
+                    }
                 )
             }
 

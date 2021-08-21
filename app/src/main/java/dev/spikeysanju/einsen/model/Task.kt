@@ -43,8 +43,8 @@ enum class TaskStatus(status: String) {
 }
 
 enum class Priority(count: Int) {
-    IMPORTANT(4),
-    URGENT(3),
+    URGENT(4),
+    IMPORTANT(3),
     DELEGATE(2),
     DUMP(1)
 }

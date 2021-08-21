@@ -188,7 +188,7 @@ fun AddTaskScreen(viewModel: MainViewModel, actions: MainActions) {
                             importance = makeValueRound(importanceState),
                             priority = calculatePriority(priorityAverage),
                             due = "18/12/2021",
-                            isCompleted = true
+                            isCompleted = false
                         )
 
                         when {
@@ -213,10 +213,10 @@ fun calculatePriority(priorityAverage: Float): Priority {
 
     return when {
         priorityAverage >= 4 -> {
-            Priority.IMPORTANT
+            Priority.URGENT
         }
         priorityAverage >= 3 -> {
-            Priority.URGENT
+            Priority.IMPORTANT
         }
         priorityAverage >= 2 -> {
             Priority.DELEGATE
@@ -225,7 +225,7 @@ fun calculatePriority(priorityAverage: Float): Priority {
             Priority.DUMP
         }
         else -> {
-            Priority.IMPORTANT
+            Priority.URGENT
         }
     }
 }

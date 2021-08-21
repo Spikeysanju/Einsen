@@ -23,6 +23,7 @@ import dev.spikeysanju.einsen.view.viewmodel.MainViewModel
 
 object EndPoints {
     const val ID = "id"
+    const val PRIORITY = "priority"
 }
 
 @Composable
@@ -50,9 +51,15 @@ fun NavGraph(toggleTheme: () -> Unit) {
         }
 
         // All Task
-        composable(Screen.AllTask.route) {
+        composable("${Screen.AllTask.route}/{priority}",
+            arguments = listOf(navArgument(EndPoints.PRIORITY) { type = NavType.StringType })
+        ) {
             val viewModel = hiltViewModel<MainViewModel>(it)
-            viewModel.getTaskByPriority(Priority.URGENT)
+
+            val priority = it.arguments?.getString(EndPoints.PRIORITY)
+                ?: throw IllegalStateException("'priority' shouldn't be null")
+
+            viewModel.getTaskByPriority(priority = priority)
             AllTaskScreen(viewModel, actions)
         }
 
@@ -101,8 +108,8 @@ class MainActions(navController: NavController) {
         navController.navigate(Screen.AddTask.route)
     }
 
-    val gotoAllTask: () -> Unit = {
-        navController.navigate(Screen.AllTask.route)
+    val gotoAllTask: (priority: Priority) -> Unit = { priority ->
+        navController.navigate("${Screen.AllTask.route}/${priority.name}")
     }
 
     val gotoTaskDetails: (id: Int) -> Unit = { id ->

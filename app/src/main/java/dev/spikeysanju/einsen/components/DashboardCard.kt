@@ -13,7 +13,6 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
-import dev.spikeysanju.einsen.navigation.MainActions
 import dev.spikeysanju.einsen.ui.theme.typography
 
 // TODO: WRAP PARAMS INTO DATA CLASS
@@ -23,7 +22,7 @@ fun DashboardCardItem(
     description: String,
     count: String,
     color: Color,
-    mainActions: MainActions
+    onClick: () -> Unit
 ) {
     val gradientBrush = Brush.verticalGradient(listOf(color.copy(.8F), color), startY = 10F)
 
@@ -35,7 +34,7 @@ fun DashboardCardItem(
             .clip(RoundedCornerShape(24.dp))
             .background(brush = gradientBrush)
             .clickable {
-                mainActions.gotoAllTask.invoke()
+                onClick()
             },
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.SpaceAround

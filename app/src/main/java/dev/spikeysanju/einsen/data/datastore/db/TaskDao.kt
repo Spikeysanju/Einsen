@@ -1,7 +1,6 @@
 package dev.spikeysanju.einsen.data.datastore.db
 
 import androidx.room.*
-import dev.spikeysanju.einsen.model.Priority
 import dev.spikeysanju.einsen.model.Task
 import kotlinx.coroutines.flow.Flow
 
@@ -27,5 +26,5 @@ interface TaskDao {
     suspend fun updateStatus(id: Int, isCompleted: Boolean)
 
     @Query("SELECT * FROM task WHERE priority=:priority")
-    fun getTaskByPriority(priority: Priority): Flow<List<Task>>
+    fun getTaskByPriority(priority: String): Flow<List<Task>>
 }

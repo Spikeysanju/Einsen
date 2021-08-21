@@ -1,7 +1,6 @@
 package dev.spikeysanju.einsen.repository
 
 import dev.spikeysanju.einsen.data.datastore.db.TaskDao
-import dev.spikeysanju.einsen.model.Priority
 import dev.spikeysanju.einsen.model.Task
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
@@ -25,6 +24,6 @@ class MainRepository @Inject constructor(private val taskDao: TaskDao) {
     suspend fun updateStatus(id: Int, isCompleted: Boolean) =
         taskDao.updateStatus(id = id, isCompleted = isCompleted)
 
-    fun getTaskByPriority(priority: Priority): Flow<List<Task>> =
+    fun getTaskByPriority(priority: String): Flow<List<Task>> =
         taskDao.getTaskByPriority(priority).flowOn(Dispatchers.IO).conflate()
 }
