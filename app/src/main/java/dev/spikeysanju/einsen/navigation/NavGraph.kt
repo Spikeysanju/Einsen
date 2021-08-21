@@ -39,6 +39,7 @@ fun NavGraph(toggleTheme: () -> Unit) {
             val viewModel: MainViewModel = viewModel(
                 factory = HiltViewModelFactory(LocalContext.current, it)
             )
+            viewModel.getAllTask()
             HomeScreen(viewModel, actions)
         }
 

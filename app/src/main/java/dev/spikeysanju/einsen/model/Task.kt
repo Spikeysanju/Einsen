@@ -35,13 +35,6 @@ data class Task(
     val id: Int = 0
 )
 
-
-enum class TaskStatus(status: String) {
-    TODO("Todo"),
-    DOING("Doing"),
-    DONE("Done")
-}
-
 enum class Priority(count: Int) {
     URGENT(4),
     IMPORTANT(3),

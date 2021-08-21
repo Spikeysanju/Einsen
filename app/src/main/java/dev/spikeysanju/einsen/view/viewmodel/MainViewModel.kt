@@ -7,6 +7,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import dev.spikeysanju.einsen.model.EmojiItem
 import dev.spikeysanju.einsen.model.Task
 import dev.spikeysanju.einsen.repository.MainRepository
+import dev.spikeysanju.einsen.utils.CountViewState
 import dev.spikeysanju.einsen.utils.EmojiViewState
 import dev.spikeysanju.einsen.utils.SingleViewState
 import dev.spikeysanju.einsen.utils.ViewState
@@ -27,11 +28,14 @@ class MainViewModel @Inject constructor(private val repo: MainRepository) : View
     private val _viewState = MutableStateFlow<ViewState>(ViewState.Loading)
     private val _singleViewState = MutableStateFlow<SingleViewState>(SingleViewState.Loading)
     private val _emojiViewState = MutableStateFlow<EmojiViewState>(EmojiViewState.Loading)
+    private val _countState = MutableStateFlow<CountViewState>(CountViewState.Loading)
+
 
     // The UI collects from this StateFlow to get its state update
     val feed = _viewState.asStateFlow()
     val singleTask = _singleViewState.asStateFlow()
     val emoji = _emojiViewState.asStateFlow()
+    val countState = _countState.asStateFlow()
 
     // get all task
     fun getAllTask() = viewModelScope.launch(Dispatchers.IO) {
@@ -122,6 +126,17 @@ class MainViewModel @Inject constructor(private val repo: MainRepository) : View
 
             } catch (e: Exception) {
                 _viewState.value = ViewState.Error(e)
+            }
+        }
+    }
+
+
+    fun getTaskByPriorityCount(priority: String) = viewModelScope.launch(Dispatchers.IO) {
+        repo.getTaskByPriorityCount(priority).distinctUntilChanged().collect {
+            try {
+                _countState.value = CountViewState.Success(it)
+            } catch (e: Exception) {
+                _countState.value = CountViewState.Error(e)
             }
         }
     }

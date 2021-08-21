@@ -14,7 +14,7 @@ interface TaskDao {
     suspend fun insertTask(task: Task)
 
     @Query("DELETE FROM task where id =:id")
-    suspend fun deleteByID(id: Int)
+    suspend fun deleteTaskByID(id: Int)
 
     @Update(onConflict = OnConflictStrategy.REPLACE)
     suspend fun updateTask(task: Task)
@@ -23,8 +23,11 @@ interface TaskDao {
     fun findByID(id: Int): Flow<Task>
 
     @Query("UPDATE task set isCompleted= :isCompleted where id=:id")
-    suspend fun updateStatus(id: Int, isCompleted: Boolean)
+    suspend fun updateTaskStatus(id: Int, isCompleted: Boolean)
 
     @Query("SELECT * FROM task WHERE priority=:priority")
     fun getTaskByPriority(priority: String): Flow<List<Task>>
+
+    @Query("SELECT COUNT(id) FROM task WHERE priority=:priority")
+    fun getTaskByPriorityCount(priority: String): Flow<Int>
 }
