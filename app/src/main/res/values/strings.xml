@@ -26,4 +26,13 @@
     <string name="text_todo">Todo</string>
     <string name="text_doing">Doing</string>
     <string name="text_done">Done</string>
+    <string name="text_do_it_now">Do it now</string>
+    <string name="text_decide_when_todo">Decide when to do</string>
+    <string name="text_important_not_urgent">Important Not Urgent</string>
+    <string name="text_important_and_urgent">Urgent and Important</string>
+    <string name="text_delegate_it">Delegate it</string>
+    <string name="text_urgent_not_important">Urgent Not Important</string>
+    <string name="text_dump_it">Dump it!</string>
+    <string name="text_not_important_not_urgent">Not Important Not Urgent</string>
+    <string name="text_my_dashboard">My Dashboard</string>
 </resources>

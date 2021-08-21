@@ -18,6 +18,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import dev.spikeysanju.einsen.R
 import dev.spikeysanju.einsen.components.*
+import dev.spikeysanju.einsen.model.Priority
 import dev.spikeysanju.einsen.model.Task
 import dev.spikeysanju.einsen.navigation.MainActions
 import dev.spikeysanju.einsen.ui.theme.typography
@@ -35,7 +36,8 @@ fun TaskDetailsScreen(viewModel: MainViewModel, action: MainActions) {
                 "",
                 0F,
                 0F,
-                "",
+                Priority.IMPORTANT,
+                "0",
                 false,
                 0,
                 0
@@ -82,7 +84,7 @@ fun TaskDetailsScreen(viewModel: MainViewModel, action: MainActions) {
                     state = listState
                 ) {
 
-                    // update the task state with lates value
+                    // update the task state with latest value
                     val task = result.task
                     taskState.value = result.task
 

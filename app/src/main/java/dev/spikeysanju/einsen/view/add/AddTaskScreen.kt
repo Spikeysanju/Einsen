@@ -15,6 +15,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import dev.spikeysanju.einsen.R
 import dev.spikeysanju.einsen.components.*
+import dev.spikeysanju.einsen.model.Priority
 import dev.spikeysanju.einsen.model.Task
 import dev.spikeysanju.einsen.navigation.MainActions
 import dev.spikeysanju.einsen.ui.theme.Avenir
@@ -39,6 +40,9 @@ fun AddTaskScreen(viewModel: MainViewModel, actions: MainActions) {
     var importanceState by remember { mutableStateOf(0F) }
     val stepCount by remember { mutableStateOf(5) }
     val result = viewModel.emoji.collectAsState().value
+    val priority by remember {
+        mutableStateOf(Priority.IMPORTANT)
+    }
 
     ModalBottomSheetLayout(sheetState = bottomSheetState, sheetContent = {
         BottomSheetTitle()
@@ -172,6 +176,9 @@ fun AddTaskScreen(viewModel: MainViewModel, actions: MainActions) {
                 item {
                     Spacer(modifier = Modifier.height(36.dp))
                     PrimaryButton(title = stringResource(R.string.text_save_task)) {
+
+                        val priorityAverage = urgencyState + importanceState / 2
+
                         val task = Task(
                             title = title,
                             description = description,
@@ -179,8 +186,9 @@ fun AddTaskScreen(viewModel: MainViewModel, actions: MainActions) {
                             emoji = emojiState,
                             urgency = makeValueRound(urgencyState),
                             importance = makeValueRound(importanceState),
+                            priority = calculatePriority(priorityAverage),
                             due = "18/12/2021",
-                            isCompleted = true
+                            isCompleted = false
                         )
 
                         when {
@@ -198,6 +206,27 @@ fun AddTaskScreen(viewModel: MainViewModel, actions: MainActions) {
 
         }
 
+    }
+}
+
+fun calculatePriority(priorityAverage: Float): Priority {
+
+    return when {
+        priorityAverage >= 4 -> {
+            Priority.URGENT
+        }
+        priorityAverage >= 3 -> {
+            Priority.IMPORTANT
+        }
+        priorityAverage >= 2 -> {
+            Priority.DELEGATE
+        }
+        priorityAverage >= 1 -> {
+            Priority.DUMP
+        }
+        else -> {
+            Priority.URGENT
+        }
     }
 }
 

@@ -19,6 +19,8 @@ data class Task(
     val urgency: Float = 0F,
     @ColumnInfo(name = "importance")
     val importance: Float = 0F,
+    @ColumnInfo(name = "priority")
+    val priority: Priority = Priority.IMPORTANT,
     @ColumnInfo(name = "timer")
     val due: String = "",
     @ColumnInfo(name = "isCompleted")
@@ -33,9 +35,9 @@ data class Task(
     val id: Int = 0
 )
 
-
-enum class TaskStatus(status: String) {
-    TODO("Todo"),
-    DOING("Doing"),
-    DONE("Done")
+enum class Priority(count: Int) {
+    URGENT(4),
+    IMPORTANT(3),
+    DELEGATE(2),
+    DUMP(1)
 }

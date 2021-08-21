@@ -15,6 +15,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import dev.spikeysanju.einsen.R
 import dev.spikeysanju.einsen.components.*
+import dev.spikeysanju.einsen.model.Priority
 import dev.spikeysanju.einsen.model.Task
 import dev.spikeysanju.einsen.navigation.MainActions
 import dev.spikeysanju.einsen.ui.theme.Avenir
@@ -23,13 +24,14 @@ import dev.spikeysanju.einsen.utils.EmojiViewState
 import dev.spikeysanju.einsen.utils.SingleViewState
 import dev.spikeysanju.einsen.utils.makeValueRound
 import dev.spikeysanju.einsen.utils.showToast
+import dev.spikeysanju.einsen.view.add.calculatePriority
 import dev.spikeysanju.einsen.view.viewmodel.MainViewModel
 import kotlinx.coroutines.launch
 
 @Composable
 fun EditTaskScreen(viewModel: MainViewModel, actions: MainActions) {
 
-    // Content & Couroutine scope
+    // Couroutines scope
     val scope = rememberCoroutineScope()
     val context = LocalContext.current
 
@@ -46,6 +48,9 @@ fun EditTaskScreen(viewModel: MainViewModel, actions: MainActions) {
     var urgency by remember { mutableStateOf(0F) }
     var importance by remember { mutableStateOf(0F) }
     var due by remember { mutableStateOf("") }
+    var priority by remember {
+        mutableStateOf(Priority.IMPORTANT)
+    }
     var isCompleted by remember { mutableStateOf(false) }
     var createdAt by remember { mutableStateOf(0L) }
     var updatedAt by remember { mutableStateOf(0L) }
@@ -63,7 +68,7 @@ fun EditTaskScreen(viewModel: MainViewModel, actions: MainActions) {
         ) {
 
             // get all emoji
-            viewModel.getAllEmoji(context)
+            viewModel.getAllEmoji(context = context)
 
             // parse emoji into ViewStates
             when (result) {
@@ -115,6 +120,7 @@ fun EditTaskScreen(viewModel: MainViewModel, actions: MainActions) {
                     emojiState = taskResult.task.emoji
                     urgency = taskResult.task.urgency
                     importance = taskResult.task.importance
+                    priority = taskResult.task.priority
                     due = taskResult.task.due
                     isCompleted = taskResult.task.isCompleted
                     createdAt = taskResult.task.createdAt
@@ -211,6 +217,9 @@ fun EditTaskScreen(viewModel: MainViewModel, actions: MainActions) {
 
                         // Save Task
                         item {
+
+                            val priorityAverage = importance + urgency / 2
+
                             Spacer(modifier = Modifier.height(36.dp))
                             PrimaryButton(title = stringResource(R.string.text_save_task)) {
                                 val task = Task(
@@ -220,6 +229,7 @@ fun EditTaskScreen(viewModel: MainViewModel, actions: MainActions) {
                                     emoji = emojiState,
                                     urgency = makeValueRound(urgency),
                                     importance = makeValueRound(importance),
+                                    priority = calculatePriority(priorityAverage),
                                     due = due,
                                     isCompleted = isCompleted,
                                     createdAt = createdAt,

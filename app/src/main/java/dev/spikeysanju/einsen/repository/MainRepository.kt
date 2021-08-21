@@ -14,9 +14,20 @@ class MainRepository @Inject constructor(private val taskDao: TaskDao) {
         taskDao.getAllTask().flowOn(Dispatchers.IO).conflate()
 
     suspend fun insert(task: Task) = taskDao.insertTask(task)
+
     suspend fun update(task: Task) = taskDao.updateTask(task)
-    suspend fun delete(id: Int) = taskDao.deleteByID(id)
+
+    suspend fun delete(id: Int) = taskDao.deleteTaskByID(id)
+
     fun find(id: Int) = taskDao.findByID(id).flowOn(Dispatchers.IO).conflate()
+
     suspend fun updateStatus(id: Int, isCompleted: Boolean) =
-        taskDao.updateStatus(id = id, isCompleted = isCompleted)
+        taskDao.updateTaskStatus(id = id, isCompleted = isCompleted)
+
+    fun getTaskByPriority(priority: String): Flow<List<Task>> =
+        taskDao.getTaskByPriority(priority).flowOn(Dispatchers.IO).conflate()
+
+    suspend fun getTaskByPriorityCount(priority: String): Flow<Int> =
+        taskDao.getTaskByPriorityCount(priority).flowOn(Dispatchers.IO).conflate()
+
 }
