@@ -6,6 +6,7 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.darkColors
 import androidx.compose.material.lightColors
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.ReadOnlyComposable
 import androidx.compose.runtime.staticCompositionLocalOf
 
@@ -39,15 +40,21 @@ private val LightColors = MyColors(
     warning = warning,
     success = success,
     err = error,
-    calm = calm
+    calm = calm,
+    card = card,
+    bg = bg,
+    text = textDark
 )
 
 private val DarkColors = MyColors(
     material = DarkColorPalette,
-    warning = warning,
-    success = success,
-    err = error,
-    calm = calm
+    warning = card,
+    success = card,
+    err = card,
+    calm = card,
+    card = cardDark,
+    bg = bgDark,
+    text = text
 )
 
 private val LocalColors = staticCompositionLocalOf { LightColors }
@@ -67,10 +74,12 @@ fun EinsenTheme(darkTheme: Boolean = isSystemInDarkTheme(), content: @Composable
         LightColors
     }
 
-    MaterialTheme(
-        colors = colors.material,
-        typography = typography,
-        shapes = Shapes,
-        content = content
-    )
+    CompositionLocalProvider(LocalColors provides colors) {
+        MaterialTheme(
+            colors = colors.material,
+            content = content,
+            shapes = Shapes,
+            typography = typography
+        )
+    }
 }

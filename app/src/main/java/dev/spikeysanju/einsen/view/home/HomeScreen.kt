@@ -1,10 +1,15 @@
 package dev.spikeysanju.einsen.view.home
 
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.rememberLazyListState
-import androidx.compose.material.Scaffold
+import androidx.compose.material.*
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Add
 import androidx.compose.runtime.*
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.unit.dp
 import dev.spikeysanju.einsen.R
 import dev.spikeysanju.einsen.components.DashboardCardItem
 import dev.spikeysanju.einsen.components.TopBar
@@ -17,11 +22,30 @@ import dev.spikeysanju.einsen.view.viewmodel.MainViewModel
 @Composable
 fun HomeScreen(
     viewModel: MainViewModel,
-    actions: MainActions
+    actions: MainActions,
+    toggleTheme: () -> Unit
 ) {
     Scaffold(topBar = {
-        TopBar(title = stringResource(R.string.text_my_dashboard))
-    }, backgroundColor = myColors.primary) {
+        TopBar(title = stringResource(R.string.text_my_dashboard), onToggle = {
+            toggleTheme()
+        })
+    }, floatingActionButton = {
+        FloatingActionButton(
+            modifier = Modifier.padding(30.dp),
+            onClick = {
+                actions.gotoAddTask.invoke()
+            },
+            backgroundColor = MaterialTheme.colors.onPrimary,
+            contentColor = MaterialTheme.colors.background,
+            elevation = FloatingActionButtonDefaults.elevation(12.dp)
+        ) {
+            Icon(
+                Icons.Filled.Add,
+                contentDescription = stringResource(id = R.string.text_addTask),
+                tint = MaterialTheme.colors.onSecondary
+            )
+        }
+    }) {
 
         val listState = rememberLazyListState()
         var urgentCount by remember { mutableStateOf(0) }
