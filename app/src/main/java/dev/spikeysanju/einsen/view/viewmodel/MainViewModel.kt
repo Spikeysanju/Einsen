@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dev.spikeysanju.einsen.model.EmojiItem
+import dev.spikeysanju.einsen.model.Priority
 import dev.spikeysanju.einsen.model.Task
 import dev.spikeysanju.einsen.repository.MainRepository
 import dev.spikeysanju.einsen.utils.EmojiViewState
@@ -108,4 +109,22 @@ class MainViewModel @Inject constructor(private val repo: MainRepository) : View
             }
         }
     }
+
+
+    // get all task
+    fun getTaskByPriority(priority: Priority) = viewModelScope.launch(Dispatchers.IO) {
+        repo.getTaskByPriority(priority).distinctUntilChanged().collect { result ->
+            try {
+                if (result.isNullOrEmpty()) {
+                    _viewState.value = ViewState.Empty
+                } else {
+                    _viewState.value = ViewState.Success(result)
+                }
+
+            } catch (e: Exception) {
+                _viewState.value = ViewState.Error(e)
+            }
+        }
+    }
+
 }

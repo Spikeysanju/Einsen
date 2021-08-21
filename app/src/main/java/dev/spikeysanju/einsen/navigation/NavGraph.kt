@@ -12,6 +12,7 @@ import androidx.navigation.compose.navArgument
 import com.google.accompanist.navigation.animation.AnimatedNavHost
 import com.google.accompanist.navigation.animation.composable
 import com.google.accompanist.navigation.animation.rememberAnimatedNavController
+import dev.spikeysanju.einsen.model.Priority
 import dev.spikeysanju.einsen.view.add.AddTaskScreen
 import dev.spikeysanju.einsen.view.details.TaskDetailsScreen
 import dev.spikeysanju.einsen.view.edit.EditTaskScreen
@@ -51,7 +52,7 @@ fun NavGraph(toggleTheme: () -> Unit) {
         // All Task
         composable(Screen.AllTask.route) {
             val viewModel = hiltViewModel<MainViewModel>(it)
-            viewModel.getAllTask()
+            viewModel.getTaskByPriority(Priority.URGENT)
             AllTaskScreen(viewModel, actions)
         }
 
