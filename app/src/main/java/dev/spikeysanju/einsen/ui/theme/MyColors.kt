@@ -8,7 +8,10 @@ data class MyColors(
     val success: Color,
     val err: Color,
     val warning: Color,
-    val calm: Color
+    val calm: Color,
+    val card: Color,
+    val bg: Color,
+    val text: Color
 ) {
     val primary: Color get() = material.primary
     val primaryVariant: Color get() = material.primaryVariant

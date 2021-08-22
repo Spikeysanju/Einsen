@@ -5,16 +5,13 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.compose.animation.ExperimentalAnimationApi
-import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.isSystemInDarkTheme
-import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.MaterialTheme.colors
 import androidx.compose.material.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.SideEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.lifecycleScope
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
@@ -22,13 +19,12 @@ import dagger.hilt.android.AndroidEntryPoint
 import dev.spikeysanju.einsen.data.datastore.ThemeManager
 import dev.spikeysanju.einsen.navigation.NavGraph
 import dev.spikeysanju.einsen.ui.theme.EinsenTheme
+import dev.spikeysanju.einsen.ui.theme.myColors
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-@ExperimentalFoundationApi
-@ExperimentalMaterialApi
-@ExperimentalComposeUiApi
+
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     @Inject
@@ -59,7 +55,7 @@ class MainActivity : ComponentActivity() {
         }
 
         EinsenTheme(darkTheme = darkMode) {
-            Surface(color = colors.background) {
+            Surface(color = myColors.bg) {
                 SetStatusBarColor()
                 NavGraph(toggleTheme)
             }
