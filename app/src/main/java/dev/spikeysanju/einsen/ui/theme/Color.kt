@@ -8,6 +8,10 @@ val warning = Color(0xFFFFA93B)
 val success = Color(0xFF6FCF97)
 val calm = Color(0xFF006AF6)
 
+// button
+val black = Color(0xFF000000)
+val white = Color(0xFFFFFFFF)
+
 // bg color
 val card = Color(0xFFFFFFFF)
 val bg = Color(0xFFFAFAFA)
@@ -18,9 +22,6 @@ val bgDark = Color(0xFF131313)
 val text = Color(0xFF000000)
 val textDark = Color(0xFFFFFFFF)
 
-// neutral colors
-val black = Color(0xFF000000)
-val white = Color(0xFFFFFFFF)
 
 // shades of grey
 val gray100 = Color(0xFF303030)

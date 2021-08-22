@@ -7,7 +7,6 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Button
 import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.Icon
-import androidx.compose.material.MaterialTheme.colors
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -17,6 +16,7 @@ import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import dev.spikeysanju.einsen.ui.theme.Shapes
+import dev.spikeysanju.einsen.ui.theme.myColors
 import dev.spikeysanju.einsen.ui.theme.typography
 
 @Composable
@@ -30,15 +30,15 @@ fun PrimaryButton(title: String, onclick: () -> Unit) {
             .padding(start = 20.dp, end = 20.dp),
         onClick = { onclick() },
         colors = ButtonDefaults.buttonColors(
-            backgroundColor = colors.onPrimary,
-            contentColor = colors.primary
+            backgroundColor = myColors.button,
+            contentColor = myColors.night
         ),
     ) {
         Text(
             text = title,
             style = typography.subtitle2,
             textAlign = TextAlign.Center,
-            color = colors.primary
+            color = myColors.night
         )
     }
 }
@@ -52,7 +52,7 @@ fun PrimaryButtonWithIcon(title: String, icon: Painter, onclick: () -> Unit) {
             .height(48.dp)
             .clickable { onclick() }
             .clip(Shapes.large)
-            .background(colors.onPrimary)
+            .background(myColors.button)
             .padding(start = 16.dp, end = 16.dp, top = 8.dp, bottom = 8.dp),
         horizontalArrangement = Arrangement.SpaceBetween,
         verticalAlignment = Alignment.CenterVertically
@@ -61,7 +61,7 @@ fun PrimaryButtonWithIcon(title: String, icon: Painter, onclick: () -> Unit) {
         Icon(
             painter = icon,
             contentDescription = title,
-            tint = colors.primary
+            tint = myColors.night
         )
 
         Spacer(modifier = Modifier.width(12.dp))
@@ -70,7 +70,7 @@ fun PrimaryButtonWithIcon(title: String, icon: Painter, onclick: () -> Unit) {
             text = title,
             style = typography.subtitle2,
             textAlign = TextAlign.Center,
-            color = colors.primary
+            color = myColors.night
         )
     }
 }

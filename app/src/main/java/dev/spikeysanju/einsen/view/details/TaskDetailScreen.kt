@@ -81,7 +81,8 @@ fun TaskDetailsScreen(viewModel: MainViewModel, action: MainActions) {
             is SingleViewState.Success -> {
                 LazyColumn(
                     modifier = Modifier.padding(start = 16.dp, end = 16.dp),
-                    state = listState
+                    state = listState,
+                    contentPadding = PaddingValues(bottom = 100.dp)
                 ) {
 
                     // update the task state with latest value
