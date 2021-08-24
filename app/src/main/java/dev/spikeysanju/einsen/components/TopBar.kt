@@ -28,7 +28,7 @@ fun TopBar(title: String, onToggle: () -> Unit) {
                 text = title,
                 textAlign = TextAlign.Start,
                 style = typography.h5,
-                color = myColors.day
+                color = myColors.black
             )
         }
         Row(
@@ -56,7 +56,7 @@ fun EinsenThemeSwitch(onToggle: () -> Unit) {
         modifier = Modifier
             .size(24.dp)
             .clickable(onClick = onToggle),
-        tint = myColors.day
+        tint = myColors.black
     )
 }
 
@@ -70,7 +70,7 @@ fun TopBarWithBack(title: String, upPress: () -> Unit) {
             Icon(
                 painter = painterResource(id = R.drawable.ic_back),
                 contentDescription = stringResource(R.string.back_button),
-                tint = myColors.day
+                tint = myColors.black
             )
         }
 
@@ -78,7 +78,7 @@ fun TopBarWithBack(title: String, upPress: () -> Unit) {
             text = title,
             style = typography.h6,
             textAlign = TextAlign.Start,
-            color = myColors.day,
+            color = myColors.black,
             modifier = Modifier.padding(start = 16.dp)
         )
     }

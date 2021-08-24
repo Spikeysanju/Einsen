@@ -19,6 +19,7 @@ import dev.spikeysanju.einsen.ui.theme.myColors
 fun BottomCTA(
     title: String,
     icon: Painter,
+    iconTint: Color,
     color: Color,
     onEdit: () -> Unit,
     onDelete: () -> Unit,
@@ -42,7 +43,7 @@ fun BottomCTA(
             Row(modifier = Modifier.fillMaxWidth(), Arrangement.End) {
                 PrimaryButtonWithIcon(title = title, onclick = {
                     onButtonChange()
-                }, icon = icon, color = color)
+                }, icon = icon, iconTint = iconTint, color = color)
             }
         }
     }

@@ -61,6 +61,12 @@ fun TaskDetailsScreen(viewModel: MainViewModel, action: MainActions) {
             false -> painterResource(id = R.drawable.ic_check)
         }
 
+        val iconTinTColor = when (taskState.value.isCompleted) {
+            true -> myColors.black
+            false -> myColors.white
+        }
+
+
         val buttonColor = when (taskState.value.isCompleted) {
             true -> myColors.err
             false -> myColors.button
@@ -76,7 +82,7 @@ fun TaskDetailsScreen(viewModel: MainViewModel, action: MainActions) {
             //Todo share notes
         }, onButtonChange = {
             viewModel.updateStatus(taskState.value.id, !taskState.value.isCompleted)
-        }, title = buttonTitle, icon = buttonIcon, color = buttonColor)
+        }, title = buttonTitle, icon = buttonIcon, iconTint = iconTinTColor, color = buttonColor)
 
     }) {
 

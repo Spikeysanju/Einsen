@@ -30,7 +30,7 @@ fun InfoCard(title: String, value: String, modifier: Modifier) {
             Text(
                 text = value,
                 modifier = Modifier.fillMaxWidth(),
-                color = myColors.day,
+                color = myColors.black,
                 style = typography.subtitle1,
                 fontWeight = FontWeight.W600,
                 textAlign = TextAlign.Center
@@ -41,7 +41,7 @@ fun InfoCard(title: String, value: String, modifier: Modifier) {
             Text(
                 text = title,
                 modifier = Modifier.fillMaxWidth(),
-                color = myColors.day.copy(.7f),
+                color = myColors.black.copy(.7f),
                 style = typography.overline,
                 textAlign = TextAlign.Center
             )

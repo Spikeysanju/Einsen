@@ -22,7 +22,7 @@ fun LabelView(title: String) {
         text = title,
         style = typography.caption,
         textAlign = TextAlign.Start,
-        color = myColors.day
+        color = myColors.black
     )
 }
 
@@ -56,11 +56,11 @@ fun InputTextField(title: String, value: String, onValueChanged: (String) -> Uni
 
 @Composable
 fun textFieldColors() = TextFieldDefaults.textFieldColors(
-    textColor = myColors.day,
-    focusedLabelColor = myColors.day,
-    focusedIndicatorColor = myColors.day,
+    textColor = myColors.black,
+    focusedLabelColor = myColors.black,
+    focusedIndicatorColor = myColors.black,
     unfocusedIndicatorColor = myColors.background,
-    cursorColor = myColors.day,
-    placeholderColor = myColors.day,
-    disabledPlaceholderColor = myColors.day
+    cursorColor = myColors.black,
+    placeholderColor = myColors.black,
+    disabledPlaceholderColor = myColors.black
 )

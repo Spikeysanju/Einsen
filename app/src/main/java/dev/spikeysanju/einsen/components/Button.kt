@@ -32,14 +32,14 @@ fun PrimaryButton(title: String, onclick: () -> Unit) {
         onClick = { onclick() },
         colors = ButtonDefaults.buttonColors(
             backgroundColor = myColors.button,
-            contentColor = myColors.night
+            contentColor = myColors.white
         ),
     ) {
         Text(
             text = title,
             style = typography.subtitle2,
             textAlign = TextAlign.Center,
-            color = myColors.night
+            color = myColors.white
         )
     }
 }
@@ -62,7 +62,7 @@ fun PrimaryButtonWithIcons(title: String, icon: Painter, onclick: () -> Unit) {
         Icon(
             painter = icon,
             contentDescription = title,
-            tint = myColors.night
+            tint = myColors.white
         )
 
         Spacer(modifier = Modifier.width(12.dp))
@@ -71,23 +71,29 @@ fun PrimaryButtonWithIcons(title: String, icon: Painter, onclick: () -> Unit) {
             text = title,
             style = typography.subtitle2,
             textAlign = TextAlign.Center,
-            color = myColors.night
+            color = myColors.white
         )
     }
 }
 
 @Composable
-fun PrimaryButtonWithIcon(title: String, icon: Painter, onclick: () -> Unit, color: Color) {
+fun PrimaryButtonWithIcon(
+    title: String,
+    icon: Painter,
+    iconTint: Color,
+    onclick: () -> Unit,
+    color: Color
+) {
     Button(
         onClick = { onclick() }, colors = ButtonDefaults.buttonColors(
             backgroundColor = color,
-            contentColor = myColors.night
+            contentColor = myColors.white
         )
     ) {
         Icon(
             painter = icon,
             contentDescription = title,
-            tint = myColors.night
+            tint = iconTint
         )
 
         Spacer(modifier = Modifier.width(12.dp))
@@ -96,7 +102,7 @@ fun PrimaryButtonWithIcon(title: String, icon: Painter, onclick: () -> Unit, col
             text = title,
             style = typography.subtitle2,
             textAlign = TextAlign.Center,
-            color = myColors.night
+            color = iconTint
         )
     }
 }

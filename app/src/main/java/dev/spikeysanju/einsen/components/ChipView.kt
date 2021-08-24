@@ -29,7 +29,7 @@ fun ChipView(title: String, onClick: () -> Unit) {
         Text(
             text = title, modifier = Modifier.padding(12.dp, 6.dp, 12.dp, 6.dp),
             style = MaterialTheme.typography.overline,
-            color = myColors.night
+            color = myColors.white
         )
     }
 }

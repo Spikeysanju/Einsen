@@ -14,8 +14,8 @@ data class MyColors(
     val text: Color,
     val button: Color,
     val icon: Color,
-    val day: Color,
-    val night: Color
+    val black: Color,
+    val white: Color
 ) {
     val primary: Color get() = material.primary
     val primaryVariant: Color get() = material.primaryVariant

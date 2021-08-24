@@ -98,7 +98,7 @@ fun TaskItemCard(
                 Text(
                     text = task.title,
                     style = titleStyle,
-                    color = myColors.day,
+                    color = myColors.black,
                     maxLines = 1,
                     overflow = TextOverflow.Ellipsis
                 )
@@ -107,7 +107,7 @@ fun TaskItemCard(
                 Text(
                     text = task.category,
                     style = categoryStyle,
-                    color = myColors.day.copy(.7f)
+                    color = myColors.black.copy(.7f)
                 )
             }
         }
@@ -127,7 +127,7 @@ fun EmojiTextView(emoji: String) {
     ) {
         Text(
             text = emoji,
-            color = myColors.day,
+            color = myColors.black,
             style = typography.subtitle1,
             textAlign = TextAlign.Center,
             modifier = Modifier.align(Alignment.Center)

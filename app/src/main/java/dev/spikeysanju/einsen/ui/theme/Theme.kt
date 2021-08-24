@@ -46,23 +46,23 @@ private val LightColors = MyColors(
     text = black,
     button = black,
     icon = black,
-    day = black,
-    night = white
+    black = black,
+    white = white
 )
 
 private val DarkColors = MyColors(
     material = DarkColorPalette,
-    warning = cardDark,
-    success = cardDark,
-    err = cardDark,
-    calm = cardDark,
+    warning = warningDark,
+    success = successDark,
+    err = errorDark,
+    calm = calmDark,
     card = cardDark,
     bg = bgDark,
     text = black,
     button = white,
     icon = white,
-    day = white,
-    night = black
+    black = white,
+    white = black
 )
 
 private val LocalColors = staticCompositionLocalOf { LightColors }
