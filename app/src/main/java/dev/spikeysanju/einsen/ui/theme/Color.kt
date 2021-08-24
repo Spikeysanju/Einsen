@@ -9,10 +9,10 @@ val success = Color(0xFF6FCF97)
 val calm = Color(0xFF006AF6)
 
 // state colors for dark mode
-val errorDark = Color(0xFFFF8A80)
-val warningDark = Color(0xFFFFD180)
-val successDark = Color(0xFF69F0AE)
-val calmDark = Color(0xFF82B1FF)
+val errorDark = Color(0xFFD57576)
+val warningDark = Color(0xFFD5BA75)
+val successDark = Color(0xFF75D596)
+val calmDark = Color(0xFF75A7D5)
 
 // button
 val black = Color(0xFF000000)

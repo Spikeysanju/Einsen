@@ -80,20 +80,19 @@ fun PrimaryButtonWithIcons(title: String, icon: Painter, onclick: () -> Unit) {
 fun PrimaryButtonWithIcon(
     title: String,
     icon: Painter,
-    iconTint: Color,
     onclick: () -> Unit,
     color: Color
 ) {
     Button(
         onClick = { onclick() }, colors = ButtonDefaults.buttonColors(
             backgroundColor = color,
-            contentColor = myColors.white
+            contentColor = Color.White
         )
     ) {
         Icon(
             painter = icon,
             contentDescription = title,
-            tint = iconTint
+            tint = Color.White
         )
 
         Spacer(modifier = Modifier.width(12.dp))
@@ -102,7 +101,7 @@ fun PrimaryButtonWithIcon(
             text = title,
             style = typography.subtitle2,
             textAlign = TextAlign.Center,
-            color = iconTint
+            color = Color.White
         )
     }
 }

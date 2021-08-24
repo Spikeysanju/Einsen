@@ -24,7 +24,7 @@ fun EmojiPlaceHolder(emoji: String, onTap: () -> Unit) {
     ) {
         Text(
             text = emoji,
-            style = typography.h3,
+            style = typography.h1,
             textAlign = TextAlign.Center,
             color = myColors.text
         )
