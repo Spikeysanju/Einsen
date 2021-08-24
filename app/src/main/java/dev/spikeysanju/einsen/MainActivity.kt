@@ -6,7 +6,6 @@ import androidx.activity.compose.setContent
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.foundation.isSystemInDarkTheme
-import androidx.compose.material.MaterialTheme.colors
 import androidx.compose.material.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.SideEffect
@@ -81,7 +80,7 @@ fun SetStatusBarColor() {
     // Remember a SystemUiController
     val systemUiController = rememberSystemUiController()
     val useDarkIcons = true
-    val color = colors.background
+    val color = myColors.bg
 
     SideEffect {
         // Update all of the system bar colors to be transparent, and use

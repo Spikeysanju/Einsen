@@ -25,8 +25,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import dev.spikeysanju.einsen.model.Task
 import dev.spikeysanju.einsen.ui.theme.Avenir
+import dev.spikeysanju.einsen.ui.theme.myColors
 import dev.spikeysanju.einsen.ui.theme.typography
-import dev.spikeysanju.einsen.ui.theme.white
 
 
 @ExperimentalFoundationApi
@@ -59,7 +59,7 @@ fun TaskItemCard(
             modifier = Modifier
                 .fillMaxWidth()
                 .clip(shape = shapes.large)
-                .background(colors.onSecondary)
+                .background(myColors.card)
                 .clickable { onClick() },
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.Start
@@ -98,7 +98,7 @@ fun TaskItemCard(
                 Text(
                     text = task.title,
                     style = titleStyle,
-                    color = colors.onPrimary,
+                    color = myColors.black,
                     maxLines = 1,
                     overflow = TextOverflow.Ellipsis
                 )
@@ -107,7 +107,7 @@ fun TaskItemCard(
                 Text(
                     text = task.category,
                     style = categoryStyle,
-                    color = colors.onPrimary.copy(.7f)
+                    color = myColors.black.copy(.7f)
                 )
             }
         }
@@ -123,11 +123,11 @@ fun EmojiTextView(emoji: String) {
             .padding(12.dp)
             .clip(CircleShape)
             .clickable { }
-            .background(colors.background)
+            .background(myColors.bg)
     ) {
         Text(
             text = emoji,
-            color = white,
+            color = myColors.black,
             style = typography.subtitle1,
             textAlign = TextAlign.Center,
             modifier = Modifier.align(Alignment.Center)

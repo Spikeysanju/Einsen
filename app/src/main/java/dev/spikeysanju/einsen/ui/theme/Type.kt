@@ -22,6 +22,13 @@ val Avenir = FontFamily(
 
 // Set of Material typography styles to start with
 val typography = Typography(
+
+    h1 = TextStyle(
+        fontFamily = Avenir,
+        fontWeight = FontWeight.Bold,
+        fontSize = 80.sp
+    ),
+
     h2 = TextStyle(
         fontFamily = Avenir,
         fontWeight = FontWeight.Bold,

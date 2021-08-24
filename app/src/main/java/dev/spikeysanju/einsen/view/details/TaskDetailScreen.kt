@@ -21,6 +21,7 @@ import dev.spikeysanju.einsen.components.*
 import dev.spikeysanju.einsen.model.Priority
 import dev.spikeysanju.einsen.model.Task
 import dev.spikeysanju.einsen.navigation.MainActions
+import dev.spikeysanju.einsen.ui.theme.myColors
 import dev.spikeysanju.einsen.ui.theme.typography
 import dev.spikeysanju.einsen.utils.SingleViewState
 import dev.spikeysanju.einsen.view.viewmodel.MainViewModel
@@ -60,6 +61,11 @@ fun TaskDetailsScreen(viewModel: MainViewModel, action: MainActions) {
             false -> painterResource(id = R.drawable.ic_check)
         }
 
+        val buttonColor = when (taskState.value.isCompleted) {
+            true -> myColors.err
+            false -> myColors.success
+        }
+
         BottomCTA(onEdit = {
             action.gotoEditTask(taskState.value.id)
         }, onDelete = {
@@ -70,7 +76,7 @@ fun TaskDetailsScreen(viewModel: MainViewModel, action: MainActions) {
             //Todo share notes
         }, onButtonChange = {
             viewModel.updateStatus(taskState.value.id, !taskState.value.isCompleted)
-        }, title = buttonTitle, icon = buttonIcon)
+        }, title = buttonTitle, icon = buttonIcon, color = buttonColor)
 
     }) {
 
@@ -81,7 +87,8 @@ fun TaskDetailsScreen(viewModel: MainViewModel, action: MainActions) {
             is SingleViewState.Success -> {
                 LazyColumn(
                     modifier = Modifier.padding(start = 16.dp, end = 16.dp),
-                    state = listState
+                    state = listState,
+                    contentPadding = PaddingValues(bottom = 100.dp)
                 ) {
 
                     // update the task state with latest value
