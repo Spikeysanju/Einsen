@@ -1,6 +1,5 @@
 package dev.spikeysanju.einsen.navigation
 
-import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.platform.LocalContext
@@ -8,14 +7,11 @@ import androidx.hilt.navigation.HiltViewModelFactory
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
-import androidx.navigation.NavHostController
 import androidx.navigation.NavType
 import androidx.navigation.compose.navArgument
-import androidx.navigation.compose.rememberNavController
-import androidx.navigation.plusAssign
-import com.google.accompanist.navigation.animation.AnimatedComposeNavigator
 import com.google.accompanist.navigation.animation.AnimatedNavHost
 import com.google.accompanist.navigation.animation.composable
+import com.google.accompanist.navigation.animation.rememberAnimatedNavController
 import dev.spikeysanju.einsen.model.Priority
 import dev.spikeysanju.einsen.view.add.AddTaskScreen
 import dev.spikeysanju.einsen.view.details.TaskDetailsScreen
@@ -32,7 +28,7 @@ object EndPoints {
 
 @Composable
 fun NavGraph(toggleTheme: () -> Unit) {
-    val navController = rememberAnimatedNavigationController()
+    val navController = rememberAnimatedNavController()
 
     val actions = remember(navController) { MainActions(navController) }
 
@@ -128,15 +124,5 @@ class MainActions(navController: NavController) {
 
     val gotoSettings: () -> Unit = {
         navController.navigate(Screen.Settings.route)
-    }
-}
-
-@ExperimentalAnimationApi
-@Composable
-fun rememberAnimatedNavigationController(): NavHostController {
-    val navController = rememberNavController()
-    val animatedNavigator = remember(navController) { AnimatedComposeNavigator() }
-    return navController.apply {
-        navigatorProvider += animatedNavigator
     }
 }

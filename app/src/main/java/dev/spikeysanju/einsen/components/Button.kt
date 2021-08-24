@@ -12,6 +12,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
@@ -44,7 +45,7 @@ fun PrimaryButton(title: String, onclick: () -> Unit) {
 }
 
 @Composable
-fun PrimaryButtonWithIcon(title: String, icon: Painter, onclick: () -> Unit) {
+fun PrimaryButtonWithIcons(title: String, icon: Painter, onclick: () -> Unit) {
 
     Row(
         modifier = Modifier
@@ -58,6 +59,31 @@ fun PrimaryButtonWithIcon(title: String, icon: Painter, onclick: () -> Unit) {
         verticalAlignment = Alignment.CenterVertically
     ) {
 
+        Icon(
+            painter = icon,
+            contentDescription = title,
+            tint = myColors.night
+        )
+
+        Spacer(modifier = Modifier.width(12.dp))
+
+        Text(
+            text = title,
+            style = typography.subtitle2,
+            textAlign = TextAlign.Center,
+            color = myColors.night
+        )
+    }
+}
+
+@Composable
+fun PrimaryButtonWithIcon(title: String, icon: Painter, onclick: () -> Unit, color: Color) {
+    Button(
+        onClick = { onclick() }, colors = ButtonDefaults.buttonColors(
+            backgroundColor = color,
+            contentColor = myColors.night
+        )
+    ) {
         Icon(
             painter = icon,
             contentDescription = title,
