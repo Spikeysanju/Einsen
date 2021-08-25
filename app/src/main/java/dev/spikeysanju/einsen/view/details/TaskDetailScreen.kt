@@ -1,15 +1,13 @@
 package dev.spikeysanju.einsen.view.details
 
+import androidx.compose.animation.animateColorAsState
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material.MaterialTheme.colors
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
@@ -50,20 +48,16 @@ fun TaskDetailsScreen(viewModel: MainViewModel, action: MainActions) {
         TopBarWithBack(title = stringResource(id = R.string.text_taskDetails), action.upPress)
     }, bottomBar = {
 
-        // check if task is already completed
+        val buttonColor by animateColorAsState(if (taskState.value.isCompleted) myColors.err else myColors.success)
+
         val buttonTitle = when (taskState.value.isCompleted) {
-            true -> stringResource(R.string.text_incomplete)
-            false -> stringResource(R.string.text_complete)
+            true -> stringResource(id = R.string.text_incomplete)
+            false -> stringResource(id = R.string.text_complete)
         }
 
         val buttonIcon = when (taskState.value.isCompleted) {
             true -> painterResource(id = R.drawable.ic_incomplete)
             false -> painterResource(id = R.drawable.ic_check)
-        }
-
-        val buttonColor = when (taskState.value.isCompleted) {
-            true -> myColors.err
-            false -> myColors.success
         }
 
         BottomCTA(onEdit = {
