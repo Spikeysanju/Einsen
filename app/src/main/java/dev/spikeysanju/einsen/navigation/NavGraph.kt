@@ -53,7 +53,8 @@ fun NavGraph(toggleTheme: () -> Unit) {
         }
 
         // All Task
-        composable("${Screen.AllTask.route}/{priority}",
+        composable(
+            "${Screen.AllTask.route}/{priority}",
             arguments = listOf(navArgument(EndPoints.PRIORITY) { type = NavType.StringType })
         ) {
             val viewModel = hiltViewModel<MainViewModel>(it)
@@ -96,7 +97,6 @@ fun NavGraph(toggleTheme: () -> Unit) {
             val viewModel = hiltViewModel<MainViewModel>(it)
             SettingsScreen(viewModel, actions)
         }
-
     }
 }
 

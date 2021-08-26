@@ -3,10 +3,19 @@ package dev.spikeysanju.einsen.view.home
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.rememberLazyListState
-import androidx.compose.material.*
+import androidx.compose.material.FloatingActionButton
+import androidx.compose.material.FloatingActionButtonDefaults
+import androidx.compose.material.Icon
+import androidx.compose.material.MaterialTheme
+import androidx.compose.material.Scaffold
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
@@ -25,27 +34,33 @@ fun HomeScreen(
     actions: MainActions,
     toggleTheme: () -> Unit
 ) {
-    Scaffold(topBar = {
-        TopBar(title = stringResource(R.string.text_my_dashboard), onToggle = {
-            toggleTheme()
-        })
-    }, floatingActionButton = {
-        FloatingActionButton(
-            modifier = Modifier.padding(30.dp),
-            onClick = {
-                actions.gotoAddTask.invoke()
-            },
-            backgroundColor = MaterialTheme.colors.onPrimary,
-            contentColor = MaterialTheme.colors.background,
-            elevation = FloatingActionButtonDefaults.elevation(12.dp)
-        ) {
-            Icon(
-                Icons.Filled.Add,
-                contentDescription = stringResource(id = R.string.text_addTask),
-                tint = MaterialTheme.colors.onSecondary
+    Scaffold(
+        topBar = {
+            TopBar(
+                title = stringResource(R.string.text_my_dashboard),
+                onToggle = {
+                    toggleTheme()
+                }
             )
+        },
+        floatingActionButton = {
+            FloatingActionButton(
+                modifier = Modifier.padding(30.dp),
+                onClick = {
+                    actions.gotoAddTask.invoke()
+                },
+                backgroundColor = MaterialTheme.colors.onPrimary,
+                contentColor = MaterialTheme.colors.background,
+                elevation = FloatingActionButtonDefaults.elevation(12.dp)
+            ) {
+                Icon(
+                    Icons.Filled.Add,
+                    contentDescription = stringResource(id = R.string.text_addTask),
+                    tint = MaterialTheme.colors.onSecondary
+                )
+            }
         }
-    }) {
+    ) {
 
         val listState = rememberLazyListState()
         var urgentCount by remember { mutableStateOf(0) }
@@ -84,7 +99,6 @@ fun HomeScreen(
                                 actions.gotoAllTask(Priority.URGENT)
                             }
                         )
-
                     }
 
                     item {

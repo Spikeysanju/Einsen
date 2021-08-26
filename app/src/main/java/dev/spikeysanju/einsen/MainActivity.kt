@@ -23,7 +23,6 @@ import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     @Inject
@@ -61,7 +60,6 @@ class MainActivity : ComponentActivity() {
         }
     }
 
-
     private fun observeThemeMode() {
         lifecycleScope.launchWhenStarted {
             themeManager.uiModeFlow.collect {
@@ -92,11 +90,9 @@ fun SetStatusBarColor() {
     }
 }
 
-
 @Preview(showBackground = true)
 @Composable
 fun DefaultPreview() {
     EinsenTheme {
-
     }
 }

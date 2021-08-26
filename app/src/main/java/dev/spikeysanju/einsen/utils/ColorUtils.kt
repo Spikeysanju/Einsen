@@ -11,7 +11,6 @@ fun toColor(color: Int): Color {
     return Color(color)
 }
 
-
 fun makeValueRound(value: Float): Float {
     return when (value) {
         0.0F -> 0.0F

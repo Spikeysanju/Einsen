@@ -67,7 +67,6 @@ private val DarkColors = MyColors(
 
 private val LocalColors = staticCompositionLocalOf { LightColors }
 
-
 val myColors: MyColors
     @Composable
     @ReadOnlyComposable

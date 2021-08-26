@@ -1,7 +1,15 @@
 package dev.spikeysanju.einsen.components
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
 import androidx.compose.runtime.Composable
@@ -40,9 +48,13 @@ fun BottomCTA(
             Spacer(modifier = Modifier.width(12.dp))
 
             Row(modifier = Modifier.fillMaxWidth(), Arrangement.End) {
-                PrimaryButtonWithIcon(title = title, onclick = {
-                    onButtonChange()
-                }, icon = icon, color = color)
+                PrimaryButtonWithIcon(
+                    title = title,
+                    onclick = {
+                        onButtonChange()
+                    },
+                    icon = icon, color = color
+                )
             }
         }
     }

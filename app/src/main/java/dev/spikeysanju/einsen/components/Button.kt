@@ -2,7 +2,14 @@ package dev.spikeysanju.einsen.components
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Button
 import androidx.compose.material.ButtonDefaults
@@ -84,7 +91,8 @@ fun PrimaryButtonWithIcon(
     color: Color
 ) {
     Button(
-        onClick = { onclick() }, colors = ButtonDefaults.buttonColors(
+        onClick = { onclick() },
+        colors = ButtonDefaults.buttonColors(
             backgroundColor = color,
             contentColor = Color.White
         )

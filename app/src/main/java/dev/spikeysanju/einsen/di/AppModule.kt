@@ -13,7 +13,6 @@ import dev.spikeysanju.einsen.data.datastore.db.EinsenDatabase
 import dev.spikeysanju.einsen.data.datastore.db.TaskDao
 import javax.inject.Singleton
 
-
 @Module
 @InstallIn(SingletonComponent::class)
 object AppModule {

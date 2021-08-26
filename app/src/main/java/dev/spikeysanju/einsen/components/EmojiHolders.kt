@@ -20,7 +20,8 @@ fun EmojiPlaceHolder(emoji: String, onTap: () -> Unit) {
         modifier = Modifier
             .size(100.dp)
             .clip(CircleShape)
-            .clickable { onTap() }, contentAlignment = Alignment.Center
+            .clickable { onTap() },
+        contentAlignment = Alignment.Center
     ) {
         Text(
             text = emoji,
@@ -37,7 +38,8 @@ fun EmojiPlaceHolderSmall(emoji: String, onSelect: (String) -> Unit) {
         modifier = Modifier
             .size(50.dp)
             .clip(CircleShape)
-            .clickable { onSelect(emoji) }, contentAlignment = Alignment.Center
+            .clickable { onSelect(emoji) },
+        contentAlignment = Alignment.Center
     ) {
         Text(
             text = emoji,
@@ -46,5 +48,3 @@ fun EmojiPlaceHolderSmall(emoji: String, onSelect: (String) -> Unit) {
         )
     }
 }
-
-

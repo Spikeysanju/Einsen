@@ -27,7 +27,6 @@ class MainRepository @Inject constructor(private val taskDao: TaskDao) {
     fun getTaskByPriority(priority: String): Flow<List<Task>> =
         taskDao.getTaskByPriority(priority).flowOn(Dispatchers.IO).conflate()
 
-    suspend fun getTaskByPriorityCount(priority: String): Flow<Int> =
+    fun getTaskByPriorityCount(priority: String): Flow<Int> =
         taskDao.getTaskByPriorityCount(priority).flowOn(Dispatchers.IO).conflate()
-
 }
