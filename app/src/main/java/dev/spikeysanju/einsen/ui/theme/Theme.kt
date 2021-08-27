@@ -52,10 +52,10 @@ private val LightColors = MyColors(
 
 private val DarkColors = MyColors(
     material = DarkColorPalette,
-    warning = warningDark,
-    success = successDark,
-    err = errorDark,
-    calm = calmDark,
+    warning = warning,
+    success = success,
+    err = error,
+    calm = calm,
     card = cardDark,
     bg = bgDark,
     text = black,
