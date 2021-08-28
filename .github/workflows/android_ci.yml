@@ -20,11 +20,12 @@ jobs:
         with:
           java-version: 11
 
-      - name: Run Tests 🧪
+      - name: 🧪 Run Tests
         run: ./gradlew test
 
-      - name: Build Project 🛠
-        run: ./gradlew assemble
+      - name: 🛠 Build Project & 🌳 Spotless Check
+        run: ./gradlew spotlessCheck assemble lintDebug --stacktrace
 
-      - name: Build with Gradle ⏳
+      - name: ⏳ Build with Gradle
         run: ./gradlew build
+

@@ -13,17 +13,21 @@ import com.google.accompanist.navigation.animation.AnimatedNavHost
 import com.google.accompanist.navigation.animation.composable
 import com.google.accompanist.navigation.animation.rememberAnimatedNavController
 import dev.spikeysanju.einsen.model.Priority
+import dev.spikeysanju.einsen.view.about.AboutScreen
 import dev.spikeysanju.einsen.view.add.AddTaskScreen
+import dev.spikeysanju.einsen.view.dashboard.DashboardScreen
 import dev.spikeysanju.einsen.view.details.TaskDetailsScreen
 import dev.spikeysanju.einsen.view.edit.EditTaskScreen
-import dev.spikeysanju.einsen.view.home.HomeScreen
 import dev.spikeysanju.einsen.view.settings.SettingsScreen
 import dev.spikeysanju.einsen.view.task.AllTaskScreen
 import dev.spikeysanju.einsen.view.viewmodel.MainViewModel
+import dev.spikeysanju.einsen.view.webview.WebViewScreen
 
 object EndPoints {
     const val ID = "id"
     const val PRIORITY = "priority"
+    const val URL = "url"
+    const val TITLE = "title"
 }
 
 @Composable
@@ -33,7 +37,7 @@ fun NavGraph(toggleTheme: () -> Unit) {
     val actions = remember(navController) { MainActions(navController) }
 
     AnimatedNavHost(navController, startDestination = Screen.Home.route) {
-        // Home
+        // Dashboard
         composable(
             Screen.Home.route
         ) {
@@ -41,7 +45,7 @@ fun NavGraph(toggleTheme: () -> Unit) {
                 factory = HiltViewModelFactory(LocalContext.current, it)
             )
             viewModel.getAllTask()
-            HomeScreen(viewModel, actions, toggleTheme)
+            DashboardScreen(viewModel, actions, toggleTheme)
         }
 
         // Add Task
@@ -53,7 +57,8 @@ fun NavGraph(toggleTheme: () -> Unit) {
         }
 
         // All Task
-        composable("${Screen.AllTask.route}/{priority}",
+        composable(
+            "${Screen.AllTask.route}/{priority}",
             arguments = listOf(navArgument(EndPoints.PRIORITY) { type = NavType.StringType })
         ) {
             val viewModel = hiltViewModel<MainViewModel>(it)
@@ -97,6 +102,29 @@ fun NavGraph(toggleTheme: () -> Unit) {
             SettingsScreen(viewModel, actions)
         }
 
+        // About
+        composable(
+            Screen.About.route
+        ) {
+            val viewModel = hiltViewModel<MainViewModel>(it)
+            AboutScreen(viewModel, actions)
+        }
+
+        // WebView
+        composable(
+            "${Screen.WebView.route}/{title}/{url}",
+            arguments = listOf(
+                navArgument(EndPoints.TITLE) { type = NavType.StringType },
+                navArgument(EndPoints.URL) { type = NavType.StringType }
+            )
+        ) {
+            val viewModel = hiltViewModel<MainViewModel>(it)
+            val url = it.arguments?.getString(EndPoints.URL)
+                ?: throw IllegalStateException("'URL' shouldn't be null")
+            val title = it.arguments?.getString(EndPoints.TITLE)
+                ?: throw java.lang.IllegalStateException("'Title' should't be null")
+            WebViewScreen(viewModel = viewModel, title = title, url = url, actions = actions)
+        }
     }
 }
 
@@ -124,5 +152,13 @@ class MainActions(navController: NavController) {
 
     val gotoSettings: () -> Unit = {
         navController.navigate(Screen.Settings.route)
+    }
+
+    val gotoAbout: () -> Unit = {
+        navController.navigate(Screen.About.route)
+    }
+
+    val gotoWebView: (title: String, url: String) -> Unit = { title, url ->
+        navController.navigate("${Screen.WebView.route}/$title/$url")
     }
 }

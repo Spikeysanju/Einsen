@@ -30,7 +30,6 @@ class MainViewModel @Inject constructor(private val repo: MainRepository) : View
     private val _emojiViewState = MutableStateFlow<EmojiViewState>(EmojiViewState.Loading)
     private val _countState = MutableStateFlow<CountViewState>(CountViewState.Loading)
 
-
     // The UI collects from this StateFlow to get its state update
     val feed = _viewState.asStateFlow()
     val singleTask = _singleViewState.asStateFlow()
@@ -46,7 +45,6 @@ class MainViewModel @Inject constructor(private val repo: MainRepository) : View
                 } else {
                     _viewState.value = ViewState.Success(result)
                 }
-
             } catch (e: Exception) {
                 _viewState.value = ViewState.Error(e)
             }
@@ -70,11 +68,9 @@ class MainViewModel @Inject constructor(private val repo: MainRepository) : View
 
             val decodedEmoji = format.decodeFromString<List<EmojiItem>>(myJson)
             _emojiViewState.value = EmojiViewState.Success(decodedEmoji)
-
         } catch (e: Exception) {
             _emojiViewState.value = EmojiViewState.Error(exception = e)
         }
-
     }
 
     // insert source
@@ -106,13 +102,11 @@ class MainViewModel @Inject constructor(private val repo: MainRepository) : View
                 } else {
                     _singleViewState.value = SingleViewState.Success(result)
                 }
-
             } catch (e: Exception) {
                 _viewState.value = ViewState.Error(e)
             }
         }
     }
-
 
     // get all task
     fun getTaskByPriority(priority: String) = viewModelScope.launch(Dispatchers.IO) {
@@ -123,13 +117,11 @@ class MainViewModel @Inject constructor(private val repo: MainRepository) : View
                 } else {
                     _viewState.value = ViewState.Success(result)
                 }
-
             } catch (e: Exception) {
                 _viewState.value = ViewState.Error(e)
             }
         }
     }
-
 
     fun getTaskByPriorityCount(priority: String) = viewModelScope.launch(Dispatchers.IO) {
         repo.getTaskByPriorityCount(priority).distinctUntilChanged().collect {
@@ -140,5 +132,4 @@ class MainViewModel @Inject constructor(private val repo: MainRepository) : View
             }
         }
     }
-
 }

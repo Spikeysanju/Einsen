@@ -13,7 +13,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import dev.spikeysanju.einsen.ui.theme.typography
 
-
 @Composable
 fun StepSlider(stepCount: Int, value: Float, onValueChanged: (Float) -> Unit) {
     Column(

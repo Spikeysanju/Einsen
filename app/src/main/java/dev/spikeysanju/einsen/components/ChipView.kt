@@ -15,7 +15,6 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
 import dev.spikeysanju.einsen.ui.theme.myColors
 
-
 @Composable
 fun ChipView(title: String, onClick: () -> Unit) {
     Box(

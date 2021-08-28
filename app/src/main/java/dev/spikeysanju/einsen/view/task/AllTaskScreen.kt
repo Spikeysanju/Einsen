@@ -5,7 +5,12 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
-import androidx.compose.material.*
+import androidx.compose.material.ExperimentalMaterialApi
+import androidx.compose.material.FloatingActionButton
+import androidx.compose.material.FloatingActionButtonDefaults
+import androidx.compose.material.Icon
+import androidx.compose.material.MaterialTheme
+import androidx.compose.material.Scaffold
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.runtime.Composable
@@ -28,9 +33,11 @@ fun AllTaskScreen(
     viewModel: MainViewModel,
     actions: MainActions
 ) {
-        Scaffold(topBar = {
+    Scaffold(
+        topBar = {
             TopBarWithBack(title = stringResource(R.string.text_allTask), actions.upPress)
-        }, floatingActionButton = {
+        },
+        floatingActionButton = {
             FloatingActionButton(
                 modifier = Modifier.padding(30.dp),
                 onClick = {
@@ -46,35 +53,37 @@ fun AllTaskScreen(
                     tint = MaterialTheme.colors.onSecondary
                 )
             }
-        }) {
+        }
+    ) {
 
-            when (val result = viewModel.feed.collectAsState().value) {
-                ViewState.Loading -> {
-                }
-                ViewState.Empty -> {
-                }
-                is ViewState.Success -> {
-                    LazyColumn(
-                        contentPadding = PaddingValues(
-                            start = 16.dp,
-                            top = 16.dp,
-                            end = 16.dp
+        when (val result = viewModel.feed.collectAsState().value) {
+            ViewState.Loading -> {
+            }
+            ViewState.Empty -> {
+            }
+            is ViewState.Success -> {
+                LazyColumn(
+                    contentPadding = PaddingValues(
+                        start = 16.dp,
+                        top = 16.dp,
+                        end = 16.dp
+                    )
+                ) {
+                    itemsIndexed(result.task) { index: Int, item: Task ->
+                        TaskItemCard(
+                            item,
+                            onClick = {
+                                actions.gotoTaskDetails(item.id)
+                            },
+                            onCheckboxChange = {
+                                viewModel.updateStatus(item.id, it)
+                            }
                         )
-                    ) {
-                        itemsIndexed(result.task) { index: Int, item: Task ->
-                            TaskItemCard(item,
-                                onClick = {
-                                    actions.gotoTaskDetails(item.id)
-                                }, onCheckboxChange = {
-                                    viewModel.updateStatus(item.id, it)
-                                })
-                        }
                     }
                 }
-                is ViewState.Error -> {
-
-                }
+            }
+            is ViewState.Error -> {
             }
         }
+    }
 }
-

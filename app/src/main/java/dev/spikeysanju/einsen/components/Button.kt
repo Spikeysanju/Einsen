@@ -1,22 +1,22 @@
 package dev.spikeysanju.einsen.components
 
-import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Button
 import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.Icon
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import dev.spikeysanju.einsen.ui.theme.Shapes
 import dev.spikeysanju.einsen.ui.theme.myColors
 import dev.spikeysanju.einsen.ui.theme.typography
 
@@ -45,38 +45,6 @@ fun PrimaryButton(title: String, onclick: () -> Unit) {
 }
 
 @Composable
-fun PrimaryButtonWithIcons(title: String, icon: Painter, onclick: () -> Unit) {
-
-    Row(
-        modifier = Modifier
-            .wrapContentWidth()
-            .height(48.dp)
-            .clickable { onclick() }
-            .clip(Shapes.large)
-            .background(myColors.button)
-            .padding(start = 16.dp, end = 16.dp, top = 8.dp, bottom = 8.dp),
-        horizontalArrangement = Arrangement.SpaceBetween,
-        verticalAlignment = Alignment.CenterVertically
-    ) {
-
-        Icon(
-            painter = icon,
-            contentDescription = title,
-            tint = myColors.white
-        )
-
-        Spacer(modifier = Modifier.width(12.dp))
-
-        Text(
-            text = title,
-            style = typography.subtitle2,
-            textAlign = TextAlign.Center,
-            color = myColors.white
-        )
-    }
-}
-
-@Composable
 fun PrimaryButtonWithIcon(
     title: String,
     icon: Painter,
@@ -84,7 +52,8 @@ fun PrimaryButtonWithIcon(
     color: Color
 ) {
     Button(
-        onClick = { onclick() }, colors = ButtonDefaults.buttonColors(
+        onClick = { onclick() },
+        colors = ButtonDefaults.buttonColors(
             backgroundColor = color,
             contentColor = Color.White
         )

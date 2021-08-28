@@ -1,15 +1,29 @@
 package dev.spikeysanju.einsen.view.details
 
-import androidx.compose.foundation.layout.*
+import androidx.compose.animation.animateColorAsState
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.rememberLazyListState
+import androidx.compose.material.Icon
+import androidx.compose.material.IconButton
 import androidx.compose.material.MaterialTheme.colors
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
+import androidx.compose.material.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
@@ -17,7 +31,10 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import dev.spikeysanju.einsen.R
-import dev.spikeysanju.einsen.components.*
+import dev.spikeysanju.einsen.components.BottomCTA
+import dev.spikeysanju.einsen.components.ChipView
+import dev.spikeysanju.einsen.components.EmojiPlaceHolder
+import dev.spikeysanju.einsen.components.InfoCard
 import dev.spikeysanju.einsen.model.Priority
 import dev.spikeysanju.einsen.model.Task
 import dev.spikeysanju.einsen.navigation.MainActions
@@ -28,7 +45,8 @@ import dev.spikeysanju.einsen.view.viewmodel.MainViewModel
 
 @Composable
 fun TaskDetailsScreen(viewModel: MainViewModel, action: MainActions) {
-    val taskState = remember {
+
+    var taskState by remember {
         mutableStateOf(
             Task(
                 "",
@@ -46,39 +64,63 @@ fun TaskDetailsScreen(viewModel: MainViewModel, action: MainActions) {
         )
     }
 
-    Scaffold(topBar = {
-        TopBarWithBack(title = stringResource(id = R.string.text_taskDetails), action.upPress)
-    }, bottomBar = {
+    Scaffold(
+        topBar = {
+            TopAppBar(
+                title = {
+                    Text(
+                        text = stringResource(id = R.string.text_taskDetails),
+                        style = typography.h6,
+                        textAlign = TextAlign.Start,
+                        color = myColors.black,
+                        modifier = Modifier.padding(start = 16.dp)
+                    )
+                },
+                navigationIcon = {
+                    IconButton(onClick = { action.upPress.invoke() }) {
+                        Icon(
+                            painter = painterResource(id = R.drawable.ic_back),
+                            contentDescription = stringResource(R.string.back_button),
+                            tint = myColors.black
+                        )
+                    }
+                },
+                backgroundColor = myColors.background, elevation = 0.dp
+            )
+        },
+        bottomBar = {
 
-        // check if task is already completed
-        val buttonTitle = when (taskState.value.isCompleted) {
-            true -> stringResource(R.string.text_incomplete)
-            false -> stringResource(R.string.text_complete)
-        }
+            val buttonColor by animateColorAsState(if (taskState.isCompleted) myColors.err else myColors.success)
 
-        val buttonIcon = when (taskState.value.isCompleted) {
-            true -> painterResource(id = R.drawable.ic_incomplete)
-            false -> painterResource(id = R.drawable.ic_check)
-        }
-
-        val buttonColor = when (taskState.value.isCompleted) {
-            true -> myColors.err
-            false -> myColors.success
-        }
-
-        BottomCTA(onEdit = {
-            action.gotoEditTask(taskState.value.id)
-        }, onDelete = {
-            viewModel.deleteTaskByID(taskState.value.id).run {
-                action.upPress.invoke()
+            val buttonTitle = when (taskState.isCompleted) {
+                true -> stringResource(id = R.string.text_incomplete)
+                false -> stringResource(id = R.string.text_complete)
             }
-        }, onShare = {
-            //Todo share notes
-        }, onButtonChange = {
-            viewModel.updateStatus(taskState.value.id, !taskState.value.isCompleted)
-        }, title = buttonTitle, icon = buttonIcon, color = buttonColor)
 
-    }) {
+            val buttonIcon = when (taskState.isCompleted) {
+                true -> painterResource(id = R.drawable.ic_incomplete)
+                false -> painterResource(id = R.drawable.ic_check)
+            }
+
+            BottomCTA(
+                onEdit = {
+                    action.gotoEditTask(taskState.id)
+                },
+                onDelete = {
+                    viewModel.deleteTaskByID(taskState.id).run {
+                        action.upPress.invoke()
+                    }
+                },
+                onShare = {
+                    // Todo share notes
+                },
+                onButtonChange = {
+                    viewModel.updateStatus(taskState.id, !taskState.isCompleted)
+                },
+                title = buttonTitle, icon = buttonIcon, color = buttonColor
+            )
+        }
+    ) {
 
         val listState = rememberLazyListState()
 
@@ -93,8 +135,7 @@ fun TaskDetailsScreen(viewModel: MainViewModel, action: MainActions) {
 
                     // update the task state with latest value
                     val task = result.task
-                    taskState.value = result.task
-
+                    taskState = result.task
 
                     // Emoji placeholder
                     item {
@@ -104,9 +145,11 @@ fun TaskDetailsScreen(viewModel: MainViewModel, action: MainActions) {
                             modifier = Modifier.fillMaxWidth(),
                             contentAlignment = Alignment.Center
                         ) {
-                            EmojiPlaceHolder(emoji = task.emoji, onTap = {
-
-                            })
+                            EmojiPlaceHolder(
+                                emoji = task.emoji,
+                                onTap = {
+                                }
+                            )
                         }
                     }
 
@@ -114,9 +157,11 @@ fun TaskDetailsScreen(viewModel: MainViewModel, action: MainActions) {
                     item {
 
                         Spacer(modifier = Modifier.height(16.dp))
-                        ChipView(title = task.category, onClick = {
-
-                        })
+                        ChipView(
+                            title = task.category,
+                            onClick = {
+                            }
+                        )
 
                         Spacer(modifier = Modifier.height(16.dp))
                         Text(
@@ -158,7 +203,6 @@ fun TaskDetailsScreen(viewModel: MainViewModel, action: MainActions) {
                             )
                         }
                     }
-
                 }
             }
             SingleViewState.Empty -> {
@@ -170,6 +214,5 @@ fun TaskDetailsScreen(viewModel: MainViewModel, action: MainActions) {
             SingleViewState.Loading -> {
             }
         }
-
     }
 }

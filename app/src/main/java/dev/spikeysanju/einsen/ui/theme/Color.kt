@@ -28,7 +28,6 @@ val bgDark = Color(0xFF131313)
 val text = Color(0xFF000000)
 val textDark = Color(0xFFFFFFFF)
 
-
 // shades of grey
 val gray100 = Color(0xFF303030)
 val gray200 = Color(0xFF242424)

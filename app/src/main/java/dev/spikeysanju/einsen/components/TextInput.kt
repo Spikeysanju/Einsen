@@ -26,7 +26,6 @@ fun LabelView(title: String) {
     )
 }
 
-
 @ExperimentalComposeUiApi
 @Composable
 fun InputTextField(title: String, value: String, onValueChanged: (String) -> Unit) {
@@ -51,7 +50,6 @@ fun InputTextField(title: String, value: String, onValueChanged: (String) -> Uni
             }
         )
     )
-
 }
 
 @Composable

@@ -3,7 +3,16 @@ package dev.spikeysanju.einsen.components
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.Checkbox
 import androidx.compose.material.CheckboxDefaults
@@ -28,7 +37,6 @@ import dev.spikeysanju.einsen.ui.theme.Avenir
 import dev.spikeysanju.einsen.ui.theme.myColors
 import dev.spikeysanju.einsen.ui.theme.typography
 
-
 @ExperimentalFoundationApi
 @Composable
 fun TaskItemCard(
@@ -47,11 +55,13 @@ fun TaskItemCard(
         val status = remember { mutableStateOf(task.isCompleted) }
 
         // Checkbox
-        EisenCheckBox(value = status.value, onValueChanged = {
-            status.value = it
-            onCheckboxChange(status.value)
-
-        })
+        EisenCheckBox(
+            value = status.value,
+            onValueChanged = {
+                status.value = it
+                onCheckboxChange(status.value)
+            }
+        )
 
         Spacer(modifier = Modifier.width(12.dp))
         // Emoji + (title + category)
@@ -114,7 +124,6 @@ fun TaskItemCard(
     }
 }
 
-
 @Composable
 fun EmojiTextView(emoji: String) {
     Box(
@@ -138,9 +147,11 @@ fun EmojiTextView(emoji: String) {
 @Composable
 fun EisenCheckBox(value: Boolean, onValueChanged: (Boolean) -> Unit) {
     Checkbox(
-        checked = value, onCheckedChange = {
+        checked = value,
+        onCheckedChange = {
             onValueChanged(it)
-        }, colors = CheckboxDefaults.colors(
+        },
+        colors = CheckboxDefaults.colors(
             colors.onPrimary,
             colors.onPrimary.copy(0.3F)
         )

@@ -9,4 +9,3 @@ sealed class EmojiViewState {
     data class Success(val emojiItem: List<EmojiItem>) : EmojiViewState()
     data class Error(val exception: Throwable) : EmojiViewState()
 }
-
