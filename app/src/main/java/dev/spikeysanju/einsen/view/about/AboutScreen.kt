@@ -59,25 +59,27 @@ fun AboutScreen(viewModel: MainViewModel, actions: MainActions) {
 
     Scaffold(
         topBar = {
-            TopAppBar(title = {
-                Text(
-                    text = stringResource(id = R.string.text_about),
-                    style = typography.h6,
-                    textAlign = TextAlign.Start,
-                    color = myColors.black,
-                    modifier = Modifier.padding(start = 16.dp)
-                )
-            }, navigationIcon = {
-                IconButton(onClick = { actions.upPress.invoke() }) {
-                    Icon(
-                        painter = painterResource(id = R.drawable.ic_back),
-                        contentDescription = stringResource(R.string.back_button),
-                        tint = myColors.black
+            TopAppBar(
+                title = {
+                    Text(
+                        text = stringResource(id = R.string.text_about),
+                        style = typography.h6,
+                        textAlign = TextAlign.Start,
+                        color = myColors.black,
+                        modifier = Modifier.padding(start = 16.dp)
                     )
-                }
-
-            }, backgroundColor = myColors.background, elevation = 0.dp)
-
+                },
+                navigationIcon = {
+                    IconButton(onClick = { actions.upPress.invoke() }) {
+                        Icon(
+                            painter = painterResource(id = R.drawable.ic_back),
+                            contentDescription = stringResource(R.string.back_button),
+                            tint = myColors.black
+                        )
+                    }
+                },
+                backgroundColor = myColors.background, elevation = 0.dp
+            )
         }
 
     ) {
@@ -95,7 +97,6 @@ fun AboutScreen(viewModel: MainViewModel, actions: MainActions) {
                         modifier = Modifier.size(80.dp)
                     )
                 }
-
             }
 
             item {
@@ -173,15 +174,20 @@ fun TitleAndURL(title: String, url: String, onClick: () -> Unit) {
         CompositionLocalProvider(values = arrayOf(LocalContentAlpha provides ContentAlpha.disabled)) {
             Text(
                 text = AnnotatedString(
-                    text = url, spanStyle = SpanStyle(
-                        color = myColors.calm, fontFamily = FontFamily(
+                    text = url,
+                    spanStyle = SpanStyle(
+                        color = myColors.calm,
+                        fontFamily = FontFamily(
                             Font(R.font.avenir_medium, FontWeight.Medium)
                         ),
                         textDecoration = TextDecoration.Underline
                     )
-                ), modifier = Modifier.clickable(onClick = {
-                    onClick()
-                })
+                ),
+                modifier = Modifier.clickable(
+                    onClick = {
+                        onClick()
+                    }
+                )
             )
         }
     }

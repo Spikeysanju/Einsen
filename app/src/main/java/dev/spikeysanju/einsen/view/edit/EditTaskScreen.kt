@@ -137,25 +137,27 @@ fun EditTaskScreen(viewModel: MainViewModel, actions: MainActions) {
     ) {
         Scaffold(
             topBar = {
-                TopAppBar(title = {
-                    Text(
-                        text = stringResource(id = R.string.text_editTask),
-                        style = typography.h6,
-                        textAlign = TextAlign.Start,
-                        color = myColors.black,
-                        modifier = Modifier.padding(start = 16.dp)
-                    )
-                }, navigationIcon = {
-                    IconButton(onClick = { actions.upPress }) {
-                        Icon(
-                            painter = painterResource(id = R.drawable.ic_back),
-                            contentDescription = stringResource(R.string.back_button),
-                            tint = myColors.black
+                TopAppBar(
+                    title = {
+                        Text(
+                            text = stringResource(id = R.string.text_editTask),
+                            style = typography.h6,
+                            textAlign = TextAlign.Start,
+                            color = myColors.black,
+                            modifier = Modifier.padding(start = 16.dp)
                         )
-                    }
-
-                }, backgroundColor = myColors.background, elevation = 0.dp)
-
+                    },
+                    navigationIcon = {
+                        IconButton(onClick = { actions.upPress }) {
+                            Icon(
+                                painter = painterResource(id = R.drawable.ic_back),
+                                contentDescription = stringResource(R.string.back_button),
+                                tint = myColors.black
+                            )
+                        }
+                    },
+                    backgroundColor = myColors.background, elevation = 0.dp
+                )
             }
         ) {
 

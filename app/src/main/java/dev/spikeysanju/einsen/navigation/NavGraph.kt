@@ -110,13 +110,13 @@ fun NavGraph(toggleTheme: () -> Unit) {
             AboutScreen(viewModel, actions)
         }
 
-
         // WebView
         composable(
             "${Screen.WebView.route}/{title}/{url}",
             arguments = listOf(
                 navArgument(EndPoints.TITLE) { type = NavType.StringType },
-                navArgument(EndPoints.URL) { type = NavType.StringType })
+                navArgument(EndPoints.URL) { type = NavType.StringType }
+            )
         ) {
             val viewModel = hiltViewModel<MainViewModel>(it)
             val url = it.arguments?.getString(EndPoints.URL)
@@ -125,7 +125,6 @@ fun NavGraph(toggleTheme: () -> Unit) {
                 ?: throw java.lang.IllegalStateException("'Title' should't be null")
             WebViewScreen(viewModel = viewModel, title = title, url = url, actions = actions)
         }
-
     }
 }
 

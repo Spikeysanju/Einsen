@@ -44,45 +44,48 @@ fun DashboardScreen(
 ) {
     Scaffold(
         topBar = {
-            TopAppBar(title = {
-                Text(
-                    text = stringResource(id = R.string.text_my_dashboard),
-                    textAlign = TextAlign.Start,
-                    style = typography.h5,
-                    color = myColors.black
-                )
-
-            }, actions = {
-                IconButton(onClick = {
-                    toggleTheme()
-
-                }) {
-
-                    Icon(
-                        painter = when (isSystemInDarkTheme()) {
-                            true -> painterResource(id = R.drawable.ic_bulb_on)
-                            false -> painterResource(id = R.drawable.ic_bulb_off)
-                        },
-                        contentDescription = stringResource(R.string.text_bulb_turn_on),
-                        tint = myColors.black
+            TopAppBar(
+                title = {
+                    Text(
+                        text = stringResource(id = R.string.text_my_dashboard),
+                        textAlign = TextAlign.Start,
+                        style = typography.h5,
+                        color = myColors.black
                     )
-                }
+                },
+                actions = {
+                    IconButton(
+                        onClick = {
+                            toggleTheme()
+                        }
+                    ) {
 
-                Spacer(modifier = Modifier.width(8.dp))
+                        Icon(
+                            painter = when (isSystemInDarkTheme()) {
+                                true -> painterResource(id = R.drawable.ic_bulb_on)
+                                false -> painterResource(id = R.drawable.ic_bulb_off)
+                            },
+                            contentDescription = stringResource(R.string.text_bulb_turn_on),
+                            tint = myColors.black
+                        )
+                    }
 
-                IconButton(onClick = {
-                    actions.gotoAbout.invoke()
-                }) {
-                    Icon(
-                        painter = painterResource(id = R.drawable.ic_about),
-                        contentDescription = stringResource(R.string.text_bulb_turn_on),
-                        tint = myColors.black
-                    )
-                }
+                    Spacer(modifier = Modifier.width(8.dp))
 
-            }, backgroundColor = myColors.background, elevation = 0.dp)
-
-
+                    IconButton(
+                        onClick = {
+                            actions.gotoAbout.invoke()
+                        }
+                    ) {
+                        Icon(
+                            painter = painterResource(id = R.drawable.ic_about),
+                            contentDescription = stringResource(R.string.text_bulb_turn_on),
+                            tint = myColors.black
+                        )
+                    }
+                },
+                backgroundColor = myColors.background, elevation = 0.dp
+            )
         },
         floatingActionButton = {
             FloatingActionButton(
