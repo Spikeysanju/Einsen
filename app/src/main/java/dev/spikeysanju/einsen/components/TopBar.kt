@@ -2,7 +2,12 @@ package dev.spikeysanju.einsen.components
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.isSystemInDarkTheme
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
 import androidx.compose.material.Text
@@ -63,6 +68,7 @@ fun EinsenThemeSwitch(onToggle: () -> Unit) {
 @Composable
 fun TopBarWithBack(title: String, upPress: () -> Unit) {
     Row(
+        modifier = Modifier.padding(start = 12.dp, top = 8.dp),
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.Center
     ) {

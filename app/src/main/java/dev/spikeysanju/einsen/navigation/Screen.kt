@@ -10,4 +10,5 @@ sealed class Screen(val route: String, @StringRes val resourceId: Int) {
     object AllTask : Screen("all_task", R.string.text_allTask)
     object TaskDetails : Screen("details", R.string.text_taskDetails)
     object Settings : Screen("settings", R.string.text_settings)
+    object About : Screen("about", R.string.text_about)
 }

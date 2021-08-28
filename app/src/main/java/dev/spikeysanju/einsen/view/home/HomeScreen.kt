@@ -1,13 +1,19 @@
 package dev.spikeysanju.einsen.view.home
 
+import androidx.compose.foundation.isSystemInDarkTheme
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material.FloatingActionButton
 import androidx.compose.material.FloatingActionButtonDefaults
 import androidx.compose.material.Icon
+import androidx.compose.material.IconButton
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Scaffold
+import androidx.compose.material.Text
+import androidx.compose.material.TopAppBar
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.runtime.Composable
@@ -17,14 +23,16 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import dev.spikeysanju.einsen.R
 import dev.spikeysanju.einsen.components.DashboardCardItem
-import dev.spikeysanju.einsen.components.TopBar
 import dev.spikeysanju.einsen.model.Priority
 import dev.spikeysanju.einsen.navigation.MainActions
 import dev.spikeysanju.einsen.ui.theme.myColors
+import dev.spikeysanju.einsen.ui.theme.typography
 import dev.spikeysanju.einsen.utils.ViewState
 import dev.spikeysanju.einsen.view.viewmodel.MainViewModel
 
@@ -36,12 +44,44 @@ fun HomeScreen(
 ) {
     Scaffold(
         topBar = {
-            TopBar(
-                title = stringResource(R.string.text_my_dashboard),
-                onToggle = {
+            TopAppBar(title = {
+                Text(
+                    text = stringResource(id = R.string.text_my_dashboard),
+                    textAlign = TextAlign.Start,
+                    style = typography.h5,
+                    color = myColors.black
+                )
+
+            }, actions = {
+                IconButton(onClick = {
                     toggleTheme()
+
+                }) {
+                    Icon(
+                        painter = when (isSystemInDarkTheme()) {
+                            true -> painterResource(id = R.drawable.ic_bulb_on)
+                            false -> painterResource(id = R.drawable.ic_bulb_off)
+                        },
+                        contentDescription = stringResource(R.string.text_bulb_turn_on),
+                        tint = myColors.black
+                    )
                 }
-            )
+
+                Spacer(modifier = Modifier.width(8.dp))
+
+                IconButton(onClick = {
+                    toggleTheme()
+                }) {
+                    Icon(
+                        painter = painterResource(id = R.drawable.ic_settings),
+                        contentDescription = stringResource(R.string.text_bulb_turn_on),
+                        tint = myColors.black
+                    )
+                }
+
+            }, backgroundColor = myColors.background, elevation = 0.dp)
+
+
         },
         floatingActionButton = {
             FloatingActionButton(

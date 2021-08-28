@@ -12,11 +12,14 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyVerticalGrid
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
+import androidx.compose.material.Icon
+import androidx.compose.material.IconButton
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.ModalBottomSheetLayout
 import androidx.compose.material.ModalBottomSheetValue
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
+import androidx.compose.material.TopAppBar
 import androidx.compose.material.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -28,6 +31,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
@@ -41,11 +45,11 @@ import dev.spikeysanju.einsen.components.InputTextField
 import dev.spikeysanju.einsen.components.Message
 import dev.spikeysanju.einsen.components.PrimaryButton
 import dev.spikeysanju.einsen.components.StepSlider
-import dev.spikeysanju.einsen.components.TopBarWithBack
 import dev.spikeysanju.einsen.model.Priority
 import dev.spikeysanju.einsen.model.Task
 import dev.spikeysanju.einsen.navigation.MainActions
 import dev.spikeysanju.einsen.ui.theme.Avenir
+import dev.spikeysanju.einsen.ui.theme.myColors
 import dev.spikeysanju.einsen.ui.theme.typography
 import dev.spikeysanju.einsen.utils.EmojiViewState
 import dev.spikeysanju.einsen.utils.SingleViewState
@@ -58,7 +62,7 @@ import kotlinx.coroutines.launch
 @Composable
 fun EditTaskScreen(viewModel: MainViewModel, actions: MainActions) {
 
-    // Couroutines scope
+    // Coroutines scope
     val scope = rememberCoroutineScope()
     val context = LocalContext.current
 
@@ -75,9 +79,7 @@ fun EditTaskScreen(viewModel: MainViewModel, actions: MainActions) {
     var urgency by remember { mutableStateOf(0F) }
     var importance by remember { mutableStateOf(0F) }
     var due by remember { mutableStateOf("") }
-    var priority by remember {
-        mutableStateOf(Priority.IMPORTANT)
-    }
+    var priority by remember { mutableStateOf(Priority.IMPORTANT) }
     var isCompleted by remember { mutableStateOf(false) }
     var createdAt by remember { mutableStateOf(0L) }
     var updatedAt by remember { mutableStateOf(0L) }
@@ -135,7 +137,25 @@ fun EditTaskScreen(viewModel: MainViewModel, actions: MainActions) {
     ) {
         Scaffold(
             topBar = {
-                TopBarWithBack(title = stringResource(R.string.text_editTask), actions.upPress)
+                TopAppBar(title = {
+                    Text(
+                        text = stringResource(id = R.string.text_editTask),
+                        style = typography.h6,
+                        textAlign = TextAlign.Start,
+                        color = myColors.black,
+                        modifier = Modifier.padding(start = 16.dp)
+                    )
+                }, navigationIcon = {
+                    IconButton(onClick = { actions.upPress }) {
+                        Icon(
+                            painter = painterResource(id = R.drawable.ic_back),
+                            contentDescription = stringResource(R.string.back_button),
+                            tint = myColors.black
+                        )
+                    }
+
+                }, backgroundColor = myColors.background, elevation = 0.dp)
+
             }
         ) {
 

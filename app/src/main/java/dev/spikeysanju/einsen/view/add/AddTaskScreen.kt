@@ -67,7 +67,7 @@ fun AddTaskScreen(viewModel: MainViewModel, actions: MainActions) {
     var importanceState by remember { mutableStateOf(0F) }
     val stepCount by remember { mutableStateOf(5) }
     val result = viewModel.emoji.collectAsState().value
-    val priority by remember {
+    var priority by remember {
         mutableStateOf(Priority.IMPORTANT)
     }
 
@@ -214,6 +214,7 @@ fun AddTaskScreen(viewModel: MainViewModel, actions: MainActions) {
                     PrimaryButton(title = stringResource(R.string.text_save_task)) {
 
                         val priorityAverage = urgencyState + importanceState / 2
+                        priority = calculatePriority(priorityAverage)
 
                         val task = Task(
                             title = title,
@@ -222,7 +223,7 @@ fun AddTaskScreen(viewModel: MainViewModel, actions: MainActions) {
                             emoji = emojiState,
                             urgency = makeValueRound(urgencyState),
                             importance = makeValueRound(importanceState),
-                            priority = calculatePriority(priorityAverage),
+                            priority = priority,
                             due = "18/12/2021",
                             isCompleted = false
                         )
