@@ -82,7 +82,7 @@ fun EditTaskScreen(viewModel: MainViewModel, actions: MainActions) {
     var priority by remember { mutableStateOf(Priority.IMPORTANT) }
     var isCompleted by remember { mutableStateOf(false) }
     var createdAt by remember { mutableStateOf(0L) }
-    var updatedAt by remember { mutableStateOf(0L) }
+    val updatedAt by remember { mutableStateOf(System.currentTimeMillis()) }
 
     // Slider Step count
     val stepCount by remember { mutableStateOf(5) }
@@ -177,7 +177,6 @@ fun EditTaskScreen(viewModel: MainViewModel, actions: MainActions) {
                     due = taskResult.task.due
                     isCompleted = taskResult.task.isCompleted
                     createdAt = taskResult.task.createdAt
-                    updatedAt = taskResult.task.updatedAt
 
                     LazyColumn(state = listState, contentPadding = PaddingValues(bottom = 24.dp)) {
 
@@ -274,6 +273,7 @@ fun EditTaskScreen(viewModel: MainViewModel, actions: MainActions) {
                         item {
 
                             val priorityAverage = importance + urgency / 2
+                            priority = calculatePriority(priorityAverage)
 
                             Spacer(modifier = Modifier.height(36.dp))
                             PrimaryButton(title = stringResource(R.string.text_save_task)) {
@@ -284,11 +284,11 @@ fun EditTaskScreen(viewModel: MainViewModel, actions: MainActions) {
                                     emoji = emojiState,
                                     urgency = makeValueRound(urgency),
                                     importance = makeValueRound(importance),
-                                    priority = calculatePriority(priorityAverage),
+                                    priority = priority,
                                     due = due,
                                     isCompleted = isCompleted,
                                     createdAt = createdAt,
-                                    updatedAt = System.currentTimeMillis(),
+                                    updatedAt = updatedAt,
                                     id = taskID
                                 )
 

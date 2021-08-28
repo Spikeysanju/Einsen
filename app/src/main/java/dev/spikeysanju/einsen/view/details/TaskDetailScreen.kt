@@ -69,7 +69,7 @@ fun TaskDetailsScreen(viewModel: MainViewModel, action: MainActions) {
         topBar = {
             TopAppBar(title = {
                 Text(
-                    text = stringResource(id = R.string.text_about),
+                    text = stringResource(id = R.string.text_taskDetails),
                     style = typography.h6,
                     textAlign = TextAlign.Start,
                     color = myColors.black,

@@ -4,6 +4,7 @@
     <string name="text_addTask">Add Task</string>
     <string name="text_editTask">Edit Task</string>
     <string name="text_about">About</string>
+    <string name="text_details">Details</string>
     <string name="text_allTask">All Task</string>
     <string name="text_taskDetails">Task Details</string>
     <string name="text_settings">Settings</string>
@@ -45,4 +46,6 @@
     <string name="text_author_name">Made with 🍄 Spikey Sanju</string>
     <string name="text_repo_link">https://www.github.com/Spikeysanju/Einsen</string>
     <string name="text_license">Licensed Under Apache 2.0</string>
+    <string name="text_webview">WebView</string>
+    <string name="text_einsen_logo">Einsen logo</string>
 </resources>

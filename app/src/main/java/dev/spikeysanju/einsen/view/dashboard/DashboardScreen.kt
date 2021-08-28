@@ -1,4 +1,4 @@
-package dev.spikeysanju.einsen.view.home
+package dev.spikeysanju.einsen.view.dashboard
 
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Spacer
@@ -37,7 +37,7 @@ import dev.spikeysanju.einsen.utils.ViewState
 import dev.spikeysanju.einsen.view.viewmodel.MainViewModel
 
 @Composable
-fun HomeScreen(
+fun DashboardScreen(
     viewModel: MainViewModel,
     actions: MainActions,
     toggleTheme: () -> Unit
@@ -57,6 +57,7 @@ fun HomeScreen(
                     toggleTheme()
 
                 }) {
+
                     Icon(
                         painter = when (isSystemInDarkTheme()) {
                             true -> painterResource(id = R.drawable.ic_bulb_on)
@@ -70,10 +71,10 @@ fun HomeScreen(
                 Spacer(modifier = Modifier.width(8.dp))
 
                 IconButton(onClick = {
-                    toggleTheme()
+                    actions.gotoAbout.invoke()
                 }) {
                     Icon(
-                        painter = painterResource(id = R.drawable.ic_settings),
+                        painter = painterResource(id = R.drawable.ic_about),
                         contentDescription = stringResource(R.string.text_bulb_turn_on),
                         tint = myColors.black
                     )
