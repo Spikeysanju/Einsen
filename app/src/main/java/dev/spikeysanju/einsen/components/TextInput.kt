@@ -13,7 +13,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import dev.spikeysanju.einsen.ui.theme.myColors
+import dev.spikeysanju.einsen.ui.theme.einsenColors
 import dev.spikeysanju.einsen.ui.theme.typography
 
 @Composable
@@ -22,7 +22,7 @@ fun LabelView(title: String) {
         text = title,
         style = typography.caption,
         textAlign = TextAlign.Start,
-        color = myColors.black
+        color = einsenColors.black
     )
 }
 
@@ -54,11 +54,11 @@ fun InputTextField(title: String, value: String, onValueChanged: (String) -> Uni
 
 @Composable
 fun textFieldColors() = TextFieldDefaults.textFieldColors(
-    textColor = myColors.black,
-    focusedLabelColor = myColors.black,
-    focusedIndicatorColor = myColors.black,
-    unfocusedIndicatorColor = myColors.background,
-    cursorColor = myColors.black,
-    placeholderColor = myColors.black,
-    disabledPlaceholderColor = myColors.black
+    textColor = einsenColors.black,
+    focusedLabelColor = einsenColors.black,
+    focusedIndicatorColor = einsenColors.black,
+    unfocusedIndicatorColor = einsenColors.background,
+    cursorColor = einsenColors.black,
+    placeholderColor = einsenColors.black,
+    disabledPlaceholderColor = einsenColors.black
 )

@@ -13,7 +13,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
-import dev.spikeysanju.einsen.ui.theme.myColors
+import dev.spikeysanju.einsen.ui.theme.einsenColors
 
 @Composable
 fun ChipView(title: String, onClick: () -> Unit) {
@@ -23,12 +23,12 @@ fun ChipView(title: String, onClick: () -> Unit) {
             .animateContentSize()
             .clickable(onClick = onClick)
             .clip(RoundedCornerShape(12.dp))
-            .background(myColors.button)
+            .background(einsenColors.button)
     ) {
         Text(
             text = title, modifier = Modifier.padding(12.dp, 6.dp, 12.dp, 6.dp),
             style = MaterialTheme.typography.overline,
-            color = myColors.white
+            color = einsenColors.white
         )
     }
 }

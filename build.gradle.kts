@@ -16,7 +16,7 @@ buildscript {
     val hiltCompilerVersion by extra("1.0.0")
     val kotlinVersion by extra("1.5.10")
     val moshiVersion by extra(":1.11.0")
-    val systemUIControllerVersion by extra("0.12.0")
+    val systemUIControllerVersion by extra("0.17.0")
     val expressoVersion by extra("3.3.0")
     val kotlinSerializationVersion by extra("1.2.1")
     val navigationAnimation by extra("0.17.0")

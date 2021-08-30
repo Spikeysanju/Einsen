@@ -17,7 +17,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import dev.spikeysanju.einsen.ui.theme.myColors
+import dev.spikeysanju.einsen.ui.theme.einsenColors
 import dev.spikeysanju.einsen.ui.theme.typography
 
 @Composable
@@ -31,15 +31,15 @@ fun PrimaryButton(title: String, onclick: () -> Unit) {
             .padding(start = 20.dp, end = 20.dp),
         onClick = { onclick() },
         colors = ButtonDefaults.buttonColors(
-            backgroundColor = myColors.button,
-            contentColor = myColors.white
+            backgroundColor = einsenColors.button,
+            contentColor = einsenColors.white
         ),
     ) {
         Text(
             text = title,
             style = typography.subtitle2,
             textAlign = TextAlign.Center,
-            color = myColors.white
+            color = einsenColors.white
         )
     }
 }

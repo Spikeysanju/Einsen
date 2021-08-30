@@ -3,7 +3,7 @@ package dev.spikeysanju.einsen.ui.theme
 import androidx.compose.material.Colors
 import androidx.compose.ui.graphics.Color
 
-data class MyColors(
+data class EinsenColors(
     val material: Colors,
     val success: Color,
     val err: Color,

@@ -49,7 +49,7 @@ import dev.spikeysanju.einsen.model.Priority
 import dev.spikeysanju.einsen.model.Task
 import dev.spikeysanju.einsen.navigation.MainActions
 import dev.spikeysanju.einsen.ui.theme.Avenir
-import dev.spikeysanju.einsen.ui.theme.myColors
+import dev.spikeysanju.einsen.ui.theme.einsenColors
 import dev.spikeysanju.einsen.ui.theme.typography
 import dev.spikeysanju.einsen.utils.EmojiViewState
 import dev.spikeysanju.einsen.utils.SingleViewState
@@ -143,7 +143,7 @@ fun EditTaskScreen(viewModel: MainViewModel, actions: MainActions) {
                             text = stringResource(id = R.string.text_editTask),
                             style = typography.h6,
                             textAlign = TextAlign.Start,
-                            color = myColors.black,
+                            color = einsenColors.black,
                             modifier = Modifier.padding(start = 16.dp)
                         )
                     },
@@ -152,11 +152,11 @@ fun EditTaskScreen(viewModel: MainViewModel, actions: MainActions) {
                             Icon(
                                 painter = painterResource(id = R.drawable.ic_back),
                                 contentDescription = stringResource(R.string.back_button),
-                                tint = myColors.black
+                                tint = einsenColors.black
                             )
                         }
                     },
-                    backgroundColor = myColors.background, elevation = 0.dp
+                    backgroundColor = einsenColors.background, elevation = 0.dp
                 )
             }
         ) {

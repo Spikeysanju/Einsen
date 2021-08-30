@@ -9,20 +9,26 @@ import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.FloatingActionButton
 import androidx.compose.material.FloatingActionButtonDefaults
 import androidx.compose.material.Icon
+import androidx.compose.material.IconButton
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Scaffold
+import androidx.compose.material.Text
+import androidx.compose.material.TopAppBar
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import dev.spikeysanju.einsen.R
 import dev.spikeysanju.einsen.components.TaskItemCard
-import dev.spikeysanju.einsen.components.TopBarWithBack
 import dev.spikeysanju.einsen.model.Task
 import dev.spikeysanju.einsen.navigation.MainActions
+import dev.spikeysanju.einsen.ui.theme.einsenColors
+import dev.spikeysanju.einsen.ui.theme.typography
 import dev.spikeysanju.einsen.utils.ViewState
 import dev.spikeysanju.einsen.view.viewmodel.MainViewModel
 
@@ -35,7 +41,27 @@ fun AllTaskScreen(
 ) {
     Scaffold(
         topBar = {
-            TopBarWithBack(title = stringResource(R.string.text_allTask), actions.upPress)
+            TopAppBar(
+                title = {
+                    Text(
+                        text = stringResource(id = R.string.text_allTask),
+                        style = typography.h6,
+                        textAlign = TextAlign.Start,
+                        color = einsenColors.black,
+                        modifier = Modifier.padding(start = 16.dp)
+                    )
+                },
+                navigationIcon = {
+                    IconButton(onClick = { actions.upPress.invoke() }) {
+                        Icon(
+                            painter = painterResource(id = R.drawable.ic_back),
+                            contentDescription = stringResource(R.string.back_button),
+                            tint = einsenColors.black
+                        )
+                    }
+                },
+                backgroundColor = einsenColors.background, elevation = 0.dp
+            )
         },
         floatingActionButton = {
             FloatingActionButton(

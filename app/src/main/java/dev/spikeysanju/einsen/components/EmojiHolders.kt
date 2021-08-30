@@ -11,7 +11,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import dev.spikeysanju.einsen.ui.theme.myColors
+import dev.spikeysanju.einsen.ui.theme.einsenColors
 import dev.spikeysanju.einsen.ui.theme.typography
 
 @Composable
@@ -27,7 +27,7 @@ fun EmojiPlaceHolder(emoji: String, onTap: () -> Unit) {
             text = emoji,
             style = typography.h1,
             textAlign = TextAlign.Center,
-            color = myColors.text
+            color = einsenColors.text
         )
     }
 }

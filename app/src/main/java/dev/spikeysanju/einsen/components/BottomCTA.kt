@@ -21,7 +21,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import dev.spikeysanju.einsen.R
-import dev.spikeysanju.einsen.ui.theme.myColors
+import dev.spikeysanju.einsen.ui.theme.einsenColors
 
 @Composable
 fun BottomCTA(
@@ -37,7 +37,7 @@ fun BottomCTA(
         modifier = Modifier
             .fillMaxWidth()
             .height(80.dp)
-            .background(myColors.card),
+            .background(einsenColors.card),
         contentAlignment = Alignment.Center
     ) {
         Row(
@@ -68,7 +68,7 @@ fun ActionIcons(onEdit: () -> Unit, onDelete: () -> Unit, onShare: () -> Unit) {
             Icon(
                 painter = painterResource(id = R.drawable.ic_edit),
                 contentDescription = stringResource(R.string.text_edit_button),
-                tint = myColors.icon
+                tint = einsenColors.icon
             )
         }
 
@@ -76,7 +76,7 @@ fun ActionIcons(onEdit: () -> Unit, onDelete: () -> Unit, onShare: () -> Unit) {
             Icon(
                 painter = painterResource(id = R.drawable.ic_delete),
                 contentDescription = stringResource(R.string.text_delete_button),
-                tint = myColors.icon
+                tint = einsenColors.icon
             )
         }
 
@@ -84,7 +84,7 @@ fun ActionIcons(onEdit: () -> Unit, onDelete: () -> Unit, onShare: () -> Unit) {
             Icon(
                 painter = painterResource(id = R.drawable.ic_share),
                 contentDescription = stringResource(R.string.text_share_button),
-                tint = myColors.icon
+                tint = einsenColors.icon
             )
         }
     }

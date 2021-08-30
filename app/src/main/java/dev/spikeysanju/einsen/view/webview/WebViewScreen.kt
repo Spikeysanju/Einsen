@@ -22,7 +22,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.viewinterop.AndroidView
 import dev.spikeysanju.einsen.R
 import dev.spikeysanju.einsen.navigation.MainActions
-import dev.spikeysanju.einsen.ui.theme.myColors
+import dev.spikeysanju.einsen.ui.theme.einsenColors
 import dev.spikeysanju.einsen.ui.theme.typography
 import dev.spikeysanju.einsen.view.viewmodel.MainViewModel
 
@@ -41,7 +41,7 @@ fun WebViewScreen(
                         text = title,
                         style = typography.h6,
                         textAlign = TextAlign.Start,
-                        color = myColors.black,
+                        color = einsenColors.black,
                         modifier = Modifier.padding(start = 16.dp)
                     )
                 },
@@ -50,11 +50,11 @@ fun WebViewScreen(
                         Icon(
                             painter = painterResource(id = R.drawable.ic_back),
                             contentDescription = stringResource(R.string.back_button),
-                            tint = myColors.black
+                            tint = einsenColors.black
                         )
                     }
                 },
-                backgroundColor = myColors.background, elevation = 0.dp
+                backgroundColor = einsenColors.background, elevation = 0.dp
             )
         }
     ) {

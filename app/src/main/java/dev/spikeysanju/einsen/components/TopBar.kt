@@ -19,7 +19,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import dev.spikeysanju.einsen.R
-import dev.spikeysanju.einsen.ui.theme.myColors
+import dev.spikeysanju.einsen.ui.theme.einsenColors
 import dev.spikeysanju.einsen.ui.theme.typography
 
 @Composable
@@ -33,7 +33,7 @@ fun TopBar(title: String, onToggle: () -> Unit) {
                 text = title,
                 textAlign = TextAlign.Start,
                 style = typography.h5,
-                color = myColors.black
+                color = einsenColors.black
             )
         }
         Row(
@@ -61,7 +61,7 @@ fun EinsenThemeSwitch(onToggle: () -> Unit) {
         modifier = Modifier
             .size(24.dp)
             .clickable(onClick = onToggle),
-        tint = myColors.black
+        tint = einsenColors.black
     )
 }
 
@@ -76,7 +76,7 @@ fun TopBarWithBack(title: String, upPress: () -> Unit) {
             Icon(
                 painter = painterResource(id = R.drawable.ic_back),
                 contentDescription = stringResource(R.string.back_button),
-                tint = myColors.black
+                tint = einsenColors.black
             )
         }
 
@@ -84,7 +84,7 @@ fun TopBarWithBack(title: String, upPress: () -> Unit) {
             text = title,
             style = typography.h6,
             textAlign = TextAlign.Start,
-            color = myColors.black,
+            color = einsenColors.black,
             modifier = Modifier.padding(start = 16.dp)
         )
     }

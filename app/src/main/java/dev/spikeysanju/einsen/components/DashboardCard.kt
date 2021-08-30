@@ -22,7 +22,6 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import dev.spikeysanju.einsen.ui.theme.typography
 
-// TODO: WRAP PARAMS INTO DATA CLASS
 @Composable
 fun DashboardCardItem(
     title: String,

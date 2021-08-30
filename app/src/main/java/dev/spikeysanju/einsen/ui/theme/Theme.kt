@@ -35,7 +35,7 @@ private val LightColorPalette = lightColors(
     onSurface = success
 )
 
-private val LightColors = MyColors(
+private val LightColors = EinsenColors(
     material = LightColorPalette,
     warning = warning,
     success = success,
@@ -50,7 +50,7 @@ private val LightColors = MyColors(
     white = white
 )
 
-private val DarkColors = MyColors(
+private val DarkColors = EinsenColors(
     material = DarkColorPalette,
     warning = warning,
     success = success,
@@ -67,7 +67,7 @@ private val DarkColors = MyColors(
 
 private val LocalColors = staticCompositionLocalOf { LightColors }
 
-val myColors: MyColors
+val einsenColors: EinsenColors
     @Composable
     @ReadOnlyComposable
     get() = LocalColors.current
