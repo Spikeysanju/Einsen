@@ -1,11 +1,9 @@
 package dev.spikeysanju.einsen.view.task
 
-import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
-import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.FloatingActionButton
 import androidx.compose.material.FloatingActionButtonDefaults
 import androidx.compose.material.Icon
@@ -32,8 +30,6 @@ import dev.spikeysanju.einsen.ui.theme.typography
 import dev.spikeysanju.einsen.utils.ViewState
 import dev.spikeysanju.einsen.view.viewmodel.MainViewModel
 
-@ExperimentalFoundationApi
-@ExperimentalMaterialApi
 @Composable
 fun AllTaskScreen(
     viewModel: MainViewModel,
