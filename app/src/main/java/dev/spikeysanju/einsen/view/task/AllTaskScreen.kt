@@ -27,7 +27,7 @@ import dev.spikeysanju.einsen.model.Task
 import dev.spikeysanju.einsen.navigation.MainActions
 import dev.spikeysanju.einsen.ui.theme.einsenColors
 import dev.spikeysanju.einsen.ui.theme.typography
-import dev.spikeysanju.einsen.utils.ViewState
+import dev.spikeysanju.einsen.utils.viewstate.ViewState
 import dev.spikeysanju.einsen.view.viewmodel.MainViewModel
 
 @Composable

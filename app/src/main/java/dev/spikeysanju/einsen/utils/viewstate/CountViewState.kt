@@ -1,4 +1,4 @@
-package dev.spikeysanju.einsen.utils
+package dev.spikeysanju.einsen.utils.viewstate
 
 sealed class CountViewState {
     // Represents different states for the Emoji

@@ -4,6 +4,7 @@ import androidx.annotation.NonNull
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import dev.spikeysanju.einsen.model.task.TaskBuilder
 
 @Entity(tableName = "task")
 data class Task(
@@ -41,3 +42,6 @@ enum class Priority(count: Int) {
     DELEGATE(2),
     DUMP(1)
 }
+
+
+fun task(block: TaskBuilder.() -> Unit): Task = TaskBuilder().apply(block).build()

@@ -40,7 +40,7 @@ import dev.spikeysanju.einsen.model.Task
 import dev.spikeysanju.einsen.navigation.MainActions
 import dev.spikeysanju.einsen.ui.theme.einsenColors
 import dev.spikeysanju.einsen.ui.theme.typography
-import dev.spikeysanju.einsen.utils.SingleViewState
+import dev.spikeysanju.einsen.utils.viewstate.SingleViewState
 import dev.spikeysanju.einsen.view.viewmodel.MainViewModel
 
 @Composable

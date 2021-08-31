@@ -1,4 +1,4 @@
-package dev.spikeysanju.einsen.utils
+package dev.spikeysanju.einsen.utils.viewstate
 
 import dev.spikeysanju.einsen.model.Task
 
