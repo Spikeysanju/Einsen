@@ -77,6 +77,7 @@ fun AddTaskScreen(viewModel: MainViewModel, actions: MainActions) {
         mutableStateOf(Priority.IMPORTANT)
     }
     val isCompletedState by remember { mutableStateOf(false) }
+    val dueState by remember { mutableStateOf("18/12/1998") }
 
     val stepCount by remember { mutableStateOf(5) }
     val result = viewModel.emoji.collectAsState().value
@@ -260,7 +261,7 @@ fun AddTaskScreen(viewModel: MainViewModel, actions: MainActions) {
                             urgency = urgencyState
                             importance = importanceState
                             priority = priorityState
-                            due = "12/12/1993"
+                            due = dueState
                             isCompleted = isCompletedState
                         }
 
