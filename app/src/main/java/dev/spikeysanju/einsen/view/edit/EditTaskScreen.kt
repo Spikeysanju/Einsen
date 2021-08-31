@@ -293,7 +293,6 @@ fun EditTaskScreen(viewModel: MainViewModel, actions: MainActions) {
                                     id = taskID
                                 }
 
-
                                 when {
                                     titleState.isEmpty() -> showToast(context, "Title is Empty!")
                                     descriptionState.isEmpty() -> showToast(

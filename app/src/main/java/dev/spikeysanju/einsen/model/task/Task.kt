@@ -43,5 +43,4 @@ enum class Priority(count: Int) {
     DUMP(1)
 }
 
-
 fun task(block: TaskBuilder.() -> Unit): Task = TaskBuilder().apply(block).build()

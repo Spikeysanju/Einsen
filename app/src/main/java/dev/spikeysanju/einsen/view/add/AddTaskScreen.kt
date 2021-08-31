@@ -82,7 +82,6 @@ fun AddTaskScreen(viewModel: MainViewModel, actions: MainActions) {
     val stepCount by remember { mutableStateOf(5) }
     val result = viewModel.emoji.collectAsState().value
 
-
     ModalBottomSheetLayout(
         sheetState = bottomSheetState,
         sheetContent = {
@@ -265,7 +264,6 @@ fun AddTaskScreen(viewModel: MainViewModel, actions: MainActions) {
                             isCompleted = isCompletedState
                         }
 
-
                         when {
                             titleState.isEmpty() -> showToast(context, "Title is Empty!")
                             descriptionState.isEmpty() -> showToast(
@@ -284,8 +282,6 @@ fun AddTaskScreen(viewModel: MainViewModel, actions: MainActions) {
         }
     }
 }
-
-
 
 @Composable
 private fun BottomSheetTitle() {
