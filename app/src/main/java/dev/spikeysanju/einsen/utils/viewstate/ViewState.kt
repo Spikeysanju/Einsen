@@ -1,6 +1,6 @@
 package dev.spikeysanju.einsen.utils.viewstate
 
-import dev.spikeysanju.einsen.model.Task
+import dev.spikeysanju.einsen.model.task.Task
 
 sealed class ViewState {
     // Represents different states for the LatestNews screen

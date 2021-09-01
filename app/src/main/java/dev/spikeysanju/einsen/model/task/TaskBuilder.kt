@@ -1,8 +1,5 @@
 package dev.spikeysanju.einsen.model.task
 
-import dev.spikeysanju.einsen.model.Priority
-import dev.spikeysanju.einsen.model.Task
-
 class TaskBuilder {
     var title: String = ""
     var description: String = ""

@@ -35,8 +35,8 @@ import dev.spikeysanju.einsen.components.BottomCTA
 import dev.spikeysanju.einsen.components.ChipView
 import dev.spikeysanju.einsen.components.EmojiPlaceHolder
 import dev.spikeysanju.einsen.components.InfoCard
-import dev.spikeysanju.einsen.model.Priority
-import dev.spikeysanju.einsen.model.Task
+import dev.spikeysanju.einsen.model.task.Priority
+import dev.spikeysanju.einsen.model.task.Task
 import dev.spikeysanju.einsen.navigation.MainActions
 import dev.spikeysanju.einsen.ui.theme.einsenColors
 import dev.spikeysanju.einsen.ui.theme.typography

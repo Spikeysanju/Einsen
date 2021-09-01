@@ -23,7 +23,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import dev.spikeysanju.einsen.R
 import dev.spikeysanju.einsen.components.TaskItemCard
-import dev.spikeysanju.einsen.model.Task
+import dev.spikeysanju.einsen.model.task.Task
 import dev.spikeysanju.einsen.navigation.MainActions
 import dev.spikeysanju.einsen.ui.theme.einsenColors
 import dev.spikeysanju.einsen.ui.theme.typography

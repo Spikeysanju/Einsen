@@ -1,6 +1,6 @@
 package dev.spikeysanju.einsen.utils
 
-import dev.spikeysanju.einsen.model.Priority
+import dev.spikeysanju.einsen.model.task.Priority
 
 fun makeValueRound(value: Float): Float {
     return when (value) {

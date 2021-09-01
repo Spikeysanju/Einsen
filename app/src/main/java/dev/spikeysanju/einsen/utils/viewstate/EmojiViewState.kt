@@ -1,6 +1,6 @@
 package dev.spikeysanju.einsen.utils.viewstate
 
-import dev.spikeysanju.einsen.model.EmojiItem
+import dev.spikeysanju.einsen.model.emoji.EmojiItem
 
 sealed class EmojiViewState {
     // Represents different states for the Emoji

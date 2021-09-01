@@ -1,10 +1,9 @@
-package dev.spikeysanju.einsen.model
+package dev.spikeysanju.einsen.model.task
 
 import androidx.annotation.NonNull
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import dev.spikeysanju.einsen.model.task.TaskBuilder
 
 @Entity(tableName = "task")
 data class Task(

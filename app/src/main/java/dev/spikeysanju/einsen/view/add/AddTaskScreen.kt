@@ -45,8 +45,8 @@ import dev.spikeysanju.einsen.components.InputTextField
 import dev.spikeysanju.einsen.components.Message
 import dev.spikeysanju.einsen.components.PrimaryButton
 import dev.spikeysanju.einsen.components.StepSlider
-import dev.spikeysanju.einsen.model.Priority
-import dev.spikeysanju.einsen.model.task
+import dev.spikeysanju.einsen.model.task.Priority
+import dev.spikeysanju.einsen.model.task.task
 import dev.spikeysanju.einsen.navigation.MainActions
 import dev.spikeysanju.einsen.ui.theme.Avenir
 import dev.spikeysanju.einsen.ui.theme.einsenColors

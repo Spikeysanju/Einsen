@@ -4,8 +4,8 @@ import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
-import dev.spikeysanju.einsen.model.EmojiItem
-import dev.spikeysanju.einsen.model.Task
+import dev.spikeysanju.einsen.model.emoji.EmojiItem
+import dev.spikeysanju.einsen.model.task.Task
 import dev.spikeysanju.einsen.repository.MainRepository
 import dev.spikeysanju.einsen.utils.viewstate.CountViewState
 import dev.spikeysanju.einsen.utils.viewstate.EmojiViewState

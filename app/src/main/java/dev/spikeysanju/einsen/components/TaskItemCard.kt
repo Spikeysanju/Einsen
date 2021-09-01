@@ -32,7 +32,7 @@ import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import dev.spikeysanju.einsen.model.Task
+import dev.spikeysanju.einsen.model.task.Task
 import dev.spikeysanju.einsen.ui.theme.Avenir
 import dev.spikeysanju.einsen.ui.theme.einsenColors
 import dev.spikeysanju.einsen.ui.theme.typography
