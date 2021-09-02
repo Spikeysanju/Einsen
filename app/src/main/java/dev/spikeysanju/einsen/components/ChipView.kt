@@ -15,6 +15,11 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
 import dev.spikeysanju.einsen.ui.theme.einsenColors
 
+/**
+ * This component helps to show the category for each Task of this app.
+ * @param title
+ * @param onClick
+ */
 @Composable
 fun ChipView(title: String, onClick: () -> Unit) {
     Box(

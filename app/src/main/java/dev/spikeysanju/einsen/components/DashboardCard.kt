@@ -22,6 +22,14 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import dev.spikeysanju.einsen.ui.theme.typography
 
+/**
+ * This component helps to show the priority of the task with title, color & task count.
+ * @param title
+ * @param description
+ * @param count
+ * @param color
+ * @param onClick
+ */
 @Composable
 fun DashboardCardItem(
     title: String,

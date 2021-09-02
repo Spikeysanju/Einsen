@@ -22,24 +22,28 @@ class MainRepository @Inject constructor(private val taskDao: TaskDao) {
 
     /**
      * Create a new Task.
+     * @param task
      */
     suspend fun insert(task: Task) = taskDao.insertTask(task)
 
 
     /**
      * Update a existing Task.
+     * @param task
      */
     suspend fun update(task: Task) = taskDao.updateTask(task)
 
 
     /**
      * Delete a Task.
+     * @param id
      */
     suspend fun delete(id: Int) = taskDao.deleteTaskByID(id)
 
 
     /**
      * Find a Task by it's ID.
+     * @param id
      */
 
     fun find(id: Int) = taskDao.findByID(id).flowOn(Dispatchers.IO).conflate()
@@ -47,6 +51,8 @@ class MainRepository @Inject constructor(private val taskDao: TaskDao) {
 
     /**
      * Update a status for a Task by it's ID.
+     * @param id
+     * @param isCompleted
      */
     suspend fun updateStatus(id: Int, isCompleted: Boolean) =
         taskDao.updateTaskStatus(id = id, isCompleted = isCompleted)
@@ -54,6 +60,7 @@ class MainRepository @Inject constructor(private val taskDao: TaskDao) {
 
     /**
      * Get a Task by it's Priority.
+     * @param priority
      */
     fun getTaskByPriority(priority: String): Flow<List<Task>> =
         taskDao.getTaskByPriority(priority).flowOn(Dispatchers.IO).conflate()
@@ -61,6 +68,7 @@ class MainRepository @Inject constructor(private val taskDao: TaskDao) {
 
     /**
      * Get a Task count by it's Priority.
+     * @param priority
      */
     fun getTaskByPriorityCount(priority: String): Flow<Int> =
         taskDao.getTaskByPriorityCount(priority).flowOn(Dispatchers.IO).conflate()

@@ -136,10 +136,9 @@ fun TaskItemCard(
 
 
 /**
- * Rounded Emoji TextView
+ * This component helps to show Emoji with Rounded background.
  * @param emoji
  */
-
 @Composable
 fun EmojiTextView(emoji: String) {
     Box(
@@ -161,7 +160,7 @@ fun EmojiTextView(emoji: String) {
 }
 
 /**
- * A Custom Checkbox for Einsen app.
+ * This customer slider component helps to show the slider with step indicator.
  * @param value
  * @param onValueChanged
  */

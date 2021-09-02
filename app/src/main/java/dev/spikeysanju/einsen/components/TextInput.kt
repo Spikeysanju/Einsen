@@ -8,7 +8,6 @@ import androidx.compose.material.OutlinedTextField
 import androidx.compose.material.Text
 import androidx.compose.material.TextFieldDefaults
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.text.style.TextAlign
@@ -16,6 +15,11 @@ import androidx.compose.ui.unit.dp
 import dev.spikeysanju.einsen.ui.theme.einsenColors
 import dev.spikeysanju.einsen.ui.theme.typography
 
+
+/**
+ * This customer Label component with helps to show the label for the input field of this app.
+ * @param title
+ */
 @Composable
 fun LabelView(title: String) {
     Text(
@@ -26,7 +30,12 @@ fun LabelView(title: String) {
     )
 }
 
-@ExperimentalComposeUiApi
+/**
+ * This customer input component which helps to get input data from the users.
+ * @param title
+ * @param value
+ * @param onValueChanged
+ */
 @Composable
 fun InputTextField(title: String, value: String, onValueChanged: (String) -> Unit) {
     val keyboardController = LocalSoftwareKeyboardController.current

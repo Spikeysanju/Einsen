@@ -21,6 +21,12 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import dev.spikeysanju.einsen.ui.theme.einsenColors
 
+/**
+ * This component helps to show Importance & Priority in CardView.
+ * @param title
+ * @param value
+ * @param modifier
+ */
 @Composable
 fun InfoCard(title: String, value: String, modifier: Modifier) {
     Box(

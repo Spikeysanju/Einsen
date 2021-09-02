@@ -19,7 +19,11 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import dev.spikeysanju.einsen.ui.theme.einsenColors
 import dev.spikeysanju.einsen.ui.theme.typography
-
+/**
+ * This component helps to perform call to action of this app.
+ * @param title
+ * @param onclick
+ */
 @Composable
 fun PrimaryButton(title: String, onclick: () -> Unit) {
 
@@ -44,6 +48,13 @@ fun PrimaryButton(title: String, onclick: () -> Unit) {
     }
 }
 
+/**
+ * This component helps to perform call to action of this app especially for Task details screen.
+ * @param title
+ * @param icon
+ * @param onclick
+ * @param color
+ */
 @Composable
 fun PrimaryButtonWithIcon(
     title: String,

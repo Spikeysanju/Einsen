@@ -147,7 +147,7 @@ fun TaskDetailsScreen(viewModel: MainViewModel, action: MainActions) {
                         ) {
                             EmojiPlaceHolder(
                                 emoji = task.emoji,
-                                onTap = {
+                                onSelect = {
                                 }
                             )
                         }

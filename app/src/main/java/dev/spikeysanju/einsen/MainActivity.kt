@@ -32,17 +32,24 @@ class MainActivity : ComponentActivity() {
         setContent {
             EinsenMain()
         }
-        // fetch theme mode
+
+        /**
+         * Observe the Theme Mode
+         */
         observeThemeMode()
     }
 
     @Composable
     fun EinsenMain() {
 
-        // check UI mode
+        /**
+         * Check if the UI Mode is in Dark Mode
+         */
         val darkMode by themeManager.uiModeFlow.collectAsState(initial = isSystemInDarkTheme())
 
-        // set UI mode accordingly
+        /**
+         * Set UI Mode accordingly
+         */
         val toggleTheme: () -> Unit = {
             lifecycleScope.launch {
                 themeManager.setDarkMode(!darkMode)
@@ -77,8 +84,10 @@ fun SetStatusBarColor() {
     val color = einsenColors.bg
 
     SideEffect {
-        // Update all of the system bar colors to be transparent, and use
-        // dark icons if we're in light theme
+        /**
+         *  Update all of the system bar colors to be transparent, and use
+         *  dark icons if we're in light theme
+         */
         systemUiController.setStatusBarColor(color = color)
     }
 }

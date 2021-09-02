@@ -190,7 +190,7 @@ fun EditTaskScreen(viewModel: MainViewModel, actions: MainActions) {
                             ) {
                                 EmojiPlaceHolder(
                                     emoji = emojiState,
-                                    onTap = {
+                                    onSelect = {
                                         scope.launch {
                                             bottomSheetState.show()
                                         }

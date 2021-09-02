@@ -14,13 +14,18 @@ import androidx.compose.ui.unit.dp
 import dev.spikeysanju.einsen.ui.theme.einsenColors
 import dev.spikeysanju.einsen.ui.theme.typography
 
+/**
+ * This component helps to show Emoji with Rounded background - larger version.
+ * @param emoji
+ * @param onSelect
+ */
 @Composable
-fun EmojiPlaceHolder(emoji: String, onTap: () -> Unit) {
+fun EmojiPlaceHolder(emoji: String, onSelect: () -> Unit) {
     Box(
         modifier = Modifier
             .size(100.dp)
             .clip(CircleShape)
-            .clickable { onTap() },
+            .clickable { onSelect() },
         contentAlignment = Alignment.Center
     ) {
         Text(
@@ -32,6 +37,11 @@ fun EmojiPlaceHolder(emoji: String, onTap: () -> Unit) {
     }
 }
 
+/**
+ * This component helps to show Emoji with Rounded background - smaller version.
+ * @param emoji
+ * @param onSelect
+ */
 @Composable
 fun EmojiPlaceHolderSmall(emoji: String, onSelect: (String) -> Unit) {
     Box(
