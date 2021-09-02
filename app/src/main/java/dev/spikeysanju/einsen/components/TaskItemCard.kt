@@ -1,6 +1,5 @@
 package dev.spikeysanju.einsen.components
 
-import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -37,7 +36,13 @@ import dev.spikeysanju.einsen.ui.theme.Avenir
 import dev.spikeysanju.einsen.ui.theme.einsenColors
 import dev.spikeysanju.einsen.ui.theme.typography
 
-@ExperimentalFoundationApi
+/**
+ * This component is used to show all the task item of this app.
+ * @param task
+ * @param onClick
+ * @param onCheckboxChange
+ */
+
 @Composable
 fun TaskItemCard(
     task: Task,
@@ -54,7 +59,9 @@ fun TaskItemCard(
         // checkbox state
         val status = remember { mutableStateOf(task.isCompleted) }
 
-        // Checkbox
+        /**
+         * Checkbox
+         */
         EisenCheckBox(
             value = status.value,
             onValueChanged = {
@@ -64,7 +71,10 @@ fun TaskItemCard(
         )
 
         Spacer(modifier = Modifier.width(12.dp))
-        // Emoji + (title + category)
+
+        /**
+         * Emoji + (title + category)
+         */
         Row(
             modifier = Modifier
                 .fillMaxWidth()
@@ -75,54 +85,60 @@ fun TaskItemCard(
             horizontalArrangement = Arrangement.Start
         ) {
 
-            // Emoji Text View
+            /**
+             * Emoji Text View
+             */
             EmojiTextView(emoji = task.emoji)
             Spacer(modifier = Modifier.width(12.dp))
 
-            // condition check if the task is marked as completed the make it as strikethrough
-            val titleStyle = when (task.isCompleted) {
-                true -> TextStyle(
-                    textDecoration = TextDecoration.LineThrough,
-                    fontSize = 16.sp,
-                    fontFamily = Avenir,
-                    fontWeight = FontWeight.SemiBold
-                )
-                false -> typography.subtitle1
-            }
-
-            val categoryStyle = when (task.isCompleted) {
-                true -> TextStyle(
-                    textDecoration = TextDecoration.LineThrough,
-                    fontSize = 12.sp,
-                    fontFamily = Avenir,
-                    fontWeight = FontWeight.Normal
-                )
-                false -> typography.caption
-            }
-
-            // Title + Content
+            /**
+             * Title + category
+             */
             Column(
                 modifier = Modifier
                     .align(Alignment.CenterVertically),
             ) {
                 Text(
                     text = task.title,
-                    style = titleStyle,
+                    style = when (task.isCompleted) {
+                        true -> TextStyle(
+                            textDecoration = TextDecoration.LineThrough,
+                            fontSize = 12.sp,
+                            fontFamily = Avenir,
+                            fontWeight = FontWeight.Normal
+                        )
+                        false -> typography.caption
+                    },
                     color = einsenColors.black,
                     maxLines = 1,
                     overflow = TextOverflow.Ellipsis
                 )
 
                 Spacer(modifier = Modifier.height(12.dp))
+
                 Text(
                     text = task.category,
-                    style = categoryStyle,
+                    style = when (task.isCompleted) {
+                        true -> TextStyle(
+                            textDecoration = TextDecoration.LineThrough,
+                            fontSize = 12.sp,
+                            fontFamily = Avenir,
+                            fontWeight = FontWeight.Normal
+                        )
+                        false -> typography.caption
+                    },
                     color = einsenColors.black.copy(.7f)
                 )
             }
         }
     }
 }
+
+
+/**
+ * Rounded Emoji TextView
+ * @param emoji
+ */
 
 @Composable
 fun EmojiTextView(emoji: String) {
@@ -144,6 +160,11 @@ fun EmojiTextView(emoji: String) {
     }
 }
 
+/**
+ * A Custom Checkbox for Einsen app.
+ * @param value
+ * @param onValueChanged
+ */
 @Composable
 fun EisenCheckBox(value: Boolean, onValueChanged: (Boolean) -> Unit) {
     Checkbox(

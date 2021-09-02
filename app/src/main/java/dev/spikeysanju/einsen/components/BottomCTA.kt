@@ -23,6 +23,16 @@ import androidx.compose.ui.unit.dp
 import dev.spikeysanju.einsen.R
 import dev.spikeysanju.einsen.ui.theme.einsenColors
 
+/**
+ * This component helps to perform action for each task like Edit, Delete & Share task of this app.
+ * @param title
+ * @param icon
+ * @param color
+ * @param onEdit
+ * @param onDelete
+ * @param onShare
+ * @param onButtonChange
+ */
 @Composable
 fun BottomCTA(
     title: String,
@@ -60,6 +70,12 @@ fun BottomCTA(
     }
 }
 
+/**
+ * This component helps to perform action for each task like Edit, Delete & Share task of this app.
+ * @param onEdit
+ * @param onDelete
+ * @param onShare
+ */
 @Composable
 fun ActionIcons(onEdit: () -> Unit, onDelete: () -> Unit, onShare: () -> Unit) {
     Row(modifier = Modifier.wrapContentWidth(), horizontalArrangement = Arrangement.SpaceAround) {

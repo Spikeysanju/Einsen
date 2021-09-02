@@ -69,6 +69,7 @@ fun NavGraph(toggleTheme: () -> Unit) {
 
         /**
          * Navigates to All Task.
+         * @param priority
          */
         composable(
             "${Screen.AllTask.route}/{priority}",
@@ -77,7 +78,7 @@ fun NavGraph(toggleTheme: () -> Unit) {
             val viewModel = hiltViewModel<MainViewModel>(it)
 
             val priority = it.arguments?.getString(EndPoints.PRIORITY)
-                ?: throw IllegalStateException("'priority' shouldn't be null")
+                ?: throw IllegalStateException("'Priority' shouldn't be null")
 
             viewModel.getTaskByPriority(priority = priority)
             AllTaskScreen(viewModel, actions)
@@ -86,6 +87,7 @@ fun NavGraph(toggleTheme: () -> Unit) {
 
         /**
          * Navigates to Task Details.
+         * @param id
          */
         composable(
             "${Screen.TaskDetails.route}/{id}",
@@ -93,7 +95,7 @@ fun NavGraph(toggleTheme: () -> Unit) {
         ) {
             val viewModel = hiltViewModel<MainViewModel>(it)
             val taskID = it.arguments?.getInt(EndPoints.ID)
-                ?: throw IllegalStateException("'task ID' shouldn't be null")
+                ?: throw IllegalStateException("'Task ID' shouldn't be null")
 
             viewModel.findTaskByID(taskID)
             TaskDetailsScreen(viewModel, actions)
@@ -102,6 +104,7 @@ fun NavGraph(toggleTheme: () -> Unit) {
 
         /**
          * Navigates to Edit Task.
+         * @param id
          */
         composable(
             "${Screen.EditTask.route}/{id}",
@@ -109,7 +112,7 @@ fun NavGraph(toggleTheme: () -> Unit) {
         ) {
             val viewModel = hiltViewModel<MainViewModel>(it)
             val taskID = it.arguments?.getInt(EndPoints.ID)
-                ?: throw IllegalStateException("'task ID' shouldn't be null")
+                ?: throw IllegalStateException("'Task ID' shouldn't be null")
 
             viewModel.findTaskByID(taskID)
             EditTaskScreen(viewModel, actions)
@@ -138,6 +141,8 @@ fun NavGraph(toggleTheme: () -> Unit) {
 
         /**
          * Navigates to WebView.
+         * @param title
+         * @param url
          */
         composable(
             "${Screen.WebView.route}/{title}/{url}",
@@ -150,7 +155,7 @@ fun NavGraph(toggleTheme: () -> Unit) {
             val url = it.arguments?.getString(EndPoints.URL)
                 ?: throw IllegalStateException("'URL' shouldn't be null")
             val title = it.arguments?.getString(EndPoints.TITLE)
-                ?: throw java.lang.IllegalStateException("'Title' should't be null")
+                ?: throw java.lang.IllegalStateException("'Title' shouldn't be null")
             WebViewScreen(viewModel = viewModel, title = title, url = url, actions = actions)
         }
     }
@@ -158,7 +163,8 @@ fun NavGraph(toggleTheme: () -> Unit) {
 
 
 /**
- * A class to define Navigation Route to All Flows of this app/
+ * A class to define Navigation Route to All Flows of this app with the help of NavController
+ * @param navController
  */
 
 class MainActions(navController: NavController) {
