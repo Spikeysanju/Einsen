@@ -26,13 +26,11 @@ class MainRepository @Inject constructor(private val taskDao: TaskDao) {
      */
     suspend fun insert(task: Task) = taskDao.insertTask(task)
 
-
     /**
      * Update a existing Task.
      * @param task
      */
     suspend fun update(task: Task) = taskDao.updateTask(task)
-
 
     /**
      * Delete a Task.
@@ -40,14 +38,12 @@ class MainRepository @Inject constructor(private val taskDao: TaskDao) {
      */
     suspend fun delete(id: Int) = taskDao.deleteTaskByID(id)
 
-
     /**
      * Find a Task by it's ID.
      * @param id
      */
 
     fun find(id: Int) = taskDao.findByID(id).flowOn(Dispatchers.IO).conflate()
-
 
     /**
      * Update a status for a Task by it's ID.
@@ -57,14 +53,12 @@ class MainRepository @Inject constructor(private val taskDao: TaskDao) {
     suspend fun updateStatus(id: Int, isCompleted: Boolean) =
         taskDao.updateTaskStatus(id = id, isCompleted = isCompleted)
 
-
     /**
      * Get a Task by it's Priority.
      * @param priority
      */
     fun getTaskByPriority(priority: String): Flow<List<Task>> =
         taskDao.getTaskByPriority(priority).flowOn(Dispatchers.IO).conflate()
-
 
     /**
      * Get a Task count by it's Priority.

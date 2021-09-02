@@ -15,7 +15,6 @@ import androidx.compose.ui.unit.dp
 import dev.spikeysanju.einsen.ui.theme.einsenColors
 import dev.spikeysanju.einsen.ui.theme.typography
 
-
 /**
  * This customer Label component with helps to show the label for the input field of this app.
  * @param title

@@ -134,7 +134,6 @@ fun TaskItemCard(
     }
 }
 
-
 /**
  * This component helps to show Emoji with Rounded background.
  * @param emoji

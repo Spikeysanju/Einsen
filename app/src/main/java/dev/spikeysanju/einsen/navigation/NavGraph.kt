@@ -55,7 +55,6 @@ fun NavGraph(toggleTheme: () -> Unit) {
             DashboardScreen(viewModel, actions, toggleTheme)
         }
 
-
         /**
          * Navigates to Add Notes.
          */
@@ -65,7 +64,6 @@ fun NavGraph(toggleTheme: () -> Unit) {
             val viewModel = hiltViewModel<MainViewModel>(it)
             AddTaskScreen(viewModel, actions)
         }
-
 
         /**
          * Navigates to All Task.
@@ -84,7 +82,6 @@ fun NavGraph(toggleTheme: () -> Unit) {
             AllTaskScreen(viewModel, actions)
         }
 
-
         /**
          * Navigates to Task Details.
          * @param id
@@ -100,7 +97,6 @@ fun NavGraph(toggleTheme: () -> Unit) {
             viewModel.findTaskByID(taskID)
             TaskDetailsScreen(viewModel, actions)
         }
-
 
         /**
          * Navigates to Edit Task.
@@ -118,7 +114,6 @@ fun NavGraph(toggleTheme: () -> Unit) {
             EditTaskScreen(viewModel, actions)
         }
 
-
         /**
          * Navigates to Settings.
          */
@@ -126,7 +121,6 @@ fun NavGraph(toggleTheme: () -> Unit) {
             val viewModel = hiltViewModel<MainViewModel>(it)
             SettingsScreen(viewModel, actions)
         }
-
 
         /**
          * Navigates to About.
@@ -137,7 +131,6 @@ fun NavGraph(toggleTheme: () -> Unit) {
             val viewModel = hiltViewModel<MainViewModel>(it)
             AboutScreen(viewModel, actions)
         }
-
 
         /**
          * Navigates to WebView.
@@ -160,7 +153,6 @@ fun NavGraph(toggleTheme: () -> Unit) {
         }
     }
 }
-
 
 /**
  * A class to define Navigation Route to All Flows of this app with the help of NavController
