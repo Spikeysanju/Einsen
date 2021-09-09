@@ -29,7 +29,6 @@ import dev.spikeysanju.einsen.ui.theme.typography
  * @param title
  */
 
-
 @Composable
 fun LabelView(title: String) {
     Text(
@@ -98,7 +97,8 @@ fun InputTextField(title: String, onValueChanged: (String) -> Unit) {
                         }
                     }
                 }
-            ), isError = errorState
+            ),
+            isError = errorState
         )
 
         if (errorState) {
