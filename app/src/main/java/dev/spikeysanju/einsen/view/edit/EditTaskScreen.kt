@@ -24,7 +24,6 @@ import androidx.compose.material.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateMapOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
@@ -205,7 +204,6 @@ fun EditTaskScreen(viewModel: MainViewModel, actions: MainActions) {
                             Spacer(modifier = Modifier.height(24.dp))
                             InputTextField(
                                 title = stringResource(R.string.text_title),
-                                value = titleState
                             ) {
                                 titleState = it
                             }
@@ -216,7 +214,6 @@ fun EditTaskScreen(viewModel: MainViewModel, actions: MainActions) {
                             Spacer(modifier = Modifier.height(24.dp))
                             InputTextField(
                                 title = stringResource(R.string.text_description),
-                                value = descriptionState
                             ) {
                                 descriptionState = it
                             }
@@ -227,7 +224,6 @@ fun EditTaskScreen(viewModel: MainViewModel, actions: MainActions) {
                             Spacer(modifier = Modifier.height(24.dp))
                             InputTextField(
                                 title = stringResource(R.string.text_category),
-                                value = categoryState
                             ) {
                                 categoryState = it
                             }

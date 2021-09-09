@@ -177,7 +177,6 @@ fun AddTaskScreen(viewModel: MainViewModel, actions: MainActions) {
                     Spacer(modifier = Modifier.height(24.dp))
                     InputTextField(
                         title = stringResource(R.string.text_title),
-                        value = titleState
                     ) {
                         titleState = it
                     }
@@ -188,7 +187,6 @@ fun AddTaskScreen(viewModel: MainViewModel, actions: MainActions) {
                     Spacer(modifier = Modifier.height(24.dp))
                     InputTextField(
                         title = stringResource(R.string.text_description),
-                        value = descriptionState
                     ) {
                         descriptionState = it
                     }
@@ -199,7 +197,6 @@ fun AddTaskScreen(viewModel: MainViewModel, actions: MainActions) {
                     Spacer(modifier = Modifier.height(24.dp))
                     InputTextField(
                         title = stringResource(R.string.text_category),
-                        value = categoryState
                     ) {
                         categoryState = it
                     }
