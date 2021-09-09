@@ -17,7 +17,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusDirection
 import androidx.compose.ui.platform.LocalFocusManager
-import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
@@ -30,7 +29,7 @@ import dev.spikeysanju.einsen.ui.theme.typography
  */
 
 @Composable
-fun LabelView(title: String) {
+fun EinsenLabelView(title: String) {
     Text(
         text = title,
         style = typography.caption,
@@ -42,12 +41,10 @@ fun LabelView(title: String) {
 /**
  * This customer input component which helps to get input data from the users.
  * @param title
- * @param value
  * @param onValueChanged
  */
 @Composable
-fun InputTextField(title: String, onValueChanged: (String) -> Unit) {
-    val keyboardController = LocalSoftwareKeyboardController.current
+fun EinsenInputTextField(title: String, onValueChanged: (String) -> Unit) {
     var textState by rememberSaveable { mutableStateOf("") }
     var errorState by rememberSaveable { mutableStateOf(false) }
     var errorMessage by rememberSaveable { mutableStateOf("") }
@@ -75,7 +72,7 @@ fun InputTextField(title: String, onValueChanged: (String) -> Unit) {
                 onValueChanged(it)
             },
 
-            label = { LabelView(title = title) },
+            label = { EinsenLabelView(title = title) },
             textStyle = typography.body1,
             colors = textFieldColors(),
             keyboardOptions = KeyboardOptions(imeAction = ImeAction.Next),

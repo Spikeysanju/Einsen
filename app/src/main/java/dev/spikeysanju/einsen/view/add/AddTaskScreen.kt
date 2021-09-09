@@ -39,9 +39,9 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import dev.spikeysanju.einsen.R
+import dev.spikeysanju.einsen.components.EinsenInputTextField
 import dev.spikeysanju.einsen.components.EmojiPlaceHolder
 import dev.spikeysanju.einsen.components.EmojiPlaceHolderSmall
-import dev.spikeysanju.einsen.components.InputTextField
 import dev.spikeysanju.einsen.components.Message
 import dev.spikeysanju.einsen.components.PrimaryButton
 import dev.spikeysanju.einsen.components.StepSlider
@@ -175,7 +175,7 @@ fun AddTaskScreen(viewModel: MainViewModel, actions: MainActions) {
                 // Title
                 item {
                     Spacer(modifier = Modifier.height(24.dp))
-                    InputTextField(
+                    EinsenInputTextField(
                         title = stringResource(R.string.text_title),
                     ) {
                         titleState = it
@@ -185,7 +185,7 @@ fun AddTaskScreen(viewModel: MainViewModel, actions: MainActions) {
                 // Description
                 item {
                     Spacer(modifier = Modifier.height(24.dp))
-                    InputTextField(
+                    EinsenInputTextField(
                         title = stringResource(R.string.text_description),
                     ) {
                         descriptionState = it
@@ -195,7 +195,7 @@ fun AddTaskScreen(viewModel: MainViewModel, actions: MainActions) {
                 // Category
                 item {
                     Spacer(modifier = Modifier.height(24.dp))
-                    InputTextField(
+                    EinsenInputTextField(
                         title = stringResource(R.string.text_category),
                     ) {
                         categoryState = it
