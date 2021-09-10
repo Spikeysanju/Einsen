@@ -105,5 +105,7 @@ dependencies {
     // Compose Navigation Animation
     implementation("com.google.accompanist:accompanist-navigation-animation:${rootProject.extra["navigationAnimation"]}")
 
+    // Lottie
+    implementation("com.airbnb.android:${rootProject.extra["lottieAnimation"]}")
 
 }

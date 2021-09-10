@@ -3,7 +3,7 @@ package dev.spikeysanju.einsen.utils.viewstate
 import dev.spikeysanju.einsen.model.task.Task
 
 sealed class SingleViewState {
-    // Represents different states for the LatestNews screen
+    // Represents different states for the Single Task Details Screen
     object Empty : SingleViewState()
     object Loading : SingleViewState()
     data class Success(val task: Task) : SingleViewState()

@@ -21,6 +21,7 @@ buildscript {
     val kotlinSerializationVersion by extra("1.2.1")
     val navigationAnimation by extra("0.17.0")
     val composeAnimation by extra("1.1.0-alpha02")
+    val lottieAnimation by extra("lottie-compose:1.0.0-rc02-1")
 
     repositories {
         google()
