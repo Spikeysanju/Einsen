@@ -1,4 +1,4 @@
-package dev.spikeysanju.einsen.model
+package dev.spikeysanju.einsen.model.emoji
 
 import kotlinx.serialization.Serializable
 

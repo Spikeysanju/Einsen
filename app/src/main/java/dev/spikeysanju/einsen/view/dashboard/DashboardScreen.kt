@@ -29,11 +29,13 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import dev.spikeysanju.einsen.R
 import dev.spikeysanju.einsen.components.DashboardCardItem
-import dev.spikeysanju.einsen.model.Priority
+import dev.spikeysanju.einsen.model.task.Priority
 import dev.spikeysanju.einsen.navigation.MainActions
-import dev.spikeysanju.einsen.ui.theme.myColors
+import dev.spikeysanju.einsen.ui.theme.einsenColors
 import dev.spikeysanju.einsen.ui.theme.typography
-import dev.spikeysanju.einsen.utils.ViewState
+import dev.spikeysanju.einsen.utils.viewstate.ViewState
+import dev.spikeysanju.einsen.view.animationviewstate.AnimationViewState
+import dev.spikeysanju.einsen.view.animationviewstate.ScreenState
 import dev.spikeysanju.einsen.view.viewmodel.MainViewModel
 
 @Composable
@@ -50,7 +52,7 @@ fun DashboardScreen(
                         text = stringResource(id = R.string.text_my_dashboard),
                         textAlign = TextAlign.Start,
                         style = typography.h5,
-                        color = myColors.black
+                        color = einsenColors.black
                     )
                 },
                 actions = {
@@ -66,7 +68,7 @@ fun DashboardScreen(
                                 false -> painterResource(id = R.drawable.ic_bulb_off)
                             },
                             contentDescription = stringResource(R.string.text_bulb_turn_on),
-                            tint = myColors.black
+                            tint = einsenColors.black
                         )
                     }
 
@@ -80,11 +82,11 @@ fun DashboardScreen(
                         Icon(
                             painter = painterResource(id = R.drawable.ic_about),
                             contentDescription = stringResource(R.string.text_bulb_turn_on),
-                            tint = myColors.black
+                            tint = einsenColors.black
                         )
                     }
                 },
-                backgroundColor = myColors.background, elevation = 0.dp
+                backgroundColor = einsenColors.background, elevation = 0.dp
             )
         },
         floatingActionButton = {
@@ -114,8 +116,22 @@ fun DashboardScreen(
 
         when (val allTaskList = viewModel.feed.collectAsState().value) {
             ViewState.Empty -> {
+                AnimationViewState(
+                    title = stringResource(R.string.text_no_task_title),
+                    description = stringResource(R.string.text_no_task_description),
+                    callToAction = stringResource(R.string.text_add_a_task),
+                    ScreenState.EMPTY,
+                    actions = actions.gotoAddTask
+                )
             }
             ViewState.Loading -> {
+                AnimationViewState(
+                    title = stringResource(R.string.text_no_task_title),
+                    description = stringResource(R.string.text_no_task_description),
+                    callToAction = stringResource(R.string.text_add_a_task),
+                    ScreenState.LOADING,
+                    actions = actions.gotoAddTask
+                )
             }
             is ViewState.Success -> {
 
@@ -138,7 +154,7 @@ fun DashboardScreen(
                             title = stringResource(R.string.text_do_it_now),
                             description = stringResource(R.string.text_important_and_urgent),
                             count = urgentCount.toString(),
-                            color = myColors.success,
+                            color = einsenColors.success,
                             onClick = {
                                 actions.gotoAllTask(Priority.URGENT)
                             }
@@ -150,7 +166,7 @@ fun DashboardScreen(
                             title = stringResource(R.string.text_decide_when_todo),
                             description = stringResource(R.string.text_important_not_urgent),
                             count = importantCount.toString(),
-                            color = myColors.calm,
+                            color = einsenColors.calm,
                             onClick = {
                                 actions.gotoAllTask(Priority.IMPORTANT)
                             }
@@ -162,7 +178,7 @@ fun DashboardScreen(
                             title = stringResource(R.string.text_delegate_it),
                             description = stringResource(R.string.text_urgent_not_important),
                             count = delegateCount.toString(),
-                            color = myColors.err,
+                            color = einsenColors.err,
                             onClick = {
                                 actions.gotoAllTask(Priority.DELEGATE)
                             }
@@ -174,7 +190,7 @@ fun DashboardScreen(
                             title = stringResource(R.string.text_dump_it),
                             description = stringResource(R.string.text_not_important_not_urgent),
                             count = dumpCount.toString(),
-                            color = myColors.warning,
+                            color = einsenColors.warning,
                             onClick = {
                                 actions.gotoAllTask(Priority.DUMP)
                             }
@@ -183,7 +199,15 @@ fun DashboardScreen(
                 }
             }
             is ViewState.Error -> {
-                // Todo show error
+                AnimationViewState(
+                    title = stringResource(R.string.text_error_title),
+                    description = stringResource(
+                        R.string.text_error_description
+                    ),
+                    callToAction = stringResource(R.string.text_add_a_task),
+                    ScreenState.ERROR,
+                    actions = actions.gotoAddTask
+                )
             }
         }
     }

@@ -1,7 +1,7 @@
-package dev.spikeysanju.einsen.utils
+package dev.spikeysanju.einsen.utils.viewstate
 
 sealed class CountViewState {
-    // Represents different states for the Emoji
+    // Represents different states for the Dashboard Task Count
     object Empty : CountViewState()
     object Loading : CountViewState()
     data class Success(val count: Int) : CountViewState()

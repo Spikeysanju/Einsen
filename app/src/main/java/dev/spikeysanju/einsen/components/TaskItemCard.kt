@@ -1,6 +1,5 @@
 package dev.spikeysanju.einsen.components
 
-import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -32,12 +31,18 @@ import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import dev.spikeysanju.einsen.model.Task
+import dev.spikeysanju.einsen.model.task.Task
 import dev.spikeysanju.einsen.ui.theme.Avenir
-import dev.spikeysanju.einsen.ui.theme.myColors
+import dev.spikeysanju.einsen.ui.theme.einsenColors
 import dev.spikeysanju.einsen.ui.theme.typography
 
-@ExperimentalFoundationApi
+/**
+ * This component is used to show all the task item of this app.
+ * @param task
+ * @param onClick
+ * @param onCheckboxChange
+ */
+
 @Composable
 fun TaskItemCard(
     task: Task,
@@ -54,7 +59,9 @@ fun TaskItemCard(
         // checkbox state
         val status = remember { mutableStateOf(task.isCompleted) }
 
-        // Checkbox
+        /**
+         * Checkbox
+         */
         EisenCheckBox(
             value = status.value,
             onValueChanged = {
@@ -64,66 +71,73 @@ fun TaskItemCard(
         )
 
         Spacer(modifier = Modifier.width(12.dp))
-        // Emoji + (title + category)
+
+        /**
+         * Emoji + (title + category)
+         */
         Row(
             modifier = Modifier
                 .fillMaxWidth()
                 .clip(shape = shapes.large)
-                .background(myColors.card)
+                .background(einsenColors.card)
                 .clickable { onClick() },
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.Start
         ) {
 
-            // Emoji Text View
+            /**
+             * Emoji Text View
+             */
             EmojiTextView(emoji = task.emoji)
             Spacer(modifier = Modifier.width(12.dp))
 
-            // condition check if the task is marked as completed the make it as strikethrough
-            val titleStyle = when (task.isCompleted) {
-                true -> TextStyle(
-                    textDecoration = TextDecoration.LineThrough,
-                    fontSize = 16.sp,
-                    fontFamily = Avenir,
-                    fontWeight = FontWeight.SemiBold
-                )
-                false -> typography.subtitle1
-            }
-
-            val categoryStyle = when (task.isCompleted) {
-                true -> TextStyle(
-                    textDecoration = TextDecoration.LineThrough,
-                    fontSize = 12.sp,
-                    fontFamily = Avenir,
-                    fontWeight = FontWeight.Normal
-                )
-                false -> typography.caption
-            }
-
-            // Title + Content
+            /**
+             * Title + category
+             */
             Column(
                 modifier = Modifier
                     .align(Alignment.CenterVertically),
             ) {
                 Text(
                     text = task.title,
-                    style = titleStyle,
-                    color = myColors.black,
+                    style = when (task.isCompleted) {
+                        true -> TextStyle(
+                            textDecoration = TextDecoration.LineThrough,
+                            fontSize = 12.sp,
+                            fontFamily = Avenir,
+                            fontWeight = FontWeight.Normal
+                        )
+                        false -> typography.caption
+                    },
+                    color = einsenColors.black,
                     maxLines = 1,
                     overflow = TextOverflow.Ellipsis
                 )
 
                 Spacer(modifier = Modifier.height(12.dp))
+
                 Text(
                     text = task.category,
-                    style = categoryStyle,
-                    color = myColors.black.copy(.7f)
+                    style = when (task.isCompleted) {
+                        true -> TextStyle(
+                            textDecoration = TextDecoration.LineThrough,
+                            fontSize = 12.sp,
+                            fontFamily = Avenir,
+                            fontWeight = FontWeight.Normal
+                        )
+                        false -> typography.caption
+                    },
+                    color = einsenColors.black.copy(.7f)
                 )
             }
         }
     }
 }
 
+/**
+ * This component helps to show Emoji with Rounded background.
+ * @param emoji
+ */
 @Composable
 fun EmojiTextView(emoji: String) {
     Box(
@@ -132,11 +146,11 @@ fun EmojiTextView(emoji: String) {
             .padding(12.dp)
             .clip(CircleShape)
             .clickable { }
-            .background(myColors.bg)
+            .background(einsenColors.bg)
     ) {
         Text(
             text = emoji,
-            color = myColors.black,
+            color = einsenColors.black,
             style = typography.subtitle1,
             textAlign = TextAlign.Center,
             modifier = Modifier.align(Alignment.Center)
@@ -144,6 +158,11 @@ fun EmojiTextView(emoji: String) {
     }
 }
 
+/**
+ * This customer slider component helps to show the slider with step indicator.
+ * @param value
+ * @param onValueChanged
+ */
 @Composable
 fun EisenCheckBox(value: Boolean, onValueChanged: (Boolean) -> Unit) {
     Checkbox(

@@ -12,11 +12,14 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyVerticalGrid
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
+import androidx.compose.material.Icon
+import androidx.compose.material.IconButton
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.ModalBottomSheetLayout
 import androidx.compose.material.ModalBottomSheetValue
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
+import androidx.compose.material.TopAppBar
 import androidx.compose.material.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -28,6 +31,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
@@ -35,41 +39,48 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import dev.spikeysanju.einsen.R
+import dev.spikeysanju.einsen.components.EinsenInputTextField
 import dev.spikeysanju.einsen.components.EmojiPlaceHolder
 import dev.spikeysanju.einsen.components.EmojiPlaceHolderSmall
-import dev.spikeysanju.einsen.components.InputTextField
 import dev.spikeysanju.einsen.components.Message
 import dev.spikeysanju.einsen.components.PrimaryButton
 import dev.spikeysanju.einsen.components.StepSlider
-import dev.spikeysanju.einsen.components.TopBarWithBack
-import dev.spikeysanju.einsen.model.Priority
-import dev.spikeysanju.einsen.model.Task
+import dev.spikeysanju.einsen.model.task.Priority
+import dev.spikeysanju.einsen.model.task.task
 import dev.spikeysanju.einsen.navigation.MainActions
 import dev.spikeysanju.einsen.ui.theme.Avenir
+import dev.spikeysanju.einsen.ui.theme.einsenColors
 import dev.spikeysanju.einsen.ui.theme.typography
-import dev.spikeysanju.einsen.utils.EmojiViewState
-import dev.spikeysanju.einsen.utils.makeValueRound
+import dev.spikeysanju.einsen.utils.calculatePriority
 import dev.spikeysanju.einsen.utils.showToast
+import dev.spikeysanju.einsen.utils.viewstate.EmojiViewState
 import dev.spikeysanju.einsen.view.viewmodel.MainViewModel
 import kotlinx.coroutines.launch
 
 @Composable
 fun AddTaskScreen(viewModel: MainViewModel, actions: MainActions) {
+
+    // component state
     val bottomSheetState = rememberModalBottomSheetState(ModalBottomSheetValue.Hidden)
-    var emojiState by remember { mutableStateOf("") }
+    val listState = rememberLazyListState()
     val scope = rememberCoroutineScope()
     val context = LocalContext.current
-    var title by remember { mutableStateOf("") }
-    var description by remember { mutableStateOf("") }
-    var category by remember { mutableStateOf("") }
-    val listState = rememberLazyListState()
+
+    // task value state
+    var titleState by remember { mutableStateOf("") }
+    var descriptionState by remember { mutableStateOf("") }
+    var categoryState by remember { mutableStateOf("") }
+    var emojiState by remember { mutableStateOf("") }
     var urgencyState by remember { mutableStateOf(0F) }
     var importanceState by remember { mutableStateOf(0F) }
-    val stepCount by remember { mutableStateOf(5) }
-    val result = viewModel.emoji.collectAsState().value
-    var priority by remember {
+    var priorityState by remember {
         mutableStateOf(Priority.IMPORTANT)
     }
+    val isCompletedState by remember { mutableStateOf(false) }
+    val dueState by remember { mutableStateOf("18/12/1998") }
+
+    val stepCount by remember { mutableStateOf(5) }
+    val result = viewModel.emoji.collectAsState().value
 
     ModalBottomSheetLayout(
         sheetState = bottomSheetState,
@@ -116,8 +127,29 @@ fun AddTaskScreen(viewModel: MainViewModel, actions: MainActions) {
     ) {
         Scaffold(
             topBar = {
-                TopBarWithBack(title = stringResource(R.string.text_addTask), actions.upPress)
+                TopAppBar(
+                    title = {
+                        Text(
+                            text = stringResource(id = R.string.text_addTask),
+                            style = typography.h6,
+                            textAlign = TextAlign.Start,
+                            color = einsenColors.black,
+                            modifier = Modifier.padding(start = 16.dp)
+                        )
+                    },
+                    navigationIcon = {
+                        IconButton(onClick = { actions.upPress.invoke() }) {
+                            Icon(
+                                painter = painterResource(id = R.drawable.ic_back),
+                                contentDescription = stringResource(R.string.back_button),
+                                tint = einsenColors.black
+                            )
+                        }
+                    },
+                    backgroundColor = einsenColors.background, elevation = 0.dp
+                )
             }
+
         ) {
 
             LazyColumn(state = listState, contentPadding = PaddingValues(bottom = 24.dp)) {
@@ -131,7 +163,7 @@ fun AddTaskScreen(viewModel: MainViewModel, actions: MainActions) {
                     ) {
                         EmojiPlaceHolder(
                             emoji = emojiState,
-                            onTap = {
+                            onSelect = {
                                 scope.launch {
                                     bottomSheetState.show()
                                 }
@@ -143,30 +175,30 @@ fun AddTaskScreen(viewModel: MainViewModel, actions: MainActions) {
                 // Title
                 item {
                     Spacer(modifier = Modifier.height(24.dp))
-                    InputTextField(title = stringResource(R.string.text_title), value = title) {
-                        title = it
+                    EinsenInputTextField(
+                        title = stringResource(R.string.text_title),
+                    ) {
+                        titleState = it
                     }
                 }
 
                 // Description
                 item {
                     Spacer(modifier = Modifier.height(24.dp))
-                    InputTextField(
+                    EinsenInputTextField(
                         title = stringResource(R.string.text_description),
-                        value = description
                     ) {
-                        description = it
+                        descriptionState = it
                     }
                 }
 
                 // Category
                 item {
                     Spacer(modifier = Modifier.height(24.dp))
-                    InputTextField(
+                    EinsenInputTextField(
                         title = stringResource(R.string.text_category),
-                        value = category
                     ) {
-                        category = it
+                        categoryState = it
                     }
                 }
 
@@ -208,30 +240,34 @@ fun AddTaskScreen(viewModel: MainViewModel, actions: MainActions) {
                     }
                 }
 
-                // Save Task
+                // Save Task CTA
                 item {
                     Spacer(modifier = Modifier.height(36.dp))
                     PrimaryButton(title = stringResource(R.string.text_save_task)) {
 
+                        // calculate the average value by adding urgency + priority / 2
                         val priorityAverage = urgencyState + importanceState / 2
-                        priority = calculatePriority(priorityAverage)
+                        priorityState = calculatePriority(priorityAverage)
 
-                        val task = Task(
-                            title = title,
-                            description = description,
-                            category = category,
-                            emoji = emojiState,
-                            urgency = makeValueRound(urgencyState),
-                            importance = makeValueRound(importanceState),
-                            priority = priority,
-                            due = "18/12/2021",
-                            isCompleted = false
-                        )
+                        val task = task {
+                            title = titleState
+                            description = descriptionState
+                            category = categoryState
+                            emoji = emojiState
+                            urgency = urgencyState
+                            importance = importanceState
+                            priority = priorityState
+                            due = dueState
+                            isCompleted = isCompletedState
+                        }
 
                         when {
-                            title.isEmpty() -> showToast(context, "Title is Empty!")
-                            description.isEmpty() -> showToast(context, "Description is Empty!")
-                            category.isEmpty() -> showToast(context, "Category is Empty!")
+                            titleState.isEmpty() -> showToast(context, "Title is Empty!")
+                            descriptionState.isEmpty() -> showToast(
+                                context,
+                                "Description is Empty!"
+                            )
+                            categoryState.isEmpty() -> showToast(context, "Category is Empty!")
                             else -> viewModel.insertTask(task).run {
                                 showToast(context, "Task Added Successfully!")
                                 actions.upPress.invoke()
@@ -244,27 +280,6 @@ fun AddTaskScreen(viewModel: MainViewModel, actions: MainActions) {
     }
 }
 
-fun calculatePriority(priorityAverage: Float): Priority {
-
-    return when {
-        priorityAverage >= 4 -> {
-            Priority.URGENT
-        }
-        priorityAverage >= 3 -> {
-            Priority.IMPORTANT
-        }
-        priorityAverage >= 2 -> {
-            Priority.DELEGATE
-        }
-        priorityAverage >= 1 -> {
-            Priority.DUMP
-        }
-        else -> {
-            Priority.URGENT
-        }
-    }
-}
-
 @Composable
 private fun BottomSheetTitle() {
     Text(
@@ -272,6 +287,6 @@ private fun BottomSheetTitle() {
         text = stringResource(R.string.tetxt_choose_emoji),
         style = typography.h5,
         textAlign = TextAlign.Start,
-        color = MaterialTheme.colors.onPrimary
+        color = einsenColors.black
     )
 }

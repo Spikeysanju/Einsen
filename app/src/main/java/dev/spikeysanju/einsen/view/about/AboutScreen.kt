@@ -40,7 +40,7 @@ import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
 import dev.spikeysanju.einsen.R
 import dev.spikeysanju.einsen.navigation.MainActions
-import dev.spikeysanju.einsen.ui.theme.myColors
+import dev.spikeysanju.einsen.ui.theme.einsenColors
 import dev.spikeysanju.einsen.ui.theme.typography
 import dev.spikeysanju.einsen.view.viewmodel.MainViewModel
 import java.net.URLEncoder
@@ -65,7 +65,7 @@ fun AboutScreen(viewModel: MainViewModel, actions: MainActions) {
                         text = stringResource(id = R.string.text_about),
                         style = typography.h6,
                         textAlign = TextAlign.Start,
-                        color = myColors.black,
+                        color = einsenColors.black,
                         modifier = Modifier.padding(start = 16.dp)
                     )
                 },
@@ -74,11 +74,11 @@ fun AboutScreen(viewModel: MainViewModel, actions: MainActions) {
                         Icon(
                             painter = painterResource(id = R.drawable.ic_back),
                             contentDescription = stringResource(R.string.back_button),
-                            tint = myColors.black
+                            tint = einsenColors.black
                         )
                     }
                 },
-                backgroundColor = myColors.background, elevation = 0.dp
+                backgroundColor = einsenColors.background, elevation = 0.dp
             )
         }
 
@@ -147,12 +147,12 @@ fun TitleAndDescription(title: String, description: String) {
         Text(
             text = title,
             style = typography.subtitle1,
-            color = myColors.black,
+            color = einsenColors.black,
             fontWeight = FontWeight.Bold
         )
         Spacer(modifier = Modifier.height(8.dp))
         CompositionLocalProvider(values = arrayOf(LocalContentAlpha provides ContentAlpha.disabled)) {
-            Text(text = description, style = typography.subtitle2, color = myColors.black)
+            Text(text = description, style = typography.subtitle2, color = einsenColors.black)
         }
     }
 }
@@ -167,7 +167,7 @@ fun TitleAndURL(title: String, url: String, onClick: () -> Unit) {
         Text(
             text = title,
             style = typography.subtitle1,
-            color = myColors.black,
+            color = einsenColors.black,
             fontWeight = FontWeight.Bold
         )
         Spacer(modifier = Modifier.height(8.dp))
@@ -176,7 +176,7 @@ fun TitleAndURL(title: String, url: String, onClick: () -> Unit) {
                 text = AnnotatedString(
                     text = url,
                     spanStyle = SpanStyle(
-                        color = myColors.calm,
+                        color = einsenColors.calm,
                         fontFamily = FontFamily(
                             Font(R.font.avenir_medium, FontWeight.Medium)
                         ),

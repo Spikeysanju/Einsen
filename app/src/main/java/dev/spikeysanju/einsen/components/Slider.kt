@@ -13,6 +13,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import dev.spikeysanju.einsen.ui.theme.typography
 
+/**
+ * This customer slider component helps to show the slider with step indicator.
+ * @param stepCount
+ * @param value
+ * @param onValueChanged
+ */
 @Composable
 fun StepSlider(stepCount: Int, value: Float, onValueChanged: (Float) -> Unit) {
     Column(

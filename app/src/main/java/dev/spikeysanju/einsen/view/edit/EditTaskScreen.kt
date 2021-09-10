@@ -39,23 +39,22 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import dev.spikeysanju.einsen.R
+import dev.spikeysanju.einsen.components.EinsenInputTextField
 import dev.spikeysanju.einsen.components.EmojiPlaceHolder
 import dev.spikeysanju.einsen.components.EmojiPlaceHolderSmall
-import dev.spikeysanju.einsen.components.InputTextField
 import dev.spikeysanju.einsen.components.Message
 import dev.spikeysanju.einsen.components.PrimaryButton
 import dev.spikeysanju.einsen.components.StepSlider
-import dev.spikeysanju.einsen.model.Priority
-import dev.spikeysanju.einsen.model.Task
+import dev.spikeysanju.einsen.model.task.Priority
+import dev.spikeysanju.einsen.model.task.task
 import dev.spikeysanju.einsen.navigation.MainActions
 import dev.spikeysanju.einsen.ui.theme.Avenir
-import dev.spikeysanju.einsen.ui.theme.myColors
+import dev.spikeysanju.einsen.ui.theme.einsenColors
 import dev.spikeysanju.einsen.ui.theme.typography
-import dev.spikeysanju.einsen.utils.EmojiViewState
-import dev.spikeysanju.einsen.utils.SingleViewState
-import dev.spikeysanju.einsen.utils.makeValueRound
+import dev.spikeysanju.einsen.utils.calculatePriority
 import dev.spikeysanju.einsen.utils.showToast
-import dev.spikeysanju.einsen.view.add.calculatePriority
+import dev.spikeysanju.einsen.utils.viewstate.EmojiViewState
+import dev.spikeysanju.einsen.utils.viewstate.SingleViewState
 import dev.spikeysanju.einsen.view.viewmodel.MainViewModel
 import kotlinx.coroutines.launch
 
@@ -72,17 +71,17 @@ fun EditTaskScreen(viewModel: MainViewModel, actions: MainActions) {
 
     // All Task State
     var taskID by remember { mutableStateOf(0) }
-    var title by remember { mutableStateOf("") }
-    var description by remember { mutableStateOf("") }
-    var category by remember { mutableStateOf("") }
+    var titleState by remember { mutableStateOf("") }
+    var descriptionState by remember { mutableStateOf("") }
+    var categoryState by remember { mutableStateOf("") }
     var emojiState by remember { mutableStateOf("") }
-    var urgency by remember { mutableStateOf(0F) }
-    var importance by remember { mutableStateOf(0F) }
-    var due by remember { mutableStateOf("") }
-    var priority by remember { mutableStateOf(Priority.IMPORTANT) }
-    var isCompleted by remember { mutableStateOf(false) }
-    var createdAt by remember { mutableStateOf(0L) }
-    val updatedAt by remember { mutableStateOf(System.currentTimeMillis()) }
+    var urgencyState by remember { mutableStateOf(0F) }
+    var importanceState by remember { mutableStateOf(0F) }
+    var dueState by remember { mutableStateOf("18/12/1998") }
+    var priorityState by remember { mutableStateOf(Priority.IMPORTANT) }
+    var isCompletedState by remember { mutableStateOf(false) }
+    var createdAtState by remember { mutableStateOf(0L) }
+    val updatedAtState by remember { mutableStateOf(System.currentTimeMillis()) }
 
     // Slider Step count
     val stepCount by remember { mutableStateOf(5) }
@@ -143,20 +142,20 @@ fun EditTaskScreen(viewModel: MainViewModel, actions: MainActions) {
                             text = stringResource(id = R.string.text_editTask),
                             style = typography.h6,
                             textAlign = TextAlign.Start,
-                            color = myColors.black,
+                            color = einsenColors.black,
                             modifier = Modifier.padding(start = 16.dp)
                         )
                     },
                     navigationIcon = {
-                        IconButton(onClick = { actions.upPress }) {
+                        IconButton(onClick = { actions.upPress.invoke() }) {
                             Icon(
                                 painter = painterResource(id = R.drawable.ic_back),
                                 contentDescription = stringResource(R.string.back_button),
-                                tint = myColors.black
+                                tint = einsenColors.black
                             )
                         }
                     },
-                    backgroundColor = myColors.background, elevation = 0.dp
+                    backgroundColor = einsenColors.background, elevation = 0.dp
                 )
             }
         ) {
@@ -169,16 +168,16 @@ fun EditTaskScreen(viewModel: MainViewModel, actions: MainActions) {
 
                     // update the task state with latest value
                     taskID = taskResult.task.id
-                    title = taskResult.task.title
-                    description = taskResult.task.description
-                    category = taskResult.task.category
+                    titleState = taskResult.task.title
+                    descriptionState = taskResult.task.description
+                    categoryState = taskResult.task.category
                     emojiState = taskResult.task.emoji
-                    urgency = taskResult.task.urgency
-                    importance = taskResult.task.importance
-                    priority = taskResult.task.priority
-                    due = taskResult.task.due
-                    isCompleted = taskResult.task.isCompleted
-                    createdAt = taskResult.task.createdAt
+                    urgencyState = taskResult.task.urgency
+                    importanceState = taskResult.task.importance
+                    priorityState = taskResult.task.priority
+                    dueState = taskResult.task.due
+                    isCompletedState = taskResult.task.isCompleted
+                    createdAtState = taskResult.task.createdAt
 
                     LazyColumn(state = listState, contentPadding = PaddingValues(bottom = 24.dp)) {
 
@@ -191,7 +190,7 @@ fun EditTaskScreen(viewModel: MainViewModel, actions: MainActions) {
                             ) {
                                 EmojiPlaceHolder(
                                     emoji = emojiState,
-                                    onTap = {
+                                    onSelect = {
                                         scope.launch {
                                             bottomSheetState.show()
                                         }
@@ -203,33 +202,30 @@ fun EditTaskScreen(viewModel: MainViewModel, actions: MainActions) {
                         // Title
                         item {
                             Spacer(modifier = Modifier.height(24.dp))
-                            InputTextField(
+                            EinsenInputTextField(
                                 title = stringResource(R.string.text_title),
-                                value = title
                             ) {
-                                title = it
+                                titleState = it
                             }
                         }
 
                         // Description
                         item {
                             Spacer(modifier = Modifier.height(24.dp))
-                            InputTextField(
+                            EinsenInputTextField(
                                 title = stringResource(R.string.text_description),
-                                value = description
                             ) {
-                                description = it
+                                descriptionState = it
                             }
                         }
 
                         // Category
                         item {
                             Spacer(modifier = Modifier.height(24.dp))
-                            InputTextField(
+                            EinsenInputTextField(
                                 title = stringResource(R.string.text_category),
-                                value = category
                             ) {
-                                category = it
+                                categoryState = it
                             }
                         }
 
@@ -249,8 +245,8 @@ fun EditTaskScreen(viewModel: MainViewModel, actions: MainActions) {
                                     color = MaterialTheme.colors.onPrimary
                                 )
                                 Spacer(modifier = Modifier.height(12.dp))
-                                StepSlider(stepCount = stepCount, value = urgency) {
-                                    urgency = it
+                                StepSlider(stepCount = stepCount, value = urgencyState) {
+                                    urgencyState = it
                                 }
                             }
                         }
@@ -265,42 +261,46 @@ fun EditTaskScreen(viewModel: MainViewModel, actions: MainActions) {
                                     color = MaterialTheme.colors.onPrimary
                                 )
                                 Spacer(modifier = Modifier.height(12.dp))
-                                StepSlider(stepCount = stepCount, value = importance) {
-                                    importance = it
+                                StepSlider(stepCount = stepCount, value = importanceState) {
+                                    importanceState = it
                                 }
                             }
                         }
 
-                        // Save Task
+                        // Update Task CTA
                         item {
 
-                            val priorityAverage = importance + urgency / 2
-                            priority = calculatePriority(priorityAverage)
+                            val priorityAverage = importanceState + urgencyState / 2
+                            priorityState = calculatePriority(priorityAverage)
 
                             Spacer(modifier = Modifier.height(36.dp))
                             PrimaryButton(title = stringResource(R.string.text_save_task)) {
-                                val task = Task(
-                                    title = title,
-                                    description = description,
-                                    category = category,
-                                    emoji = emojiState,
-                                    urgency = makeValueRound(urgency),
-                                    importance = makeValueRound(importance),
-                                    priority = priority,
-                                    due = due,
-                                    isCompleted = isCompleted,
-                                    createdAt = createdAt,
-                                    updatedAt = updatedAt,
+
+                                val task = task {
+                                    title = titleState
+                                    description = descriptionState
+                                    category = categoryState
+                                    emoji = emojiState
+                                    urgency = urgencyState
+                                    importance = importanceState
+                                    priority = priorityState
+                                    due = dueState
+                                    isCompleted = isCompletedState
+                                    createdAt = createdAtState
+                                    updatedAt = updatedAtState
                                     id = taskID
-                                )
+                                }
 
                                 when {
-                                    title.isEmpty() -> showToast(context, "Title is Empty!")
-                                    description.isEmpty() -> showToast(
+                                    titleState.isEmpty() -> showToast(context, "Title is Empty!")
+                                    descriptionState.isEmpty() -> showToast(
                                         context,
                                         "Description is Empty!"
                                     )
-                                    category.isEmpty() -> showToast(context, "Category is Empty!")
+                                    categoryState.isEmpty() -> showToast(
+                                        context,
+                                        "Category is Empty!"
+                                    )
                                     else -> viewModel.updateTask(task).run {
                                         showToast(context, "Task Added Successfully!")
                                         actions.upPress.invoke()

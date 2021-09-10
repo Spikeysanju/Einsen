@@ -35,12 +35,12 @@ import dev.spikeysanju.einsen.components.BottomCTA
 import dev.spikeysanju.einsen.components.ChipView
 import dev.spikeysanju.einsen.components.EmojiPlaceHolder
 import dev.spikeysanju.einsen.components.InfoCard
-import dev.spikeysanju.einsen.model.Priority
-import dev.spikeysanju.einsen.model.Task
+import dev.spikeysanju.einsen.model.task.Priority
+import dev.spikeysanju.einsen.model.task.Task
 import dev.spikeysanju.einsen.navigation.MainActions
-import dev.spikeysanju.einsen.ui.theme.myColors
+import dev.spikeysanju.einsen.ui.theme.einsenColors
 import dev.spikeysanju.einsen.ui.theme.typography
-import dev.spikeysanju.einsen.utils.SingleViewState
+import dev.spikeysanju.einsen.utils.viewstate.SingleViewState
 import dev.spikeysanju.einsen.view.viewmodel.MainViewModel
 
 @Composable
@@ -72,7 +72,7 @@ fun TaskDetailsScreen(viewModel: MainViewModel, action: MainActions) {
                         text = stringResource(id = R.string.text_taskDetails),
                         style = typography.h6,
                         textAlign = TextAlign.Start,
-                        color = myColors.black,
+                        color = einsenColors.black,
                         modifier = Modifier.padding(start = 16.dp)
                     )
                 },
@@ -81,16 +81,16 @@ fun TaskDetailsScreen(viewModel: MainViewModel, action: MainActions) {
                         Icon(
                             painter = painterResource(id = R.drawable.ic_back),
                             contentDescription = stringResource(R.string.back_button),
-                            tint = myColors.black
+                            tint = einsenColors.black
                         )
                     }
                 },
-                backgroundColor = myColors.background, elevation = 0.dp
+                backgroundColor = einsenColors.background, elevation = 0.dp
             )
         },
         bottomBar = {
 
-            val buttonColor by animateColorAsState(if (taskState.isCompleted) myColors.err else myColors.success)
+            val buttonColor by animateColorAsState(if (taskState.isCompleted) einsenColors.err else einsenColors.success)
 
             val buttonTitle = when (taskState.isCompleted) {
                 true -> stringResource(id = R.string.text_incomplete)
@@ -147,7 +147,7 @@ fun TaskDetailsScreen(viewModel: MainViewModel, action: MainActions) {
                         ) {
                             EmojiPlaceHolder(
                                 emoji = task.emoji,
-                                onTap = {
+                                onSelect = {
                                 }
                             )
                         }

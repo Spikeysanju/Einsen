@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">Einsen</string>
-    <string name="text_home">Home</string>
+    <string name="text_dashboard">Dashboard</string>
     <string name="text_addTask">Add Task</string>
     <string name="text_editTask">Edit Task</string>
     <string name="text_about">About</string>
@@ -8,6 +8,9 @@
     <string name="text_allTask">All Task</string>
     <string name="text_taskDetails">Task Details</string>
     <string name="text_settings">Settings</string>
+    <string name="text_no_task_title">No tasks yet</string>
+    <string name="text_no_task_description">Be sure to add your first task!</string>
+    <string name="text_add_a_task">Add a task</string>
     <string name="text_title">Title</string>
     <string name="text_description">Description</string>
     <string name="text_category">Category</string>
@@ -48,4 +51,6 @@
     <string name="text_license">Licensed Under Apache 2.0</string>
     <string name="text_webview">WebView</string>
     <string name="text_einsen_logo">Einsen logo</string>
+    <string name="text_error_title">Well, this is unexpected...</string>
+    <string name="text_error_description"><![CDATA[Sorry, we\'re having technical issues (as you can see) try to add some task & try again...]]></string>
 </resources>

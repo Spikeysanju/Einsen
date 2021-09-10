@@ -4,7 +4,6 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.appcompat.app.AppCompatDelegate
-import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material.Surface
 import androidx.compose.runtime.Composable
@@ -18,7 +17,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import dev.spikeysanju.einsen.data.datastore.ThemeManager
 import dev.spikeysanju.einsen.navigation.NavGraph
 import dev.spikeysanju.einsen.ui.theme.EinsenTheme
-import dev.spikeysanju.einsen.ui.theme.myColors
+import dev.spikeysanju.einsen.ui.theme.einsenColors
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -28,24 +27,29 @@ class MainActivity : ComponentActivity() {
     @Inject
     lateinit var themeManager: ThemeManager
 
-    @ExperimentalAnimationApi
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
             EinsenMain()
         }
-        // fetch theme mode
+
+        /**
+         * Observe the Theme Mode
+         */
         observeThemeMode()
     }
 
-    @ExperimentalAnimationApi
     @Composable
     fun EinsenMain() {
 
-        // check UI mode
+        /**
+         * Check if the UI Mode is in Dark Mode
+         */
         val darkMode by themeManager.uiModeFlow.collectAsState(initial = isSystemInDarkTheme())
 
-        // set UI mode accordingly
+        /**
+         * Set UI Mode accordingly
+         */
         val toggleTheme: () -> Unit = {
             lifecycleScope.launch {
                 themeManager.setDarkMode(!darkMode)
@@ -53,7 +57,7 @@ class MainActivity : ComponentActivity() {
         }
 
         EinsenTheme(darkTheme = darkMode) {
-            Surface(color = myColors.bg) {
+            Surface(color = einsenColors.bg) {
                 SetStatusBarColor()
                 NavGraph(toggleTheme)
             }
@@ -77,16 +81,14 @@ class MainActivity : ComponentActivity() {
 fun SetStatusBarColor() {
     // Remember a SystemUiController
     val systemUiController = rememberSystemUiController()
-    val useDarkIcons = true
-    val color = myColors.bg
+    val color = einsenColors.bg
 
     SideEffect {
-        // Update all of the system bar colors to be transparent, and use
-        // dark icons if we're in light theme
-        systemUiController.setStatusBarColor(
-            color = color,
-            darkIcons = useDarkIcons
-        )
+        /**
+         *  Update all of the system bar colors to be transparent, and use
+         *  dark icons if we're in light theme
+         */
+        systemUiController.setStatusBarColor(color = color)
     }
 }
 

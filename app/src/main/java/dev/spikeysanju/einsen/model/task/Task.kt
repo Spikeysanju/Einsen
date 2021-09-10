@@ -1,4 +1,4 @@
-package dev.spikeysanju.einsen.model
+package dev.spikeysanju.einsen.model.task
 
 import androidx.annotation.NonNull
 import androidx.room.ColumnInfo
@@ -41,3 +41,5 @@ enum class Priority(count: Int) {
     DELEGATE(2),
     DUMP(1)
 }
+
+fun task(block: TaskBuilder.() -> Unit): Task = TaskBuilder().apply(block).build()

@@ -19,14 +19,20 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import dev.spikeysanju.einsen.ui.theme.myColors
+import dev.spikeysanju.einsen.ui.theme.einsenColors
 
+/**
+ * This component helps to show Importance & Priority in CardView.
+ * @param title
+ * @param value
+ * @param modifier
+ */
 @Composable
 fun InfoCard(title: String, value: String, modifier: Modifier) {
     Box(
         modifier = modifier
             .clip(RoundedCornerShape(12.dp))
-            .background(color = myColors.card)
+            .background(color = einsenColors.card)
             .padding(12.dp),
         contentAlignment = Alignment.Center
     ) {
@@ -37,7 +43,7 @@ fun InfoCard(title: String, value: String, modifier: Modifier) {
             Text(
                 text = value,
                 modifier = Modifier.fillMaxWidth(),
-                color = myColors.black,
+                color = einsenColors.black,
                 style = typography.subtitle1,
                 fontWeight = FontWeight.W600,
                 textAlign = TextAlign.Center
@@ -48,7 +54,7 @@ fun InfoCard(title: String, value: String, modifier: Modifier) {
             Text(
                 text = title,
                 modifier = Modifier.fillMaxWidth(),
-                color = myColors.black.copy(.7f),
+                color = einsenColors.black.copy(.7f),
                 style = typography.overline,
                 textAlign = TextAlign.Center
             )

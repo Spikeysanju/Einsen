@@ -1,9 +1,9 @@
-package dev.spikeysanju.einsen.utils
+package dev.spikeysanju.einsen.utils.viewstate
 
-import dev.spikeysanju.einsen.model.Task
+import dev.spikeysanju.einsen.model.task.Task
 
 sealed class ViewState {
-    // Represents different states for the LatestNews screen
+    // Represents different states for the All Task screen
     object Empty : ViewState()
     object Loading : ViewState()
     data class Success(val task: List<Task>) : ViewState()

@@ -3,8 +3,13 @@ package dev.spikeysanju.einsen.navigation
 import androidx.annotation.StringRes
 import dev.spikeysanju.einsen.R
 
+/**
+ * A sealed class to define all unique navigation routes of this app.
+ * @param route
+ * @param resourceId
+ */
 sealed class Screen(val route: String, @StringRes val resourceId: Int) {
-    object Home : Screen("home", R.string.text_home)
+    object Dashboard : Screen("dashboard", R.string.text_dashboard)
     object AddTask : Screen("add_task", R.string.text_addTask)
     object EditTask : Screen("edit_task", R.string.text_editTask)
     object AllTask : Screen("all_task", R.string.text_allTask)
