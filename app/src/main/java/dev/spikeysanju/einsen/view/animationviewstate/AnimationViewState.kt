@@ -37,7 +37,8 @@ fun AnimationViewState(
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .wrapContentSize(Alignment.Center), horizontalAlignment = Alignment.CenterHorizontally
+            .wrapContentSize(Alignment.Center),
+        horizontalAlignment = Alignment.CenterHorizontally
     ) {
 
         when (screenState) {
@@ -97,7 +98,8 @@ fun LottieAnimationPlaceHolder(
     )
     Spacer(modifier = Modifier.height(24.dp))
     Button(
-        onClick = { actions() }, colors = ButtonDefaults.buttonColors(
+        onClick = { actions() },
+        colors = ButtonDefaults.buttonColors(
             backgroundColor = einsenColors.black,
             contentColor = einsenColors.white
         )
@@ -105,7 +107,6 @@ fun LottieAnimationPlaceHolder(
         Text(text = callToAction)
     }
 }
-
 
 @Composable
 fun LottieAnimation(lottie: Int) {

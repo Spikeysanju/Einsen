@@ -32,7 +32,8 @@ fun EmptyScreen(actions: () -> Unit) {
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .wrapContentSize(Alignment.Center), horizontalAlignment = Alignment.CenterHorizontally
+            .wrapContentSize(Alignment.Center),
+        horizontalAlignment = Alignment.CenterHorizontally
     ) {
         // lottie animation
         EmptyStateAnimator()
@@ -54,7 +55,8 @@ fun EmptyScreen(actions: () -> Unit) {
         )
         Spacer(modifier = Modifier.height(24.dp))
         Button(
-            onClick = { actions() }, colors = ButtonDefaults.buttonColors(
+            onClick = { actions() },
+            colors = ButtonDefaults.buttonColors(
                 backgroundColor = einsenColors.black,
                 contentColor = einsenColors.white
             )
