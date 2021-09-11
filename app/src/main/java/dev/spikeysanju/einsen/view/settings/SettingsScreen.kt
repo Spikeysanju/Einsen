@@ -43,8 +43,7 @@ fun SettingsScreen(viewModel: MainViewModel, actions: MainActions) {
                 },
                 backgroundColor = einsenColors.background, elevation = 0.dp
             )
-        }) {
-
-
+        }
+    ) {
     }
 }
