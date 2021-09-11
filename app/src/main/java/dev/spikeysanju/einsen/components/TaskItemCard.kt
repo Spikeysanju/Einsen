@@ -103,11 +103,11 @@ fun TaskItemCard(
                     style = when (task.isCompleted) {
                         true -> TextStyle(
                             textDecoration = TextDecoration.LineThrough,
-                            fontSize = 12.sp,
+                            fontSize = 16.sp,
                             fontFamily = Avenir,
-                            fontWeight = FontWeight.Normal
+                            fontWeight = FontWeight.Bold
                         )
-                        false -> typography.caption
+                        false -> typography.subtitle1
                     },
                     color = einsenColors.black,
                     maxLines = 1,

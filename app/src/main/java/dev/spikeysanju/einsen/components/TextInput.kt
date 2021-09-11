@@ -44,7 +44,7 @@ fun EinsenLabelView(title: String) {
  * @param onValueChanged
  */
 @Composable
-fun EinsenInputTextField(title: String, onValueChanged: (String) -> Unit) {
+fun EinsenInputTextField(title: String, value: String, onValueChanged: (String) -> Unit) {
     var textState by rememberSaveable { mutableStateOf("") }
     var errorState by rememberSaveable { mutableStateOf(false) }
     var errorMessage by rememberSaveable { mutableStateOf("") }
@@ -56,7 +56,7 @@ fun EinsenInputTextField(title: String, onValueChanged: (String) -> Unit) {
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(start = 20.dp, end = 20.dp),
-            value = textState,
+            value = value,
             onValueChange = {
                 textState = it
                 when (textState.isEmpty()) {
@@ -103,7 +103,7 @@ fun EinsenInputTextField(title: String, onValueChanged: (String) -> Unit) {
                 errorMessage,
                 style = typography.caption,
                 color = einsenColors.err,
-                modifier = Modifier.padding(top = 16.dp, end = 16.dp)
+                modifier = Modifier.padding(top = 12.dp, start = 16.dp, end = 16.dp)
             )
         }
     }

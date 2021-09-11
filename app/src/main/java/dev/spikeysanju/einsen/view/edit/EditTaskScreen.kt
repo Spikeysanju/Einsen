@@ -27,6 +27,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -41,8 +42,7 @@ import androidx.compose.ui.unit.sp
 import dev.spikeysanju.einsen.R
 import dev.spikeysanju.einsen.components.EinsenInputTextField
 import dev.spikeysanju.einsen.components.EmojiPlaceHolder
-import dev.spikeysanju.einsen.components.EmojiPlaceHolderSmall
-import dev.spikeysanju.einsen.components.Message
+import dev.spikeysanju.einsen.components.EmojiPlaceHolderBottomSheet
 import dev.spikeysanju.einsen.components.PrimaryButton
 import dev.spikeysanju.einsen.components.StepSlider
 import dev.spikeysanju.einsen.model.task.Priority
@@ -55,6 +55,8 @@ import dev.spikeysanju.einsen.utils.calculatePriority
 import dev.spikeysanju.einsen.utils.showToast
 import dev.spikeysanju.einsen.utils.viewstate.EmojiViewState
 import dev.spikeysanju.einsen.utils.viewstate.SingleViewState
+import dev.spikeysanju.einsen.view.animationviewstate.AnimationViewState
+import dev.spikeysanju.einsen.view.animationviewstate.ScreenState
 import dev.spikeysanju.einsen.view.viewmodel.MainViewModel
 import kotlinx.coroutines.launch
 
@@ -70,18 +72,18 @@ fun EditTaskScreen(viewModel: MainViewModel, actions: MainActions) {
     val bottomSheetState = rememberModalBottomSheetState(ModalBottomSheetValue.Hidden)
 
     // All Task State
-    var taskID by remember { mutableStateOf(0) }
-    var titleState by remember { mutableStateOf("") }
-    var descriptionState by remember { mutableStateOf("") }
-    var categoryState by remember { mutableStateOf("") }
-    var emojiState by remember { mutableStateOf("") }
-    var urgencyState by remember { mutableStateOf(0F) }
-    var importanceState by remember { mutableStateOf(0F) }
-    var dueState by remember { mutableStateOf("18/12/1998") }
-    var priorityState by remember { mutableStateOf(Priority.IMPORTANT) }
-    var isCompletedState by remember { mutableStateOf(false) }
-    var createdAtState by remember { mutableStateOf(0L) }
-    val updatedAtState by remember { mutableStateOf(System.currentTimeMillis()) }
+    var taskID by rememberSaveable { mutableStateOf(0) }
+    var titleState by rememberSaveable { mutableStateOf("") }
+    var descriptionState by rememberSaveable { mutableStateOf("") }
+    var categoryState by rememberSaveable { mutableStateOf("") }
+    var emojiState by rememberSaveable { mutableStateOf("") }
+    var urgencyState by rememberSaveable { mutableStateOf(0F) }
+    var importanceState by rememberSaveable { mutableStateOf(0F) }
+    var dueState by rememberSaveable { mutableStateOf("18/12/1998") }
+    var priorityState by rememberSaveable { mutableStateOf(Priority.IMPORTANT) }
+    var isCompletedState by rememberSaveable { mutableStateOf(false) }
+    var createdAtState by rememberSaveable { mutableStateOf(0L) }
+    val updatedAtState by rememberSaveable { mutableStateOf(System.currentTimeMillis()) }
 
     // Slider Step count
     val stepCount by remember { mutableStateOf(5) }
@@ -104,22 +106,53 @@ fun EditTaskScreen(viewModel: MainViewModel, actions: MainActions) {
                 when (result) {
                     EmojiViewState.Empty -> {
                         item {
-                            Message(title = "Empty")
+                            AnimationViewState(
+                                title = stringResource(R.string.text_error_title),
+                                description = stringResource(R.string.text_error_description),
+                                callToAction = stringResource(R.string.text_error_description),
+                                screenState = ScreenState.ERROR,
+                                actions = {
+                                    scope.launch {
+                                        bottomSheetState.hide()
+                                    }
+                                }
+                            )
                         }
                     }
                     is EmojiViewState.Error -> {
                         item {
-                            Message("Error ${result.exception}")
+                            AnimationViewState(
+                                title = stringResource(R.string.text_error_title).plus(", ")
+                                    .plus(result.exception),
+                                description = stringResource(R.string.text_error_description),
+                                callToAction = stringResource(R.string.text_error_description),
+                                screenState = ScreenState.ERROR,
+                                actions = {
+                                    scope.launch {
+                                        bottomSheetState.hide()
+                                    }
+                                }
+                            )
                         }
                     }
                     EmojiViewState.Loading -> {
                         item {
-                            Message("Loading")
+                            AnimationViewState(
+                                title = stringResource(R.string.text_error_title),
+                                description = stringResource(R.string.text_error_description),
+                                callToAction = stringResource(R.string.text_error_description),
+                                screenState = ScreenState.LOADING,
+                                actions = {
+                                    scope.launch {
+                                        bottomSheetState.hide()
+                                    }
+                                }
+                            )
                         }
                     }
                     is EmojiViewState.Success -> {
                         items(result.emojiItem) { emoji ->
-                            EmojiPlaceHolderSmall(
+                            EmojiPlaceHolderBottomSheet(
                                 emoji = emoji.emoji,
                                 onSelect = {
                                     scope.launch {
@@ -204,6 +237,7 @@ fun EditTaskScreen(viewModel: MainViewModel, actions: MainActions) {
                             Spacer(modifier = Modifier.height(24.dp))
                             EinsenInputTextField(
                                 title = stringResource(R.string.text_title),
+                                value = titleState
                             ) {
                                 titleState = it
                             }
@@ -214,6 +248,7 @@ fun EditTaskScreen(viewModel: MainViewModel, actions: MainActions) {
                             Spacer(modifier = Modifier.height(24.dp))
                             EinsenInputTextField(
                                 title = stringResource(R.string.text_description),
+                                value = descriptionState
                             ) {
                                 descriptionState = it
                             }
@@ -224,6 +259,7 @@ fun EditTaskScreen(viewModel: MainViewModel, actions: MainActions) {
                             Spacer(modifier = Modifier.height(24.dp))
                             EinsenInputTextField(
                                 title = stringResource(R.string.text_category),
+                                value = categoryState
                             ) {
                                 categoryState = it
                             }
@@ -292,18 +328,17 @@ fun EditTaskScreen(viewModel: MainViewModel, actions: MainActions) {
                                 }
 
                                 when {
-                                    titleState.isEmpty() -> showToast(context, "Title is Empty!")
-                                    descriptionState.isEmpty() -> showToast(
-                                        context,
-                                        "Description is Empty!"
-                                    )
-                                    categoryState.isEmpty() -> showToast(
-                                        context,
-                                        "Category is Empty!"
-                                    )
-                                    else -> viewModel.updateTask(task).run {
-                                        showToast(context, "Task Added Successfully!")
-                                        actions.upPress.invoke()
+                                    titleState.isEmpty() && descriptionState.isEmpty() || categoryState.isEmpty() -> {
+                                        showToast(
+                                            context,
+                                            "Please fill all the fields & save the task"
+                                        )
+                                    }
+                                    else -> {
+                                        viewModel.insertTask(task).run {
+                                            showToast(context, "Task updated successfully!")
+                                            actions.upPress.invoke()
+                                        }
                                     }
                                 }
                             }

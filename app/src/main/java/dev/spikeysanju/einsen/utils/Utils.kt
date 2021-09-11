@@ -2,18 +2,21 @@ package dev.spikeysanju.einsen.utils
 
 import dev.spikeysanju.einsen.model.task.Priority
 
-fun makeValueRound(value: Float): Float {
-    return when (value) {
-        0.0F -> 0.0F
-        0.8F -> 1.0F
-        1.6F -> 2.0F
-        2.4F -> 3.0F
-        3.2F -> 4.0F
-        4.0F -> 5.0F
-        else -> 0.0F
-    }
-}
-
+/**
+ * This function helps to perform calculation for the Einsenhower matrix technique.
+ * The Eisenhower Decision Matrix, also known as the Urgent-Important Matrix, is a powerful tool
+ * for time management. It helps you to decide on and prioritize your tasks based on urgency and
+ * importance while sorting out less urgent and less important tasks.
+ *
+ * Points Table
+ * Urgent -> 4 pts
+ * Important -> 3 pts
+ * Delegate -> 2 pts
+ * Dump -> 1 pts
+ *
+ * @param priorityAverage
+ * @return Priority
+ */
 fun calculatePriority(priorityAverage: Float): Priority {
 
     return when {

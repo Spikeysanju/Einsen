@@ -45,6 +45,5 @@ fun SettingsScreen(viewModel: MainViewModel, actions: MainActions) {
             )
         }
     ) {
-        Text(text = "My Settings")
     }
 }
