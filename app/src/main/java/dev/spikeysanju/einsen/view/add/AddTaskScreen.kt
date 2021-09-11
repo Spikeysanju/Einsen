@@ -25,8 +25,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -67,19 +67,19 @@ fun AddTaskScreen(viewModel: MainViewModel, actions: MainActions) {
     val context = LocalContext.current
 
     // task value state
-    var titleState by remember { mutableStateOf("") }
-    var descriptionState by remember { mutableStateOf("") }
-    var categoryState by remember { mutableStateOf("") }
-    var emojiState by remember { mutableStateOf("") }
-    var urgencyState by remember { mutableStateOf(0F) }
-    var importanceState by remember { mutableStateOf(0F) }
-    var priorityState by remember {
+    var titleState by rememberSaveable { mutableStateOf("") }
+    var descriptionState by rememberSaveable { mutableStateOf("") }
+    var categoryState by rememberSaveable { mutableStateOf("") }
+    var emojiState by rememberSaveable { mutableStateOf("") }
+    var urgencyState by rememberSaveable { mutableStateOf(0F) }
+    var importanceState by rememberSaveable { mutableStateOf(0F) }
+    var priorityState by rememberSaveable {
         mutableStateOf(Priority.IMPORTANT)
     }
-    val isCompletedState by remember { mutableStateOf(false) }
-    val dueState by remember { mutableStateOf("18/12/1998") }
+    val isCompletedState by rememberSaveable { mutableStateOf(false) }
+    val dueState by rememberSaveable { mutableStateOf("18/12/1998") }
 
-    val stepCount by remember { mutableStateOf(5) }
+    val stepCount by rememberSaveable { mutableStateOf(5) }
     val result = viewModel.emoji.collectAsState().value
 
     ModalBottomSheetLayout(
@@ -177,6 +177,7 @@ fun AddTaskScreen(viewModel: MainViewModel, actions: MainActions) {
                     Spacer(modifier = Modifier.height(24.dp))
                     EinsenInputTextField(
                         title = stringResource(R.string.text_title),
+                        value = titleState
                     ) {
                         titleState = it
                     }
@@ -187,6 +188,7 @@ fun AddTaskScreen(viewModel: MainViewModel, actions: MainActions) {
                     Spacer(modifier = Modifier.height(24.dp))
                     EinsenInputTextField(
                         title = stringResource(R.string.text_description),
+                        value = descriptionState
                     ) {
                         descriptionState = it
                     }
@@ -197,6 +199,7 @@ fun AddTaskScreen(viewModel: MainViewModel, actions: MainActions) {
                     Spacer(modifier = Modifier.height(24.dp))
                     EinsenInputTextField(
                         title = stringResource(R.string.text_category),
+                        value = categoryState
                     ) {
                         categoryState = it
                     }
@@ -262,15 +265,14 @@ fun AddTaskScreen(viewModel: MainViewModel, actions: MainActions) {
                         }
 
                         when {
-                            titleState.isEmpty() -> showToast(context, "Title is Empty!")
-                            descriptionState.isEmpty() -> showToast(
-                                context,
-                                "Description is Empty!"
-                            )
-                            categoryState.isEmpty() -> showToast(context, "Category is Empty!")
-                            else -> viewModel.insertTask(task).run {
-                                showToast(context, "Task Added Successfully!")
-                                actions.upPress.invoke()
+                            titleState.isNotEmpty() && descriptionState.isNotEmpty() || categoryState.isNotEmpty() -> {
+                                showToast(context, "Please fill all the fields & save the task")
+                            }
+                            else -> {
+                                viewModel.insertTask(task).run {
+                                    showToast(context, "Task added successfully!")
+                                    actions.upPress.invoke()
+                                }
                             }
                         }
                     }
