@@ -103,7 +103,7 @@ fun EinsenInputTextField(title: String, value: String, onValueChanged: (String) 
                 errorMessage,
                 style = typography.caption,
                 color = einsenColors.err,
-                modifier = Modifier.padding(top = 16.dp, end = 16.dp)
+                modifier = Modifier.padding(top = 12.dp, start = 16.dp, end = 16.dp)
             )
         }
     }

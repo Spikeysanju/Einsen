@@ -42,7 +42,7 @@ import androidx.compose.ui.unit.sp
 import dev.spikeysanju.einsen.R
 import dev.spikeysanju.einsen.components.EinsenInputTextField
 import dev.spikeysanju.einsen.components.EmojiPlaceHolder
-import dev.spikeysanju.einsen.components.EmojiPlaceHolderSmall
+import dev.spikeysanju.einsen.components.EmojiPlaceHolderBottomSheet
 import dev.spikeysanju.einsen.components.PrimaryButton
 import dev.spikeysanju.einsen.components.StepSlider
 import dev.spikeysanju.einsen.model.task.Priority
@@ -152,7 +152,7 @@ fun EditTaskScreen(viewModel: MainViewModel, actions: MainActions) {
                     }
                     is EmojiViewState.Success -> {
                         items(result.emojiItem) { emoji ->
-                            EmojiPlaceHolderSmall(
+                            EmojiPlaceHolderBottomSheet(
                                 emoji = emoji.emoji,
                                 onSelect = {
                                     scope.launch {
@@ -328,7 +328,7 @@ fun EditTaskScreen(viewModel: MainViewModel, actions: MainActions) {
                                 }
 
                                 when {
-                                    titleState.isNotEmpty() && descriptionState.isNotEmpty() || categoryState.isNotEmpty() -> {
+                                    titleState.isEmpty() && descriptionState.isEmpty() || categoryState.isEmpty() -> {
                                         showToast(
                                             context,
                                             "Please fill all the fields & save the task"

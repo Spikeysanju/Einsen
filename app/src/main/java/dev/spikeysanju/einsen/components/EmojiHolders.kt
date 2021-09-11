@@ -1,5 +1,6 @@
 package dev.spikeysanju.einsen.components
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.size
@@ -25,6 +26,7 @@ fun EmojiPlaceHolder(emoji: String, onSelect: () -> Unit) {
         modifier = Modifier
             .size(100.dp)
             .clip(CircleShape)
+            .background(einsenColors.card)
             .clickable { onSelect() },
         contentAlignment = Alignment.Center
     ) {
@@ -44,6 +46,29 @@ fun EmojiPlaceHolder(emoji: String, onSelect: () -> Unit) {
  */
 @Composable
 fun EmojiPlaceHolderSmall(emoji: String, onSelect: (String) -> Unit) {
+    Box(
+        modifier = Modifier
+            .size(50.dp)
+            .clip(CircleShape)
+            .background(einsenColors.card)
+            .clickable { onSelect(emoji) },
+        contentAlignment = Alignment.Center
+    ) {
+        Text(
+            text = emoji,
+            style = typography.h5,
+            textAlign = TextAlign.Center
+        )
+    }
+}
+
+/**
+ * This component helps to show Emoji with Rounded background - BottomSheet version.
+ * @param emoji
+ * @param onSelect
+ */
+@Composable
+fun EmojiPlaceHolderBottomSheet(emoji: String, onSelect: (String) -> Unit) {
     Box(
         modifier = Modifier
             .size(50.dp)

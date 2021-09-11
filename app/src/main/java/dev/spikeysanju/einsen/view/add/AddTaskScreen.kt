@@ -41,8 +41,7 @@ import androidx.compose.ui.unit.sp
 import dev.spikeysanju.einsen.R
 import dev.spikeysanju.einsen.components.EinsenInputTextField
 import dev.spikeysanju.einsen.components.EmojiPlaceHolder
-import dev.spikeysanju.einsen.components.EmojiPlaceHolderSmall
-import dev.spikeysanju.einsen.components.Message
+import dev.spikeysanju.einsen.components.EmojiPlaceHolderBottomSheet
 import dev.spikeysanju.einsen.components.PrimaryButton
 import dev.spikeysanju.einsen.components.StepSlider
 import dev.spikeysanju.einsen.model.task.Priority
@@ -54,6 +53,8 @@ import dev.spikeysanju.einsen.ui.theme.typography
 import dev.spikeysanju.einsen.utils.calculatePriority
 import dev.spikeysanju.einsen.utils.showToast
 import dev.spikeysanju.einsen.utils.viewstate.EmojiViewState
+import dev.spikeysanju.einsen.view.animationviewstate.AnimationViewState
+import dev.spikeysanju.einsen.view.animationviewstate.ScreenState
 import dev.spikeysanju.einsen.view.viewmodel.MainViewModel
 import kotlinx.coroutines.launch
 
@@ -95,22 +96,53 @@ fun AddTaskScreen(viewModel: MainViewModel, actions: MainActions) {
                 when (result) {
                     EmojiViewState.Empty -> {
                         item {
-                            Message(title = "Empty")
+                            AnimationViewState(
+                                title = stringResource(R.string.text_error_title),
+                                description = stringResource(R.string.text_error_description),
+                                callToAction = stringResource(R.string.text_error_description),
+                                screenState = ScreenState.ERROR,
+                                actions = {
+                                    scope.launch {
+                                        bottomSheetState.hide()
+                                    }
+                                }
+                            )
                         }
                     }
                     is EmojiViewState.Error -> {
                         item {
-                            Message("Error ${result.exception}")
+                            AnimationViewState(
+                                title = stringResource(R.string.text_error_title).plus(", ")
+                                    .plus(result.exception),
+                                description = stringResource(R.string.text_error_description),
+                                callToAction = stringResource(R.string.text_error_description),
+                                screenState = ScreenState.ERROR,
+                                actions = {
+                                    scope.launch {
+                                        bottomSheetState.hide()
+                                    }
+                                }
+                            )
                         }
                     }
                     EmojiViewState.Loading -> {
                         item {
-                            Message("Loading")
+                            AnimationViewState(
+                                title = stringResource(R.string.text_error_title),
+                                description = stringResource(R.string.text_error_description),
+                                callToAction = stringResource(R.string.text_error_description),
+                                screenState = ScreenState.LOADING,
+                                actions = {
+                                    scope.launch {
+                                        bottomSheetState.hide()
+                                    }
+                                }
+                            )
                         }
                     }
                     is EmojiViewState.Success -> {
                         items(result.emojiItem) { emoji ->
-                            EmojiPlaceHolderSmall(
+                            EmojiPlaceHolderBottomSheet(
                                 emoji = emoji.emoji,
                                 onSelect = {
                                     scope.launch {
@@ -265,7 +297,7 @@ fun AddTaskScreen(viewModel: MainViewModel, actions: MainActions) {
                         }
 
                         when {
-                            titleState.isNotEmpty() && descriptionState.isNotEmpty() || categoryState.isNotEmpty() -> {
+                            titleState.isEmpty() && descriptionState.isEmpty() || categoryState.isEmpty() -> {
                                 showToast(context, "Please fill all the fields & save the task")
                             }
                             else -> {

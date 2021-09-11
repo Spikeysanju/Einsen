@@ -56,7 +56,7 @@ val typography = Typography(
     ),
     subtitle1 = TextStyle(
         fontFamily = Avenir,
-        fontWeight = FontWeight.SemiBold,
+        fontWeight = FontWeight.Bold,
         fontSize = 16.sp
     ),
     subtitle2 = TextStyle(
