@@ -90,7 +90,6 @@ fun CraneEditableUserInput(
     )
 }
 
-
 @Composable
 private fun CraneBaseUserInput(
     modifier: Modifier = Modifier,
@@ -146,7 +145,6 @@ fun EisenTextField() {
     )
     Text("The textfield has this text: " + textState.value.text)
 }
-
 
 @Preview
 @Composable

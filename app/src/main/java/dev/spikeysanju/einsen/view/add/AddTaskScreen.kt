@@ -70,17 +70,19 @@ fun AddTaskScreen(viewModel: MainViewModel, actions: MainActions) {
 
     // task value state
     var taskState by remember {
-        mutableStateOf(task {
-            title = ""
-            description = ""
-            category = ""
-            emoji = ""
-            urgency = 0F
-            importance = 0F
-            priority = Priority.IMPORTANT
-            due = "18/12/1998"
-            isCompleted = false
-        })
+        mutableStateOf(
+            task {
+                title = ""
+                description = ""
+                category = ""
+                emoji = ""
+                urgency = 0F
+                importance = 0F
+                priority = Priority.IMPORTANT
+                due = "18/12/1998"
+                isCompleted = false
+            }
+        )
     }
 
     val stepCount by rememberSaveable { mutableStateOf(5) }

@@ -70,11 +70,13 @@ fun SettingsScreen(viewModel: MainViewModel, actions: MainActions) {
                 Spacer(modifier = Modifier.height(12.dp))
                 SimpleUserInput(text, caption = "Title", vectorImageId = R.drawable.ic_settings)
                 Spacer(modifier = Modifier.height(12.dp))
-                CraneEditableUserInput(hint = "text", "Title", R.drawable.ic_add, onInputChanged = {
-                    text = it
-                })
+                CraneEditableUserInput(
+                    hint = "text", "Title", R.drawable.ic_add,
+                    onInputChanged = {
+                        text = it
+                    }
+                )
             }
-
         }
     }
 }
