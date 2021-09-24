@@ -25,6 +25,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
@@ -68,17 +69,19 @@ fun AddTaskScreen(viewModel: MainViewModel, actions: MainActions) {
     val context = LocalContext.current
 
     // task value state
-    var titleState by rememberSaveable { mutableStateOf("") }
-    var descriptionState by rememberSaveable { mutableStateOf("") }
-    var categoryState by rememberSaveable { mutableStateOf("") }
-    var emojiState by rememberSaveable { mutableStateOf("") }
-    var urgencyState by rememberSaveable { mutableStateOf(0F) }
-    var importanceState by rememberSaveable { mutableStateOf(0F) }
-    var priorityState by rememberSaveable {
-        mutableStateOf(Priority.IMPORTANT)
+    var taskState by remember {
+        mutableStateOf(task {
+            title = ""
+            description = ""
+            category = ""
+            emoji = ""
+            urgency = 0F
+            importance = 0F
+            priority = Priority.IMPORTANT
+            due = "18/12/1998"
+            isCompleted = false
+        })
     }
-    val isCompletedState by rememberSaveable { mutableStateOf(false) }
-    val dueState by rememberSaveable { mutableStateOf("18/12/1998") }
 
     val stepCount by rememberSaveable { mutableStateOf(5) }
     val result = viewModel.emoji.collectAsState().value
@@ -141,12 +144,12 @@ fun AddTaskScreen(viewModel: MainViewModel, actions: MainActions) {
                         }
                     }
                     is EmojiViewState.Success -> {
-                        items(result.emojiItem) { emoji ->
+                        items(result.emojiItem) { result ->
                             EmojiPlaceHolderBottomSheet(
-                                emoji = emoji.emoji,
+                                emoji = result.emoji,
                                 onSelect = {
                                     scope.launch {
-                                        emojiState = it
+                                        taskState = taskState.copy(emoji = it)
                                         bottomSheetState.hide()
                                     }
                                 }
@@ -194,7 +197,7 @@ fun AddTaskScreen(viewModel: MainViewModel, actions: MainActions) {
                         contentAlignment = Alignment.Center
                     ) {
                         EmojiPlaceHolder(
-                            emoji = emojiState,
+                            emoji = taskState.emoji,
                             onSelect = {
                                 scope.launch {
                                     bottomSheetState.show()
@@ -209,9 +212,9 @@ fun AddTaskScreen(viewModel: MainViewModel, actions: MainActions) {
                     Spacer(modifier = Modifier.height(24.dp))
                     EinsenInputTextField(
                         title = stringResource(R.string.text_title),
-                        value = titleState
+                        value = taskState.title
                     ) {
-                        titleState = it
+                        taskState = taskState.copy(title = it)
                     }
                 }
 
@@ -220,9 +223,9 @@ fun AddTaskScreen(viewModel: MainViewModel, actions: MainActions) {
                     Spacer(modifier = Modifier.height(24.dp))
                     EinsenInputTextField(
                         title = stringResource(R.string.text_description),
-                        value = descriptionState
+                        value = taskState.description
                     ) {
-                        descriptionState = it
+                        taskState = taskState.copy(description = it)
                     }
                 }
 
@@ -231,9 +234,9 @@ fun AddTaskScreen(viewModel: MainViewModel, actions: MainActions) {
                     Spacer(modifier = Modifier.height(24.dp))
                     EinsenInputTextField(
                         title = stringResource(R.string.text_category),
-                        value = categoryState
+                        value = taskState.category
                     ) {
-                        categoryState = it
+                        taskState = taskState.copy(category = it)
                     }
                 }
 
@@ -253,8 +256,8 @@ fun AddTaskScreen(viewModel: MainViewModel, actions: MainActions) {
                             color = MaterialTheme.colors.onPrimary
                         )
                         Spacer(modifier = Modifier.height(12.dp))
-                        StepSlider(stepCount = stepCount, value = urgencyState) {
-                            urgencyState = it
+                        StepSlider(stepCount = stepCount, value = taskState.urgency) {
+                            taskState = taskState.copy(urgency = it)
                         }
                     }
                 }
@@ -269,8 +272,8 @@ fun AddTaskScreen(viewModel: MainViewModel, actions: MainActions) {
                             color = MaterialTheme.colors.onPrimary
                         )
                         Spacer(modifier = Modifier.height(12.dp))
-                        StepSlider(stepCount = stepCount, value = importanceState) {
-                            importanceState = it
+                        StepSlider(stepCount = stepCount, value = taskState.importance) {
+                            taskState = taskState.copy(importance = it)
                         }
                     }
                 }
@@ -281,27 +284,15 @@ fun AddTaskScreen(viewModel: MainViewModel, actions: MainActions) {
                     PrimaryButton(title = stringResource(R.string.text_save_task)) {
 
                         // calculate the average value by adding urgency + priority / 2
-                        val priorityAverage = urgencyState + importanceState / 2
-                        priorityState = calculatePriority(priorityAverage)
-
-                        val task = task {
-                            title = titleState
-                            description = descriptionState
-                            category = categoryState
-                            emoji = emojiState
-                            urgency = urgencyState
-                            importance = importanceState
-                            priority = priorityState
-                            due = dueState
-                            isCompleted = isCompletedState
-                        }
+                        val priorityAverage = taskState.importance + taskState.urgency / 2
+                        taskState = taskState.copy(priority = calculatePriority(priorityAverage))
 
                         when {
-                            titleState.isEmpty() && descriptionState.isEmpty() || categoryState.isEmpty() -> {
+                            taskState.title.isEmpty() && taskState.description.isEmpty() || taskState.category.isEmpty() -> {
                                 showToast(context, "Please fill all the fields & save the task")
                             }
                             else -> {
-                                viewModel.insertTask(task).run {
+                                viewModel.insertTask(taskState).run {
                                     showToast(context, "Task added successfully!")
                                     actions.upPress.invoke()
                                 }

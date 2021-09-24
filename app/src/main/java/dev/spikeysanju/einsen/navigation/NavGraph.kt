@@ -26,7 +26,6 @@ import dev.spikeysanju.einsen.view.webview.WebViewScreen
 /**
  * Single source for Navigation Routes of this app.
  */
-
 object EndPoints {
     const val ID = "id"
     const val PRIORITY = "priority"
@@ -158,7 +157,6 @@ fun NavGraph(toggleTheme: () -> Unit) {
  * A class to define Navigation Route to All Flows of this app with the help of NavController
  * @param navController
  */
-
 class MainActions(navController: NavController) {
 
     val upPress: () -> Unit = {
