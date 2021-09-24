@@ -1,9 +1,6 @@
 package dev.spikeysanju.einsen.view.settings
 
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
@@ -21,9 +18,6 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import dev.spikeysanju.einsen.R
-import dev.spikeysanju.einsen.components.CraneEditableUserInput
-import dev.spikeysanju.einsen.components.CraneUserInput
-import dev.spikeysanju.einsen.components.SimpleUserInput
 import dev.spikeysanju.einsen.navigation.MainActions
 import dev.spikeysanju.einsen.ui.theme.einsenColors
 import dev.spikeysanju.einsen.ui.theme.typography
@@ -58,25 +52,6 @@ fun SettingsScreen(viewModel: MainViewModel, actions: MainActions) {
             )
         }
     ) {
-        LazyColumn(state = listState) {
-            item {
-                CraneUserInput(
-                    text,
-                    onClick = {},
-                    caption = "Title",
-                    vectorImageId = R.drawable.ic_settings,
-                    tint = einsenColors.black
-                )
-                Spacer(modifier = Modifier.height(12.dp))
-                SimpleUserInput(text, caption = "Title", vectorImageId = R.drawable.ic_settings)
-                Spacer(modifier = Modifier.height(12.dp))
-                CraneEditableUserInput(
-                    hint = "text", "Title", R.drawable.ic_add,
-                    onInputChanged = {
-                        text = it
-                    }
-                )
-            }
-        }
+        // todo content
     }
 }
