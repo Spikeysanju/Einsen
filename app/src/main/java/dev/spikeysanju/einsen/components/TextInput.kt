@@ -5,10 +5,11 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.material.OutlinedTextField
 import androidx.compose.material.Text
+import androidx.compose.material.TextField
 import androidx.compose.material.TextFieldDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.Stable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
@@ -43,6 +44,7 @@ fun EinsenLabelView(title: String) {
  * @param title
  * @param onValueChanged
  */
+@Stable
 @Composable
 fun EinsenInputTextField(title: String, value: String, onValueChanged: (String) -> Unit) {
     var textState by rememberSaveable { mutableStateOf("") }
@@ -52,7 +54,7 @@ fun EinsenInputTextField(title: String, value: String, onValueChanged: (String) 
 
     Column(horizontalAlignment = Alignment.Start) {
 
-        OutlinedTextField(
+        TextField(
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(start = 20.dp, end = 20.dp),
@@ -116,6 +118,7 @@ fun textFieldColors() = TextFieldDefaults.textFieldColors(
     focusedIndicatorColor = einsenColors.black,
     unfocusedIndicatorColor = einsenColors.background,
     cursorColor = einsenColors.black,
+    backgroundColor = einsenColors.card,
     placeholderColor = einsenColors.black,
     disabledPlaceholderColor = einsenColors.black
 )

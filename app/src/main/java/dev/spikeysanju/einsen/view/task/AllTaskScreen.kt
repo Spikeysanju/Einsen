@@ -28,6 +28,8 @@ import dev.spikeysanju.einsen.navigation.MainActions
 import dev.spikeysanju.einsen.ui.theme.einsenColors
 import dev.spikeysanju.einsen.ui.theme.typography
 import dev.spikeysanju.einsen.utils.viewstate.ViewState
+import dev.spikeysanju.einsen.view.animationviewstate.AnimationViewState
+import dev.spikeysanju.einsen.view.animationviewstate.ScreenState
 import dev.spikeysanju.einsen.view.viewmodel.MainViewModel
 
 @Composable
@@ -80,8 +82,22 @@ fun AllTaskScreen(
 
         when (val result = viewModel.feed.collectAsState().value) {
             ViewState.Loading -> {
+                AnimationViewState(
+                    title = stringResource(R.string.text_no_task_title),
+                    description = stringResource(R.string.text_no_task_description),
+                    callToAction = stringResource(R.string.text_add_a_task),
+                    ScreenState.LOADING,
+                    actions = actions.gotoAddTask
+                )
             }
             ViewState.Empty -> {
+                AnimationViewState(
+                    title = stringResource(R.string.text_no_task_title),
+                    description = stringResource(R.string.text_no_task_description),
+                    callToAction = stringResource(R.string.text_add_a_task),
+                    ScreenState.EMPTY,
+                    actions = actions.gotoAddTask
+                )
             }
             is ViewState.Success -> {
                 LazyColumn(
@@ -105,6 +121,15 @@ fun AllTaskScreen(
                 }
             }
             is ViewState.Error -> {
+                AnimationViewState(
+                    title = stringResource(R.string.text_error_title),
+                    description = stringResource(
+                        R.string.text_error_description
+                    ),
+                    callToAction = stringResource(R.string.text_add_a_task),
+                    ScreenState.ERROR,
+                    actions = actions.gotoAddTask
+                )
             }
         }
     }
