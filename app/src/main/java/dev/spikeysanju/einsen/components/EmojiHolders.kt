@@ -32,7 +32,7 @@ fun EmojiPlaceHolder(emoji: String, onSelect: () -> Unit) {
     ) {
         Text(
             text = emoji,
-            style = typography.h1,
+            style = typography.h2,
             textAlign = TextAlign.Center,
             color = einsenColors.text
         )
