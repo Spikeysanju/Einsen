@@ -14,7 +14,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.lifecycleScope
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import dagger.hilt.android.AndroidEntryPoint
-import dev.spikeysanju.einsen.data.datastore.ThemeManager
+import dev.spikeysanju.einsen.data.local.datastore.ThemeManager
 import dev.spikeysanju.einsen.navigation.NavGraph
 import dev.spikeysanju.einsen.ui.theme.EinsenTheme
 import dev.spikeysanju.einsen.ui.theme.einsenColors

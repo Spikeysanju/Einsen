@@ -1,4 +1,4 @@
-package dev.spikeysanju.einsen.data.datastore.db
+package dev.spikeysanju.einsen.data.local.db
 
 import androidx.room.Database
 import androidx.room.RoomDatabase

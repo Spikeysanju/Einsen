@@ -1,6 +1,6 @@
 package dev.spikeysanju.einsen.repository
 
-import dev.spikeysanju.einsen.data.datastore.db.TaskDao
+import dev.spikeysanju.einsen.data.local.db.TaskDao
 import dev.spikeysanju.einsen.model.task.Task
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow

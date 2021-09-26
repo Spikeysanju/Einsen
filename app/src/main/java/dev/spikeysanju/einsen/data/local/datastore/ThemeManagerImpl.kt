@@ -1,4 +1,4 @@
-package dev.spikeysanju.einsen.data.datastore
+package dev.spikeysanju.einsen.data.local.datastore
 
 import android.content.Context
 import androidx.datastore.preferences.core.booleanPreferencesKey
