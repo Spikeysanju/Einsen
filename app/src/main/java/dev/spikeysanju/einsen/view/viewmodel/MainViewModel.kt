@@ -133,7 +133,6 @@ class MainViewModel @Inject constructor(private val repo: MainRepository) : View
         }
     }
 
-
     // get all task
     fun getAllEmojis() = viewModelScope.launch(Dispatchers.IO) {
         repo.getAllEmojis().distinctUntilChanged().collect { result ->

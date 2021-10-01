@@ -93,6 +93,4 @@ class MainRepository @Inject constructor(
      * Delete all [Emojis].
      */
     suspend fun deleteAllEmojis() = emojisDao.deleteAllEmojis()
-
-
 }

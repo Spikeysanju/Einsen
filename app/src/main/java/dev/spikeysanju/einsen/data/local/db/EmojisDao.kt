@@ -18,5 +18,4 @@ interface EmojisDao {
 
     @Query("DELETE FROM emojis")
     suspend fun deleteAllEmojis()
-
 }
