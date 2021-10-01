@@ -8,7 +8,7 @@ import dev.spikeysanju.einsen.BuildConfig
 import javax.inject.Inject
 
 @HiltAndroidApp
-class Einsen : Application(), Configuration.Provider {
+class EinsenApp : Application(), Configuration.Provider {
 
     @Inject
     lateinit var workerFactory: HiltWorkerFactory
