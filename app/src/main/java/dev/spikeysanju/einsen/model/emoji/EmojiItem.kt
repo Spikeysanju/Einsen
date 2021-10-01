@@ -1,16 +1,20 @@
 package dev.spikeysanju.einsen.model.emoji
 
+import androidx.annotation.NonNull
+import androidx.room.ColumnInfo
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 import kotlinx.serialization.Serializable
-import kotlinx.serialization.Transient
 
+@Entity(tableName = "emojis")
 @Serializable
 data class EmojiItem(
+    @NonNull
+    @PrimaryKey(autoGenerate = false)
+    @ColumnInfo(name = "emoji")
     val emoji: String,
+    @ColumnInfo(name = "description")
     val description: String,
-    val category: String,
-    val aliases: List<String> = listOf(""),
-    val tags: List<String> = listOf(""),
-    @Transient val unicode_version: String = "",
-    @Transient val ios_version: String = "",
-    @Transient val skin_tones: Boolean = false
+    @ColumnInfo(name = "category")
+    val category: String
 )

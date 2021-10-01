@@ -132,4 +132,24 @@ class MainViewModel @Inject constructor(private val repo: MainRepository) : View
             }
         }
     }
+
+
+    // get all task
+    fun getAllEmojis() = viewModelScope.launch(Dispatchers.IO) {
+        repo.getAllEmojis().distinctUntilChanged().collect { result ->
+            try {
+                if (result.isNullOrEmpty()) {
+                    _emojiViewState.value = EmojiViewState.Empty
+                } else {
+                    _emojiViewState.value = EmojiViewState.Success(result)
+                }
+            } catch (e: Exception) {
+                _viewState.value = ViewState.Error(e)
+            }
+        }
+    }
+
+    fun insertAllEmojis(emojiItem: List<EmojiItem>) = viewModelScope.launch(Dispatchers.IO) {
+        repo.insert(emojiItem)
+    }
 }
