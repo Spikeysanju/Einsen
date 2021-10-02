@@ -18,7 +18,6 @@ import dev.spikeysanju.einsen.view.add.AddTaskScreen
 import dev.spikeysanju.einsen.view.dashboard.DashboardScreen
 import dev.spikeysanju.einsen.view.details.TaskDetailsScreen
 import dev.spikeysanju.einsen.view.edit.EditTaskScreen
-import dev.spikeysanju.einsen.view.settings.SettingsScreen
 import dev.spikeysanju.einsen.view.task.AllTaskScreen
 import dev.spikeysanju.einsen.view.viewmodel.MainViewModel
 import dev.spikeysanju.einsen.view.webview.WebViewScreen
@@ -114,15 +113,7 @@ fun NavGraph(toggleTheme: () -> Unit) {
         }
 
         /**
-         * Navigates to Settings.
-         */
-        composable(Screen.Settings.route) {
-            val viewModel = hiltViewModel<MainViewModel>(it)
-            SettingsScreen(viewModel, actions)
-        }
-
-        /**
-         * Navigates to About.
+         * Navigates to [About].
          */
         composable(
             Screen.About.route
@@ -177,10 +168,6 @@ class MainActions(navController: NavController) {
 
     val gotoEditTask: (id: Int) -> Unit = { id ->
         navController.navigate("${Screen.EditTask.route}/$id")
-    }
-
-    val gotoSettings: () -> Unit = {
-        navController.navigate(Screen.Settings.route)
     }
 
     val gotoAbout: () -> Unit = {

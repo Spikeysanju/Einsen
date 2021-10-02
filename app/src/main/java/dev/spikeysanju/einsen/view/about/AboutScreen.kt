@@ -22,6 +22,7 @@ import androidx.compose.material.Text
 import androidx.compose.material.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -55,6 +56,10 @@ fun AboutScreen(viewModel: MainViewModel, actions: MainActions) {
     }
     var title by remember {
         mutableStateOf("")
+    }
+
+    LaunchedEffect(Unit) {
+        viewModel.getAllEmojis()
     }
 
     Scaffold(

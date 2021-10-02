@@ -23,6 +23,11 @@ android {
         }
     }
 
+    lint {
+        isCheckReleaseBuilds = false
+        isAbortOnError = false
+    }
+
     buildTypes {
         release {
             isMinifyEnabled = true
@@ -66,6 +71,7 @@ dependencies {
     implementation("androidx.compose.ui:ui-tooling:${rootProject.extra["compose_version"]}")
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:${rootProject.extra["lifeCycleVersion"]}")
     implementation("androidx.activity:activity-compose:${rootProject.extra["composeActivityVersion"]}")
+    implementation("androidx.hilt:hilt-work:1.0.0")
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.3")
     androidTestImplementation("androidx.test.espresso:espresso-core:${rootProject.extra["expressoVersion"]}")
@@ -108,5 +114,8 @@ dependencies {
 
     // Lottie
     implementation("com.airbnb.android:${rootProject.extra["lottieAnimation"]}")
+
+    // Kotlin + coroutines
+    implementation("androidx.work:work-runtime-ktx:2.6.0")
 
 }

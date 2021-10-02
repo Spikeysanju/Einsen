@@ -12,12 +12,15 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.lifecycleScope
+import androidx.work.OneTimeWorkRequest
+import androidx.work.WorkManager
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import dagger.hilt.android.AndroidEntryPoint
-import dev.spikeysanju.einsen.data.datastore.ThemeManager
+import dev.spikeysanju.einsen.data.local.datastore.ThemeManager
 import dev.spikeysanju.einsen.navigation.NavGraph
 import dev.spikeysanju.einsen.ui.theme.EinsenTheme
 import dev.spikeysanju.einsen.ui.theme.einsenColors
+import dev.spikeysanju.einsen.workers.EmojiDatabaseWorker
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -37,6 +40,14 @@ class MainActivity : ComponentActivity() {
          * Observe the Theme Mode
          */
         observeThemeMode()
+
+        // init Emoji worker
+        initWorker()
+    }
+
+    private fun initWorker() {
+        val work = OneTimeWorkRequest.Builder(EmojiDatabaseWorker::class.java).build()
+        WorkManager.getInstance(applicationContext).enqueue(work)
     }
 
     @Composable
