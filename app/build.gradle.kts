@@ -23,6 +23,11 @@ android {
         }
     }
 
+    lint {
+        isCheckReleaseBuilds = false
+        isAbortOnError = false
+    }
+
     buildTypes {
         release {
             isMinifyEnabled = true
