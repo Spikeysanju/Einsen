@@ -113,7 +113,7 @@ fun NavGraph(toggleTheme: () -> Unit) {
         }
 
         /**
-         * Navigates to About.
+         * Navigates to [About].
          */
         composable(
             Screen.About.route
