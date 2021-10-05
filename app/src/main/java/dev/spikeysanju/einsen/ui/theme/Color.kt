@@ -20,7 +20,7 @@ val white = Color(0xFFFFFFFF)
 
 // bg color
 val card = Color(0xFFFFFFFF)
-val bg = Color(0xFFFAFAFA)
+val bg = Color(0xFFF6F9FF)
 val cardDark = Color(0xFF1C1C1C)
 val bgDark = Color(0xFF131313)
 

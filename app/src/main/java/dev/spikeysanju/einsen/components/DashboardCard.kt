@@ -21,6 +21,7 @@ import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import dev.spikeysanju.einsen.ui.theme.typography
+import dev.spikeysanju.einsen.utils.coloredShadow
 
 /**
  * This component helps to show the priority of the task with title, color & task count.
@@ -45,6 +46,14 @@ fun DashboardCardItem(
         modifier = Modifier
             .fillMaxWidth()
             .padding(start = 16.dp, end = 16.dp)
+            .coloredShadow(
+                color,
+                alpha = 0.4F,
+                borderRadius = 10.dp,
+                shadowRadius = 24.dp,
+                offsetX = 0.dp,
+                offsetY = 4.dp
+            )
             .clip(RoundedCornerShape(24.dp))
             .background(brush = gradientBrush)
             .clickable {

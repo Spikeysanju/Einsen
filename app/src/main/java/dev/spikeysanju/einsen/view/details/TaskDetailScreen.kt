@@ -36,7 +36,7 @@ import dev.spikeysanju.einsen.components.ChipView
 import dev.spikeysanju.einsen.components.EmojiPlaceHolder
 import dev.spikeysanju.einsen.components.InfoCard
 import dev.spikeysanju.einsen.model.task.Priority
-import dev.spikeysanju.einsen.model.task.Task
+import dev.spikeysanju.einsen.model.task.task
 import dev.spikeysanju.einsen.navigation.MainActions
 import dev.spikeysanju.einsen.ui.theme.einsenColors
 import dev.spikeysanju.einsen.ui.theme.typography
@@ -48,19 +48,17 @@ fun TaskDetailsScreen(viewModel: MainViewModel, action: MainActions) {
 
     var taskState by remember {
         mutableStateOf(
-            Task(
-                "",
-                "",
-                "",
-                "",
-                0F,
-                0F,
-                Priority.IMPORTANT,
-                "0",
-                false,
-                0,
-                0
-            )
+            task {
+                title = ""
+                description = ""
+                category = ""
+                emoji = ""
+                urgency = 0F
+                importance = 0F
+                priority = Priority.IMPORTANT
+                due = "18/12/1998"
+                isCompleted = false
+            }
         )
     }
 
@@ -121,7 +119,6 @@ fun TaskDetailsScreen(viewModel: MainViewModel, action: MainActions) {
             )
         }
     ) {
-
         val listState = rememberLazyListState()
 
         when (val result = viewModel.singleTask.collectAsState().value) {

@@ -32,7 +32,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import dev.spikeysanju.einsen.model.task.Task
-import dev.spikeysanju.einsen.ui.theme.Avenir
+import dev.spikeysanju.einsen.ui.theme.Sailec
 import dev.spikeysanju.einsen.ui.theme.einsenColors
 import dev.spikeysanju.einsen.ui.theme.typography
 
@@ -104,10 +104,14 @@ fun TaskItemCard(
                         true -> TextStyle(
                             textDecoration = TextDecoration.LineThrough,
                             fontSize = 16.sp,
-                            fontFamily = Avenir,
-                            fontWeight = FontWeight.Bold
+                            fontFamily = Sailec,
+                            fontWeight = FontWeight.SemiBold
                         )
-                        false -> typography.subtitle1
+                        false -> TextStyle(
+                            fontSize = 16.sp,
+                            fontFamily = Sailec,
+                            fontWeight = FontWeight.SemiBold
+                        )
                     },
                     color = einsenColors.black,
                     maxLines = 1,
@@ -122,7 +126,7 @@ fun TaskItemCard(
                         true -> TextStyle(
                             textDecoration = TextDecoration.LineThrough,
                             fontSize = 12.sp,
-                            fontFamily = Avenir,
+                            fontFamily = Sailec,
                             fontWeight = FontWeight.Normal
                         )
                         false -> typography.caption

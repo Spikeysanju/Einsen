@@ -53,4 +53,5 @@
     <string name="text_einsen_logo">Einsen logo</string>
     <string name="text_error_title">Well, this is unexpected...</string>
     <string name="text_error_description"><![CDATA[Sorry, we\'re having technical issues (as you can see) try to add some task & try again...]]></string>
+    <string name="text_five">5</string>
 </resources>
