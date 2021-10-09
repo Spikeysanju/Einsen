@@ -110,7 +110,7 @@ fun TaskDetailsScreen(viewModel: MainViewModel, action: MainActions) {
                     }
                 },
                 onShare = {
-                    // Todo share notes
+                          action.gotoAllEmoji.invoke()
                 },
                 onButtonChange = {
                     viewModel.updateStatus(taskState.id, !taskState.isCompleted)

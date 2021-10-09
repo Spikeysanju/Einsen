@@ -14,7 +14,7 @@ data class Task(
     @ColumnInfo(name = "category")
     val category: String = "",
     @ColumnInfo(name = "Emoji")
-    val emoji: String = "",
+    var emoji: String = "",
     @ColumnInfo(name = "urgency")
     val urgency: Float = 0F,
     @ColumnInfo(name = "importance")

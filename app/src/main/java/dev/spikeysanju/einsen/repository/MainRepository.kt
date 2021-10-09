@@ -1,5 +1,9 @@
 package dev.spikeysanju.einsen.repository
 
+import androidx.paging.Pager
+import androidx.paging.PagingConfig
+import androidx.paging.PagingData
+import androidx.paging.PagingSource
 import dev.spikeysanju.einsen.data.local.db.EmojisDao
 import dev.spikeysanju.einsen.data.local.db.TaskDao
 import dev.spikeysanju.einsen.model.emoji.EmojiItem
@@ -93,4 +97,18 @@ class MainRepository @Inject constructor(
      * Delete all [Emojis].
      */
     suspend fun deleteAllEmojis() = emojisDao.deleteAllEmojis()
+
+    fun getEmojis(): Flow<PagingData<EmojiItem>> {
+        return Pager(
+            PagingConfig(
+                pageSize = 60,
+                prefetchDistance = 30,
+                enablePlaceholders = false,
+                maxSize = 200
+            )
+        ) { emojisDao.getEmojis() }.flow
+    }
+
+    val getAllEmojiss: PagingSource<Int, EmojiItem> = emojisDao.getEmojis()
+
 }

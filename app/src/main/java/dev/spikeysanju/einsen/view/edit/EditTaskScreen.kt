@@ -351,7 +351,7 @@ fun EditTaskScreen(viewModel: MainViewModel, actions: MainActions) {
 }
 
 @Composable
-private fun BottomSheetTitle() {
+internal fun BottomSheetTitle() {
     Text(
         modifier = Modifier.padding(start = 16.dp, top = 16.dp, bottom = 24.dp),
         text = stringResource(R.string.tetxt_choose_emoji),

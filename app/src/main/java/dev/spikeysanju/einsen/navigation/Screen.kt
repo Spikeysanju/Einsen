@@ -16,4 +16,5 @@ sealed class Screen(val route: String, @StringRes val resourceId: Int) {
     object TaskDetails : Screen("details", R.string.text_taskDetails)
     object About : Screen("about", R.string.text_about)
     object WebView : Screen("webview", R.string.text_webview)
+    object AllEmoji : Screen("all_emoji", R.string.text_all_emoji)
 }

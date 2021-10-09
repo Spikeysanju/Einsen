@@ -3,6 +3,10 @@ package dev.spikeysanju.einsen.view.viewmodel
 import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import androidx.paging.Pager
+import androidx.paging.PagingConfig
+import androidx.paging.PagingData
+import androidx.paging.cachedIn
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dev.spikeysanju.einsen.model.emoji.EmojiItem
 import dev.spikeysanju.einsen.model.task.Task
@@ -12,6 +16,7 @@ import dev.spikeysanju.einsen.utils.viewstate.EmojiViewState
 import dev.spikeysanju.einsen.utils.viewstate.SingleViewState
 import dev.spikeysanju.einsen.utils.viewstate.ViewState
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.collect
@@ -29,12 +34,14 @@ class MainViewModel @Inject constructor(private val repo: MainRepository) : View
     private val _singleViewState = MutableStateFlow<SingleViewState>(SingleViewState.Loading)
     private val _emojiViewState = MutableStateFlow<EmojiViewState>(EmojiViewState.Loading)
     private val _countState = MutableStateFlow<CountViewState>(CountViewState.Loading)
+    private val _currentEmoji = MutableStateFlow<String>("😄")
 
     // The UI collects from this StateFlow to get its state update
     val feed = _viewState.asStateFlow()
     val singleTask = _singleViewState.asStateFlow()
     val emoji = _emojiViewState.asStateFlow()
     val countState = _countState.asStateFlow()
+    val currentEmoji = _currentEmoji.asStateFlow()
 
     // get all task
     fun getAllTask() = viewModelScope.launch(Dispatchers.IO) {
@@ -133,7 +140,7 @@ class MainViewModel @Inject constructor(private val repo: MainRepository) : View
         }
     }
 
-    // get all task
+    // get all emoji's from db
     fun getAllEmojis() = viewModelScope.launch(Dispatchers.IO) {
         repo.getAllEmojis().distinctUntilChanged().collect { result ->
             try {
@@ -143,12 +150,32 @@ class MainViewModel @Inject constructor(private val repo: MainRepository) : View
                     _emojiViewState.value = EmojiViewState.Success(result)
                 }
             } catch (e: Exception) {
-                _viewState.value = ViewState.Error(e)
+                _emojiViewState.value = EmojiViewState.Error(e)
             }
         }
     }
 
     fun insertAllEmojis(emojiItem: List<EmojiItem>) = viewModelScope.launch(Dispatchers.IO) {
         repo.insert(emojiItem)
+    }
+
+
+    fun getEmojis(): Flow<PagingData<EmojiItem>> {
+        return Pager(PagingConfig(10)) {
+            repo.getAllEmojiss
+        }.flow.cachedIn(viewModelScope)
+    }
+
+    // update status
+    fun currentEmoji(emoji: String) = viewModelScope.launch {
+        try {
+            if (emoji.isEmpty()) {
+                _currentEmoji.value = "Select an emoji"
+            } else {
+                _currentEmoji.value = emoji
+            }
+        } catch (e: Exception) {
+            _currentEmoji.value = "❌"
+        }
     }
 }

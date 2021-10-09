@@ -1,5 +1,6 @@
 package dev.spikeysanju.einsen.data.local.db
 
+import androidx.paging.PagingSource
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
@@ -18,4 +19,7 @@ interface EmojisDao {
 
     @Query("DELETE FROM emojis")
     suspend fun deleteAllEmojis()
+
+    @Query("SELECT * FROM emojis")
+    fun getEmojis(): PagingSource<Int, EmojiItem>
 }
