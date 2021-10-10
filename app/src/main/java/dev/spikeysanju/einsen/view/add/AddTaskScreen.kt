@@ -78,7 +78,7 @@ fun AddTaskScreen(viewModel: MainViewModel, actions: MainActions) {
 
     // get current emoji
     viewModel.currentEmoji.collectAsState().value.apply {
-        taskState.emoji = this
+        taskState = taskState.copy(emoji = this)
     }
 
     // Add Task Screen content

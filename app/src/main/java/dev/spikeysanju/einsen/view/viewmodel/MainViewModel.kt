@@ -3,10 +3,6 @@ package dev.spikeysanju.einsen.view.viewmodel
 import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import androidx.paging.Pager
-import androidx.paging.PagingConfig
-import androidx.paging.PagingData
-import androidx.paging.cachedIn
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dev.spikeysanju.einsen.model.emoji.EmojiItem
 import dev.spikeysanju.einsen.model.task.Task
@@ -16,7 +12,6 @@ import dev.spikeysanju.einsen.utils.viewstate.EmojiViewState
 import dev.spikeysanju.einsen.utils.viewstate.SingleViewState
 import dev.spikeysanju.einsen.utils.viewstate.ViewState
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.collect
@@ -140,31 +135,6 @@ class MainViewModel @Inject constructor(private val repo: MainRepository) : View
         }
     }
 
-    // get all emoji's from db
-    fun getAllEmojis() = viewModelScope.launch(Dispatchers.IO) {
-        repo.getAllEmojis().distinctUntilChanged().collect { result ->
-            try {
-                if (result.isNullOrEmpty()) {
-                    _emojiViewState.value = EmojiViewState.Empty
-                } else {
-                    _emojiViewState.value = EmojiViewState.Success(result)
-                }
-            } catch (e: Exception) {
-                _emojiViewState.value = EmojiViewState.Error(e)
-            }
-        }
-    }
-
-    fun insertAllEmojis(emojiItem: List<EmojiItem>) = viewModelScope.launch(Dispatchers.IO) {
-        repo.insert(emojiItem)
-    }
-
-
-    fun getEmojis(): Flow<PagingData<EmojiItem>> {
-        return Pager(PagingConfig(10)) {
-            repo.getAllEmojiss
-        }.flow.cachedIn(viewModelScope)
-    }
 
     // update status
     fun currentEmoji(emoji: String) = viewModelScope.launch {

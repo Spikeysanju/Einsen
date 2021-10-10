@@ -79,6 +79,20 @@ fun EditTaskScreen(viewModel: MainViewModel, actions: MainActions) {
         )
     }
 
+    // All Task State
+    var taskID by remember { mutableStateOf(0) }
+    var titleState by remember { mutableStateOf("") }
+    var descriptionState by remember { mutableStateOf("") }
+    var categoryState by remember { mutableStateOf("") }
+    var emojiState by remember { mutableStateOf("") }
+    var urgencyState by remember { mutableStateOf(0F) }
+    var importanceState by remember { mutableStateOf(0F) }
+    var dueState by remember { mutableStateOf("18/12/1998") }
+    var priorityState by remember { mutableStateOf(Priority.IMPORTANT) }
+    var isCompletedState by remember { mutableStateOf(false) }
+    var createdAtState by remember { mutableStateOf(0L) }
+    val updatedAtState by remember { mutableStateOf(System.currentTimeMillis()) }
+
     // Slider Step count
     val stepCount by remember { mutableStateOf(5) }
 
@@ -117,8 +131,20 @@ fun EditTaskScreen(viewModel: MainViewModel, actions: MainActions) {
             }
             is SingleViewState.Success -> {
 
-                // update task to current state
-                taskState = taskResult.task
+                // update the task state with latest value
+                taskResult.task.apply {
+                    taskID = this.id
+                    titleState = this.title
+                    descriptionState = this.description
+                    categoryState = this.category
+                    emojiState = this.emoji
+                    urgencyState = this.urgency
+                    importanceState = this.importance
+                    priorityState = this.priority
+                    dueState = this.due
+                    isCompletedState = this.isCompleted
+                    createdAtState = this.createdAt
+                }
 
                 /*
                 Check if the current emoji from backstack is empty or not.
@@ -126,10 +152,10 @@ fun EditTaskScreen(viewModel: MainViewModel, actions: MainActions) {
                 the [EmojiState]
                  */
                 val currentEmoji = viewModel.currentEmoji.collectAsState().value
-                if (currentEmoji.isEmpty()) {
-                    taskState.emoji = taskResult.task.emoji
+                emojiState = if (currentEmoji.isEmpty()) {
+                    taskResult.task.emoji
                 } else {
-                    taskState.emoji = currentEmoji
+                    currentEmoji
                 }
 
                 LazyColumn(state = listState, contentPadding = PaddingValues(bottom = 24.dp)) {
@@ -142,7 +168,7 @@ fun EditTaskScreen(viewModel: MainViewModel, actions: MainActions) {
                             contentAlignment = Alignment.Center
                         ) {
                             EmojiPlaceHolder(
-                                emoji = taskState.emoji,
+                                emoji = emojiState,
                                 onSelect = {
                                     scope.launch {
                                         actions.gotoAllEmoji.invoke()
@@ -157,9 +183,9 @@ fun EditTaskScreen(viewModel: MainViewModel, actions: MainActions) {
                         Spacer(modifier = Modifier.height(24.dp))
                         EinsenInputTextField(
                             title = stringResource(R.string.text_title),
-                            value = taskState.title
+                            value = titleState
                         ) {
-                            taskState = taskState.copy(title = it)
+                            titleState = it
                         }
                     }
 
@@ -168,9 +194,9 @@ fun EditTaskScreen(viewModel: MainViewModel, actions: MainActions) {
                         Spacer(modifier = Modifier.height(24.dp))
                         EinsenInputTextField(
                             title = stringResource(R.string.text_description),
-                            value = taskState.description
+                            value = descriptionState
                         ) {
-                            taskState = taskState.copy(description = it)
+                            descriptionState = it
                         }
                     }
 
@@ -179,9 +205,9 @@ fun EditTaskScreen(viewModel: MainViewModel, actions: MainActions) {
                         Spacer(modifier = Modifier.height(24.dp))
                         EinsenInputTextField(
                             title = stringResource(R.string.text_category),
-                            value = taskState.category
+                            value = categoryState
                         ) {
-                            taskState = taskState.copy(category = it)
+                            categoryState = it
                         }
                     }
 
@@ -201,8 +227,8 @@ fun EditTaskScreen(viewModel: MainViewModel, actions: MainActions) {
                                 color = MaterialTheme.colors.onPrimary
                             )
                             Spacer(modifier = Modifier.height(12.dp))
-                            StepSlider(stepCount = stepCount, value = taskState.urgency) {
-                                taskState = taskState.copy(urgency = it)
+                            StepSlider(stepCount = stepCount, value = urgencyState) {
+                                urgencyState = it
                             }
                         }
                     }
@@ -217,8 +243,8 @@ fun EditTaskScreen(viewModel: MainViewModel, actions: MainActions) {
                                 color = MaterialTheme.colors.onPrimary
                             )
                             Spacer(modifier = Modifier.height(12.dp))
-                            StepSlider(stepCount = stepCount, value = taskState.importance) {
-                                taskState = taskState.copy(importance = it)
+                            StepSlider(stepCount = stepCount, value = importanceState) {
+                                importanceState = it
                             }
                         }
                     }
@@ -230,16 +256,31 @@ fun EditTaskScreen(viewModel: MainViewModel, actions: MainActions) {
                         PrimaryButton(title = stringResource(R.string.text_save_task)) {
 
                             // calculate the average value by adding urgency + priority / 2
-                            val priorityAverage = taskState.importance + taskState.urgency / 2
-                            taskState =
-                                taskState.copy(priority = calculatePriority(priorityAverage))
+                            val priorityAverage = importanceState + urgencyState / 2
+                            priorityState = calculatePriority(priorityAverage)
+
+                            val task = task {
+                                title = titleState
+                                description = descriptionState
+                                category = categoryState
+                                emoji = emojiState
+                                urgency = urgencyState
+                                importance = importanceState
+                                priority = priorityState
+                                due = dueState
+                                isCompleted = isCompletedState
+                                createdAt = createdAtState
+                                updatedAt = updatedAtState
+                                id = taskID
+                            }
+
 
                             when {
-                                taskState.title.isEmpty() && taskState.description.isEmpty() || taskState.category.isEmpty() -> {
+                                titleState.isEmpty() && descriptionState.isEmpty() || categoryState.isEmpty() -> {
                                     showToast(context, "Please fill all the fields & save the task")
                                 }
                                 else -> {
-                                    viewModel.insertTask(taskState).run {
+                                    viewModel.insertTask(task).run {
                                         showToast(context, "Task updated successfully!")
                                         actions.upPress.invoke()
                                     }

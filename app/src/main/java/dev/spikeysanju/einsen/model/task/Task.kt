@@ -8,13 +8,13 @@ import androidx.room.PrimaryKey
 @Entity(tableName = "task")
 data class Task(
     @ColumnInfo(name = "title")
-    var title: String = "",
+    val title: String = "",
     @ColumnInfo(name = "description")
     val description: String = "",
     @ColumnInfo(name = "category")
     val category: String = "",
     @ColumnInfo(name = "Emoji")
-    var emoji: String = "",
+    val emoji: String = "",
     @ColumnInfo(name = "urgency")
     val urgency: Float = 0F,
     @ColumnInfo(name = "importance")

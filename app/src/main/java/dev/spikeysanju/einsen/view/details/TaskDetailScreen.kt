@@ -132,7 +132,7 @@ fun TaskDetailsScreen(viewModel: MainViewModel, action: MainActions) {
 
                     // update the task state with latest value
                     val task = result.task
-                    taskState = result.task
+                    taskState = task
 
                     // Emoji placeholder
                     item {
