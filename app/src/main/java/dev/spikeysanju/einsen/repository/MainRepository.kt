@@ -1,8 +1,6 @@
 package dev.spikeysanju.einsen.repository
 
-import dev.spikeysanju.einsen.data.local.db.EmojisDao
 import dev.spikeysanju.einsen.data.local.db.TaskDao
-import dev.spikeysanju.einsen.model.emoji.EmojiItem
 import dev.spikeysanju.einsen.model.task.Task
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
@@ -15,8 +13,7 @@ import javax.inject.Inject
  */
 
 class MainRepository @Inject constructor(
-    private val taskDao: TaskDao,
-    private val emojisDao: EmojisDao
+    private val taskDao: TaskDao
 ) {
 
     /**
@@ -71,26 +68,4 @@ class MainRepository @Inject constructor(
      */
     fun getTaskByPriorityCount(priority: String): Flow<Int> =
         taskDao.getTaskByPriorityCount(priority).flowOn(Dispatchers.IO).conflate()
-
-    /**
-     * *********************************************************************************************
-     * Emoji's CRUD operations
-     */
-
-    /**
-     * Get a all [Emojis].
-     */
-    fun getAllEmojis(): Flow<List<EmojiItem>> =
-        emojisDao.getAllEmojis().flowOn(Dispatchers.IO).conflate()
-
-    /**
-     * Insert a new [Emojis].
-     * @param emojiItem
-     */
-    suspend fun insert(emojiItem: List<EmojiItem>) = emojisDao.insertEmojis(emojiItem)
-
-    /**
-     * Delete all [Emojis].
-     */
-    suspend fun deleteAllEmojis() = emojisDao.deleteAllEmojis()
 }

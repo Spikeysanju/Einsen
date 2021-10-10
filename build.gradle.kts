@@ -15,13 +15,15 @@ buildscript {
     val hiltComposeVersion by extra("1.0.0-alpha03")
     val hiltCompilerVersion by extra("1.0.0")
     val kotlinVersion by extra("1.5.21")
-    val moshiVersion by extra(":1.11.0")
     val systemUIControllerVersion by extra("0.17.0")
     val expressoVersion by extra("3.3.0")
     val kotlinSerializationVersion by extra("1.2.1")
-    val navigationAnimation by extra("0.17.0")
+    val navigationAnimation by extra("0.19.0")
     val composeAnimation by extra("1.1.0-alpha02")
     val lottieAnimation by extra("lottie-compose:1.0.0-rc02-1")
+    val pagingVersion by extra("1.0.0-alpha07")
+    val workManagerVersion by extra("2.6.0")
+    val navigationMaterialVersion by extra("0 19.0")
 
     repositories {
         google()

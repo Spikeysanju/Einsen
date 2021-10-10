@@ -42,9 +42,11 @@ android {
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11
     }
+
     kotlinOptions {
         jvmTarget = "11"
     }
+
     buildFeatures {
         compose = true
         kotlinOptions.freeCompilerArgs += "-Xopt-in=androidx.compose.material.ExperimentalMaterialApi"
@@ -53,7 +55,7 @@ android {
         kotlinOptions.freeCompilerArgs += "-Xopt-in=androidx.compose.animation.ExperimentalAnimationApi"
         kotlinOptions.freeCompilerArgs += "-Xopt-in=androidx.compose.animation.graphics.ExperimentalAnimationGraphicsApi"
         kotlinOptions.freeCompilerArgs += "-Xopt-in=kotlinx.serialization.ExperimentalSerializationApi"
-
+        kotlinOptions.freeCompilerArgs += "-Xopt-in=com.google.accompanist.navigation.material.ExperimentalMaterialNavigationApi"
     }
 
     composeOptions {
@@ -86,7 +88,7 @@ dependencies {
 
     // Room
     implementation("androidx.room:room-runtime:${rootProject.extra["roomVersion"]}")
-    kapt("org.xerial:sqlite-jdbc:3.34.0")
+    kapt("org.xerial:sqlite-jdbc:3.36.0.3")
     kapt("androidx.room:room-compiler:${rootProject.extra["roomVersion"]}")
     implementation("androidx.room:room-ktx:${rootProject.extra["roomVersion"]}")
 
@@ -111,11 +113,15 @@ dependencies {
 
     // Compose Navigation Animation
     implementation("com.google.accompanist:accompanist-navigation-animation:${rootProject.extra["navigationAnimation"]}")
+    implementation("com.google.accompanist:accompanist-navigation-material:${rootProject.extra["navigationAnimation"]}")
 
     // Lottie
     implementation("com.airbnb.android:${rootProject.extra["lottieAnimation"]}")
 
     // Kotlin + coroutines
-    implementation("androidx.work:work-runtime-ktx:2.6.0")
+    implementation("androidx.work:work-runtime-ktx:${rootProject.extra["workManagerVersion"]}")
+
+    // Compose Paging
+    implementation("androidx.paging:paging-compose:${rootProject.extra["pagingVersion"]}")
 
 }

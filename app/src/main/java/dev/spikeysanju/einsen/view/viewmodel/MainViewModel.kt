@@ -29,12 +29,14 @@ class MainViewModel @Inject constructor(private val repo: MainRepository) : View
     private val _singleViewState = MutableStateFlow<SingleViewState>(SingleViewState.Loading)
     private val _emojiViewState = MutableStateFlow<EmojiViewState>(EmojiViewState.Loading)
     private val _countState = MutableStateFlow<CountViewState>(CountViewState.Loading)
+    private val _currentEmoji = MutableStateFlow("")
 
     // The UI collects from this StateFlow to get its state update
     val feed = _viewState.asStateFlow()
     val singleTask = _singleViewState.asStateFlow()
     val emoji = _emojiViewState.asStateFlow()
     val countState = _countState.asStateFlow()
+    val currentEmoji = _currentEmoji.asStateFlow()
 
     // get all task
     fun getAllTask() = viewModelScope.launch(Dispatchers.IO) {
@@ -133,22 +135,16 @@ class MainViewModel @Inject constructor(private val repo: MainRepository) : View
         }
     }
 
-    // get all task
-    fun getAllEmojis() = viewModelScope.launch(Dispatchers.IO) {
-        repo.getAllEmojis().distinctUntilChanged().collect { result ->
-            try {
-                if (result.isNullOrEmpty()) {
-                    _emojiViewState.value = EmojiViewState.Empty
-                } else {
-                    _emojiViewState.value = EmojiViewState.Success(result)
-                }
-            } catch (e: Exception) {
-                _viewState.value = ViewState.Error(e)
+    // update status
+    fun currentEmoji(emoji: String) = viewModelScope.launch {
+        try {
+            if (emoji.isEmpty()) {
+                _currentEmoji.value = "Select an emoji"
+            } else {
+                _currentEmoji.value = emoji
             }
+        } catch (e: Exception) {
+            _currentEmoji.value = "❌"
         }
-    }
-
-    fun insertAllEmojis(emojiItem: List<EmojiItem>) = viewModelScope.launch(Dispatchers.IO) {
-        repo.insert(emojiItem)
     }
 }
