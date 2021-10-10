@@ -68,5 +68,4 @@ class MainRepository @Inject constructor(
      */
     fun getTaskByPriorityCount(priority: String): Flow<Int> =
         taskDao.getTaskByPriorityCount(priority).flowOn(Dispatchers.IO).conflate()
-
 }

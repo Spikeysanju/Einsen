@@ -37,9 +37,7 @@ class MainActivity : ComponentActivity() {
          * Observe the Theme Mode
          */
         observeThemeMode()
-
     }
-
 
     @Composable
     fun EinsenMain() {

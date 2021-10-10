@@ -37,7 +37,6 @@ object EndPoints {
     const val EMOJI = "emoji"
 }
 
-
 @Composable
 fun NavGraph(toggleTheme: () -> Unit) {
     val bottomSheetNavigator = rememberBottomSheetNavigator()
@@ -166,14 +165,17 @@ fun NavGraph(toggleTheme: () -> Unit) {
              */
             bottomSheet(route = Screen.AllEmoji.route) {
                 val viewModel = hiltViewModel<MainViewModel>(it)
-                AllEmojiScreen(viewModel, actions, onSelect = { selectedEmoji ->
-                    navController.previousBackStackEntry?.savedStateHandle?.set(
-                        EndPoints.EMOJI,
-                        selectedEmoji
-                    ).apply {
-                        actions.popBackStack.invoke()
+                AllEmojiScreen(
+                    viewModel, actions,
+                    onSelect = { selectedEmoji ->
+                        navController.previousBackStackEntry?.savedStateHandle?.set(
+                            EndPoints.EMOJI,
+                            selectedEmoji
+                        ).apply {
+                            actions.popBackStack.invoke()
+                        }
                     }
-                })
+                )
             }
         }
     }

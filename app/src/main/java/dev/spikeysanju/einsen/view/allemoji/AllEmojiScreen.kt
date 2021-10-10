@@ -114,8 +114,4 @@ fun AllEmojiScreen(viewModel: MainViewModel, actions: MainActions, onSelect: (St
             }
         }
     }
-
-
 }
-
-

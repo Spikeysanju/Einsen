@@ -135,7 +135,6 @@ class MainViewModel @Inject constructor(private val repo: MainRepository) : View
         }
     }
 
-
     // update status
     fun currentEmoji(emoji: String) = viewModelScope.launch {
         try {

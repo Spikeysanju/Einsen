@@ -274,7 +274,6 @@ fun EditTaskScreen(viewModel: MainViewModel, actions: MainActions) {
                                 id = taskID
                             }
 
-
                             when {
                                 titleState.isEmpty() && descriptionState.isEmpty() || categoryState.isEmpty() -> {
                                     showToast(context, "Please fill all the fields & save the task")
