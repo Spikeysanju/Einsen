@@ -68,7 +68,7 @@ fun NavGraph(toggleTheme: () -> Unit) {
                 Screen.AddTask.route
             ) {
                 val viewModel = hiltViewModel<MainViewModel>(it)
-                navController.currentBackStackEntry?.savedStateHandle?.getLiveData<String>("emoji")
+                navController.currentBackStackEntry?.savedStateHandle?.getLiveData<String>(EndPoints.EMOJI)
                     ?.observeForever { result ->
                         viewModel.currentEmoji(result)
                     }
@@ -120,6 +120,10 @@ fun NavGraph(toggleTheme: () -> Unit) {
                 val taskID = it.arguments?.getInt(EndPoints.ID)
                     ?: throw IllegalStateException("'Task ID' shouldn't be null")
 
+                navController.currentBackStackEntry?.savedStateHandle?.getLiveData<String>(EndPoints.EMOJI)
+                    ?.observeForever { result ->
+                        viewModel.currentEmoji(result)
+                    }
                 viewModel.findTaskByID(taskID)
                 EditTaskScreen(viewModel, actions)
             }
@@ -167,7 +171,7 @@ fun NavGraph(toggleTheme: () -> Unit) {
                         EndPoints.EMOJI,
                         selectedEmoji
                     ).apply {
-                        actions.upPress.invoke()
+                        actions.popBackStack.invoke()
                     }
                 })
             }
@@ -183,6 +187,10 @@ class MainActions(navController: NavController) {
 
     val upPress: () -> Unit = {
         navController.navigateUp()
+    }
+
+    val popBackStack: () -> Unit = {
+        navController.popBackStack()
     }
 
     val gotoAddTask: () -> Unit = {

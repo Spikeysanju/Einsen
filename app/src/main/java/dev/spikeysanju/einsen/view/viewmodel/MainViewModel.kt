@@ -34,7 +34,7 @@ class MainViewModel @Inject constructor(private val repo: MainRepository) : View
     private val _singleViewState = MutableStateFlow<SingleViewState>(SingleViewState.Loading)
     private val _emojiViewState = MutableStateFlow<EmojiViewState>(EmojiViewState.Loading)
     private val _countState = MutableStateFlow<CountViewState>(CountViewState.Loading)
-    private val _currentEmoji = MutableStateFlow<String>("😄")
+    private val _currentEmoji = MutableStateFlow("")
 
     // The UI collects from this StateFlow to get its state update
     val feed = _viewState.asStateFlow()

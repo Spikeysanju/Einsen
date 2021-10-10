@@ -4,6 +4,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.lazy.GridCells
 import androidx.compose.foundation.lazy.LazyVerticalGrid
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material.ModalBottomSheetValue
 import androidx.compose.material.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
@@ -33,8 +34,9 @@ fun AllEmojiScreen(viewModel: MainViewModel, actions: MainActions, onSelect: (St
     val scope = rememberCoroutineScope()
     val context = LocalContext.current
 
-    // Emoji and bottom sheet state
+    // List, Emoji and Bottom Sheet State
     var emojiState by remember { mutableStateOf("") }
+    val listState = rememberLazyListState()
     val bottomSheetState = rememberModalBottomSheetState(ModalBottomSheetValue.Hidden)
 
     // Emoji List state
@@ -43,6 +45,7 @@ fun AllEmojiScreen(viewModel: MainViewModel, actions: MainActions, onSelect: (St
     Column {
         BottomSheetTitle()
         LazyVerticalGrid(
+            state = listState,
             cells = GridCells.Adaptive(minSize = 60.dp)
         ) {
 
