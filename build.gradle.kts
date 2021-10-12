@@ -24,6 +24,7 @@ buildscript {
     val pagingVersion by extra("1.0.0-alpha07")
     val workManagerVersion by extra("2.6.0")
     val navigationMaterialVersion by extra("0 19.0")
+    val logcatVersion by extra("0.1")
 
     repositories {
         google()

@@ -21,6 +21,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -46,6 +47,8 @@ import dev.spikeysanju.einsen.ui.theme.typography
 import dev.spikeysanju.einsen.utils.calculatePriority
 import dev.spikeysanju.einsen.utils.showToast
 import dev.spikeysanju.einsen.utils.viewstate.SingleViewState
+import dev.spikeysanju.einsen.view.animationviewstate.AnimationViewState
+import dev.spikeysanju.einsen.view.animationviewstate.ScreenState
 import dev.spikeysanju.einsen.view.viewmodel.MainViewModel
 import kotlinx.coroutines.launch
 
@@ -59,30 +62,10 @@ fun EditTaskScreen(viewModel: MainViewModel, actions: MainActions) {
     // List and bottom sheet state
     val listState = rememberLazyListState()
 
-    // Task State value
-    var taskState by remember {
-        mutableStateOf(
-            task {
-                title = ""
-                description = ""
-                category = ""
-                emoji = ""
-                urgency = 0F
-                importance = 0F
-                priority = Priority.IMPORTANT
-                due = "18/12/1998"
-                isCompleted = false
-                createdAt = 0L
-                updatedAt = System.currentTimeMillis()
-                id = 0
-            }
-        )
-    }
-
     // All Task State
-    var taskID by remember { mutableStateOf(0) }
-    var titleState by remember { mutableStateOf("") }
-    var descriptionState by remember { mutableStateOf("") }
+    var taskID by rememberSaveable { mutableStateOf(0) }
+    var titleState by rememberSaveable { mutableStateOf("") }
+    var descriptionState by rememberSaveable { mutableStateOf("") }
     var categoryState by remember { mutableStateOf("") }
     var emojiState by remember { mutableStateOf("") }
     var urgencyState by remember { mutableStateOf(0F) }
@@ -124,10 +107,33 @@ fun EditTaskScreen(viewModel: MainViewModel, actions: MainActions) {
 
         when (val taskResult = viewModel.singleTask.collectAsState().value) {
             SingleViewState.Empty -> {
+                AnimationViewState(
+                    title = stringResource(R.string.text_no_task_title),
+                    description = stringResource(R.string.text_no_task_description),
+                    callToAction = stringResource(R.string.text_add_a_task),
+                    ScreenState.EMPTY,
+                    actions = actions.gotoAddTask
+                )
             }
             is SingleViewState.Error -> {
+                AnimationViewState(
+                    title = stringResource(R.string.text_error_title),
+                    description = stringResource(
+                        R.string.text_error_description
+                    ),
+                    callToAction = stringResource(R.string.text_add_a_task),
+                    ScreenState.ERROR,
+                    actions = actions.gotoAddTask
+                )
             }
             SingleViewState.Loading -> {
+                AnimationViewState(
+                    title = stringResource(R.string.text_no_task_title),
+                    description = stringResource(R.string.text_no_task_description),
+                    callToAction = stringResource(R.string.text_add_a_task),
+                    ScreenState.LOADING,
+                    actions = actions.gotoAddTask
+                )
             }
             is SingleViewState.Success -> {
 
