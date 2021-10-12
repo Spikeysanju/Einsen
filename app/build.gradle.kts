@@ -124,4 +124,8 @@ dependencies {
     // Compose Paging
     implementation("androidx.paging:paging-compose:${rootProject.extra["pagingVersion"]}")
 
+    // Square Logcat
+    implementation("com.squareup.logcat:logcat:${rootProject.extra["logcatVersion"]}")
+
 }
+

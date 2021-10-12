@@ -22,6 +22,7 @@ import dev.spikeysanju.einsen.view.allemoji.AllEmojiScreen
 import dev.spikeysanju.einsen.view.dashboard.DashboardScreen
 import dev.spikeysanju.einsen.view.details.TaskDetailsScreen
 import dev.spikeysanju.einsen.view.edit.EditTaskScreen
+import dev.spikeysanju.einsen.view.splash.SplashScreen
 import dev.spikeysanju.einsen.view.task.AllTaskScreen
 import dev.spikeysanju.einsen.view.viewmodel.MainViewModel
 import dev.spikeysanju.einsen.view.webview.WebViewScreen
@@ -45,10 +46,14 @@ fun NavGraph(toggleTheme: () -> Unit) {
 
     ModalBottomSheetLayout(bottomSheetNavigator) {
 
-        AnimatedNavHost(navController, startDestination = Screen.Dashboard.route) {
+        AnimatedNavHost(navController, startDestination = Screen.Splash.route) {
+
+            composable(Screen.Splash.route) {
+                SplashScreen(actions)
+            }
 
             /**
-             * Navigates to Dashboard.
+             * Navigates to [Dashboard].
              */
             composable(
                 Screen.Dashboard.route
@@ -61,7 +66,7 @@ fun NavGraph(toggleTheme: () -> Unit) {
             }
 
             /**
-             * Navigates to Add Notes.
+             * Navigates to [AddNotes].
              */
             composable(
                 Screen.AddTask.route
@@ -75,7 +80,7 @@ fun NavGraph(toggleTheme: () -> Unit) {
             }
 
             /**
-             * Navigates to All Task.
+             * Navigates to [AllTask].
              * @param priority
              */
             composable(
@@ -92,7 +97,7 @@ fun NavGraph(toggleTheme: () -> Unit) {
             }
 
             /**
-             * Navigates to Task Details.
+             * Navigates to [TaskDetails].
              * @param id
              */
             composable(
@@ -108,7 +113,7 @@ fun NavGraph(toggleTheme: () -> Unit) {
             }
 
             /**
-             * Navigates to Edit Task.
+             * Navigates to [EditTask].
              * @param id
              */
             composable(
@@ -138,7 +143,7 @@ fun NavGraph(toggleTheme: () -> Unit) {
             }
 
             /**
-             * Navigates to WebView.
+             * Navigates to [WebView].
              * @param title
              * @param url
              */
@@ -158,7 +163,7 @@ fun NavGraph(toggleTheme: () -> Unit) {
             }
 
             /**
-             * Navigates to All Emoji Screen.
+             * Navigates to [AllEmoji].
              * @param viewModel
              * @param actions
              * @param onSelect
@@ -182,7 +187,7 @@ fun NavGraph(toggleTheme: () -> Unit) {
 }
 
 /**
- * A class to define Navigation Route to All Flows of this app with the help of NavController
+ * A class to define Navigation Route to All Flows of this app with the help of [NavController]
  * @param navController
  */
 class MainActions(navController: NavController) {
@@ -193,6 +198,10 @@ class MainActions(navController: NavController) {
 
     val popBackStack: () -> Unit = {
         navController.popBackStack()
+    }
+
+    val gotoDashboard: () -> Unit = {
+        navController.navigate(Screen.Dashboard.route)
     }
 
     val gotoAddTask: () -> Unit = {

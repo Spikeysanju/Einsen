@@ -9,6 +9,7 @@ import dev.spikeysanju.einsen.R
  * @param resourceId
  */
 sealed class Screen(val route: String, @StringRes val resourceId: Int) {
+    object Splash : Screen("splash", R.string.text_splash)
     object Dashboard : Screen("dashboard", R.string.text_dashboard)
     object AddTask : Screen("add_task", R.string.text_addTask)
     object EditTask : Screen("edit_task", R.string.text_editTask)
