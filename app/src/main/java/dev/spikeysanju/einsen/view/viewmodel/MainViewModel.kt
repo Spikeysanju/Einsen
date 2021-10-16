@@ -144,7 +144,7 @@ class MainViewModel @Inject constructor(private val repo: MainRepository) : View
                 _currentEmoji.value = emoji
             }
         } catch (e: Exception) {
-            _currentEmoji.value = "❌"
+            _currentEmoji.value = "⚠️"
         }
     }
 }

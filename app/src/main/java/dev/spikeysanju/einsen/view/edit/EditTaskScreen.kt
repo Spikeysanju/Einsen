@@ -138,7 +138,8 @@ fun EditTaskScreen(viewModel: MainViewModel, actions: MainActions) {
             is SingleViewState.Success -> {
 
                 // update the task state with latest value
-                taskResult.task.apply {
+
+                with(taskResult.task) {
                     taskID = this.id
                     titleState = this.title
                     descriptionState = this.description
