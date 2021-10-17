@@ -1,6 +1,6 @@
 ![GitHub Cards Preview](https://github.com/Spikeysanju/Expenso/blob/master/art/EXPENSO-ANDROID.png?raw=true)
 
-# Expenso 📊
+# 🎯 Einsen 
 Einsen is a prioritization app that uses Eisenhower matrix technique as workflow to prioritize a
 list of tasks or agenda according to their urgency and importance.<br />
 
@@ -18,13 +18,11 @@ list of tasks or agenda according to their urgency and importance.<br />
 
 <br />
 
-## 🔥 Features
-
 ## 🌞 Day Mode
 
 |   Dashboard    | All Task    |   Task Details    |   Add Task    |   Emoji    |   About    | Empty State    |
 |---	|---	|---	|---	|---	|---	|---	|
-|  [](https://github.com/Spikeysanju/Einsen/blob/master/art/dashboard_day.png)    |  [](https://github.com/Spikeysanju/Einsen/blob/master/art/all_task_day.png)    |   [](https://github.com/Spikeysanju/Einsen/blob/master/art/task_details_day_v2.png)    |   [](https://github.com/Spikeysanju/Einsen/blob/master/art/add_task_day.png)    |   [](https://github.com/Spikeysanju/Einsen/blob/master/art/choose_emoji_day.png)    | [](https://github.com/Spikeysanju/Einsen/blob/master/art/about_day.png)    |   [](https://github.com/Spikeysanju/Einsen/blob/master/art/empty_state_day.png)
+|  ![](https://github.com/Spikeysanju/Einsen/blob/master/art/dashboard_day.png)    |  ![](https://github.com/Spikeysanju/Einsen/blob/master/art/all_task_day.png)    |   ![](https://github.com/Spikeysanju/Einsen/blob/master/art/task_details_day_v2.png)    |   ![](https://github.com/Spikeysanju/Einsen/blob/master/art/add_task_day.png)    |   ![](https://github.com/Spikeysanju/Einsen/blob/master/art/choose_emoji_day.png)    | ![](https://github.com/Spikeysanju/Einsen/blob/master/art/about_day.png)    |   ![](https://github.com/Spikeysanju/Einsen/blob/master/art/empty_state_day.png)
 
 <br />
 
@@ -32,7 +30,7 @@ list of tasks or agenda according to their urgency and importance.<br />
 
 |   Dashboard    | All Task    |   Task Details    |   Add Task    |   Emoji    |   About    | Empty State    |
 |---	|---	|---	|---	|---	|---	|---	|
-|  [](https://github.com/Spikeysanju/Einsen/blob/master/art/dashboard_night.png)    |  [](https://github.com/Spikeysanju/Einsen/blob/master/art/all_task_night.png)    |   [](https://github.com/Spikeysanju/Einsen/blob/master/art/task_details_night.png)    |   [](https://github.com/Spikeysanju/Einsen/blob/master/art/add_task_night.png)    |   [](https://github.com/Spikeysanju/Einsen/blob/master/art/choose_emoji_night.png)    | [](https://github.com/Spikeysanju/Einsen/blob/master/art/about_night.png)    |   [](https://github.com/Spikeysanju/Einsen/blob/master/art/empty_state_night.png)
+|  ![](https://github.com/Spikeysanju/Einsen/blob/master/art/dashboard_night.png)    |  ![](https://github.com/Spikeysanju/Einsen/blob/master/art/all_task_night.png)    |   ![](https://github.com/Spikeysanju/Einsen/blob/master/art/task_details_night.png)    |   ![](https://github.com/Spikeysanju/Einsen/blob/master/art/add_task_night.png)    |   ![](https://github.com/Spikeysanju/Einsen/blob/master/art/choose_emoji_night.png)    | ![](https://github.com/Spikeysanju/Einsen/blob/master/art/about_night.png)    |   ![](https://github.com/Spikeysanju/Einsen/blob/master/art/empty_state_night.png)
 
 <br />
 
@@ -156,7 +154,7 @@ build this project.
 
 <br />
 
-## Contribute 🤝
+## 🤝 Contribute 
 
 If you want to contribute to this app, you're always welcome!
 See [Contributing Guidelines](https://github.com/Spikeysanju/Expenso/blob/master/CONTRIBUTION.md).
