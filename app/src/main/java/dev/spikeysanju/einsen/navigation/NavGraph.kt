@@ -98,7 +98,7 @@ fun NavGraph(toggleTheme: () -> Unit) {
 
             /**
              * Navigates to [TaskDetails].
-             * @param id
+             * @param [id]
              */
             composable(
                 "${Screen.TaskDetails.route}/{id}",
