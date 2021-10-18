@@ -30,7 +30,6 @@
         android:label="@string/app_name"
         android:roundIcon="@drawable/einsen_logo"
         android:supportsRtl="true"
-        android:fullBackupContent="@xml/backup_descriptor"
         android:theme="@style/Theme.Einsen">
         <activity
             android:name=".MainActivity"
