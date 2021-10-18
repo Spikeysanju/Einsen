@@ -1,3 +1,22 @@
+<!--
+  ~ /*
+  ~  * Copyright 2021 Spikey Sanju
+  ~  *
+  ~  * Licensed under the Apache License, Version 2.0 (the "License");
+  ~  * you may not use this file except in compliance with the License.
+  ~  * You may obtain a copy of the License at
+  ~  *
+  ~  *     https://www.apache.org/licenses/LICENSE-2.0
+  ~  *
+  ~  * Unless required by applicable law or agreed to in writing, software
+  ~  * distributed under the License is distributed on an "AS IS" BASIS,
+  ~  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~  * See the License for the specific language governing permissions and
+  ~  * limitations under the License.
+  ~  */
+  ~
+  -->
+
 <resources>
     <string name="app_name">Einsen</string>
     <string name="text_splash">Splash</string>
@@ -5,10 +24,8 @@
     <string name="text_addTask">Add Task</string>
     <string name="text_editTask">Edit Task</string>
     <string name="text_about">About</string>
-    <string name="text_details">Details</string>
     <string name="text_allTask">All Task</string>
     <string name="text_taskDetails">Task Details</string>
-    <string name="text_settings">Settings</string>
     <string name="text_no_task_title">No tasks yet</string>
     <string name="text_no_task_description">Be sure to add your first task!</string>
     <string name="text_add_a_task">Add a task</string>
@@ -17,21 +34,13 @@
     <string name="text_category">Category</string>
     <string name="text_importance">Importance</string>
     <string name="text_save_task">Save Task</string>
-    <string name="text_delete">Delete</string>
-    <string name="text_reset">Reset</string>
-    <string name="text_timer">25:00</string>
     <string name="text_urgency">Urgency</string>
-    <string name="text_priority">Priority</string>
     <string name="tetxt_choose_emoji">Choose Emoji</string>
     <string name="text_edit_button">Edit Button</string>
     <string name="text_delete_button">Delete Button</string>
     <string name="text_share_button">Share Button</string>
-    <string name="text_complete_task">Complete Task</string>
     <string name="text_complete">Complete</string>
     <string name="text_incomplete">Incomplete</string>
-    <string name="text_todo">Todo</string>
-    <string name="text_doing">Doing</string>
-    <string name="text_done">Done</string>
     <string name="text_do_it_now">Do it now</string>
     <string name="text_decide_when_todo">Decide when to do</string>
     <string name="text_important_not_urgent">Important Not Urgent</string>
@@ -43,7 +52,6 @@
     <string name="text_my_dashboard">My Dashboard</string>
     <string name="back_button">Back Button</string>
     <string name="text_bulb_turn_on">Day mode on</string>
-    <string name="text_bulb_turn_off">Dark mode on</string>
     <string name="text_attribution_and_license"><![CDATA[Attribution & License]]></string>
     <string name="text_visit">Visit</string>
     <string name="text_author">Author</string>

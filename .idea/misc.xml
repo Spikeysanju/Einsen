@@ -5,6 +5,7 @@
       <map>
         <entry key="../../../../layout/compose-model-1624222073867.xml" value="2.0" />
         <entry key="../../../../layout/compose-model-1632471243303.xml" value="1.0425925925925925" />
+        <entry key="../../../../layout/compose-model-1634517014457.xml" value="2.0" />
         <entry key="app/src/main/res/drawable/ic_check.xml" value="0.10555555555555556" />
         <entry key="app/src/main/res/drawable/ic_delete.xml" value="0.10555555555555556" />
         <entry key="app/src/main/res/drawable/ic_edit.xml" value="0.10555555555555556" />
@@ -12,7 +13,7 @@
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="11" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_X" project-jdk-name="11" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">

@@ -1,3 +1,22 @@
+/*
+ *
+ *  * Copyright 2021 Spikey Sanju
+ *  *
+ *  * Licensed under the Apache License, Version 2.0 (the "License");
+ *  * you may not use this file except in compliance with the License.
+ *  * You may obtain a copy of the License at
+ *  *
+ *  *     https://www.apache.org/licenses/LICENSE-2.0
+ *  *
+ *  * Unless required by applicable law or agreed to in writing, software
+ *  * distributed under the License is distributed on an "AS IS" BASIS,
+ *  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *  * See the License for the specific language governing permissions and
+ *  * limitations under the License.
+ *
+ *
+ */
+
 plugins {
     id("com.android.application")
     id("kotlin-android")
@@ -25,7 +44,7 @@ android {
 
     lint {
         isCheckReleaseBuilds = false
-        isAbortOnError = false
+        isAbortOnError = true
     }
 
     buildTypes {
@@ -59,7 +78,7 @@ android {
     }
 
     composeOptions {
-        kotlinCompilerExtensionVersion = rootProject.extra["compose_version"] as String
+        kotlinCompilerExtensionVersion = rootProject.extra["composeVersion"] as String
     }
 }
 dependencies {
@@ -67,17 +86,17 @@ dependencies {
     implementation("androidx.core:core-ktx:${rootProject.extra["ktxCoreVersion"]}")
     implementation("androidx.appcompat:appcompat:${rootProject.extra["materialVersion"]}")
     implementation("com.google.android.material:material:${rootProject.extra["materialVersion"]}")
-    implementation("androidx.compose.ui:ui:${rootProject.extra["compose_version"]}")
+    implementation("androidx.compose.ui:ui:${rootProject.extra["composeVersion"]}")
     implementation("androidx.compose.animation:animation-graphics:${rootProject.extra["composeAnimation"]}")
-    implementation("androidx.compose.material:material:${rootProject.extra["compose_version"]}")
-    implementation("androidx.compose.ui:ui-tooling:${rootProject.extra["compose_version"]}")
+    implementation("androidx.compose.material:material:${rootProject.extra["composeVersion"]}")
+    implementation("androidx.compose.ui:ui-tooling:${rootProject.extra["composeVersion"]}")
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:${rootProject.extra["lifeCycleVersion"]}")
     implementation("androidx.activity:activity-compose:${rootProject.extra["composeActivityVersion"]}")
     implementation("androidx.hilt:hilt-work:1.0.0")
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.3")
     androidTestImplementation("androidx.test.espresso:espresso-core:${rootProject.extra["expressoVersion"]}")
-    androidTestImplementation("androidx.compose.ui:ui-test-junit4:${rootProject.extra["compose_version"]}")
+    androidTestImplementation("androidx.compose.ui:ui-test-junit4:${rootProject.extra["composeVersion"]}")
 
     // compose navigation
     implementation("androidx.navigation:navigation-compose:${rootProject.extra["composeNavigationVersion"]}")
@@ -88,7 +107,7 @@ dependencies {
 
     // Room
     implementation("androidx.room:room-runtime:${rootProject.extra["roomVersion"]}")
-    kapt("org.xerial:sqlite-jdbc:3.36.0.3")
+    kapt("org.xerial:sqlite-jdbc:${rootProject.extra["jdbcVersion"]}")
     kapt("androidx.room:room-compiler:${rootProject.extra["roomVersion"]}")
     implementation("androidx.room:room-ktx:${rootProject.extra["roomVersion"]}")
 
@@ -117,12 +136,6 @@ dependencies {
 
     // Lottie
     implementation("com.airbnb.android:${rootProject.extra["lottieAnimation"]}")
-
-    // Kotlin + coroutines
-    implementation("androidx.work:work-runtime-ktx:${rootProject.extra["workManagerVersion"]}")
-
-    // Compose Paging
-    implementation("androidx.paging:paging-compose:${rootProject.extra["pagingVersion"]}")
 
     // Square Logcat
     implementation("com.squareup.logcat:logcat:${rootProject.extra["logcatVersion"]}")

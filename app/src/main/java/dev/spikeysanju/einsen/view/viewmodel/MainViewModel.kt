@@ -1,3 +1,22 @@
+/*
+ *
+ *  * Copyright 2021 Spikey Sanju
+ *  *
+ *  * Licensed under the Apache License, Version 2.0 (the "License");
+ *  * you may not use this file except in compliance with the License.
+ *  * You may obtain a copy of the License at
+ *  *
+ *  *     https://www.apache.org/licenses/LICENSE-2.0
+ *  *
+ *  * Unless required by applicable law or agreed to in writing, software
+ *  * distributed under the License is distributed on an "AS IS" BASIS,
+ *  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *  * See the License for the specific language governing permissions and
+ *  * limitations under the License.
+ *
+ *
+ */
+
 package dev.spikeysanju.einsen.view.viewmodel
 
 import android.content.Context
@@ -35,7 +54,6 @@ class MainViewModel @Inject constructor(private val repo: MainRepository) : View
     val feed = _viewState.asStateFlow()
     val singleTask = _singleViewState.asStateFlow()
     val emoji = _emojiViewState.asStateFlow()
-    val countState = _countState.asStateFlow()
     val currentEmoji = _currentEmoji.asStateFlow()
 
     // get all task
@@ -85,11 +103,6 @@ class MainViewModel @Inject constructor(private val repo: MainRepository) : View
         repo.delete(id)
     }
 
-    // update source
-    fun updateTask(task: Task) = viewModelScope.launch {
-        repo.update(task)
-    }
-
     // update status
     fun updateStatus(id: Int, isCompleted: Boolean) = viewModelScope.launch {
         repo.updateStatus(id, isCompleted)
@@ -121,16 +134,6 @@ class MainViewModel @Inject constructor(private val repo: MainRepository) : View
                 }
             } catch (e: Exception) {
                 _viewState.value = ViewState.Error(e)
-            }
-        }
-    }
-
-    fun getTaskByPriorityCount(priority: String) = viewModelScope.launch(Dispatchers.IO) {
-        repo.getTaskByPriorityCount(priority).distinctUntilChanged().collect {
-            try {
-                _countState.value = CountViewState.Success(it)
-            } catch (e: Exception) {
-                _countState.value = CountViewState.Error(e)
             }
         }
     }
