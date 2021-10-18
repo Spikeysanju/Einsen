@@ -32,7 +32,7 @@
 
 ## 🌞 Day Mode
 
-|   Dashboard    | All Task    |   Task Details   
+|   Dashboard    | All Tasks    |   Task Details   
 |---	|---	|---
 |  ![](https://github.com/Spikeysanju/Einsen/blob/master/art/dashboard_day.png)    |  ![](https://github.com/Spikeysanju/Einsen/blob/master/art/all_task_day.png)    |   ![](https://github.com/Spikeysanju/Einsen/blob/master/art/task_details_day_v2.png)    
 
@@ -44,7 +44,7 @@
 
 ## 🌚 We Support Dark Mode Too
 
-|   Dashboard    | All Task    |   Task Details      
+|   Dashboard    | All Tasks    |   Task Details      
 |---	|---	|---		
 |  ![](https://github.com/Spikeysanju/Einsen/blob/master/art/dashboard_night.png)    |  ![](https://github.com/Spikeysanju/Einsen/blob/master/art/all_task_night.png)    |   ![](https://github.com/Spikeysanju/Einsen/blob/master/art/task_details_night.png)      
 
