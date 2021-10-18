@@ -182,7 +182,7 @@ build this project.
 ## 🤝 Contribute
 
 If you want to contribute to this app, you're always welcome!
-See [Contributing Guidelines](https://github.com/Spikeysanju/Einsen/blob/master/CONTRIBUTION.md).
+See [Contributing Guidelines](https://github.com/Spikeysanju/Einsen/blob/master/CONTRIBUTING.md).
 
 <br>
 
