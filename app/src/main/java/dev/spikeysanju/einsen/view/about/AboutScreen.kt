@@ -59,6 +59,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
+import dev.spikeysanju.einsen.BuildConfig
 import dev.spikeysanju.einsen.R
 import dev.spikeysanju.einsen.navigation.MainActions
 import dev.spikeysanju.einsen.ui.theme.einsenColors
@@ -121,7 +122,13 @@ fun AboutScreen(viewModel: MainViewModel, actions: MainActions) {
             }
 
             item {
-                Spacer(modifier = Modifier.height(44.dp))
+                Spacer(modifier = Modifier.height(24.dp))
+                val (version, code) = getVersionCodeAndName()
+                TitleAndDescription(stringResource(R.string.app_name), version.plus("($code)"))
+            }
+
+            item {
+                Spacer(modifier = Modifier.height(24.dp))
                 TitleAndDescription(
                     title = stringResource(R.string.text_attribution_and_license),
                     description = stringResource(
@@ -144,18 +151,12 @@ fun AboutScreen(viewModel: MainViewModel, actions: MainActions) {
                     }
                 )
             }
-
-            item {
-                Spacer(modifier = Modifier.height(24.dp))
-                TitleAndDescription(
-                    title = stringResource(R.string.text_author),
-                    description = stringResource(
-                        R.string.text_author_name
-                    )
-                )
-            }
         }
     }
+}
+
+fun getVersionCodeAndName(): Pair<String, String> {
+    return Pair(BuildConfig.VERSION_NAME, BuildConfig.VERSION_CODE.toString())
 }
 
 @Composable

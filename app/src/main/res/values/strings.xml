@@ -18,7 +18,11 @@
   -->
 
 <resources>
+
+    <!--    Application name-->
     <string name="app_name">Einsen</string>
+
+    <!--    Application screens-->
     <string name="text_splash">Splash</string>
     <string name="text_dashboard">Dashboard</string>
     <string name="text_addTask">Add Task</string>
@@ -26,9 +30,28 @@
     <string name="text_about">About</string>
     <string name="text_allTask">All Task</string>
     <string name="text_taskDetails">Task Details</string>
+
+    <!--    Empty State -->
     <string name="text_no_task_title">No tasks yet</string>
     <string name="text_no_task_description">Be sure to add your first task!</string>
     <string name="text_add_a_task">Add a task</string>
+    <string name="text_error_title">Well, this is unexpected…</string>
+    <string name="text_error_description"><![CDATA[Sorry, we\'re having technical issues (as you can see) try to add some task & try again…]]></string>
+
+    <!--    Dashboard-->
+    <string name="text_do_it_now">Do it now</string>
+    <string name="text_decide_when_todo">Decide when to do</string>
+    <string name="text_important_not_urgent">Important Not Urgent</string>
+    <string name="text_important_and_urgent">Urgent and Important</string>
+    <string name="text_delegate_it">Delegate it</string>
+    <string name="text_urgent_not_important">Urgent Not Important</string>
+    <string name="text_dump_it">Dump it!</string>
+    <string name="text_not_important_not_urgent">Not Important Not Urgent</string>
+    <string name="text_my_dashboard">My Dashboard</string>
+    <string name="text_bulb_turn_on">Day mode on</string>
+    <string name="back_button">Back Button</string>
+
+    <!--    Add/Edit Task & Task Details-->
     <string name="text_title">Title</string>
     <string name="text_description">Description</string>
     <string name="text_category">Category</string>
@@ -41,17 +64,10 @@
     <string name="text_share_button">Share Button</string>
     <string name="text_complete">Complete</string>
     <string name="text_incomplete">Incomplete</string>
-    <string name="text_do_it_now">Do it now</string>
-    <string name="text_decide_when_todo">Decide when to do</string>
-    <string name="text_important_not_urgent">Important Not Urgent</string>
-    <string name="text_important_and_urgent">Urgent and Important</string>
-    <string name="text_delegate_it">Delegate it</string>
-    <string name="text_urgent_not_important">Urgent Not Important</string>
-    <string name="text_dump_it">Dump it!</string>
-    <string name="text_not_important_not_urgent">Not Important Not Urgent</string>
-    <string name="text_my_dashboard">My Dashboard</string>
-    <string name="back_button">Back Button</string>
-    <string name="text_bulb_turn_on">Day mode on</string>
+    <string name="text_all_emoji">All Emoji</string>
+    <string name="text_message_share">Title: %s %s \n\nDescription: %s \n\nCategory: %s \n\n\Priority: %s \n\n\nCreatedAt: %s \n\nVisit: https://github.com/Spikeysanju/Einsen</string>
+
+    <!--   About-->
     <string name="text_attribution_and_license"><![CDATA[Attribution & License]]></string>
     <string name="text_visit">Visit</string>
     <string name="text_author">Author</string>
@@ -59,13 +75,7 @@
     <string name="text_repo_link">https://www.github.com/Spikeysanju/Einsen</string>
     <string name="text_license">Licensed Under Apache 2.0</string>
     <string name="text_webview">WebView</string>
-    <string name="text_all_emoji">All Emoji</string>
     <string name="text_einsen_logo">Einsen logo</string>
-    <string name="text_error_title">Well, this is unexpected…</string>
-    <string name="text_error_description"><![CDATA[Sorry, we\'re having technical issues (as you can see) try to add some task & try again…]]></string>
     <string name="text_five">5</string>
-
-
-    <string name="text_message_share">Title: %s %s \n\nDescription: %s \n\nCategory: %s \n\n\Priority: %s \n\n\nCreatedAt: %s \n\nVisit: https://github.com/Spikeysanju/Einsen</string>
 
 </resources>
