@@ -1,12 +1,24 @@
-![GitHub Cards Preview](https://github.com/Spikeysanju/Expenso/blob/master/art/EXPENSO-ANDROID.png?raw=true)
+![GitHub Cards Preview](https://github.com/Spikeysanju/Expenso/blob/master/art/einsen_cover.png?raw=true)
 
-# 🎯 Einsen 
-Einsen is a prioritization app that uses Eisenhower matrix technique as workflow to prioritize a
-list of tasks or agenda according to their urgency and importance.<br />
+![Build (Android)](https://github.com/Spikeysanju/Einsen/workflows/Build%20(Android)/badge.svg)
+![Release](https://github.com/Spikeysanju/Einsen/workflows/Release/badge.svg)
+
+[![GitHub license](https://img.shields.io/badge/License-Apache2.0-blue.svg)](LICENSE)
+[![ktlint](https://img.shields.io/badge/code%20style-%E2%9D%A4-FF4081.svg)](https://ktlint.github.io/)
+[![GitHub stars](https://img.shields.io/github/stars/Spikeysanju/Einsen?style=social)](https://github.com/Spikeysanju/Einsen/stargazers)
+[![GitHub forks](https://img.shields.io/github/forks/Spikeysanju/Einsen?style=social)](https://github.com/Spikeysanju/Einsen/network/members)
+[![GitHub watchers](https://img.shields.io/github/watchers/Spikeysanju/Einsen?style=social)](https://github.com/Spikeysanju/Einsen/watchers)
+![GitHub follow](https://img.shields.io/github/followers/SpikeySanju?label=Follow&style=social)
+![Twitter Follow](https://img.shields.io/twitter/follow/sanjay_spikey?label=Twitter&style=social)
+
+# 🎯 Einsen
+
+`Einsen` is a prioritization app that uses `Eisenhower matrix technique` as workflow to prioritize a
+list of tasks or agenda according to their `urgency` and `importance`.<br />
 
 ***Try latest Einsen app apk from below 👇***
 
-[![Einsen](https://img.shields.io/badge/Einsen-APK-black.svg?style=for-the-badge&logo=android)](https://github.com/Spikeysanju/Einsen/releases/download/v1.0.0-alpha01/Expenso.apk)
+[![Einsen](https://img.shields.io/badge/Einsen-APK-blue.svg?style=for-the-badge&logo=android)](https://github.com/Spikeysanju/Einsen/releases/download/v1.0.0-alpha01/Expenso.apk)
 
 <br />
 
@@ -14,7 +26,9 @@ list of tasks or agenda according to their urgency and importance.<br />
 
 ***Click to View `Einsen` app Design from below 👇***
 
-[![Einsen](https://img.shields.io/badge/Einsen-FIGMA-black.svg?style=for-the-badge&logo=figma)](https://www.figma.com/file/Z5KMfiwo9RYtYBUMRSIfHh/Expense-Tracker-App?node-id=140%3A1016)
+[![Einsen Figma Design](https://img.shields.io/badge/Einsen-FIGMA-black.svg?style=for-the-badge&logo=figma)](https://www.figma.com/file/s0jhjixtXtOZmmIyHIN3Yy/Einsen?node-id=0%3A1)
+[![Einsen FigJam Design](https://img.shields.io/badge/Einsen-FIJAM-blue.svg?style=for-the-badge&logo=figma)](https://www.figma.com/file/dbEZWjbmog9vYtsZx08fFM/Einsen)
+
 
 <br />
 
@@ -74,35 +88,38 @@ list of tasks or agenda according to their urgency and importance.<br />
 
 ## 📦 Package Structure
 
-    dev.spikeysanju.expenso # Root Package
-    ├── di                  # Hilt DI Modules 
-    ├── data                # For data handling.
-    │   ├── local           # Local Persistence Database. Room (SQLite) database
-    |   │   ├── dao         # Data Access Object for Room   
-    |   |   |── database    # Database Instance
-    |
-    ├── model               # Model classes [Transaction]
-    |
-    |-- repo                # Used to handle all data operations
-    |
-    ├── view                # Activity/Fragment View layer
-    │   ├── main            # Main root folder
-    |   │   ├── main        # Main Activity for RecyclerView
-    |   │   └── viewmodel   # Transaction ViewModel
-    |   │   ├── adapter     # Adapter for RecyclerView
-    │   ├── Dashboard       # Dashboard root folder
-    |   |   |__ dashboard   # Dashboard 
-    │   ├── Add             # Add Transaction root folder
-    |   |   |__ add         # Add Transaction 
-    │   ├── Edit            # Edit Transaction root folder
-    |   |   |__ edit        # Edit Transaction
-    │   ├── Details         # Add Transaction root folder
-    |   |   |__ details     # Transaction Details
-    │   ├── About           # About root folder
-    |   |   |__ about       # About 
-    │   ├── Dialog          # All Dialogs root folder
-    |   |   |__ dialog      # Error Dialog 
-    ├── utils               # All extension functions
+ ```
+dev.spikeysanju.einsen
+├── app                   # Application class
+├── components            # All resuable components for this app
+├── data                  # For data handling
+│   ├── local               # Local Persistence Database. Room (SQLite) database
+│   │   ├── Dao               # Data Access Object for Room
+│   │   └── Database          # Database Instance
+│   └── datastore
+│       └── ThemePref         # Datastore Theme Preference 
+├── di                        # Hilt DI Modules
+├── model                     # Model class for [Task] & [Emoji]
+├── navigation                # For navigation handling
+│   ├── Routes                # All unique navigation routes of this app
+│   └── NavGraph              # Single source for Navigation Routes of this app
+├── repository                # Used to handle all data operations
+├── ui.theme                  # Theme setup for this app
+├── utils                     # Extension functions
+├── view                      # All composables screens root folder
+│   ├── add                   # Add Task Screen
+│   ├── edit_task             # Edit Task Screen
+│   ├── dashboard             # Dashboard Screen
+│   ├── all_task              # All Task Screen
+│   ├── task_details          # Task Details Screen
+│   ├── emoji                 # Choose Emoji Screen
+│   ├── webview               # WebView Screen
+│   ├── animation             # Animation Placeholders for State handling(Loading, Error, Empty etc.)
+│   ├── about                 # About Screen
+│   └── viewmodel             # ViewModel 
+└── MainActivity.kt           # MainActivity 
+
+```
 
 <br />
 
@@ -115,30 +132,38 @@ View-Model)***](https://developer.android.com/jetpack/docs/guide#recommended-app
 
 ## 🧰 Build-tool
 
-You need to have [Android Studio Beta 3 or above](https://developer.android.com/studio/preview) to
+You need to
+have [Android Studio Beta 3 (BumbleBee) or above](https://developer.android.com/studio/preview) to
 build this project.
 <br>
-<img src="./beta_android.png" height="200" alt="Beta-studio"/>
+
+<img src="./art/beta_android.png" height="200" alt="Android-Studio-Beta-3-(Bumble-Bee)/>
 
 <br>
 
-## 😄 Frequently Asked Questions
+## 💬 Frequently Asked Questions
 
 <details open> <summary> When was project Einsen started? </summary>  
 
-> Einsen was started 6 months before. When I was reading about productivity `mental models` to get things done. I found this idea. So I started doing research on this topic & came up with initial MVP.
+> 🎯 Productivity Mental Models I actually I started working on this idea 6 months before founding `Einsen app` (April 2021). The idea was exploring `mental models` + `productivity tips` to achieve your `goals`. I tried to test the idea with `Productivity` & `Time Management Trackers` . So I built `initial MVP`..
 
 </details>
 
 <details> <summary> Where can I find the research process for Einsen app?</summary>  
 
-> You can find the link for design process [here](url)
+> The biggest lesson I learned while designing this was that, I need to be `focused` & `working relentlessly` on the same project, to get the right flow of thought & complete it. Each `iteration` led to more `insights` on improving the design, `solving problems` for users. You can find the link for design process [here](url)
+
+</details>
+
+<details> <summary> Where can I find the research process for Einsen app?</summary>  
+
+> The biggest lesson I learned while designing this was that, I need to be `focused` & `working relentlessly` on the same project, to get the right flow of thought & complete it. Each `iteration` led to more `insights` on improving the design, `solving problems` for users. You can find the link for design process [here](url)
 
 </details>
 
 <details> <summary> What is the future goals of this project Einsen? </summary>  
 
-> For each week I will be implementing some new cool features for this application. Some of the features are listed below :point_down:
+> For each week I will be implementing some new cool features for this application. Here are some of the amazing features you will come to expect from this platform :point_down:
 
 - `Due Date` for each task
 - `Recurring task`
@@ -151,29 +176,45 @@ build this project.
 
 </details>
 
-
 <br />
 
-## 🤝 Contribute 
+## 🤝 Contribute
 
 If you want to contribute to this app, you're always welcome!
-See [Contributing Guidelines](https://github.com/Spikeysanju/Expenso/blob/master/CONTRIBUTION.md).
+See [Contributing Guidelines](https://github.com/Spikeysanju/Einsen/blob/master/CONTRIBUTION.md).
 
 <br>
 
 ## 📩 Contact
 
-Have an project? DM me at 👇
+I know that first and foremost you are looking for a tool to solve your problems, but if you enjoy
+it that much, why not tell us? We would love to hear from you 😉
 
-Drop a mail to:- spikeysanju98@gmail.com
+DM me at 👇
+
+* Twitter: <a href="https://twitter.com/sanjay_spikey" target="_blank">@spikeysanju</a>
+* Email: spikeysanju98@gmail.com
 
 <br>
 
-## 💰 Donation
+## ❤️ Show your Support
 
-If this project help you reduce time to develop, you can give me a cup of coffee :)
+I love it when people use my tool and we’d love to make it even better. If you like this tool and
+want to support me in developing more free tools for you, I’d really appreciate a donation. Feel
+free to `buy me a cup of coffee` 😄. Thanks!
 
-<a href="https://www.buymeacoffee.com/Li0hsl4" target="_blank"><img src="https://www.buymeacoffee.com/assets/img/custom_images/yellow_img.png" alt="Buy Me A Coffee" style="height: 41px !important;width: 174px !important;box-shadow: 0px 3px 2px 0px rgba(190, 190, 190, 0.5) !important;-webkit-box-shadow: 0px 3px 2px 0px rgba(190, 190, 190, 0.5) !important;" ></a>
+
+<a href="https://www.buymeacoffee.com/Li0hsl4" target="_blank">
+    <img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" width="160">
+</a>
+
+<a href="https://www.patreon.com/spikeysanju" target="_blank">
+  <img alt="Patron Link" src="https://c5.patreon.com/external/logo/become_a_patron_button@2x.png" width="160"/>
+
+<a href="https://www.paypal.com/paypalme2/spikeysanju" target="_blank">
+  <img alt="PayPal Link" src="https://www.eurozine.com/wp-content/uploads/2018/12/paypal-donate-button-high-quality-png.png" width="160"/>
+
+<br>
 
 <br>
 
@@ -181,7 +222,7 @@ If this project help you reduce time to develop, you can give me a cup of coffee
 
 - 🤓 Icons are from [tablericons.com](https://tablericons.com)
 
-<br />
+<br>
 
 ## 🔖 License
 
