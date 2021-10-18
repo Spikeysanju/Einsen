@@ -1,10 +1,10 @@
-![GitHub Cards Preview](https://github.com/Spikeysanju/Expenso/blob/master/art/einsen_cover.png?raw=true)
+![GitHub Cards Preview](https://github.com/Spikeysanju/Einsen/blob/master/art/einsen_cover.png?raw=true)
 
-![Build (Android)](https://github.com/Spikeysanju/Einsen/workflows/Build%20(Android)/badge.svg)
-![Release](https://github.com/Spikeysanju/Einsen/workflows/Release/badge.svg)
-
+![Build (Android)](https://github.com/Spikeysanju/Einsen/workflows/Android%20CI/badge.svg)
 [![GitHub license](https://img.shields.io/badge/License-Apache2.0-blue.svg)](LICENSE)
 [![ktlint](https://img.shields.io/badge/code%20style-%E2%9D%A4-FF4081.svg)](https://ktlint.github.io/)
+
+
 [![GitHub stars](https://img.shields.io/github/stars/Spikeysanju/Einsen?style=social)](https://github.com/Spikeysanju/Einsen/stargazers)
 [![GitHub forks](https://img.shields.io/github/forks/Spikeysanju/Einsen?style=social)](https://github.com/Spikeysanju/Einsen/network/members)
 [![GitHub watchers](https://img.shields.io/github/watchers/Spikeysanju/Einsen?style=social)](https://github.com/Spikeysanju/Einsen/watchers)
@@ -18,7 +18,7 @@ list of tasks or agenda according to their `urgency` and `importance`.<br />
 
 ***Try latest Einsen app apk from below 👇***
 
-[![Einsen](https://img.shields.io/badge/Einsen-APK-blue.svg?style=for-the-badge&logo=android)](https://github.com/Spikeysanju/Einsen/releases/download/v1.0.0-alpha01/Expenso.apk)
+[![Einsen](https://img.shields.io/badge/Einsen-APK-black.svg?style=for-the-badge&logo=android)](https://github.com/Spikeysanju/Einsen/releases/download/v1.0.0-alpha01/Expenso.apk)
 
 <br />
 
@@ -27,24 +27,32 @@ list of tasks or agenda according to their `urgency` and `importance`.<br />
 ***Click to View `Einsen` app Design from below 👇***
 
 [![Einsen Figma Design](https://img.shields.io/badge/Einsen-FIGMA-black.svg?style=for-the-badge&logo=figma)](https://www.figma.com/file/s0jhjixtXtOZmmIyHIN3Yy/Einsen?node-id=0%3A1)
-[![Einsen FigJam Design](https://img.shields.io/badge/Einsen-FIJAM-blue.svg?style=for-the-badge&logo=figma)](https://www.figma.com/file/dbEZWjbmog9vYtsZx08fFM/Einsen)
+[![Einsen FigJam Design](https://img.shields.io/badge/Einsen-FIJAM-black.svg?style=for-the-badge&logo=figma)](https://www.figma.com/file/dbEZWjbmog9vYtsZx08fFM/Einsen)
 
 
 <br />
 
 ## 🌞 Day Mode
 
-|   Dashboard    | All Task    |   Task Details    |   Add Task    |   Emoji    |   About    | Empty State    |
-|---	|---	|---	|---	|---	|---	|---	|
-|  ![](https://github.com/Spikeysanju/Einsen/blob/master/art/dashboard_day.png)    |  ![](https://github.com/Spikeysanju/Einsen/blob/master/art/all_task_day.png)    |   ![](https://github.com/Spikeysanju/Einsen/blob/master/art/task_details_day_v2.png)    |   ![](https://github.com/Spikeysanju/Einsen/blob/master/art/add_task_day.png)    |   ![](https://github.com/Spikeysanju/Einsen/blob/master/art/choose_emoji_day.png)    | ![](https://github.com/Spikeysanju/Einsen/blob/master/art/about_day.png)    |   ![](https://github.com/Spikeysanju/Einsen/blob/master/art/empty_state_day.png)
+|   Dashboard    | All Task    |   Task Details   
+|---	|---	|---
+|  ![](https://github.com/Spikeysanju/Einsen/blob/master/art/dashboard_day.png)    |  ![](https://github.com/Spikeysanju/Einsen/blob/master/art/all_task_day.png)    |   ![](https://github.com/Spikeysanju/Einsen/blob/master/art/task_details_day_v2.png)    
+
+|   Add Task  |   Emoji    | Empty State    |
+|---    |---	|---	|
+|   ![](https://github.com/Spikeysanju/Einsen/blob/master/art/add_task_day.png)    |   ![](https://github.com/Spikeysanju/Einsen/blob/master/art/choose_emoji_day.png)      |   ![](https://github.com/Spikeysanju/Einsen/blob/master/art/empty_state_day.png)
 
 <br />
 
 ## 🌚 We Support Dark Mode Too
 
-|   Dashboard    | All Task    |   Task Details    |   Add Task    |   Emoji    |   About    | Empty State    |
-|---	|---	|---	|---	|---	|---	|---	|
-|  ![](https://github.com/Spikeysanju/Einsen/blob/master/art/dashboard_night.png)    |  ![](https://github.com/Spikeysanju/Einsen/blob/master/art/all_task_night.png)    |   ![](https://github.com/Spikeysanju/Einsen/blob/master/art/task_details_night.png)    |   ![](https://github.com/Spikeysanju/Einsen/blob/master/art/add_task_night.png)    |   ![](https://github.com/Spikeysanju/Einsen/blob/master/art/choose_emoji_night.png)    | ![](https://github.com/Spikeysanju/Einsen/blob/master/art/about_night.png)    |   ![](https://github.com/Spikeysanju/Einsen/blob/master/art/empty_state_night.png)
+|   Dashboard    | All Task    |   Task Details      
+|---	|---	|---		
+|  ![](https://github.com/Spikeysanju/Einsen/blob/master/art/dashboard_night.png)    |  ![](https://github.com/Spikeysanju/Einsen/blob/master/art/all_task_night.png)    |   ![](https://github.com/Spikeysanju/Einsen/blob/master/art/task_details_night.png)      
+
+|   Add Task  |   Emoji   | Empty State    |
+|---    |---	|---	|
+|   ![](https://github.com/Spikeysanju/Einsen/blob/master/art/add_task_night.png)  |   ![](https://github.com/Spikeysanju/Einsen/blob/master/art/choose_emoji_night.png)     |   ![](https://github.com/Spikeysanju/Einsen/blob/master/art/empty_state_night.png)
 
 <br />
 
@@ -151,13 +159,7 @@ build this project.
 
 <details> <summary> Where can I find the research process for Einsen app?</summary>  
 
-> The biggest lesson I learned while designing this was that, I need to be `focused` & `working relentlessly` on the same project, to get the right flow of thought & complete it. Each `iteration` led to more `insights` on improving the design, `solving problems` for users. You can find the link for design process [here](url)
-
-</details>
-
-<details> <summary> Where can I find the research process for Einsen app?</summary>  
-
-> The biggest lesson I learned while designing this was that, I need to be `focused` & `working relentlessly` on the same project, to get the right flow of thought & complete it. Each `iteration` led to more `insights` on improving the design, `solving problems` for users. You can find the link for design process [here](url)
+> The biggest lesson I learned while designing this was that, I need to be `focused` & `working relentlessly` on the same project, to get the right flow of thought & complete it. Each `iteration` led to more `insights` on improving the design, `solving problems` for users. You can find the link for 📝 Design Process [here](https://www.figma.com/file/dbEZWjbmog9vYtsZx08fFM/Einsen) & 🎨 Figma Designs [here](https://www.figma.com/file/s0jhjixtXtOZmmIyHIN3Yy/Einsen?node-id=0%3A1)
 
 </details>
 
@@ -212,7 +214,7 @@ free to `buy me a cup of coffee` 😄. Thanks!
   <img alt="Patron Link" src="https://c5.patreon.com/external/logo/become_a_patron_button@2x.png" width="160"/>
 
 <a href="https://www.paypal.com/paypalme2/spikeysanju" target="_blank">
-  <img alt="PayPal Link" src="https://www.eurozine.com/wp-content/uploads/2018/12/paypal-donate-button-high-quality-png.png" width="160"/>
+  <img alt="PayPal Link" src="https://luunvacationgroup.com/wp-content/uploads/2019/08/paypal-donate-button-high-quality-png-1_orig.png" width="160"/>
 
 <br>
 
