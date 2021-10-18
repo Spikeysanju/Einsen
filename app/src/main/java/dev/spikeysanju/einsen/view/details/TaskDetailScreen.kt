@@ -222,7 +222,7 @@ fun TaskDetailsScreen(viewModel: MainViewModel, action: MainActions) {
 
                                 // Title
                                 Text(
-                                    text = task.priority.name,
+                                    text = task.title,
                                     style = typography.h5,
                                     textAlign = TextAlign.Start,
                                     color = colors.onPrimary
