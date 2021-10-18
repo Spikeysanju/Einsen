@@ -12,8 +12,7 @@
 
 # 🎯 Einsen
 
-`Einsen` is a prioritization app that uses `Eisenhower matrix technique` as workflow to prioritize a
-list of tasks or agenda according to their `urgency` and `importance`.<br />
+ Einsen is a prioritization app that uses Eisenhower matrix technique as workflow to prioritize a list of tasks & built to Demonstrate use of Jetpack Compose with Modern Android Architecture Components & MVVM Architecture.<br />
 
 ***Try latest Einsen app apk from below 👇***
 
