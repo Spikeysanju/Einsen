@@ -2,7 +2,7 @@
 
 ### 💬 What you can do
 
-You can contribute us by filing issues, bugs and PRs.
+You can contribute us by `filing issues`, `bugs` and `PRs`.
 
 ### ✅ Contributing guidelines:
 
