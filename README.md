@@ -145,7 +145,8 @@ have [Android Studio Beta 3 (BumbleBee) or above](https://developer.android.com/
 build this project.
 <br>
 
-<img src="./beta_android.png" height="200" alt="Android-Studio-Beta-3-(Bumble-Bee)/>
+<img src="./beta_android.png" height="200" alt="Beta-studio"/>
+
 
 <br>
 
@@ -153,19 +154,19 @@ build this project.
 
 <details open> <summary> When was project Einsen started? </summary>  
 
-> 🎯 Productivity Mental Models I actually I started working on this idea 6 months before founding `Einsen app` (April 2021). The idea was exploring `mental models` + `productivity tips` to achieve your `goals`. I tried to test the idea with `Productivity` & `Time Management Trackers` . So I built `initial MVP`..
+> 🎯 I started working on this idea 6 months before founding `Einsen app` (April 2021). The idea was exploring `mental models` + `productivity tips` to achieve your `goals`. I tried to test the idea with `Productivity` & `Time Management Trackers` . So I built `initial MVP`..
 
 </details>
 
 <details> <summary> Where can I find the research process for Einsen app?</summary>  
 
-> The biggest lesson I learned while designing this was that, I need to be `focused` & `working relentlessly` on the same project, to get the right flow of thought & complete it. Each `iteration` led to more `insights` on improving the design, `solving problems` for users. You can find the link for 📝 Design Process [here](https://www.figma.com/file/dbEZWjbmog9vYtsZx08fFM/Einsen) & 🎨 Figma Designs [here](https://www.figma.com/file/s0jhjixtXtOZmmIyHIN3Yy/Einsen?node-id=0%3A1)
+> 📝 The biggest lesson I learned while designing this was that, I need to be `focused` & `working relentlessly` on the same project, to get the right flow of thought & complete it. Each `iteration` led to more `insights` on improving the design, `solving problems` for users. You can find the link for 📝 Design Process [here](https://www.figma.com/file/dbEZWjbmog9vYtsZx08fFM/Einsen) & 🎨 Figma Designs [here](https://www.figma.com/file/s0jhjixtXtOZmmIyHIN3Yy/Einsen?node-id=0%3A1)
 
 </details>
 
 <details> <summary> What is the future goals of this project Einsen? </summary>  
 
-> For each week I will be implementing some new cool features for this application. Here are some of the amazing features you will come to expect from this platform :point_down:
+> 🦄 For each week I will be implementing some new cool features for this application. Here are some of the amazing features you will come to expect from this platform :point_down:
 
 - `Due Date` for each task
 - `Recurring task`
