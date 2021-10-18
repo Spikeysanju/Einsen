@@ -19,55 +19,93 @@
 
 package dev.spikeysanju.einsen.components
 
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.Canvas
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material.MaterialTheme.colors
 import androidx.compose.material.Slider
 import androidx.compose.material.SliderDefaults
-import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.text.style.TextAlign
-import dev.spikeysanju.einsen.ui.theme.typography
+import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.nativeCanvas
+import androidx.compose.ui.graphics.toArgb
+import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.unit.dp
+import dev.spikeysanju.einsen.ui.theme.einsenColors
 
 /**
  * This customer slider component helps to show the slider with step indicator.
- * @param stepCount
+ * @param points
  * @param value
- * @param onValueChanged
+ * @param onValueChange
+ *
+ * Code reference - https://github.com/PiotrPrus/ComposeWeatherCard
  */
+
 @Composable
-fun StepSlider(stepCount: Int, value: Float, onValueChanged: (Float) -> Unit) {
-    Column(
-        Modifier
-            .fillMaxWidth()
-    ) {
+fun EinsenStepSlider(points: List<String>, value: Float, onValueChange: (Int) -> Unit) {
+    val (sliderValue, setSliderValue) = remember { mutableStateOf(value) }
+    val drawPadding = with(LocalDensity.current) { 10.dp.toPx() }
+    val textSize = with(LocalDensity.current) { 10.dp.toPx() }
+    val lineHeightDp = 10.dp
+    val lineHeightPx = with(LocalDensity.current) { lineHeightDp.toPx() }
+    val canvasHeight = 50.dp
+    val textPaint = android.graphics.Paint().apply {
+        color = einsenColors.black.toArgb()
+        textAlign = android.graphics.Paint.Align.CENTER
+        this.textSize = textSize
+    }
+    Box(contentAlignment = Alignment.Center) {
+        Canvas(
+            modifier = Modifier
+                .height(canvasHeight)
+                .fillMaxWidth()
+                .padding(
+                    top = canvasHeight
+                        .div(2)
+                        .minus(lineHeightDp.div(2))
+                )
+        ) {
+            val yStart = 0f
+            val distance = (size.width.minus(2 * drawPadding)).div(points.size.minus(1))
+            points.forEachIndexed { index, step ->
+                drawLine(
+                    color = Color.DarkGray,
+                    start = Offset(x = drawPadding + index.times(distance), y = yStart),
+                    end = Offset(x = drawPadding + index.times(distance), y = lineHeightPx)
+                )
+                if (index.rem(1) == 0) {
+                    this.drawContext.canvas.nativeCanvas.drawText(
+                        step,
+                        drawPadding + index.times(distance),
+                        size.height,
+                        textPaint
+                    )
+                }
+            }
+        }
         Slider(
-            value = value,
-            onValueChange = { onValueChanged(it) },
-            valueRange = 0f..4f,
-            steps = 4,
+            modifier = Modifier.fillMaxWidth(),
+            value = sliderValue,
+            valueRange = 0f..points.size.minus(1).toFloat(),
+            steps = points.size.minus(2),
             colors = SliderDefaults.colors(
                 thumbColor = colors.primary,
                 activeTrackColor = colors.primary,
                 inactiveTrackColor = colors.primaryVariant,
                 disabledThumbColor = colors.secondaryVariant
-            )
-        )
-        Row(
-            Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.SpaceBetween
-        ) {
-            for (i in 0..stepCount) {
-                Text(
-                    i.toString(),
-                    style = typography.subtitle1,
-                    textAlign = TextAlign.Center,
-                    color = colors.onPrimary
-                )
+            ),
+            onValueChange = {
+                setSliderValue(it)
+                onValueChange(it.toInt())
             }
-        }
+        )
     }
 }

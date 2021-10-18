@@ -24,8 +24,8 @@ class TaskBuilder {
     var description: String = ""
     var category: String = ""
     var emoji: String = ""
-    var urgency: Float = 0F
-    var importance: Float = 0F
+    var urgency: Int = 0
+    var importance: Int = 0
     var priority: Priority = Priority.IMPORTANT
     var due: String = ""
     var isCompleted: Boolean = false

@@ -40,7 +40,6 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
-import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -54,9 +53,9 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import dev.spikeysanju.einsen.R
 import dev.spikeysanju.einsen.components.EinsenInputTextField
+import dev.spikeysanju.einsen.components.EinsenStepSlider
 import dev.spikeysanju.einsen.components.EmojiPlaceHolder
 import dev.spikeysanju.einsen.components.PrimaryButton
-import dev.spikeysanju.einsen.components.StepSlider
 import dev.spikeysanju.einsen.model.task.Priority
 import dev.spikeysanju.einsen.model.task.task
 import dev.spikeysanju.einsen.navigation.MainActions
@@ -76,6 +75,12 @@ fun AddTaskScreen(viewModel: MainViewModel, actions: MainActions) {
     val scope = rememberCoroutineScope()
     val context = LocalContext.current
 
+    // slider points
+    val points = listOf("0", "1", "2", "3", "4")
+    val sliderPoints by remember {
+        mutableStateOf(points)
+    }
+
     // task value state
     var taskState by remember {
         mutableStateOf(
@@ -84,8 +89,8 @@ fun AddTaskScreen(viewModel: MainViewModel, actions: MainActions) {
                 description = ""
                 category = ""
                 emoji = ""
-                urgency = 0F
-                importance = 0F
+                urgency = 0
+                importance = 0
                 priority = Priority.IMPORTANT
                 due = "18/12/1998"
                 isCompleted = false
@@ -93,7 +98,7 @@ fun AddTaskScreen(viewModel: MainViewModel, actions: MainActions) {
         )
     }
 
-    val stepCount by rememberSaveable { mutableStateOf(5) }
+//    val stepCount by rememberSaveable { mutableStateOf(4) }
 
     // get current emoji
     viewModel.currentEmoji.collectAsState().value.apply {
@@ -197,7 +202,8 @@ fun AddTaskScreen(viewModel: MainViewModel, actions: MainActions) {
                         color = MaterialTheme.colors.onPrimary
                     )
                     Spacer(modifier = Modifier.height(12.dp))
-                    StepSlider(stepCount = stepCount, value = taskState.urgency) {
+
+                    EinsenStepSlider(points, taskState.urgency.toFloat()) {
                         taskState = taskState.copy(urgency = it)
                     }
                 }
@@ -213,7 +219,8 @@ fun AddTaskScreen(viewModel: MainViewModel, actions: MainActions) {
                         color = MaterialTheme.colors.onPrimary
                     )
                     Spacer(modifier = Modifier.height(12.dp))
-                    StepSlider(stepCount = stepCount, value = taskState.importance) {
+
+                    EinsenStepSlider(points, taskState.importance.toFloat()) {
                         taskState = taskState.copy(importance = it)
                     }
                 }

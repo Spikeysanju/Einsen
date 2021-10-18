@@ -54,9 +54,9 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import dev.spikeysanju.einsen.R
 import dev.spikeysanju.einsen.components.EinsenInputTextField
+import dev.spikeysanju.einsen.components.EinsenStepSlider
 import dev.spikeysanju.einsen.components.EmojiPlaceHolder
 import dev.spikeysanju.einsen.components.PrimaryButton
-import dev.spikeysanju.einsen.components.StepSlider
 import dev.spikeysanju.einsen.model.task.Priority
 import dev.spikeysanju.einsen.model.task.task
 import dev.spikeysanju.einsen.navigation.MainActions
@@ -78,6 +78,12 @@ fun EditTaskScreen(viewModel: MainViewModel, actions: MainActions) {
     val scope = rememberCoroutineScope()
     val context = LocalContext.current
 
+    // slider points
+    val points = listOf("0", "1", "2", "3", "4")
+    val sliderPoints by remember {
+        mutableStateOf(points)
+    }
+
     // List and bottom sheet state
     val listState = rememberLazyListState()
 
@@ -87,16 +93,13 @@ fun EditTaskScreen(viewModel: MainViewModel, actions: MainActions) {
     var descriptionState by rememberSaveable { mutableStateOf("") }
     var categoryState by remember { mutableStateOf("") }
     var emojiState by remember { mutableStateOf("") }
-    var urgencyState by remember { mutableStateOf(0F) }
-    var importanceState by remember { mutableStateOf(0F) }
+    var urgencyState by remember { mutableStateOf(0) }
+    var importanceState by remember { mutableStateOf(0) }
     var dueState by remember { mutableStateOf("18/12/1998") }
     var priorityState by remember { mutableStateOf(Priority.IMPORTANT) }
     var isCompletedState by remember { mutableStateOf(false) }
     var createdAtState by remember { mutableStateOf(0L) }
     val updatedAtState by remember { mutableStateOf(System.currentTimeMillis()) }
-
-    // Slider Step count
-    val stepCount by remember { mutableStateOf(5) }
 
     Scaffold(
         topBar = {
@@ -253,7 +256,8 @@ fun EditTaskScreen(viewModel: MainViewModel, actions: MainActions) {
                                 color = MaterialTheme.colors.onPrimary
                             )
                             Spacer(modifier = Modifier.height(12.dp))
-                            StepSlider(stepCount = stepCount, value = urgencyState) {
+
+                            EinsenStepSlider(points, urgencyState.toFloat()) {
                                 urgencyState = it
                             }
                         }
@@ -269,7 +273,8 @@ fun EditTaskScreen(viewModel: MainViewModel, actions: MainActions) {
                                 color = MaterialTheme.colors.onPrimary
                             )
                             Spacer(modifier = Modifier.height(12.dp))
-                            StepSlider(stepCount = stepCount, value = importanceState) {
+
+                            EinsenStepSlider(points, importanceState.toFloat()) {
                                 importanceState = it
                             }
                         }
