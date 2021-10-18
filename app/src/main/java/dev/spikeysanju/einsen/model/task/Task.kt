@@ -35,9 +35,9 @@ data class Task(
     @ColumnInfo(name = "Emoji")
     val emoji: String = "",
     @ColumnInfo(name = "urgency")
-    val urgency: Float = 0F,
+    val urgency: Int = 0,
     @ColumnInfo(name = "importance")
-    val importance: Float = 0F,
+    val importance: Int = 0,
     @ColumnInfo(name = "priority")
     val priority: Priority = Priority.IMPORTANT,
     @ColumnInfo(name = "timer")

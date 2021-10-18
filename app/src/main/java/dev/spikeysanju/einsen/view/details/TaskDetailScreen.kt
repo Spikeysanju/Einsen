@@ -86,8 +86,8 @@ fun TaskDetailsScreen(viewModel: MainViewModel, action: MainActions) {
                 description = ""
                 category = ""
                 emoji = ""
-                urgency = 0F
-                importance = 0F
+                urgency = 0
+                importance = 0
                 priority = Priority.IMPORTANT
                 due = "18/12/1998"
                 isCompleted = false
@@ -222,7 +222,7 @@ fun TaskDetailsScreen(viewModel: MainViewModel, action: MainActions) {
 
                                 // Title
                                 Text(
-                                    text = task.title,
+                                    text = task.priority.name,
                                     style = typography.h5,
                                     textAlign = TextAlign.Start,
                                     color = colors.onPrimary

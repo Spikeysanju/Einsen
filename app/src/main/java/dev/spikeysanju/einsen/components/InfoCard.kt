@@ -66,7 +66,7 @@ fun InfoCard(title: String, value: String, modifier: Modifier) {
             val builder = StringBuilder()
             builder.append(value)
                 .append("/")
-                .append(stringResource(R.string.text_five))
+                .append(stringResource(R.string.text_four))
 
             Text(
                 text = builder.toString(),

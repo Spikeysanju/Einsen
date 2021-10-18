@@ -36,7 +36,7 @@ import dev.spikeysanju.einsen.model.task.Priority
  * @param priorityAverage
  * @return Priority
  */
-fun calculatePriority(priorityAverage: Float): Priority {
+fun calculatePriority(priorityAverage: Int): Priority {
 
     return when {
         priorityAverage >= 4 -> {
@@ -48,11 +48,11 @@ fun calculatePriority(priorityAverage: Float): Priority {
         priorityAverage >= 2 -> {
             Priority.DELEGATE
         }
-        priorityAverage >= 1 -> {
+        priorityAverage == 1 -> {
             Priority.DUMP
         }
         else -> {
-            Priority.URGENT
+            Priority.DUMP
         }
     }
 }
