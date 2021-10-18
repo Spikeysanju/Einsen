@@ -145,7 +145,7 @@ have [Android Studio Beta 3 (BumbleBee) or above](https://developer.android.com/
 build this project.
 <br>
 
-<img src="./art/beta_android.png" height="200" alt="Android-Studio-Beta-3-(Bumble-Bee)/>
+<img src="./beta_android.png" height="200" alt="Android-Studio-Beta-3-(Bumble-Bee)/>
 
 <br>
 
