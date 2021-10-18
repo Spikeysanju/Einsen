@@ -18,7 +18,7 @@ list of tasks or agenda according to their `urgency` and `importance`.<br />
 
 ***Try latest Einsen app apk from below 👇***
 
-[![Einsen](https://img.shields.io/badge/Einsen-APK-black.svg?style=for-the-badge&logo=android)](https://github.com/Spikeysanju/Einsen/releases/download/v1.0.0-alpha01/Expenso.apk)
+[![Einsen](https://img.shields.io/badge/Einsen-APK-black.svg?style=for-the-badge&logo=android)](https://github.com/Spikeysanju/Einsen/releases/download/v1.0.0-alpha01/Einsen.apk)
 
 <br />
 
