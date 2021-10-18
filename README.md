@@ -4,10 +4,9 @@
 [![GitHub license](https://img.shields.io/badge/License-Apache2.0-blue.svg)](LICENSE)
 [![ktlint](https://img.shields.io/badge/code%20style-%E2%9D%A4-FF4081.svg)](https://ktlint.github.io/)
 
-
-[![GitHub stars](https://img.shields.io/github/stars/Spikeysanju/Einsen?style=social)](https://github.com/Spikeysanju/Einsen/stargazers)
-[![GitHub forks](https://img.shields.io/github/forks/Spikeysanju/Einsen?style=social)](https://github.com/Spikeysanju/Einsen/network/members)
-[![GitHub watchers](https://img.shields.io/github/watchers/Spikeysanju/Einsen?style=social)](https://github.com/Spikeysanju/Einsen/watchers)
+![GitHub stars](https://img.shields.io/github/stars/SpikeySanju/Einsen?style=social)
+![GitHub stars](https://img.shields.io/github/forks/SpikeySanju/Einsen?style=social)
+![GitHub stars](https://img.shields.io/github/watchers/SpikeySanju/Einsen?style=social)
 ![GitHub follow](https://img.shields.io/github/followers/SpikeySanju?label=Follow&style=social)
 ![Twitter Follow](https://img.shields.io/twitter/follow/sanjay_spikey?label=Twitter&style=social)
 
