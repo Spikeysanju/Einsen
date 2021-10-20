@@ -87,14 +87,14 @@ class MainViewModel @Inject constructor(private val repo: MainRepository) : View
             }
 
             // decode emoji list from json
-            val decodedEmoji = format.decodeFromString<List<EmojiItem>>(myJson)
+            val decodedEmoji = format.decodeFromString<List<EmojiItem>>(myJson).distinct()
 
             // filter the emoji based on Aliases
             val filteredEmojiAliases = decodedEmoji.filter { emojiAliases ->
                 emojiAliases.aliases.any {
                     it.contains(searchQuery, ignoreCase = true)
                 } || emojiAliases.category.contains(searchQuery, ignoreCase = true)
-            }
+            }.distinct()
 
             if (searchQuery.isNullOrEmpty()) {
                 _emojiViewState.value = EmojiViewState.Success(decodedEmoji)
