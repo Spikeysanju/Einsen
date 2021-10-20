@@ -19,6 +19,7 @@
 
 package dev.spikeysanju.einsen.view.animationviewstate
 
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -57,7 +58,8 @@ fun AnimationViewState(
         modifier = Modifier
             .fillMaxSize()
             .wrapContentSize(Alignment.Center),
-        horizontalAlignment = Alignment.CenterHorizontally
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.Center
     ) {
 
         when (screenState) {

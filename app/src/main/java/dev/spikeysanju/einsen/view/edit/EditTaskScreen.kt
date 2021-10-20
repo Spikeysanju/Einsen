@@ -80,9 +80,6 @@ fun EditTaskScreen(viewModel: MainViewModel, actions: MainActions) {
 
     // slider points
     val points = listOf("0", "1", "2", "3", "4")
-    val sliderPoints by remember {
-        mutableStateOf(points)
-    }
 
     // List and bottom sheet state
     val listState = rememberLazyListState()

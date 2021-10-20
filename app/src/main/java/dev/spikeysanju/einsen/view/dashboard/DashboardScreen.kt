@@ -20,6 +20,7 @@
 package dev.spikeysanju.einsen.view.dashboard
 
 import androidx.compose.foundation.isSystemInDarkTheme
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
@@ -166,7 +167,7 @@ fun DashboardScreen(
                 delegateCount = delegate.count { it.priority.name == Priority.DELEGATE.name }
                 dumpCount = dump.count { it.priority.name == Priority.DUMP.name }
 
-                LazyColumn(state = listState) {
+                LazyColumn(state = listState, contentPadding = PaddingValues(bottom = 100.dp)) {
 
                     item {
                         DashboardCardItem(
