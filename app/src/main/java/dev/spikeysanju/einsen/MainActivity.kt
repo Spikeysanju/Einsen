@@ -102,11 +102,11 @@ fun SetStatusBarColor() {
     val systemUiController = rememberSystemUiController()
     val color = einsenColors.bg
 
+    /**
+     *  Update all of the system bar colors to be transparent, and use
+     *  dark icons if we're in light theme
+     */
     SideEffect {
-        /**
-         *  Update all of the system bar colors to be transparent, and use
-         *  dark icons if we're in light theme
-         */
         systemUiController.setStatusBarColor(color = color)
     }
 }
