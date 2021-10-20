@@ -130,6 +130,40 @@ fun EinsenInputTextField(title: String, value: String, onValueChanged: (String) 
     }
 }
 
+@Stable
+@Composable
+fun EinsenInputTextFieldWithoutHint(
+    title: String,
+    value: String,
+    onValueChanged: (String) -> Unit
+) {
+    val focusManager = LocalFocusManager.current
+    Column(horizontalAlignment = Alignment.Start) {
+
+        TextField(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(start = 20.dp, end = 20.dp),
+            value = value,
+            onValueChange = {
+                onValueChanged(it)
+            },
+
+            label = { EinsenLabelView(title = title) },
+            textStyle = typography.body1,
+            colors = textFieldColors(),
+            keyboardOptions = KeyboardOptions(imeAction = ImeAction.Search),
+            keyboardActions = KeyboardActions(
+                onNext = {
+
+                    // Focus to next input
+                    focusManager.moveFocus(FocusDirection.Down)
+                }
+            )
+        )
+    }
+}
+
 @Composable
 fun textFieldColors() = TextFieldDefaults.textFieldColors(
     textColor = einsenColors.black,

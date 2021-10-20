@@ -72,7 +72,7 @@ class MainViewModel @Inject constructor(private val repo: MainRepository) : View
     }
 
     // get all list of emoji from Json
-    fun getAllEmoji(context: Context) = viewModelScope.launch {
+    fun getAllEmoji(context: Context, searchQuery: String) = viewModelScope.launch {
         try {
             // read JSON file
             val myJson = context.assets.open("emoji.json").bufferedReader().use {
@@ -86,8 +86,25 @@ class MainViewModel @Inject constructor(private val repo: MainRepository) : View
                 isLenient = true
             }
 
+            // decode emoji list from json
             val decodedEmoji = format.decodeFromString<List<EmojiItem>>(myJson)
-            _emojiViewState.value = EmojiViewState.Success(decodedEmoji)
+
+            // filter the emoji based on Aliases
+            val filteredEmojiAliases = decodedEmoji.filter { emojiAliases ->
+                emojiAliases.aliases.any {
+                    it.contains(searchQuery, ignoreCase = true)
+                } || emojiAliases.category.contains(searchQuery, ignoreCase = true)
+            }
+
+            if (searchQuery.isNullOrEmpty()) {
+                _emojiViewState.value = EmojiViewState.Success(decodedEmoji)
+            } else {
+                if (filteredEmojiAliases.isNullOrEmpty()) {
+                    _emojiViewState.value = EmojiViewState.Empty
+                } else {
+                    _emojiViewState.value = EmojiViewState.Success(filteredEmojiAliases)
+                }
+            }
         } catch (e: Exception) {
             _emojiViewState.value = EmojiViewState.Error(exception = e)
         }

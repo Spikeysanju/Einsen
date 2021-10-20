@@ -35,5 +35,7 @@ data class EmojiItem(
     @ColumnInfo(name = "description")
     val description: String,
     @ColumnInfo(name = "category")
-    val category: String
+    val category: String,
+    @ColumnInfo(name = "aliases")
+    val aliases: List<String>
 )

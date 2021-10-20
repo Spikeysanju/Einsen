@@ -34,6 +34,7 @@
     <!--    Empty State -->
     <string name="text_no_task_title">No tasks yet</string>
     <string name="text_no_task_description">Be sure to add your first task!</string>
+    <string name="text_no_emoji_description">Sorry we couldn\'t find any matches :(</string>
     <string name="text_add_a_task">Add a task</string>
     <string name="text_error_title">Well, this is unexpected…</string>
     <string name="text_error_description"><![CDATA[Sorry, we\'re having technical issues (as you can see) try to add some task & try again…]]></string>
@@ -77,5 +78,7 @@
     <string name="text_webview">WebView</string>
     <string name="text_einsen_logo">Einsen logo</string>
     <string name="text_four">4</string>
+    <string name="text_search_emoji">Search Emoji...</string>
+    <string name="text_go_back">Go Back!</string>
 
 </resources>

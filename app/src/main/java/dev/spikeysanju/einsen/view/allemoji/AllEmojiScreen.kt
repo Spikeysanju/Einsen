@@ -20,12 +20,12 @@
 package dev.spikeysanju.einsen.view.allemoji
 
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.lazy.GridCells
 import androidx.compose.foundation.lazy.LazyVerticalGrid
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
-import androidx.compose.material.ModalBottomSheetValue
-import androidx.compose.material.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -33,10 +33,13 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import dev.spikeysanju.einsen.R
+import dev.spikeysanju.einsen.components.EinsenInputTextFieldWithoutHint
 import dev.spikeysanju.einsen.components.EmojiPlaceHolderBottomSheet
 import dev.spikeysanju.einsen.navigation.MainActions
 import dev.spikeysanju.einsen.utils.viewstate.EmojiViewState
@@ -53,73 +56,93 @@ fun AllEmojiScreen(viewModel: MainViewModel, actions: MainActions, onSelect: (St
     val scope = rememberCoroutineScope()
     val context = LocalContext.current
 
-    // List, Emoji and Bottom Sheet State
+    // Search, List, Emoji and Bottom Sheet State
     var emojiState by remember { mutableStateOf("") }
+    var gridSize by remember { mutableStateOf(60.dp) }
     val listState = rememberLazyListState()
-    val bottomSheetState = rememberModalBottomSheetState(ModalBottomSheetValue.Hidden)
+    var searchEmoji by remember { mutableStateOf("") }
 
     // Emoji List state
     val result = viewModel.emoji.collectAsState().value
 
     Column {
+
+        // Title
         BottomSheetTitle()
+
+        // Search Emoji Input
+        EinsenInputTextFieldWithoutHint(
+            title = stringResource(R.string.text_search_emoji),
+            value = searchEmoji
+        ) {
+            searchEmoji = it
+        }
+
+        Spacer(modifier = Modifier.height(12.dp))
+
+        // Emoji Grid List
         LazyVerticalGrid(
             state = listState,
-            cells = GridCells.Adaptive(minSize = 60.dp)
+            modifier = Modifier.weight(1f).align(Alignment.CenterHorizontally),
+            cells = GridCells.Adaptive(minSize = gridSize)
         ) {
 
             // get all emoji
-            viewModel.getAllEmoji(context = context)
+            viewModel.getAllEmoji(context = context, searchQuery = searchEmoji)
 
             // parse emoji into ViewStates
             when (result) {
                 EmojiViewState.Empty -> {
+                    // set grid size to 200dp
+                    gridSize = 200.dp
                     item {
                         AnimationViewState(
-                            title = stringResource(R.string.text_error_title),
-                            description = stringResource(R.string.text_error_description),
-                            callToAction = stringResource(R.string.text_error_description),
+                            title = stringResource(R.string.text_no_emoji_description),
+                            description = "Please try searching with another term.\n  Ex -> star_struck",
+                            callToAction = "Retry Search",
                             screenState = ScreenState.ERROR,
                             actions = {
                                 scope.launch {
-                                    bottomSheetState.hide()
+                                    searchEmoji = ""
                                 }
                             }
                         )
                     }
                 }
                 is EmojiViewState.Error -> {
+                    gridSize = 200.dp
                     item {
                         AnimationViewState(
-                            title = stringResource(R.string.text_error_title).plus(", ")
-                                .plus(result.exception),
+                            title = stringResource(R.string.text_error_title),
                             description = stringResource(R.string.text_error_description),
-                            callToAction = stringResource(R.string.text_error_description),
+                            callToAction = stringResource(R.string.text_go_back),
                             screenState = ScreenState.ERROR,
                             actions = {
                                 scope.launch {
-                                    bottomSheetState.hide()
+                                    actions.popBackStack.invoke()
                                 }
                             }
                         )
                     }
                 }
                 EmojiViewState.Loading -> {
+                    gridSize = 200.dp
                     item {
                         AnimationViewState(
                             title = stringResource(R.string.text_error_title),
                             description = stringResource(R.string.text_error_description),
-                            callToAction = stringResource(R.string.text_error_description),
+                            callToAction = stringResource(R.string.text_go_back),
                             screenState = ScreenState.LOADING,
                             actions = {
                                 scope.launch {
-                                    bottomSheetState.hide()
+                                    actions.popBackStack.invoke()
                                 }
                             }
                         )
                     }
                 }
                 is EmojiViewState.Success -> {
+                    gridSize = 60.dp
                     items(result.emojiItem) { emoji ->
                         EmojiPlaceHolderBottomSheet(
                             emoji = emoji.emoji,
