@@ -54,7 +54,9 @@ import dev.spikeysanju.einsen.view.viewmodel.MainViewModel
 @Composable
 fun AllTaskScreen(
     viewModel: MainViewModel,
-    actions: MainActions
+    actions: MainActions,
+    defaultUrgency: Int = 0,
+    defaultImportance: Int = 0
 ) {
     Scaffold(
         topBar = {
@@ -84,7 +86,7 @@ fun AllTaskScreen(
             FloatingActionButton(
                 modifier = Modifier.padding(30.dp),
                 onClick = {
-                    actions.gotoAddTask.invoke()
+                    actions.gotoAddTask.invoke(defaultUrgency, defaultImportance)
                 },
                 backgroundColor = MaterialTheme.colors.onPrimary,
                 contentColor = MaterialTheme.colors.background,
@@ -106,7 +108,9 @@ fun AllTaskScreen(
                     description = stringResource(R.string.text_no_task_description),
                     callToAction = stringResource(R.string.text_add_a_task),
                     ScreenState.LOADING,
-                    actions = actions.gotoAddTask
+                    actions = {
+                        actions.gotoAddTask.invoke(defaultUrgency, defaultImportance)
+                    }
                 )
             }
             ViewState.Empty -> {
@@ -115,7 +119,9 @@ fun AllTaskScreen(
                     description = stringResource(R.string.text_no_task_description),
                     callToAction = stringResource(R.string.text_add_a_task),
                     ScreenState.EMPTY,
-                    actions = actions.gotoAddTask
+                    actions = {
+                        actions.gotoAddTask.invoke(defaultUrgency, defaultImportance)
+                    }
                 )
             }
             is ViewState.Success -> {
@@ -147,7 +153,9 @@ fun AllTaskScreen(
                     ),
                     callToAction = stringResource(R.string.text_add_a_task),
                     ScreenState.ERROR,
-                    actions = actions.gotoAddTask
+                    actions = {
+                        actions.gotoAddTask.invoke(defaultUrgency, defaultImportance)
+                    }
                 )
             }
         }

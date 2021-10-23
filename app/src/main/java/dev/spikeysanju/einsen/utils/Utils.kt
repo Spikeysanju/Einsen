@@ -56,3 +56,16 @@ fun calculatePriority(priorityAverage: Int): Priority {
         }
     }
 }
+
+/**
+ *@return Pair(urgency, importance)
+ */
+fun getUrgencyImportanceFromPriority(priority: String): Pair<Int, Int> {
+    return when (Priority.valueOf(priority)) {
+        Priority.URGENT -> Pair(5, 5) // (5/2) + 5 = 7.5
+        Priority.IMPORTANT -> Pair(3, 2) // (2/2) + 3 = 3
+        Priority.DELEGATE -> Pair(2, 1) // (1/2) + 2 = 2.5
+        Priority.DUMP -> Pair(1, 1) // (1/2) + 1 = 1.5
+        else -> Pair(0, 0)
+    }
+}

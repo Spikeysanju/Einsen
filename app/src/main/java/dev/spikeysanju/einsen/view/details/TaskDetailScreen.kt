@@ -271,7 +271,9 @@ fun TaskDetailsScreen(viewModel: MainViewModel, action: MainActions) {
                     description = stringResource(R.string.text_no_task_description),
                     callToAction = stringResource(R.string.text_add_a_task),
                     ScreenState.EMPTY,
-                    actions = action.gotoAddTask
+                    actions = {
+                        action.gotoAddTask.invoke(0, 0)
+                    }
                 )
             }
             is SingleViewState.Error -> {
@@ -282,7 +284,9 @@ fun TaskDetailsScreen(viewModel: MainViewModel, action: MainActions) {
                     ),
                     callToAction = stringResource(R.string.text_add_a_task),
                     ScreenState.ERROR,
-                    actions = action.gotoAddTask
+                    actions = {
+                        action.gotoAddTask.invoke(0, 0)
+                    }
                 )
             }
             SingleViewState.Loading -> {
@@ -291,7 +295,9 @@ fun TaskDetailsScreen(viewModel: MainViewModel, action: MainActions) {
                     description = stringResource(R.string.text_no_task_description),
                     callToAction = stringResource(R.string.text_add_a_task),
                     ScreenState.LOADING,
-                    actions = action.gotoAddTask
+                    actions = {
+                        action.gotoAddTask.invoke(0, 0)
+                    }
                 )
             }
         }

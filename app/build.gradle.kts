@@ -43,10 +43,9 @@ android {
     }
 
     lint {
-        isCheckReleaseBuilds = false
-        isAbortOnError = true
+        checkReleaseBuilds = false
+        abortOnError = true
     }
-
     buildTypes {
         release {
             isMinifyEnabled = true
