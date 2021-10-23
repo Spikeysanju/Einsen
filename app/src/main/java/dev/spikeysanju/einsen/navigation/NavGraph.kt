@@ -35,6 +35,7 @@ import com.google.accompanist.navigation.material.ModalBottomSheetLayout
 import com.google.accompanist.navigation.material.bottomSheet
 import com.google.accompanist.navigation.material.rememberBottomSheetNavigator
 import dev.spikeysanju.einsen.model.task.Priority
+import dev.spikeysanju.einsen.utils.getUrgencyImportanceFromPriority
 import dev.spikeysanju.einsen.view.about.AboutScreen
 import dev.spikeysanju.einsen.view.add.AddTaskScreen
 import dev.spikeysanju.einsen.view.allemoji.AllEmojiScreen
@@ -55,6 +56,11 @@ object EndPoints {
     const val URL = "url"
     const val TITLE = "title"
     const val EMOJI = "emoji"
+}
+
+object QueryParams {
+    const val URGENCY = "urgency"
+    const val IMPORTANCE = "importance"
 }
 
 @Composable
@@ -85,17 +91,31 @@ fun NavGraph(toggleTheme: () -> Unit) {
             }
 
             /**
-             * Navigates to [AddNotes].
+             * Navigates to [AddTask].
              */
             composable(
-                Screen.AddTask.route
+                "${Screen.AddTask.route}?urgency={urgency}&importance={importance}",
+                arguments = listOf(
+                    navArgument(QueryParams.URGENCY) {
+                        type = NavType.IntType
+                        defaultValue = 0
+                    },
+                    navArgument(QueryParams.IMPORTANCE) {
+                        type = NavType.IntType
+                        defaultValue = 0
+                    }
+                )
             ) {
                 val viewModel = hiltViewModel<MainViewModel>(it)
                 navController.currentBackStackEntry?.savedStateHandle?.getLiveData<String>(EndPoints.EMOJI)
                     ?.observeForever { result ->
                         viewModel.currentEmoji(result)
                     }
-                AddTaskScreen(viewModel, actions)
+
+                val defaultUrgency = it.arguments?.getInt(QueryParams.URGENCY) ?: 0
+                val defaultImportance = it.arguments?.getInt(QueryParams.IMPORTANCE) ?: 0
+
+                AddTaskScreen(viewModel, actions, defaultUrgency, defaultImportance)
             }
 
             /**
@@ -112,7 +132,15 @@ fun NavGraph(toggleTheme: () -> Unit) {
                     ?: throw IllegalStateException("'Priority' shouldn't be null")
 
                 viewModel.getTaskByPriority(priority = priority)
-                AllTaskScreen(viewModel, actions)
+
+                val defaultUrgencyImportance = getUrgencyImportanceFromPriority(priority)
+
+                AllTaskScreen(
+                    viewModel,
+                    actions,
+                    defaultUrgencyImportance.first,
+                    defaultUrgencyImportance.second
+                )
             }
 
             /**
@@ -223,8 +251,8 @@ class MainActions(navController: NavController) {
         navController.navigate(Screen.Dashboard.route)
     }
 
-    val gotoAddTask: () -> Unit = {
-        navController.navigate(Screen.AddTask.route)
+    val gotoAddTask: (urgency: Int?, importance: Int?) -> Unit = { urgency, importance ->
+        navController.navigate("${Screen.AddTask.route}?urgency=$urgency&importance=$importance")
     }
 
     val gotoAllTask: (priority: Priority) -> Unit = { priority ->

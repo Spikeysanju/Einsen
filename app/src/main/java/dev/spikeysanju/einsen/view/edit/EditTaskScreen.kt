@@ -131,7 +131,9 @@ fun EditTaskScreen(viewModel: MainViewModel, actions: MainActions) {
                     description = stringResource(R.string.text_no_task_description),
                     callToAction = stringResource(R.string.text_add_a_task),
                     ScreenState.EMPTY,
-                    actions = actions.gotoAddTask
+                    actions = {
+                        actions.gotoAddTask.invoke(0, 0)
+                    }
                 )
             }
             is SingleViewState.Error -> {
@@ -142,7 +144,9 @@ fun EditTaskScreen(viewModel: MainViewModel, actions: MainActions) {
                     ),
                     callToAction = stringResource(R.string.text_add_a_task),
                     ScreenState.ERROR,
-                    actions = actions.gotoAddTask
+                    actions = {
+                        actions.gotoAddTask.invoke(0, 0)
+                    }
                 )
             }
             SingleViewState.Loading -> {
@@ -151,7 +155,9 @@ fun EditTaskScreen(viewModel: MainViewModel, actions: MainActions) {
                     description = stringResource(R.string.text_no_task_description),
                     callToAction = stringResource(R.string.text_add_a_task),
                     ScreenState.LOADING,
-                    actions = actions.gotoAddTask
+                    actions = {
+                        actions.gotoAddTask.invoke(0, 0)
+                    }
                 )
             }
             is SingleViewState.Success -> {

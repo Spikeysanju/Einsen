@@ -68,7 +68,12 @@ import dev.spikeysanju.einsen.view.viewmodel.MainViewModel
 import kotlinx.coroutines.launch
 
 @Composable
-fun AddTaskScreen(viewModel: MainViewModel, actions: MainActions) {
+fun AddTaskScreen(
+    viewModel: MainViewModel,
+    actions: MainActions,
+    defaultUrgency: Int,
+    defaultImportance: Int
+) {
 
     // component state
     val listState = rememberLazyListState()
@@ -89,8 +94,8 @@ fun AddTaskScreen(viewModel: MainViewModel, actions: MainActions) {
                 description = ""
                 category = ""
                 emoji = ""
-                urgency = 0
-                importance = 0
+                urgency = defaultUrgency
+                importance = defaultImportance
                 priority = Priority.IMPORTANT
                 due = "18/12/1998"
                 isCompleted = false

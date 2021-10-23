@@ -113,7 +113,7 @@ fun DashboardScreen(
             FloatingActionButton(
                 modifier = Modifier.padding(30.dp),
                 onClick = {
-                    actions.gotoAddTask.invoke()
+                    actions.gotoAddTask.invoke(0, 0)
                 },
                 backgroundColor = MaterialTheme.colors.onPrimary,
                 contentColor = MaterialTheme.colors.background,
@@ -141,7 +141,9 @@ fun DashboardScreen(
                     description = stringResource(R.string.text_no_task_description),
                     callToAction = stringResource(R.string.text_add_a_task),
                     ScreenState.EMPTY,
-                    actions = actions.gotoAddTask
+                    actions = {
+                        actions.gotoAddTask.invoke(0, 0)
+                    }
                 )
             }
             ViewState.Loading -> {
@@ -150,7 +152,9 @@ fun DashboardScreen(
                     description = stringResource(R.string.text_no_task_description),
                     callToAction = stringResource(R.string.text_add_a_task),
                     ScreenState.LOADING,
-                    actions = actions.gotoAddTask
+                    actions = {
+                        actions.gotoAddTask.invoke(0, 0)
+                    }
                 )
             }
             is ViewState.Success -> {
@@ -226,7 +230,9 @@ fun DashboardScreen(
                     ),
                     callToAction = stringResource(R.string.text_add_a_task),
                     ScreenState.ERROR,
-                    actions = actions.gotoAddTask
+                    actions = {
+                        actions.gotoAddTask.invoke(0, 0)
+                    }
                 )
             }
         }
