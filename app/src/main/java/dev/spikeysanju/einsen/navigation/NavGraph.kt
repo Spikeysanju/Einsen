@@ -91,7 +91,7 @@ fun NavGraph(toggleTheme: () -> Unit) {
             }
 
             /**
-             * Navigates to [AddNotes].
+             * Navigates to [AddTask].
              */
             composable(
                 "${Screen.AddTask.route}?urgency={urgency}&importance={importance}",
