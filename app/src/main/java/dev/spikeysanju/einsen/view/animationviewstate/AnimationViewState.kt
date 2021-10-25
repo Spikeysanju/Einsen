@@ -48,6 +48,7 @@ import dev.spikeysanju.einsen.ui.theme.typography
 
 @Composable
 fun AnimationViewState(
+    modifier: Modifier = Modifier,
     title: String,
     description: String,
     callToAction: String,
@@ -55,7 +56,7 @@ fun AnimationViewState(
     actions: () -> Unit
 ) {
     Column(
-        modifier = Modifier
+        modifier = modifier
             .fillMaxSize()
             .wrapContentSize(Alignment.Center),
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -65,6 +66,7 @@ fun AnimationViewState(
         when (screenState) {
             ScreenState.ERROR -> {
                 LottieAnimationPlaceHolder(
+                    modifier,
                     title,
                     description,
                     callToAction,
@@ -74,6 +76,7 @@ fun AnimationViewState(
             }
             ScreenState.EMPTY -> {
                 LottieAnimationPlaceHolder(
+                    modifier,
                     title,
                     description,
                     callToAction,
@@ -82,7 +85,7 @@ fun AnimationViewState(
                 )
             }
             ScreenState.LOADING -> {
-                LottieAnimation(lottie = R.raw.loading_state)
+                LottieAnimation(modifier, lottie = R.raw.loading_state)
             }
         }
     }
@@ -90,6 +93,7 @@ fun AnimationViewState(
 
 @Composable
 fun LottieAnimationPlaceHolder(
+    modifier: Modifier,
     title: String,
     description: String,
     callToAction: String,
@@ -98,26 +102,28 @@ fun LottieAnimationPlaceHolder(
 ) {
 
     // lottie animation
-    LottieAnimation(lottie)
+    LottieAnimation(modifier, lottie)
 
     // title, description & CTA button
     Text(
         text = title,
-        modifier = Modifier.fillMaxWidth(),
+        modifier = modifier.fillMaxWidth(),
         style = typography.h6,
         textAlign = TextAlign.Center,
         color = einsenColors.black
     )
-    Spacer(modifier = Modifier.height(8.dp))
+    Spacer(modifier = modifier.height(8.dp))
     Text(
         text = description,
-        modifier = Modifier.fillMaxWidth().padding(start = 24.dp, end = 24.dp),
+        modifier = modifier
+            .fillMaxWidth()
+            .padding(start = 24.dp, end = 24.dp),
         style = typography.body2,
         maxLines = 3,
         textAlign = TextAlign.Center,
         color = einsenColors.black.copy(.7F)
     )
-    Spacer(modifier = Modifier.height(24.dp))
+    Spacer(modifier = modifier.height(24.dp))
     Button(
         onClick = { actions() },
         colors = ButtonDefaults.buttonColors(
@@ -130,14 +136,14 @@ fun LottieAnimationPlaceHolder(
 }
 
 @Composable
-fun LottieAnimation(lottie: Int) {
+fun LottieAnimation(modifier: Modifier, lottie: Int) {
     val composition by rememberLottieComposition(LottieCompositionSpec.RawRes(lottie))
     val progress by animateLottieCompositionAsState(
         composition,
         iterations = LottieConstants.IterateForever,
     )
     LottieAnimation(
-        modifier = Modifier.size(300.dp),
+        modifier = modifier.size(300.dp),
         composition = composition,
         progress = progress
     )

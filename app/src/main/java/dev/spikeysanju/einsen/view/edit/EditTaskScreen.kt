@@ -72,7 +72,7 @@ import dev.spikeysanju.einsen.view.viewmodel.MainViewModel
 import kotlinx.coroutines.launch
 
 @Composable
-fun EditTaskScreen(viewModel: MainViewModel, actions: MainActions) {
+fun EditTaskScreen(modifier: Modifier, viewModel: MainViewModel, actions: MainActions) {
 
     // Coroutines scope
     val scope = rememberCoroutineScope()
@@ -127,6 +127,7 @@ fun EditTaskScreen(viewModel: MainViewModel, actions: MainActions) {
         when (val taskResult = viewModel.singleTask.collectAsState().value) {
             SingleViewState.Empty -> {
                 AnimationViewState(
+                    modifier,
                     title = stringResource(R.string.text_no_task_title),
                     description = stringResource(R.string.text_no_task_description),
                     callToAction = stringResource(R.string.text_add_a_task),
@@ -138,6 +139,7 @@ fun EditTaskScreen(viewModel: MainViewModel, actions: MainActions) {
             }
             is SingleViewState.Error -> {
                 AnimationViewState(
+                    modifier,
                     title = stringResource(R.string.text_error_title),
                     description = stringResource(
                         R.string.text_error_description
@@ -151,6 +153,7 @@ fun EditTaskScreen(viewModel: MainViewModel, actions: MainActions) {
             }
             SingleViewState.Loading -> {
                 AnimationViewState(
+                    modifier,
                     title = stringResource(R.string.text_no_task_title),
                     description = stringResource(R.string.text_no_task_description),
                     callToAction = stringResource(R.string.text_add_a_task),
@@ -260,7 +263,7 @@ fun EditTaskScreen(viewModel: MainViewModel, actions: MainActions) {
                             )
                             Spacer(modifier = Modifier.height(12.dp))
 
-                            EinsenStepSlider(points, urgencyState.toFloat()) {
+                            EinsenStepSlider(modifier, points, urgencyState.toFloat()) {
                                 urgencyState = it
                             }
                         }
@@ -277,7 +280,7 @@ fun EditTaskScreen(viewModel: MainViewModel, actions: MainActions) {
                             )
                             Spacer(modifier = Modifier.height(12.dp))
 
-                            EinsenStepSlider(points, importanceState.toFloat()) {
+                            EinsenStepSlider(modifier, points, importanceState.toFloat()) {
                                 importanceState = it
                             }
                         }

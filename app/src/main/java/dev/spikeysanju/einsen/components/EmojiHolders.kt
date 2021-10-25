@@ -40,9 +40,9 @@ import dev.spikeysanju.einsen.ui.theme.typography
  * @param onSelect
  */
 @Composable
-fun EmojiPlaceHolder(emoji: String, onSelect: () -> Unit) {
+fun EmojiPlaceHolder(modifier: Modifier = Modifier, emoji: String, onSelect: () -> Unit) {
     Box(
-        modifier = Modifier
+        modifier = modifier
             .size(100.dp)
             .clip(CircleShape)
             .background(einsenColors.card)
@@ -64,9 +64,13 @@ fun EmojiPlaceHolder(emoji: String, onSelect: () -> Unit) {
  * @param onSelect
  */
 @Composable
-fun EmojiPlaceHolderSmall(emoji: String, onSelect: (String) -> Unit) {
+fun EmojiPlaceHolderSmall(
+    modifier: Modifier = Modifier,
+    emoji: String,
+    onSelect: (String) -> Unit
+) {
     Box(
-        modifier = Modifier
+        modifier = modifier
             .size(50.dp)
             .clip(CircleShape)
             .background(einsenColors.card)
@@ -87,9 +91,13 @@ fun EmojiPlaceHolderSmall(emoji: String, onSelect: (String) -> Unit) {
  * @param onSelect
  */
 @Composable
-fun EmojiPlaceHolderBottomSheet(emoji: String, onSelect: (String) -> Unit) {
+fun EmojiPlaceHolderBottomSheet(
+    modifier: Modifier = Modifier,
+    emoji: String,
+    onSelect: (String) -> Unit
+) {
     Box(
-        modifier = Modifier
+        modifier = modifier
             .size(50.dp)
             .clip(CircleShape)
             .clickable { onSelect(emoji) },

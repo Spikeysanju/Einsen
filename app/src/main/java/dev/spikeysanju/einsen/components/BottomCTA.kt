@@ -54,6 +54,7 @@ import dev.spikeysanju.einsen.ui.theme.einsenColors
  */
 @Composable
 fun BottomCTA(
+    modifier: Modifier = Modifier,
     title: String,
     icon: Painter,
     color: Color,
@@ -63,20 +64,20 @@ fun BottomCTA(
     onButtonChange: () -> Unit
 ) {
     Box(
-        modifier = Modifier
+        modifier = modifier
             .fillMaxWidth()
             .height(80.dp)
             .background(einsenColors.card),
         contentAlignment = Alignment.Center
     ) {
         Row(
-            modifier = Modifier.padding(top = 12.dp, bottom = 12.dp, start = 16.dp, end = 16.dp),
+            modifier = modifier.padding(top = 12.dp, bottom = 12.dp, start = 16.dp, end = 16.dp),
             horizontalArrangement = Arrangement.SpaceAround
         ) {
             ActionIcons(onEdit = { onEdit() }, onDelete = { onDelete() }, onShare = { onShare() })
-            Spacer(modifier = Modifier.width(12.dp))
+            Spacer(modifier = modifier.width(12.dp))
 
-            Row(modifier = Modifier.fillMaxWidth(), Arrangement.End) {
+            Row(modifier = modifier.fillMaxWidth(), Arrangement.End) {
                 PrimaryButtonWithIcon(
                     title = title,
                     onclick = {
@@ -96,8 +97,13 @@ fun BottomCTA(
  * @param onShare
  */
 @Composable
-fun ActionIcons(onEdit: () -> Unit, onDelete: () -> Unit, onShare: () -> Unit) {
-    Row(modifier = Modifier.wrapContentWidth(), horizontalArrangement = Arrangement.SpaceAround) {
+fun ActionIcons(
+    modifier: Modifier = Modifier,
+    onEdit: () -> Unit,
+    onDelete: () -> Unit,
+    onShare: () -> Unit
+) {
+    Row(modifier = modifier.wrapContentWidth(), horizontalArrangement = Arrangement.SpaceAround) {
 
         IconButton(onClick = { onEdit.invoke() }) {
             Icon(

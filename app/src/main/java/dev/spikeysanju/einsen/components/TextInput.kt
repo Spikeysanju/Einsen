@@ -65,7 +65,12 @@ fun EinsenLabelView(title: String) {
  */
 @Stable
 @Composable
-fun EinsenInputTextField(title: String, value: String, onValueChanged: (String) -> Unit) {
+fun EinsenInputTextField(
+    modifier: Modifier = Modifier,
+    title: String,
+    value: String,
+    onValueChanged: (String) -> Unit
+) {
     var textState by rememberSaveable { mutableStateOf("") }
     var errorState by rememberSaveable { mutableStateOf(false) }
     var errorMessage by rememberSaveable { mutableStateOf("") }
@@ -74,7 +79,7 @@ fun EinsenInputTextField(title: String, value: String, onValueChanged: (String) 
     Column(horizontalAlignment = Alignment.Start) {
 
         TextField(
-            modifier = Modifier
+            modifier = modifier
                 .fillMaxWidth()
                 .padding(start = 20.dp, end = 20.dp),
             value = value,
@@ -124,7 +129,7 @@ fun EinsenInputTextField(title: String, value: String, onValueChanged: (String) 
                 errorMessage,
                 style = typography.caption,
                 color = einsenColors.err,
-                modifier = Modifier.padding(top = 12.dp, start = 16.dp, end = 16.dp)
+                modifier = modifier.padding(top = 12.dp, start = 16.dp, end = 16.dp)
             )
         }
     }
@@ -133,6 +138,7 @@ fun EinsenInputTextField(title: String, value: String, onValueChanged: (String) 
 @Stable
 @Composable
 fun EinsenInputTextFieldWithoutHint(
+    modifier: Modifier = Modifier,
     title: String,
     value: String,
     onValueChanged: (String) -> Unit
@@ -141,7 +147,7 @@ fun EinsenInputTextFieldWithoutHint(
     Column(horizontalAlignment = Alignment.Start) {
 
         TextField(
-            modifier = Modifier
+            modifier = modifier
                 .fillMaxWidth()
                 .padding(start = 20.dp, end = 20.dp),
             value = value,

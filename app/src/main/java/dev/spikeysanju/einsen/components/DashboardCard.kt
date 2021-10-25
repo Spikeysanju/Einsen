@@ -52,6 +52,7 @@ import dev.spikeysanju.einsen.utils.coloredShadow
  */
 @Composable
 fun DashboardCardItem(
+    modifier: Modifier = Modifier,
     title: String,
     description: String,
     count: String,
@@ -60,9 +61,9 @@ fun DashboardCardItem(
 ) {
     val gradientBrush = Brush.verticalGradient(listOf(color.copy(.8F), color), startY = 10F)
 
-    Spacer(modifier = Modifier.height(24.dp))
+    Spacer(modifier = modifier.height(24.dp))
     Row(
-        modifier = Modifier
+        modifier = modifier
             .fillMaxWidth()
             .padding(start = 16.dp, end = 16.dp)
             .coloredShadow(
@@ -82,16 +83,16 @@ fun DashboardCardItem(
         horizontalArrangement = Arrangement.SpaceAround
     ) {
         Column(
-            modifier = Modifier
+            modifier = modifier
                 .wrapContentWidth()
                 .padding(top = 36.dp, bottom = 36.dp)
                 .align(Alignment.CenterVertically)
         ) {
             Text(text = title, style = typography.h6, color = Color.White)
-            Spacer(modifier = Modifier.height(16.dp))
+            Spacer(modifier = modifier.height(16.dp))
             Text(text = description, style = typography.subtitle1, color = Color.White)
         }
-        Spacer(modifier = Modifier.width(16.dp))
+        Spacer(modifier = modifier.width(16.dp))
         Text(text = count, style = typography.h2, color = Color.White)
     }
 }

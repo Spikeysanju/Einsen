@@ -53,6 +53,7 @@ import dev.spikeysanju.einsen.view.viewmodel.MainViewModel
 
 @Composable
 fun AllTaskScreen(
+    modifier: Modifier,
     viewModel: MainViewModel,
     actions: MainActions,
     defaultUrgency: Int = 0,
@@ -67,7 +68,7 @@ fun AllTaskScreen(
                         style = typography.h6,
                         textAlign = TextAlign.Start,
                         color = einsenColors.black,
-                        modifier = Modifier.padding(start = 16.dp)
+                        modifier = modifier.padding(start = 16.dp)
                     )
                 },
                 navigationIcon = {
@@ -84,7 +85,7 @@ fun AllTaskScreen(
         },
         floatingActionButton = {
             FloatingActionButton(
-                modifier = Modifier.padding(30.dp),
+                modifier = modifier.padding(30.dp),
                 onClick = {
                     actions.gotoAddTask.invoke(defaultUrgency, defaultImportance)
                 },
@@ -104,6 +105,7 @@ fun AllTaskScreen(
         when (val result = viewModel.feed.collectAsState().value) {
             ViewState.Loading -> {
                 AnimationViewState(
+                    modifier,
                     title = stringResource(R.string.text_no_task_title),
                     description = stringResource(R.string.text_no_task_description),
                     callToAction = stringResource(R.string.text_add_a_task),
@@ -115,6 +117,7 @@ fun AllTaskScreen(
             }
             ViewState.Empty -> {
                 AnimationViewState(
+                    modifier,
                     title = stringResource(R.string.text_no_task_title),
                     description = stringResource(R.string.text_no_task_description),
                     callToAction = stringResource(R.string.text_add_a_task),
@@ -134,6 +137,7 @@ fun AllTaskScreen(
                 ) {
                     itemsIndexed(result.task) { index: Int, item: Task ->
                         TaskItemCard(
+                            modifier,
                             item,
                             onClick = {
                                 actions.gotoTaskDetails(item.id)
@@ -147,6 +151,7 @@ fun AllTaskScreen(
             }
             is ViewState.Error -> {
                 AnimationViewState(
+                    modifier,
                     title = stringResource(R.string.text_error_title),
                     description = stringResource(
                         R.string.text_error_description
