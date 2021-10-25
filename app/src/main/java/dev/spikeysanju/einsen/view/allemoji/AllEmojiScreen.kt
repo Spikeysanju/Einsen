@@ -50,7 +50,12 @@ import dev.spikeysanju.einsen.view.viewmodel.MainViewModel
 import kotlinx.coroutines.launch
 
 @Composable
-fun AllEmojiScreen(viewModel: MainViewModel, actions: MainActions, onSelect: (String) -> Unit) {
+fun AllEmojiScreen(
+    modifier: Modifier,
+    viewModel: MainViewModel,
+    actions: MainActions,
+    onSelect: (String) -> Unit
+) {
 
     // Coroutines scope
     val scope = rememberCoroutineScope()
@@ -78,12 +83,14 @@ fun AllEmojiScreen(viewModel: MainViewModel, actions: MainActions, onSelect: (St
             searchEmoji = it
         }
 
-        Spacer(modifier = Modifier.height(12.dp))
+        Spacer(modifier = modifier.height(12.dp))
 
         // Emoji Grid List
         LazyVerticalGrid(
             state = listState,
-            modifier = Modifier.weight(1f).align(Alignment.CenterHorizontally),
+            modifier = modifier
+                .weight(1f)
+                .align(Alignment.CenterHorizontally),
             cells = GridCells.Adaptive(minSize = gridSize)
         ) {
 

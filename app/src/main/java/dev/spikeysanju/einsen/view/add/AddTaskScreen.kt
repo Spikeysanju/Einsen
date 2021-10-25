@@ -69,6 +69,7 @@ import kotlinx.coroutines.launch
 
 @Composable
 fun AddTaskScreen(
+    modifier: Modifier,
     viewModel: MainViewModel,
     actions: MainActions,
     defaultUrgency: Int,
@@ -82,9 +83,6 @@ fun AddTaskScreen(
 
     // slider points
     val points = listOf("0", "1", "2", "3", "4")
-    val sliderPoints by remember {
-        mutableStateOf(points)
-    }
 
     // task value state
     var taskState by remember {
@@ -120,7 +118,7 @@ fun AddTaskScreen(
                         style = typography.h6,
                         textAlign = TextAlign.Start,
                         color = einsenColors.black,
-                        modifier = Modifier.padding(start = 16.dp)
+                        modifier = modifier.padding(start = 16.dp)
                     )
                 },
                 navigationIcon = {
@@ -142,9 +140,9 @@ fun AddTaskScreen(
 
             // Emoji
             item {
-                Spacer(modifier = Modifier.height(24.dp))
+                Spacer(modifier = modifier.height(24.dp))
                 Box(
-                    modifier = Modifier.fillMaxWidth(),
+                    modifier = modifier.fillMaxWidth(),
                     contentAlignment = Alignment.Center
                 ) {
                     EmojiPlaceHolder(
@@ -160,7 +158,7 @@ fun AddTaskScreen(
 
             // Title
             item {
-                Spacer(modifier = Modifier.height(24.dp))
+                Spacer(modifier = modifier.height(24.dp))
                 EinsenInputTextField(
                     title = stringResource(R.string.text_title),
                     value = taskState.title
@@ -171,7 +169,7 @@ fun AddTaskScreen(
 
             // Description
             item {
-                Spacer(modifier = Modifier.height(24.dp))
+                Spacer(modifier = modifier.height(24.dp))
                 EinsenInputTextField(
                     title = stringResource(R.string.text_description),
                     value = taskState.description
@@ -182,7 +180,7 @@ fun AddTaskScreen(
 
             // Category
             item {
-                Spacer(modifier = Modifier.height(24.dp))
+                Spacer(modifier = modifier.height(24.dp))
                 EinsenInputTextField(
                     title = stringResource(R.string.text_category),
                     value = taskState.category
@@ -199,16 +197,16 @@ fun AddTaskScreen(
 
             // Urgency
             item {
-                Spacer(modifier = Modifier.height(24.dp))
-                Column(modifier = Modifier.padding(start = 24.dp, end = 24.dp)) {
+                Spacer(modifier = modifier.height(24.dp))
+                Column(modifier = modifier.padding(start = 24.dp, end = 24.dp)) {
                     Text(
                         text = stringResource(R.string.text_urgency),
                         style = titleStyle,
                         color = MaterialTheme.colors.onPrimary
                     )
-                    Spacer(modifier = Modifier.height(12.dp))
+                    Spacer(modifier = modifier.height(12.dp))
 
-                    EinsenStepSlider(points, taskState.urgency.toFloat()) {
+                    EinsenStepSlider(modifier, points, taskState.urgency.toFloat()) {
                         taskState = taskState.copy(urgency = it)
                     }
                 }
@@ -216,16 +214,16 @@ fun AddTaskScreen(
 
             // Importance
             item {
-                Spacer(modifier = Modifier.height(24.dp))
-                Column(modifier = Modifier.padding(start = 24.dp, end = 24.dp)) {
+                Spacer(modifier = modifier.height(24.dp))
+                Column(modifier = modifier.padding(start = 24.dp, end = 24.dp)) {
                     Text(
                         text = stringResource(R.string.text_importance),
                         style = titleStyle,
                         color = MaterialTheme.colors.onPrimary
                     )
-                    Spacer(modifier = Modifier.height(12.dp))
+                    Spacer(modifier = modifier.height(12.dp))
 
-                    EinsenStepSlider(points, taskState.importance.toFloat()) {
+                    EinsenStepSlider(modifier, points, taskState.importance.toFloat()) {
                         taskState = taskState.copy(importance = it)
                     }
                 }
@@ -233,7 +231,7 @@ fun AddTaskScreen(
 
             // Save Task CTA
             item {
-                Spacer(modifier = Modifier.height(36.dp))
+                Spacer(modifier = modifier.height(36.dp))
                 PrimaryButton(title = stringResource(R.string.text_save_task)) {
 
                     // calculate the average value by adding urgency + priority / 2

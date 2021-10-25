@@ -40,9 +40,13 @@ import dev.spikeysanju.einsen.ui.theme.einsenColors
  * @param onClick
  */
 @Composable
-fun ChipView(title: String, onClick: () -> Unit) {
+fun ChipView(
+    modifier: Modifier = Modifier,
+    title: String,
+    onClick: () -> Unit
+) {
     Box(
-        modifier = Modifier
+        modifier = modifier
             .wrapContentWidth()
             .animateContentSize()
             .clickable(onClick = onClick)
@@ -50,7 +54,7 @@ fun ChipView(title: String, onClick: () -> Unit) {
             .background(einsenColors.button)
     ) {
         Text(
-            text = title, modifier = Modifier.padding(12.dp, 6.dp, 12.dp, 6.dp),
+            text = title, modifier = modifier.padding(12.dp, 6.dp, 12.dp, 6.dp),
             style = MaterialTheme.typography.overline,
             color = einsenColors.white
         )

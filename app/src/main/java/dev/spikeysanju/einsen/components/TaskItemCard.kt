@@ -64,14 +64,15 @@ import dev.spikeysanju.einsen.ui.theme.typography
 
 @Composable
 fun TaskItemCard(
+    modifier: Modifier = Modifier,
     task: Task,
     onClick: () -> Unit,
     onCheckboxChange: (Boolean) -> Unit
 ) {
 
-    Spacer(modifier = Modifier.height(12.dp))
+    Spacer(modifier = modifier.height(12.dp))
     Row(
-        modifier = Modifier.fillMaxWidth(),
+        modifier = modifier.fillMaxWidth(),
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.Start
     ) {
@@ -89,13 +90,13 @@ fun TaskItemCard(
             }
         )
 
-        Spacer(modifier = Modifier.width(12.dp))
+        Spacer(modifier = modifier.width(12.dp))
 
         /**
          * Emoji + (title + category)
          */
         Row(
-            modifier = Modifier
+            modifier = modifier
                 .fillMaxWidth()
                 .clip(shape = shapes.large)
                 .background(einsenColors.card)
@@ -108,13 +109,13 @@ fun TaskItemCard(
              * Emoji Text View
              */
             EmojiTextView(emoji = task.emoji)
-            Spacer(modifier = Modifier.width(12.dp))
+            Spacer(modifier = modifier.width(12.dp))
 
             /**
              * Title + category
              */
             Column(
-                modifier = Modifier
+                modifier = modifier
                     .align(Alignment.CenterVertically),
             ) {
                 Text(
@@ -137,7 +138,7 @@ fun TaskItemCard(
                     overflow = TextOverflow.Ellipsis
                 )
 
-                Spacer(modifier = Modifier.height(12.dp))
+                Spacer(modifier = modifier.height(12.dp))
 
                 Text(
                     text = task.category,
@@ -162,9 +163,9 @@ fun TaskItemCard(
  * @param emoji
  */
 @Composable
-fun EmojiTextView(emoji: String) {
+fun EmojiTextView(modifier: Modifier = Modifier, emoji: String) {
     Box(
-        modifier = Modifier
+        modifier = modifier
             .size(80.dp)
             .padding(12.dp)
             .clip(CircleShape)
@@ -176,7 +177,7 @@ fun EmojiTextView(emoji: String) {
             color = einsenColors.black,
             style = typography.subtitle1,
             textAlign = TextAlign.Center,
-            modifier = Modifier.align(Alignment.Center)
+            modifier = modifier.align(Alignment.Center)
         )
     }
 }

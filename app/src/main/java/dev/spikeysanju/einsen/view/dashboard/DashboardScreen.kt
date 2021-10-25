@@ -60,6 +60,7 @@ import dev.spikeysanju.einsen.view.viewmodel.MainViewModel
 
 @Composable
 fun DashboardScreen(
+    modifier: Modifier,
     viewModel: MainViewModel,
     actions: MainActions,
     toggleTheme: () -> Unit
@@ -92,7 +93,7 @@ fun DashboardScreen(
                         )
                     }
 
-                    Spacer(modifier = Modifier.width(8.dp))
+                    Spacer(modifier = modifier.width(8.dp))
 
                     IconButton(
                         onClick = {
@@ -111,7 +112,7 @@ fun DashboardScreen(
         },
         floatingActionButton = {
             FloatingActionButton(
-                modifier = Modifier.padding(30.dp),
+                modifier = modifier.padding(30.dp),
                 onClick = {
                     actions.gotoAddTask.invoke(0, 0)
                 },
@@ -137,6 +138,7 @@ fun DashboardScreen(
         when (val allTaskList = viewModel.feed.collectAsState().value) {
             ViewState.Empty -> {
                 AnimationViewState(
+                    modifier,
                     title = stringResource(R.string.text_no_task_title),
                     description = stringResource(R.string.text_no_task_description),
                     callToAction = stringResource(R.string.text_add_a_task),
@@ -148,6 +150,7 @@ fun DashboardScreen(
             }
             ViewState.Loading -> {
                 AnimationViewState(
+                    modifier,
                     title = stringResource(R.string.text_no_task_title),
                     description = stringResource(R.string.text_no_task_description),
                     callToAction = stringResource(R.string.text_add_a_task),
@@ -224,6 +227,7 @@ fun DashboardScreen(
             }
             is ViewState.Error -> {
                 AnimationViewState(
+                    modifier,
                     title = stringResource(R.string.text_error_title),
                     description = stringResource(
                         R.string.text_error_description

@@ -31,7 +31,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.scale
 
 @Composable
-fun PulseEffect(pulseFraction: Float = 1.2F, content: @Composable () -> Unit) {
+fun PulseEffect(
+    modifier: Modifier = Modifier,
+    pulseFraction: Float = 1.2F,
+    content: @Composable () -> Unit
+) {
     val infiniteTransition = rememberInfiniteTransition()
     val scale by infiniteTransition.animateFloat(
         initialValue = 1f,
@@ -41,7 +45,7 @@ fun PulseEffect(pulseFraction: Float = 1.2F, content: @Composable () -> Unit) {
             repeatMode = RepeatMode.Reverse
         )
     )
-    Box(modifier = Modifier.scale(scale)) {
+    Box(modifier = modifier.scale(scale)) {
         content()
     }
 }

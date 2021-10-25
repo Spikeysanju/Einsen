@@ -50,7 +50,12 @@ import dev.spikeysanju.einsen.ui.theme.einsenColors
  */
 
 @Composable
-fun EinsenStepSlider(points: List<String>, value: Float, onValueChange: (Int) -> Unit) {
+fun EinsenStepSlider(
+    modifier: Modifier = Modifier,
+    points: List<String>,
+    value: Float,
+    onValueChange: (Int) -> Unit
+) {
     val (sliderValue, setSliderValue) = remember { mutableStateOf(value) }
     val drawPadding = with(LocalDensity.current) { 10.dp.toPx() }
     val textSize = with(LocalDensity.current) { 10.dp.toPx() }
@@ -64,7 +69,7 @@ fun EinsenStepSlider(points: List<String>, value: Float, onValueChange: (Int) ->
     }
     Box(contentAlignment = Alignment.Center) {
         Canvas(
-            modifier = Modifier
+            modifier = modifier
                 .height(canvasHeight)
                 .fillMaxWidth()
                 .padding(
@@ -92,7 +97,7 @@ fun EinsenStepSlider(points: List<String>, value: Float, onValueChange: (Int) ->
             }
         }
         Slider(
-            modifier = Modifier.fillMaxWidth(),
+            modifier = modifier.fillMaxWidth(),
             value = sliderValue,
             valueRange = 0f..points.size.minus(1).toFloat(),
             steps = points.size.minus(2),

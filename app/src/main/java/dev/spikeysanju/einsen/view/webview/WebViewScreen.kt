@@ -46,6 +46,7 @@ import dev.spikeysanju.einsen.ui.theme.typography
 
 @Composable
 fun WebViewScreen(
+    modifier: Modifier,
     title: String,
     url: String,
     actions: MainActions
@@ -59,7 +60,7 @@ fun WebViewScreen(
                         style = typography.h6,
                         textAlign = TextAlign.Start,
                         color = einsenColors.black,
-                        modifier = Modifier.padding(start = 16.dp)
+                        modifier = modifier.padding(start = 16.dp)
                     )
                 },
                 navigationIcon = {
@@ -76,7 +77,7 @@ fun WebViewScreen(
         }
     ) {
         Box(
-            modifier = Modifier
+            modifier = modifier
                 .background(MaterialTheme.colors.background)
                 .fillMaxSize()
         ) {

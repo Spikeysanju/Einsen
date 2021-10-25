@@ -75,7 +75,7 @@ import dev.spikeysanju.einsen.view.viewmodel.MainViewModel
 import java.util.*
 
 @Composable
-fun TaskDetailsScreen(viewModel: MainViewModel, action: MainActions) {
+fun TaskDetailsScreen(modifier: Modifier, viewModel: MainViewModel, action: MainActions) {
 
     val activity = LocalContext.current as Activity
 
@@ -104,7 +104,7 @@ fun TaskDetailsScreen(viewModel: MainViewModel, action: MainActions) {
                         style = typography.h6,
                         textAlign = TextAlign.Start,
                         color = einsenColors.black,
-                        modifier = Modifier.padding(start = 16.dp)
+                        modifier = modifier.padding(start = 16.dp)
                     )
                 },
                 navigationIcon = {
@@ -168,7 +168,7 @@ fun TaskDetailsScreen(viewModel: MainViewModel, action: MainActions) {
             is SingleViewState.Success -> {
 
                 LazyColumn(
-                    modifier = Modifier.padding(start = 16.dp, end = 16.dp),
+                    modifier = modifier.padding(start = 16.dp, end = 16.dp),
                     state = listState,
                     contentPadding = PaddingValues(top = 16.dp, bottom = 100.dp)
                 ) {
@@ -179,26 +179,30 @@ fun TaskDetailsScreen(viewModel: MainViewModel, action: MainActions) {
 
                     item {
                         Box(
-                            modifier = Modifier.fillMaxWidth().wrapContentHeight()
+                            modifier = modifier
+                                .fillMaxWidth()
+                                .wrapContentHeight()
                                 .clip(RoundedCornerShape(12.dp))
                                 .background(einsenColors.card),
                             contentAlignment = Alignment.TopCenter
                         ) {
 
                             Column(
-                                modifier = Modifier.fillMaxWidth().padding(
-                                    start = 16.dp,
-                                    end = 16.dp,
-                                    bottom = 24.dp,
-                                    top = 24.dp
-                                )
+                                modifier = modifier
+                                    .fillMaxWidth()
+                                    .padding(
+                                        start = 16.dp,
+                                        end = 16.dp,
+                                        bottom = 24.dp,
+                                        top = 24.dp
+                                    )
                             ) {
 
-                                Spacer(modifier = Modifier.height(24.dp))
+                                Spacer(modifier = modifier.height(24.dp))
 
                                 // Emoji view
                                 Box(
-                                    modifier = Modifier.fillMaxWidth(),
+                                    modifier = modifier.fillMaxWidth(),
                                     contentAlignment = Alignment.Center
                                 ) {
                                     EmojiPlaceHolder(
@@ -208,7 +212,7 @@ fun TaskDetailsScreen(viewModel: MainViewModel, action: MainActions) {
                                     )
                                 }
 
-                                Spacer(modifier = Modifier.height(16.dp))
+                                Spacer(modifier = modifier.height(16.dp))
 
                                 // Category chip
                                 ChipView(
@@ -218,7 +222,7 @@ fun TaskDetailsScreen(viewModel: MainViewModel, action: MainActions) {
                                     }
                                 )
 
-                                Spacer(modifier = Modifier.height(16.dp))
+                                Spacer(modifier = modifier.height(16.dp))
 
                                 // Title
                                 Text(
@@ -228,7 +232,7 @@ fun TaskDetailsScreen(viewModel: MainViewModel, action: MainActions) {
                                     color = colors.onPrimary
                                 )
 
-                                Spacer(modifier = Modifier.height(24.dp))
+                                Spacer(modifier = modifier.height(24.dp))
 
                                 // Description
                                 Text(
@@ -238,21 +242,21 @@ fun TaskDetailsScreen(viewModel: MainViewModel, action: MainActions) {
                                     color = colors.onPrimary
                                 )
 
-                                Spacer(modifier = Modifier.height(24.dp))
+                                Spacer(modifier = modifier.height(24.dp))
 
                                 // Priority score card
                                 Row(
-                                    modifier = Modifier.fillMaxWidth(),
+                                    modifier = modifier.fillMaxWidth(),
                                     horizontalArrangement = Arrangement.SpaceBetween
                                 ) {
-                                    val weight = Modifier.weight(1f)
+                                    val weight = modifier.weight(1f)
                                     InfoCard(
                                         title = stringResource(R.string.text_urgency),
                                         value = task.urgency.toString(),
                                         modifier = weight
                                     )
 
-                                    Spacer(modifier = Modifier.width(12.dp))
+                                    Spacer(modifier = modifier.width(12.dp))
 
                                     InfoCard(
                                         title = stringResource(R.string.text_importance),
@@ -267,6 +271,7 @@ fun TaskDetailsScreen(viewModel: MainViewModel, action: MainActions) {
             }
             SingleViewState.Empty -> {
                 AnimationViewState(
+                    modifier,
                     title = stringResource(R.string.text_no_task_title),
                     description = stringResource(R.string.text_no_task_description),
                     callToAction = stringResource(R.string.text_add_a_task),
@@ -278,6 +283,7 @@ fun TaskDetailsScreen(viewModel: MainViewModel, action: MainActions) {
             }
             is SingleViewState.Error -> {
                 AnimationViewState(
+                    modifier,
                     title = stringResource(R.string.text_error_title),
                     description = stringResource(
                         R.string.text_error_description
@@ -291,6 +297,7 @@ fun TaskDetailsScreen(viewModel: MainViewModel, action: MainActions) {
             }
             SingleViewState.Loading -> {
                 AnimationViewState(
+                    modifier,
                     title = stringResource(R.string.text_no_task_title),
                     description = stringResource(R.string.text_no_task_description),
                     callToAction = stringResource(R.string.text_add_a_task),

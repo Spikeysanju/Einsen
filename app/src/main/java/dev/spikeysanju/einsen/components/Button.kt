@@ -44,10 +44,10 @@ import dev.spikeysanju.einsen.ui.theme.typography
  * @param onclick
  */
 @Composable
-fun PrimaryButton(title: String, onclick: () -> Unit) {
+fun PrimaryButton(modifier: Modifier = Modifier, title: String, onclick: () -> Unit) {
 
     Button(
-        modifier = Modifier
+        modifier = modifier
             .fillMaxWidth()
             .height(54.dp)
             .clip(RoundedCornerShape(60.dp))
@@ -76,6 +76,7 @@ fun PrimaryButton(title: String, onclick: () -> Unit) {
  */
 @Composable
 fun PrimaryButtonWithIcon(
+    modifier: Modifier = Modifier,
     title: String,
     icon: Painter,
     onclick: () -> Unit,
@@ -94,7 +95,7 @@ fun PrimaryButtonWithIcon(
             tint = Color.White
         )
 
-        Spacer(modifier = Modifier.width(12.dp))
+        Spacer(modifier = modifier.width(12.dp))
 
         Text(
             text = title,

@@ -21,6 +21,7 @@ package dev.spikeysanju.einsen.navigation
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.hilt.navigation.HiltViewModelFactory
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -63,6 +64,10 @@ object QueryParams {
     const val IMPORTANCE = "importance"
 }
 
+object EinsenModifier {
+    val modifier: Modifier = Modifier
+}
+
 @Composable
 fun NavGraph(toggleTheme: () -> Unit) {
     val bottomSheetNavigator = rememberBottomSheetNavigator()
@@ -73,8 +78,11 @@ fun NavGraph(toggleTheme: () -> Unit) {
 
         AnimatedNavHost(navController, startDestination = Screen.Splash.route) {
 
+            /**
+             * Navigates to [SplashScreen].
+             */
             composable(Screen.Splash.route) {
-                SplashScreen(actions)
+                SplashScreen(EinsenModifier.modifier, actions)
             }
 
             /**
@@ -87,7 +95,7 @@ fun NavGraph(toggleTheme: () -> Unit) {
                     factory = HiltViewModelFactory(LocalContext.current, it)
                 )
                 viewModel.getAllTask()
-                DashboardScreen(viewModel, actions, toggleTheme)
+                DashboardScreen(EinsenModifier.modifier, viewModel, actions, toggleTheme)
             }
 
             /**
@@ -115,7 +123,13 @@ fun NavGraph(toggleTheme: () -> Unit) {
                 val defaultUrgency = it.arguments?.getInt(QueryParams.URGENCY) ?: 0
                 val defaultImportance = it.arguments?.getInt(QueryParams.IMPORTANCE) ?: 0
 
-                AddTaskScreen(viewModel, actions, defaultUrgency, defaultImportance)
+                AddTaskScreen(
+                    EinsenModifier.modifier,
+                    viewModel,
+                    actions,
+                    defaultUrgency,
+                    defaultImportance
+                )
             }
 
             /**
@@ -136,6 +150,7 @@ fun NavGraph(toggleTheme: () -> Unit) {
                 val defaultUrgencyImportance = getUrgencyImportanceFromPriority(priority)
 
                 AllTaskScreen(
+                    EinsenModifier.modifier,
                     viewModel,
                     actions,
                     defaultUrgencyImportance.first,
@@ -156,7 +171,7 @@ fun NavGraph(toggleTheme: () -> Unit) {
                     ?: throw IllegalStateException("'Task ID' shouldn't be null")
 
                 viewModel.findTaskByID(taskID)
-                TaskDetailsScreen(viewModel, actions)
+                TaskDetailsScreen(EinsenModifier.modifier, viewModel, actions)
             }
 
             /**
@@ -176,7 +191,7 @@ fun NavGraph(toggleTheme: () -> Unit) {
                         viewModel.currentEmoji(result)
                     }
                 viewModel.findTaskByID(taskID)
-                EditTaskScreen(viewModel, actions)
+                EditTaskScreen(EinsenModifier.modifier, viewModel, actions)
             }
 
             /**
@@ -186,7 +201,7 @@ fun NavGraph(toggleTheme: () -> Unit) {
                 Screen.About.route
             ) {
                 val viewModel = hiltViewModel<MainViewModel>(it)
-                AboutScreen(viewModel, actions)
+                AboutScreen(EinsenModifier.modifier, viewModel, actions)
             }
 
             /**
@@ -206,7 +221,12 @@ fun NavGraph(toggleTheme: () -> Unit) {
                     ?: throw IllegalStateException("'URL' shouldn't be null")
                 val title = it.arguments?.getString(EndPoints.TITLE)
                     ?: throw java.lang.IllegalStateException("'Title' shouldn't be null")
-                WebViewScreen(title = title, url = url, actions = actions)
+                WebViewScreen(
+                    modifier = EinsenModifier.modifier,
+                    title = title,
+                    url = url,
+                    actions = actions
+                )
             }
 
             /**
@@ -218,7 +238,9 @@ fun NavGraph(toggleTheme: () -> Unit) {
             bottomSheet(route = Screen.AllEmoji.route) {
                 val viewModel = hiltViewModel<MainViewModel>(it)
                 AllEmojiScreen(
-                    viewModel, actions,
+                    EinsenModifier.modifier,
+                    viewModel,
+                    actions,
                     onSelect = { selectedEmoji ->
                         navController.previousBackStackEntry?.savedStateHandle?.set(
                             EndPoints.EMOJI,

@@ -37,7 +37,7 @@ import dev.spikeysanju.einsen.ui.theme.einsenColors
 import kotlinx.coroutines.delay
 
 @Composable
-fun SplashScreen(actions: MainActions) {
+fun SplashScreen(modifier: Modifier, actions: MainActions) {
 
     // Animate state
     LaunchedEffect(key1 = true) {
@@ -49,13 +49,15 @@ fun SplashScreen(actions: MainActions) {
     PulseEffect {
         // App logo with center align
         Box(
-            modifier = Modifier.fillMaxSize().background(einsenColors.white),
+            modifier = modifier
+                .fillMaxSize()
+                .background(einsenColors.white),
             contentAlignment = Alignment.Center
         ) {
             Image(
                 painter = painterResource(id = R.drawable.einsen_logo),
                 contentDescription = "Einsen Logo",
-                modifier = Modifier.size(100.dp)
+                modifier = modifier.size(100.dp)
             )
         }
     }

@@ -69,7 +69,7 @@ import java.net.URLEncoder
 import java.nio.charset.StandardCharsets
 
 @Composable
-fun AboutScreen(viewModel: MainViewModel, actions: MainActions) {
+fun AboutScreen(modifier: Modifier, viewModel: MainViewModel, actions: MainActions) {
 
     // remember current URL
     var url by remember {
@@ -88,7 +88,7 @@ fun AboutScreen(viewModel: MainViewModel, actions: MainActions) {
                         style = typography.h6,
                         textAlign = TextAlign.Start,
                         color = einsenColors.black,
-                        modifier = Modifier.padding(start = 16.dp)
+                        modifier = modifier.padding(start = 16.dp)
                     )
                 },
                 navigationIcon = {
@@ -110,25 +110,29 @@ fun AboutScreen(viewModel: MainViewModel, actions: MainActions) {
 
             item {
 
-                Box(modifier = Modifier.fillMaxWidth(), contentAlignment = Alignment.Center) {
+                Box(modifier = modifier.fillMaxWidth(), contentAlignment = Alignment.Center) {
                     Image(
                         painter = painterResource(id = R.drawable.einsen_logo),
                         contentDescription = stringResource(
                             R.string.text_einsen_logo
                         ),
-                        modifier = Modifier.size(80.dp)
+                        modifier = modifier.size(80.dp)
                     )
                 }
             }
 
             item {
-                Spacer(modifier = Modifier.height(24.dp))
+                Spacer(modifier = modifier.height(24.dp))
                 val (version, code) = getVersionCodeAndName()
-                TitleAndDescription(stringResource(R.string.app_name), version.plus("($code)"))
+                TitleAndDescription(
+                    modifier,
+                    stringResource(R.string.app_name),
+                    version.plus("($code)")
+                )
             }
 
             item {
-                Spacer(modifier = Modifier.height(24.dp))
+                Spacer(modifier = modifier.height(24.dp))
                 TitleAndDescription(
                     title = stringResource(R.string.text_attribution_and_license),
                     description = stringResource(
@@ -141,7 +145,7 @@ fun AboutScreen(viewModel: MainViewModel, actions: MainActions) {
                 url = stringResource(id = R.string.text_repo_link)
                 title = stringResource(id = R.string.text_visit)
 
-                Spacer(modifier = Modifier.height(24.dp))
+                Spacer(modifier = modifier.height(24.dp))
                 TitleAndURL(
                     title = stringResource(R.string.text_visit),
                     url = url,
@@ -160,7 +164,7 @@ fun getVersionCodeAndName(): Pair<String, String> {
 }
 
 @Composable
-fun TitleAndDescription(title: String, description: String) {
+fun TitleAndDescription(modifier: Modifier = Modifier, title: String, description: String) {
     Column(
         modifier = Modifier
             .fillMaxWidth()
@@ -172,7 +176,7 @@ fun TitleAndDescription(title: String, description: String) {
             color = einsenColors.black,
             fontWeight = FontWeight.Bold
         )
-        Spacer(modifier = Modifier.height(8.dp))
+        Spacer(modifier = modifier.height(8.dp))
         CompositionLocalProvider(values = arrayOf(LocalContentAlpha provides ContentAlpha.disabled)) {
             Text(text = description, style = typography.subtitle2, color = einsenColors.black)
         }
@@ -180,9 +184,9 @@ fun TitleAndDescription(title: String, description: String) {
 }
 
 @Composable
-fun TitleAndURL(title: String, url: String, onClick: () -> Unit) {
+fun TitleAndURL(modifier: Modifier = Modifier, title: String, url: String, onClick: () -> Unit) {
     Column(
-        modifier = Modifier
+        modifier = modifier
             .fillMaxWidth()
             .wrapContentHeight()
     ) {
@@ -192,7 +196,7 @@ fun TitleAndURL(title: String, url: String, onClick: () -> Unit) {
             color = einsenColors.black,
             fontWeight = FontWeight.Bold
         )
-        Spacer(modifier = Modifier.height(8.dp))
+        Spacer(modifier = modifier.height(8.dp))
         CompositionLocalProvider(values = arrayOf(LocalContentAlpha provides ContentAlpha.disabled)) {
             Text(
                 text = AnnotatedString(
@@ -205,7 +209,7 @@ fun TitleAndURL(title: String, url: String, onClick: () -> Unit) {
                         textDecoration = TextDecoration.Underline
                     )
                 ),
-                modifier = Modifier.clickable(
+                modifier = modifier.clickable(
                     onClick = {
                         onClick()
                     }
