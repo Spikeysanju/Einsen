@@ -23,6 +23,8 @@ plugins {
     id("kotlin-kapt")
     id("dagger.hilt.android.plugin")
     kotlin("plugin.serialization") version "1.4.0"
+    id("com.google.gms.google-services")
+    id("com.google.firebase.crashlytics")
 }
 
 android {
@@ -97,6 +99,12 @@ dependencies {
     androidTestImplementation("androidx.test.espresso:espresso-core:${rootProject.extra["expressoVersion"]}")
     androidTestImplementation("androidx.compose.ui:ui-test-junit4:${rootProject.extra["composeVersion"]}")
 
+    // Firebase
+    implementation(platform("com.google.firebase:firebase-bom:29.0.0"))
+    implementation("com.google.firebase:firebase-crashlytics-ktx")
+    implementation("com.google.firebase:firebase-analytics-ktx")
+
+
     // compose navigation
     implementation("androidx.navigation:navigation-compose:${rootProject.extra["composeNavigationVersion"]}")
     implementation("androidx.hilt:hilt-navigation-compose:${rootProject.extra["hiltComposeNavVersion"]}")
@@ -138,6 +146,5 @@ dependencies {
 
     // Square Logcat
     implementation("com.squareup.logcat:logcat:${rootProject.extra["logcatVersion"]}")
-
 }
 

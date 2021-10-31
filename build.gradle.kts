@@ -43,6 +43,8 @@ buildscript {
     val lottieAnimation by extra("lottie-compose:1.0.0-rc02-1")
     val navigationMaterialVersion by extra("0 19.0")
     val logcatVersion by extra("0.1")
+    val googleServiceVersion by extra("4.3.10")
+    val crashlyticsVersion by extra("2.8.0")
 
     repositories {
         google()
@@ -53,6 +55,8 @@ buildscript {
         classpath("com.android.tools.build:gradle:7.2.0-alpha02")
         classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:${kotlinVersion}")
         classpath("com.google.dagger:hilt-android-gradle-plugin:${hiltVersion}")
+        classpath("com.google.gms:google-services:${googleServiceVersion}")
+        classpath("com.google.firebase:firebase-crashlytics-gradle:${crashlyticsVersion}")
     }
 }
 

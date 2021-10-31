@@ -47,6 +47,8 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.core.os.bundleOf
+import com.google.firebase.analytics.FirebaseAnalytics
 import dev.spikeysanju.einsen.R
 import dev.spikeysanju.einsen.components.DashboardCardItem
 import dev.spikeysanju.einsen.model.task.Priority
@@ -63,8 +65,10 @@ fun DashboardScreen(
     modifier: Modifier,
     viewModel: MainViewModel,
     actions: MainActions,
-    toggleTheme: () -> Unit
+    toggleTheme: () -> Unit,
+    mFirebaseAnalytics: FirebaseAnalytics?
 ) {
+
     Scaffold(
         topBar = {
             TopAppBar(
@@ -77,9 +81,17 @@ fun DashboardScreen(
                     )
                 },
                 actions = {
+
+                    // log event to firebase
+                    val bundle = bundleOf(
+                        "theme_switch" to isSystemInDarkTheme()
+                    )
+
                     IconButton(
                         onClick = {
-                            toggleTheme()
+                            toggleTheme().run {
+                                mFirebaseAnalytics?.logEvent("dashboard_theme_switch", bundle)
+                            }
                         }
                     ) {
 
@@ -97,7 +109,13 @@ fun DashboardScreen(
 
                     IconButton(
                         onClick = {
-                            actions.gotoAbout.invoke()
+                            actions.gotoAbout.invoke().run {
+                                // log event to firebase
+                                val aboutBundle = bundleOf(
+                                    "about_button" to "Clicked about button from Dashboard"
+                                )
+                                mFirebaseAnalytics?.logEvent("dashboard_about_button", aboutBundle)
+                            }
                         }
                     ) {
                         Icon(
@@ -111,10 +129,19 @@ fun DashboardScreen(
             )
         },
         floatingActionButton = {
+
+
             FloatingActionButton(
                 modifier = modifier.padding(30.dp),
                 onClick = {
-                    actions.gotoAddTask.invoke(0, 0)
+                    actions.gotoAddTask.invoke(0, 0).run {
+                        // log event to firebase
+                        val addTaskBundle = bundleOf(
+                            "add_task" to "Clicked Add Task button from Dashboard"
+                        )
+
+                        mFirebaseAnalytics?.logEvent("dashboard_add_task_button", addTaskBundle)
+                    }
                 },
                 backgroundColor = MaterialTheme.colors.onPrimary,
                 contentColor = MaterialTheme.colors.background,
@@ -144,7 +171,17 @@ fun DashboardScreen(
                     callToAction = stringResource(R.string.text_add_a_task),
                     ScreenState.EMPTY,
                     actions = {
-                        actions.gotoAddTask.invoke(0, 0)
+                        actions.gotoAddTask.invoke(0, 0).run {
+                            // log event to firebase
+                            val emptyStateCTAButton = bundleOf(
+                                "empty_state_add_task" to "Clicked empty state Add Task button from Dashboard"
+                            )
+
+                            mFirebaseAnalytics?.logEvent(
+                                "dashboard_empty_state_add_task_button",
+                                emptyStateCTAButton
+                            )
+                        }
                     }
                 )
             }
@@ -183,7 +220,18 @@ fun DashboardScreen(
                             count = urgentCount.toString(),
                             color = einsenColors.success,
                             onClick = {
-                                actions.gotoAllTask(Priority.URGENT)
+                                actions.gotoAllTask(Priority.URGENT).run {
+                                    // log event to firebase
+                                    val priorityUrgentBundle = bundleOf(
+                                        "priority_urgent" to "Clicked Priority Urgent from the Dashboard"
+                                    )
+
+                                    mFirebaseAnalytics?.logEvent(
+                                        "dashboard_priority_urgent",
+                                        priorityUrgentBundle
+                                    )
+
+                                }
                             }
                         )
                     }
@@ -195,7 +243,18 @@ fun DashboardScreen(
                             count = importantCount.toString(),
                             color = einsenColors.calm,
                             onClick = {
-                                actions.gotoAllTask(Priority.IMPORTANT)
+                                actions.gotoAllTask(Priority.IMPORTANT).run {
+                                    // log event to firebase
+                                    val priorityImportantBundle = bundleOf(
+                                        "priority_important" to "Clicked Priority Important from the Dashboard"
+                                    )
+
+                                    mFirebaseAnalytics?.logEvent(
+                                        "dashboard_priority_important",
+                                        priorityImportantBundle
+                                    )
+
+                                }
                             }
                         )
                     }
@@ -207,7 +266,17 @@ fun DashboardScreen(
                             count = delegateCount.toString(),
                             color = einsenColors.err,
                             onClick = {
-                                actions.gotoAllTask(Priority.DELEGATE)
+                                actions.gotoAllTask(Priority.DELEGATE).run {
+                                    // log event to firebase
+                                    val priorityDelegateBundle = bundleOf(
+                                        "priority_delegate" to "Clicked Priority Delegate from the Dashboard"
+                                    )
+
+                                    mFirebaseAnalytics?.logEvent(
+                                        "dashboard_priority_delegate",
+                                        priorityDelegateBundle
+                                    )
+                                }
                             }
                         )
                     }
@@ -219,7 +288,18 @@ fun DashboardScreen(
                             count = dumpCount.toString(),
                             color = einsenColors.warning,
                             onClick = {
-                                actions.gotoAllTask(Priority.DUMP)
+                                actions.gotoAllTask(Priority.DUMP).run {
+                                    // log event to firebase
+                                    val priorityDumpItBundle = bundleOf(
+                                        "priority_dump_it" to "Clicked Priority Dump it from the Dashboard"
+                                    )
+
+                                    mFirebaseAnalytics?.logEvent(
+                                        "dashboard_priority_dump_it",
+                                        priorityDumpItBundle
+                                    )
+
+                                }
                             }
                         )
                     }
@@ -235,7 +315,17 @@ fun DashboardScreen(
                     callToAction = stringResource(R.string.text_add_a_task),
                     ScreenState.ERROR,
                     actions = {
-                        actions.gotoAddTask.invoke(0, 0)
+                        actions.gotoAddTask.invoke(0, 0).run {
+                            // log event to firebase
+                            val errorBundle = bundleOf(
+                                "priority_error" to "${allTaskList.exception}"
+                            )
+
+                            mFirebaseAnalytics?.logEvent(
+                                "dashboard_priority_error",
+                                errorBundle
+                            )
+                        }
                     }
                 )
             }

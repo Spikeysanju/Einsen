@@ -35,6 +35,7 @@ import com.google.accompanist.navigation.animation.rememberAnimatedNavController
 import com.google.accompanist.navigation.material.ModalBottomSheetLayout
 import com.google.accompanist.navigation.material.bottomSheet
 import com.google.accompanist.navigation.material.rememberBottomSheetNavigator
+import com.google.firebase.analytics.FirebaseAnalytics
 import dev.spikeysanju.einsen.model.task.Priority
 import dev.spikeysanju.einsen.utils.getUrgencyImportanceFromPriority
 import dev.spikeysanju.einsen.view.about.AboutScreen
@@ -69,7 +70,7 @@ object EinsenModifier {
 }
 
 @Composable
-fun NavGraph(toggleTheme: () -> Unit) {
+fun NavGraph(toggleTheme: () -> Unit, mFirebaseAnalytics: FirebaseAnalytics) {
     val bottomSheetNavigator = rememberBottomSheetNavigator()
     val navController = rememberAnimatedNavController(bottomSheetNavigator)
     val actions = remember(navController) { MainActions(navController) }
@@ -95,7 +96,13 @@ fun NavGraph(toggleTheme: () -> Unit) {
                     factory = HiltViewModelFactory(LocalContext.current, it)
                 )
                 viewModel.getAllTask()
-                DashboardScreen(EinsenModifier.modifier, viewModel, actions, toggleTheme)
+                DashboardScreen(
+                    EinsenModifier.modifier,
+                    viewModel,
+                    actions,
+                    toggleTheme,
+                    mFirebaseAnalytics
+                )
             }
 
             /**
