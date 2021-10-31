@@ -35,7 +35,6 @@ import com.google.accompanist.navigation.animation.rememberAnimatedNavController
 import com.google.accompanist.navigation.material.ModalBottomSheetLayout
 import com.google.accompanist.navigation.material.bottomSheet
 import com.google.accompanist.navigation.material.rememberBottomSheetNavigator
-import com.google.firebase.analytics.FirebaseAnalytics
 import dev.spikeysanju.einsen.model.task.Priority
 import dev.spikeysanju.einsen.utils.getUrgencyImportanceFromPriority
 import dev.spikeysanju.einsen.view.about.AboutScreen
@@ -70,7 +69,7 @@ object EinsenModifier {
 }
 
 @Composable
-fun NavGraph(toggleTheme: () -> Unit, mFirebaseAnalytics: FirebaseAnalytics) {
+fun NavGraph(toggleTheme: () -> Unit) {
     val bottomSheetNavigator = rememberBottomSheetNavigator()
     val navController = rememberAnimatedNavController(bottomSheetNavigator)
     val actions = remember(navController) { MainActions(navController) }
@@ -134,8 +133,7 @@ fun NavGraph(toggleTheme: () -> Unit, mFirebaseAnalytics: FirebaseAnalytics) {
                     viewModel,
                     actions,
                     defaultUrgency,
-                    defaultImportance,
-                    mFirebaseAnalytics
+                    defaultImportance
                 )
             }
 
@@ -161,8 +159,7 @@ fun NavGraph(toggleTheme: () -> Unit, mFirebaseAnalytics: FirebaseAnalytics) {
                     viewModel,
                     actions,
                     defaultUrgencyImportance.first,
-                    defaultUrgencyImportance.second,
-                    mFirebaseAnalytics
+                    defaultUrgencyImportance.second
                 )
             }
 
@@ -179,7 +176,7 @@ fun NavGraph(toggleTheme: () -> Unit, mFirebaseAnalytics: FirebaseAnalytics) {
                     ?: throw IllegalStateException("'Task ID' shouldn't be null")
 
                 viewModel.findTaskByID(taskID)
-                TaskDetailsScreen(EinsenModifier.modifier, viewModel, actions, mFirebaseAnalytics)
+                TaskDetailsScreen(EinsenModifier.modifier, viewModel, actions)
             }
 
             /**

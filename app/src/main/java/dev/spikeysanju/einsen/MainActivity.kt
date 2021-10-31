@@ -32,7 +32,6 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.lifecycleScope
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
-import com.google.firebase.analytics.FirebaseAnalytics
 import dagger.hilt.android.AndroidEntryPoint
 import dev.spikeysanju.einsen.data.local.datastore.ThemeManager
 import dev.spikeysanju.einsen.navigation.NavGraph
@@ -46,9 +45,6 @@ import javax.inject.Inject
 class MainActivity : ComponentActivity() {
     @Inject
     lateinit var themeManager: ThemeManager
-
-    @Inject
-    lateinit var mFirebaseAnalytics: FirebaseAnalytics
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -82,7 +78,7 @@ class MainActivity : ComponentActivity() {
         EinsenTheme(darkTheme = darkMode) {
             Surface(color = einsenColors.bg) {
                 SetStatusBarColor()
-                NavGraph(toggleTheme, mFirebaseAnalytics)
+                NavGraph(toggleTheme)
             }
         }
     }

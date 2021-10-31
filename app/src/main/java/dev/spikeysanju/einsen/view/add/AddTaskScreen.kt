@@ -52,7 +52,6 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.core.os.bundleOf
-import com.google.firebase.analytics.FirebaseAnalytics
 import dev.spikeysanju.einsen.R
 import dev.spikeysanju.einsen.components.EinsenInputTextField
 import dev.spikeysanju.einsen.components.EinsenStepSlider
@@ -75,8 +74,7 @@ fun AddTaskScreen(
     viewModel: MainViewModel,
     actions: MainActions,
     defaultUrgency: Int,
-    defaultImportance: Int,
-    mFirebaseAnalytics: FirebaseAnalytics
+    defaultImportance: Int
 ) {
 
     // component state
@@ -156,10 +154,7 @@ fun AddTaskScreen(
                                         "all_emoji_bottom_sheet" to "Clicked All Emoji placeholder to open Emoji BottomSheet"
                                     )
 
-                                    mFirebaseAnalytics.logEvent(
-                                        "emoji_bottom_sheet",
-                                        emojiBundle
-                                    )
+                                    viewModel.firebaseLogEvent("emoji_bottom_sheet", emojiBundle)
                                 }
                             }
                         }
@@ -261,10 +256,7 @@ fun AddTaskScreen(
                                     "add_task_button" to "Clicked Add Task button to save the new task"
                                 )
 
-                                mFirebaseAnalytics.logEvent(
-                                    "add_task_save_button",
-                                    emojiBundle
-                                )
+                                viewModel.firebaseLogEvent("add_task_save_button", emojiBundle)
                                 actions.upPress.invoke()
                             }
                         }

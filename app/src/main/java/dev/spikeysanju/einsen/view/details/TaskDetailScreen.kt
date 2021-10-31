@@ -81,8 +81,7 @@ import java.util.*
 fun TaskDetailsScreen(
     modifier: Modifier,
     viewModel: MainViewModel,
-    action: MainActions,
-    mFirebaseAnalytics: FirebaseAnalytics
+    action: MainActions
 ) {
 
     LaunchedEffect(key1 = Unit) {
@@ -92,7 +91,7 @@ fun TaskDetailsScreen(
             FirebaseAnalytics.Param.SCREEN_CLASS to "TaskDetailsScreen.kt"
         )
 
-        mFirebaseAnalytics.logEvent(
+        viewModel.firebaseLogEvent(
             "task_details_screen",
             taskDetailsComposableBundle
         )
@@ -162,7 +161,7 @@ fun TaskDetailsScreen(
                             "edit_task_button" to "Clicked Edit Task button to edit the task"
                         )
 
-                        mFirebaseAnalytics.logEvent(
+                        viewModel.firebaseLogEvent(
                             "task_details_edit_task_button",
                             editTaskBundle
                         )
@@ -176,7 +175,7 @@ fun TaskDetailsScreen(
                                 "delete_task_button" to "Clicked Delete Task button to delete the task"
                             )
 
-                            mFirebaseAnalytics.logEvent(
+                            viewModel.firebaseLogEvent(
                                 "task_details_delete_task_button",
                                 deleteTaskBundle
                             )
@@ -200,7 +199,7 @@ fun TaskDetailsScreen(
                             "share_task_button" to "Clicked Share Task button to share the task"
                         )
 
-                        mFirebaseAnalytics.logEvent(
+                        viewModel.firebaseLogEvent(
                             "task_details_share_task_button",
                             editTaskBundle
                         )
@@ -213,7 +212,7 @@ fun TaskDetailsScreen(
                             "update_task_button" to "Clicked Update Task button to update the status of the task"
                         )
 
-                        mFirebaseAnalytics.logEvent(
+                        viewModel.firebaseLogEvent(
                             "task_details_share_task_button",
                             updateStatusBundle
                         )
@@ -345,7 +344,7 @@ fun TaskDetailsScreen(
                                 "empty_state_add_task" to "Clicked empty state Add Task button from Task Details"
                             )
 
-                            mFirebaseAnalytics.logEvent(
+                            viewModel.firebaseLogEvent(
                                 "task_details_empty_state_add_task_button",
                                 emptyStateCTAButton
                             )
@@ -369,7 +368,7 @@ fun TaskDetailsScreen(
                                 "task_details_error" to "${result.exception}"
                             )
 
-                            mFirebaseAnalytics.logEvent(
+                            viewModel.firebaseLogEvent(
                                 "task_details_error",
                                 errorBundle
                             )

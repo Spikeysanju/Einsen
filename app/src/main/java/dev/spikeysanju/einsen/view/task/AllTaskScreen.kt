@@ -60,8 +60,7 @@ fun AllTaskScreen(
     viewModel: MainViewModel,
     actions: MainActions,
     defaultUrgency: Int = 0,
-    defaultImportance: Int = 0,
-    mFirebaseAnalytics: FirebaseAnalytics
+    defaultImportance: Int = 0
 ) {
 
     LaunchedEffect(key1 = Unit) {
@@ -71,10 +70,7 @@ fun AllTaskScreen(
             FirebaseAnalytics.Param.SCREEN_CLASS to "AllTaskScreen.kt"
         )
 
-        mFirebaseAnalytics.logEvent(
-            "all_task_screen",
-            allTaskScreenComposable
-        )
+        viewModel.firebaseLogEvent("all_task_screen", allTaskScreenComposable)
     }
 
     Scaffold(
@@ -110,7 +106,7 @@ fun AllTaskScreen(
                         val aboutBundle = bundleOf(
                             "add_button" to "Clicked Add Task button from All Task"
                         )
-                        mFirebaseAnalytics.logEvent("all_task_add_button", aboutBundle)
+                        viewModel.firebaseLogEvent("all_task_add_button", aboutBundle)
                     }
                 },
                 backgroundColor = MaterialTheme.colors.onPrimary,
@@ -153,7 +149,7 @@ fun AllTaskScreen(
                                 "empty_state_add_task" to "Clicked empty state Add Task button from All Task"
                             )
 
-                            mFirebaseAnalytics.logEvent(
+                            viewModel.firebaseLogEvent(
                                 "all_task_empty_state_add_task_button",
                                 emptyStateCTAButton
                             )
@@ -179,7 +175,7 @@ fun AllTaskScreen(
                                     val aboutBundle = bundleOf(
                                         "task_item_card" to "Clicked Task Item Card from All Task"
                                     )
-                                    mFirebaseAnalytics.logEvent(
+                                    viewModel.firebaseLogEvent(
                                         "all_task_task_item_card",
                                         aboutBundle
                                     )
@@ -208,7 +204,7 @@ fun AllTaskScreen(
                                 "all_task_error" to "${result.exception}"
                             )
 
-                            mFirebaseAnalytics.logEvent(
+                            viewModel.firebaseLogEvent(
                                 "all_task_error",
                                 errorBundle
                             )
