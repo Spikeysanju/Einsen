@@ -34,6 +34,7 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
 import androidx.compose.material.TopAppBar
+import androidx.compose.material.rememberScaffoldState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -81,6 +82,7 @@ fun AddTaskScreen(
     val listState = rememberLazyListState()
     val scope = rememberCoroutineScope()
     val context = LocalContext.current
+    val scaffoldState = rememberScaffoldState()
 
     // slider points
     val points = listOf("0", "1", "2", "3", "4")
@@ -109,6 +111,7 @@ fun AddTaskScreen(
 
     // Add Task Screen content
     Scaffold(
+        scaffoldState = scaffoldState,
         topBar = {
             TopAppBar(
                 title = {
@@ -246,17 +249,22 @@ fun AddTaskScreen(
 
                     when {
                         taskState.title.isEmpty() && taskState.description.isEmpty() || taskState.category.isEmpty() -> {
-                            showToast(context, "Please fill all the fields & save the task")
+                            scope.launch {
+                                scaffoldState.snackbarHostState.showSnackbar(message = "Please fill all the fields & save the task")
+                            }
                         }
                         else -> {
                             viewModel.insertTask(taskState).run {
-                                showToast(context, "Task added successfully!")
+
+                                showToast(context, "Task added successfully")
+
                                 // log event to firebase
-                                val emojiBundle = bundleOf(
+                                val addTaskBundle = bundleOf(
                                     "add_task_button" to "Clicked Add Task button to save the new task"
                                 )
 
-                                viewModel.firebaseLogEvent("add_task_save_button", emojiBundle)
+                                viewModel.firebaseLogEvent("add_task_save_button", addTaskBundle)
+
                                 actions.upPress.invoke()
                             }
                         }
