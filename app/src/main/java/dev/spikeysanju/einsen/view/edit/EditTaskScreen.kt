@@ -112,7 +112,6 @@ fun EditTaskScreen(modifier: Modifier, viewModel: MainViewModel, actions: MainAc
         )
 
         viewModel.firebaseLogEvent("dashboard_screen", editTaskComposable)
-
     }
 
     Scaffold(
