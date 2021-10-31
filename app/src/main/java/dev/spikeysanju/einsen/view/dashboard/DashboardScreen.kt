@@ -37,6 +37,7 @@ import androidx.compose.material.TopAppBar
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -65,9 +66,18 @@ fun DashboardScreen(
     modifier: Modifier,
     viewModel: MainViewModel,
     actions: MainActions,
-    toggleTheme: () -> Unit,
-    mFirebaseAnalytics: FirebaseAnalytics?
+    toggleTheme: () -> Unit
 ) {
+
+    LaunchedEffect(key1 = Unit) {
+        // log event to firebase
+        val dashboardScreenComposable = bundleOf(
+            FirebaseAnalytics.Param.SCREEN_NAME to "Dashboard Screen",
+            FirebaseAnalytics.Param.SCREEN_CLASS to "DashboardScreen.kt"
+        )
+
+        viewModel.firebaseLogEvent("dashboard_screen", dashboardScreenComposable)
+    }
 
     Scaffold(
         topBar = {
@@ -90,7 +100,7 @@ fun DashboardScreen(
                     IconButton(
                         onClick = {
                             toggleTheme().run {
-                                mFirebaseAnalytics?.logEvent("dashboard_theme_switch", bundle)
+                                viewModel.firebaseLogEvent("dashboard_theme_switch", bundle)
                             }
                         }
                     ) {
@@ -114,7 +124,7 @@ fun DashboardScreen(
                                 val aboutBundle = bundleOf(
                                     "about_button" to "Clicked about button from Dashboard"
                                 )
-                                mFirebaseAnalytics?.logEvent("dashboard_about_button", aboutBundle)
+                                viewModel.firebaseLogEvent("dashboard_about_button", aboutBundle)
                             }
                         }
                     ) {
@@ -130,7 +140,6 @@ fun DashboardScreen(
         },
         floatingActionButton = {
 
-
             FloatingActionButton(
                 modifier = modifier.padding(30.dp),
                 onClick = {
@@ -140,7 +149,7 @@ fun DashboardScreen(
                             "add_task" to "Clicked Add Task button from Dashboard"
                         )
 
-                        mFirebaseAnalytics?.logEvent("dashboard_add_task_button", addTaskBundle)
+                        viewModel.firebaseLogEvent("dashboard_add_task_button", addTaskBundle)
                     }
                 },
                 backgroundColor = MaterialTheme.colors.onPrimary,
@@ -177,7 +186,7 @@ fun DashboardScreen(
                                 "empty_state_add_task" to "Clicked empty state Add Task button from Dashboard"
                             )
 
-                            mFirebaseAnalytics?.logEvent(
+                            viewModel.firebaseLogEvent(
                                 "dashboard_empty_state_add_task_button",
                                 emptyStateCTAButton
                             )
@@ -226,11 +235,10 @@ fun DashboardScreen(
                                         "priority_urgent" to "Clicked Priority Urgent from the Dashboard"
                                     )
 
-                                    mFirebaseAnalytics?.logEvent(
+                                    viewModel.firebaseLogEvent(
                                         "dashboard_priority_urgent",
                                         priorityUrgentBundle
                                     )
-
                                 }
                             }
                         )
@@ -249,11 +257,10 @@ fun DashboardScreen(
                                         "priority_important" to "Clicked Priority Important from the Dashboard"
                                     )
 
-                                    mFirebaseAnalytics?.logEvent(
+                                    viewModel.firebaseLogEvent(
                                         "dashboard_priority_important",
                                         priorityImportantBundle
                                     )
-
                                 }
                             }
                         )
@@ -272,7 +279,7 @@ fun DashboardScreen(
                                         "priority_delegate" to "Clicked Priority Delegate from the Dashboard"
                                     )
 
-                                    mFirebaseAnalytics?.logEvent(
+                                    viewModel.firebaseLogEvent(
                                         "dashboard_priority_delegate",
                                         priorityDelegateBundle
                                     )
@@ -294,11 +301,10 @@ fun DashboardScreen(
                                         "priority_dump_it" to "Clicked Priority Dump it from the Dashboard"
                                     )
 
-                                    mFirebaseAnalytics?.logEvent(
+                                    viewModel.firebaseLogEvent(
                                         "dashboard_priority_dump_it",
                                         priorityDumpItBundle
                                     )
-
                                 }
                             }
                         )
@@ -321,10 +327,7 @@ fun DashboardScreen(
                                 "priority_error" to "${allTaskList.exception}"
                             )
 
-                            mFirebaseAnalytics?.logEvent(
-                                "dashboard_priority_error",
-                                errorBundle
-                            )
+                            viewModel.firebaseLogEvent("dashboard_priority_error", errorBundle)
                         }
                     }
                 )

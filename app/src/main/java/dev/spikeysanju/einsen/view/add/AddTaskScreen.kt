@@ -51,6 +51,8 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.core.os.bundleOf
+import com.google.firebase.analytics.FirebaseAnalytics
 import dev.spikeysanju.einsen.R
 import dev.spikeysanju.einsen.components.EinsenInputTextField
 import dev.spikeysanju.einsen.components.EinsenStepSlider
@@ -73,7 +75,8 @@ fun AddTaskScreen(
     viewModel: MainViewModel,
     actions: MainActions,
     defaultUrgency: Int,
-    defaultImportance: Int
+    defaultImportance: Int,
+    mFirebaseAnalytics: FirebaseAnalytics
 ) {
 
     // component state
@@ -100,8 +103,6 @@ fun AddTaskScreen(
             }
         )
     }
-
-//    val stepCount by rememberSaveable { mutableStateOf(4) }
 
     // get current emoji
     viewModel.currentEmoji.collectAsState().value.apply {
@@ -149,7 +150,17 @@ fun AddTaskScreen(
                         emoji = taskState.emoji,
                         onSelect = {
                             scope.launch {
-                                actions.gotoAllEmoji.invoke()
+                                actions.gotoAllEmoji.invoke().run {
+                                    // log event to firebase
+                                    val emojiBundle = bundleOf(
+                                        "all_emoji_bottom_sheet" to "Clicked All Emoji placeholder to open Emoji BottomSheet"
+                                    )
+
+                                    mFirebaseAnalytics.logEvent(
+                                        "emoji_bottom_sheet",
+                                        emojiBundle
+                                    )
+                                }
                             }
                         }
                     )
@@ -245,6 +256,15 @@ fun AddTaskScreen(
                         else -> {
                             viewModel.insertTask(taskState).run {
                                 showToast(context, "Task added successfully!")
+                                // log event to firebase
+                                val emojiBundle = bundleOf(
+                                    "add_task_button" to "Clicked Add Task button to save the new task"
+                                )
+
+                                mFirebaseAnalytics.logEvent(
+                                    "add_task_save_button",
+                                    emojiBundle
+                                )
                                 actions.upPress.invoke()
                             }
                         }

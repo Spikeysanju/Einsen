@@ -20,8 +20,10 @@
 package dev.spikeysanju.einsen.view.viewmodel
 
 import android.content.Context
+import android.os.Bundle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.google.firebase.analytics.FirebaseAnalytics
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dev.spikeysanju.einsen.model.emoji.EmojiItem
 import dev.spikeysanju.einsen.model.task.Task
@@ -41,7 +43,10 @@ import kotlinx.serialization.json.Json
 import javax.inject.Inject
 
 @HiltViewModel
-class MainViewModel @Inject constructor(private val repo: MainRepository) : ViewModel() {
+class MainViewModel @Inject constructor(
+    private val repo: MainRepository,
+    private val firebaseAnalytics: FirebaseAnalytics
+) : ViewModel() {
 
     // Backing property to avoid state updates from other classes
     private val _viewState = MutableStateFlow<ViewState>(ViewState.Loading)
@@ -166,5 +171,12 @@ class MainViewModel @Inject constructor(private val repo: MainRepository) : View
         } catch (e: Exception) {
             _currentEmoji.value = "⚠️"
         }
+    }
+
+    fun firebaseLogEvent(event: String, bundle: Bundle) {
+        firebaseAnalytics.logEvent(
+            event,
+            bundle
+        )
     }
 }

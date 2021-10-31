@@ -100,8 +100,7 @@ fun NavGraph(toggleTheme: () -> Unit, mFirebaseAnalytics: FirebaseAnalytics) {
                     EinsenModifier.modifier,
                     viewModel,
                     actions,
-                    toggleTheme,
-                    mFirebaseAnalytics
+                    toggleTheme
                 )
             }
 
@@ -135,7 +134,8 @@ fun NavGraph(toggleTheme: () -> Unit, mFirebaseAnalytics: FirebaseAnalytics) {
                     viewModel,
                     actions,
                     defaultUrgency,
-                    defaultImportance
+                    defaultImportance,
+                    mFirebaseAnalytics
                 )
             }
 
@@ -161,7 +161,8 @@ fun NavGraph(toggleTheme: () -> Unit, mFirebaseAnalytics: FirebaseAnalytics) {
                     viewModel,
                     actions,
                     defaultUrgencyImportance.first,
-                    defaultUrgencyImportance.second
+                    defaultUrgencyImportance.second,
+                    mFirebaseAnalytics
                 )
             }
 
@@ -178,7 +179,7 @@ fun NavGraph(toggleTheme: () -> Unit, mFirebaseAnalytics: FirebaseAnalytics) {
                     ?: throw IllegalStateException("'Task ID' shouldn't be null")
 
                 viewModel.findTaskByID(taskID)
-                TaskDetailsScreen(EinsenModifier.modifier, viewModel, actions)
+                TaskDetailsScreen(EinsenModifier.modifier, viewModel, actions, mFirebaseAnalytics)
             }
 
             /**

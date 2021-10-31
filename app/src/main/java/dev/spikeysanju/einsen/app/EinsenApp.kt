@@ -39,6 +39,5 @@ class EinsenApp : Application() {
 
         // Obtain the FirebaseAnalytics instance.
         mFirebaseAnalytics = FirebaseAnalytics.getInstance(this)
-
     }
 }
