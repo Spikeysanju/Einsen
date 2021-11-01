@@ -104,7 +104,6 @@ fun EditTaskScreen(modifier: Modifier, viewModel: MainViewModel, actions: MainAc
     val updatedAtState by remember { mutableStateOf(System.currentTimeMillis()) }
 
     LaunchedEffect(key1 = Unit) {
-
         // log event to firebase
         val editTaskComposable = bundleOf(
             FirebaseAnalytics.Param.SCREEN_NAME to "Edit Task Screen",

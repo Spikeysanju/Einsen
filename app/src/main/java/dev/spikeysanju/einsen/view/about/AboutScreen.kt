@@ -17,8 +17,6 @@
  *
  */
 
-@file:Suppress("FunctionName", "FunctionName", "FunctionName")
-
 package dev.spikeysanju.einsen.view.about
 
 import androidx.compose.foundation.Image
@@ -44,6 +42,7 @@ import androidx.compose.material.TopAppBar
 import androidx.compose.material.rememberScaffoldState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -61,6 +60,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
 import androidx.core.os.bundleOf
+import com.google.firebase.analytics.FirebaseAnalytics
 import dev.spikeysanju.einsen.BuildConfig
 import dev.spikeysanju.einsen.R
 import dev.spikeysanju.einsen.navigation.MainActions
@@ -82,6 +82,19 @@ fun AboutScreen(modifier: Modifier, viewModel: MainViewModel, actions: MainActio
     }
 
     val scaffoldState = rememberScaffoldState()
+
+    LaunchedEffect(
+        key1 = Unit,
+        block = {
+            // log event to firebase
+            val aboutComposable = bundleOf(
+                FirebaseAnalytics.Param.SCREEN_NAME to "About Screen",
+                FirebaseAnalytics.Param.SCREEN_CLASS to "AboutScreen.kt"
+            )
+
+            viewModel.firebaseLogEvent("about_screen", aboutComposable)
+        }
+    )
 
     Scaffold(
         scaffoldState = scaffoldState,

@@ -36,6 +36,7 @@ import androidx.compose.material.Text
 import androidx.compose.material.TopAppBar
 import androidx.compose.material.rememberScaffoldState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -53,6 +54,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.core.os.bundleOf
+import com.google.firebase.analytics.FirebaseAnalytics
 import dev.spikeysanju.einsen.R
 import dev.spikeysanju.einsen.components.EinsenInputTextField
 import dev.spikeysanju.einsen.components.EinsenStepSlider
@@ -103,6 +105,19 @@ fun AddTaskScreen(
             }
         )
     }
+
+    LaunchedEffect(
+        key1 = Unit,
+        block = {
+            // log event to firebase
+            val addTaskComposable = bundleOf(
+                FirebaseAnalytics.Param.SCREEN_NAME to "Add Task Screen",
+                FirebaseAnalytics.Param.SCREEN_CLASS to "AddTaskScreen.kt"
+            )
+
+            viewModel.firebaseLogEvent("add_task_screen", addTaskComposable)
+        }
+    )
 
     // get current emoji
     viewModel.currentEmoji.collectAsState().value.apply {
