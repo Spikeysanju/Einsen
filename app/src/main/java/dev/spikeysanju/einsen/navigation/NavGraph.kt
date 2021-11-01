@@ -230,7 +230,8 @@ fun NavGraph(toggleTheme: () -> Unit) {
                     modifier = EinsenModifier.modifier,
                     title = title,
                     url = url,
-                    actions = actions
+                    actions = actions,
+                    viewModel
                 )
             }
 
