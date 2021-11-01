@@ -34,7 +34,9 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
 import androidx.compose.material.TopAppBar
+import androidx.compose.material.rememberScaffoldState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -51,6 +53,8 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.core.os.bundleOf
+import com.google.firebase.analytics.FirebaseAnalytics
 import dev.spikeysanju.einsen.R
 import dev.spikeysanju.einsen.components.EinsenInputTextField
 import dev.spikeysanju.einsen.components.EinsenStepSlider
@@ -80,6 +84,7 @@ fun AddTaskScreen(
     val listState = rememberLazyListState()
     val scope = rememberCoroutineScope()
     val context = LocalContext.current
+    val scaffoldState = rememberScaffoldState()
 
     // slider points
     val points = listOf("0", "1", "2", "3", "4")
@@ -101,7 +106,18 @@ fun AddTaskScreen(
         )
     }
 
-//    val stepCount by rememberSaveable { mutableStateOf(4) }
+    LaunchedEffect(
+        key1 = Unit,
+        block = {
+            // log event to firebase
+            val addTaskComposable = bundleOf(
+                FirebaseAnalytics.Param.SCREEN_NAME to "Add Task Screen",
+                FirebaseAnalytics.Param.SCREEN_CLASS to "AddTaskScreen.kt"
+            )
+
+            viewModel.firebaseLogEvent("add_task_screen", addTaskComposable)
+        }
+    )
 
     // get current emoji
     viewModel.currentEmoji.collectAsState().value.apply {
@@ -110,6 +126,7 @@ fun AddTaskScreen(
 
     // Add Task Screen content
     Scaffold(
+        scaffoldState = scaffoldState,
         topBar = {
             TopAppBar(
                 title = {
@@ -149,7 +166,14 @@ fun AddTaskScreen(
                         emoji = taskState.emoji,
                         onSelect = {
                             scope.launch {
-                                actions.gotoAllEmoji.invoke()
+                                actions.gotoAllEmoji.invoke().run {
+                                    // log event to firebase
+                                    val emojiBundle = bundleOf(
+                                        "all_emoji_bottom_sheet" to "Clicked All Emoji placeholder to open Emoji BottomSheet"
+                                    )
+
+                                    viewModel.firebaseLogEvent("emoji_bottom_sheet", emojiBundle)
+                                }
                             }
                         }
                     )
@@ -240,11 +264,22 @@ fun AddTaskScreen(
 
                     when {
                         taskState.title.isEmpty() && taskState.description.isEmpty() || taskState.category.isEmpty() -> {
-                            showToast(context, "Please fill all the fields & save the task")
+                            scope.launch {
+                                scaffoldState.snackbarHostState.showSnackbar(message = "Please fill all the fields & save the task")
+                            }
                         }
                         else -> {
                             viewModel.insertTask(taskState).run {
-                                showToast(context, "Task added successfully!")
+
+                                showToast(context, "Task added successfully")
+
+                                // log event to firebase
+                                val addTaskBundle = bundleOf(
+                                    "add_task_button" to "Clicked Add Task button to save the new task"
+                                )
+
+                                viewModel.firebaseLogEvent("add_task_save_button", addTaskBundle)
+
                                 actions.upPress.invoke()
                             }
                         }

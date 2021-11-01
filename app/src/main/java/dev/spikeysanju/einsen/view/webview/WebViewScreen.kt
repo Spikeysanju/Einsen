@@ -32,26 +32,50 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
 import androidx.compose.material.TopAppBar
+import androidx.compose.material.rememberScaffoldState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.viewinterop.AndroidView
+import androidx.core.os.bundleOf
+import com.google.firebase.analytics.FirebaseAnalytics
 import dev.spikeysanju.einsen.R
 import dev.spikeysanju.einsen.navigation.MainActions
 import dev.spikeysanju.einsen.ui.theme.einsenColors
 import dev.spikeysanju.einsen.ui.theme.typography
+import dev.spikeysanju.einsen.view.viewmodel.MainViewModel
 
 @Composable
 fun WebViewScreen(
     modifier: Modifier,
     title: String,
     url: String,
-    actions: MainActions
+    actions: MainActions,
+    viewModel: MainViewModel
 ) {
+
+    // state
+    val scaffoldState = rememberScaffoldState()
+
+    LaunchedEffect(
+        key1 = Unit,
+        block = {
+            // log event to firebase
+            val webViewComposable = bundleOf(
+                FirebaseAnalytics.Param.SCREEN_NAME to "WebView Screen",
+                FirebaseAnalytics.Param.SCREEN_CLASS to "WebViewScreen.kt"
+            )
+
+            viewModel.firebaseLogEvent("webview_screen", webViewComposable)
+        }
+    )
+
     Scaffold(
+        scaffoldState = scaffoldState,
         topBar = {
             TopAppBar(
                 title = {

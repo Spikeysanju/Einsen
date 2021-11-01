@@ -17,8 +17,6 @@
  *
  */
 
-@file:Suppress("FunctionName", "FunctionName", "FunctionName")
-
 package dev.spikeysanju.einsen.view.about
 
 import androidx.compose.foundation.Image
@@ -41,8 +39,10 @@ import androidx.compose.material.LocalContentAlpha
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
 import androidx.compose.material.TopAppBar
+import androidx.compose.material.rememberScaffoldState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -59,6 +59,8 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
+import androidx.core.os.bundleOf
+import com.google.firebase.analytics.FirebaseAnalytics
 import dev.spikeysanju.einsen.BuildConfig
 import dev.spikeysanju.einsen.R
 import dev.spikeysanju.einsen.navigation.MainActions
@@ -79,7 +81,23 @@ fun AboutScreen(modifier: Modifier, viewModel: MainViewModel, actions: MainActio
         mutableStateOf("")
     }
 
+    val scaffoldState = rememberScaffoldState()
+
+    LaunchedEffect(
+        key1 = Unit,
+        block = {
+            // log event to firebase
+            val aboutComposable = bundleOf(
+                FirebaseAnalytics.Param.SCREEN_NAME to "About Screen",
+                FirebaseAnalytics.Param.SCREEN_CLASS to "AboutScreen.kt"
+            )
+
+            viewModel.firebaseLogEvent("about_screen", aboutComposable)
+        }
+    )
+
     Scaffold(
+        scaffoldState = scaffoldState,
         topBar = {
             TopAppBar(
                 title = {
@@ -151,7 +169,14 @@ fun AboutScreen(modifier: Modifier, viewModel: MainViewModel, actions: MainActio
                     url = url,
                     onClick = {
                         val encodedUrl = URLEncoder.encode(url, StandardCharsets.UTF_8.toString())
-                        actions.gotoWebView(title, encodedUrl)
+                        actions.gotoWebView(title, encodedUrl).run {
+                            // log event to firebase
+                            val addTaskBundle = bundleOf(
+                                "open_webview" to "Clicked URL to open on WebView from About Screen"
+                            )
+
+                            viewModel.firebaseLogEvent("open_webview_url", addTaskBundle)
+                        }
                     }
                 )
             }

@@ -34,12 +34,15 @@ import androidx.compose.material.TopAppBar
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.core.os.bundleOf
+import com.google.firebase.analytics.FirebaseAnalytics
 import dev.spikeysanju.einsen.R
 import dev.spikeysanju.einsen.components.TaskItemCard
 import dev.spikeysanju.einsen.model.task.Task
@@ -59,6 +62,17 @@ fun AllTaskScreen(
     defaultUrgency: Int = 0,
     defaultImportance: Int = 0
 ) {
+
+    LaunchedEffect(key1 = Unit) {
+        // log event to firebase
+        val allTaskScreenComposable = bundleOf(
+            FirebaseAnalytics.Param.SCREEN_NAME to "All Task Screen",
+            FirebaseAnalytics.Param.SCREEN_CLASS to "AllTaskScreen.kt"
+        )
+
+        viewModel.firebaseLogEvent("all_task_screen", allTaskScreenComposable)
+    }
+
     Scaffold(
         topBar = {
             TopAppBar(
@@ -87,7 +101,13 @@ fun AllTaskScreen(
             FloatingActionButton(
                 modifier = modifier.padding(30.dp),
                 onClick = {
-                    actions.gotoAddTask.invoke(defaultUrgency, defaultImportance)
+                    actions.gotoAddTask.invoke(defaultUrgency, defaultImportance).run {
+                        // log event to firebase
+                        val aboutBundle = bundleOf(
+                            "add_button" to "Clicked Add Task button from All Task"
+                        )
+                        viewModel.firebaseLogEvent("all_task_add_button", aboutBundle)
+                    }
                 },
                 backgroundColor = MaterialTheme.colors.onPrimary,
                 contentColor = MaterialTheme.colors.background,
@@ -123,7 +143,17 @@ fun AllTaskScreen(
                     callToAction = stringResource(R.string.text_add_a_task),
                     ScreenState.EMPTY,
                     actions = {
-                        actions.gotoAddTask.invoke(defaultUrgency, defaultImportance)
+                        actions.gotoAddTask.invoke(defaultUrgency, defaultImportance).run {
+                            // log event to firebase
+                            val emptyStateCTAButton = bundleOf(
+                                "empty_state_add_task" to "Clicked empty state Add Task button from All Task"
+                            )
+
+                            viewModel.firebaseLogEvent(
+                                "all_task_empty_state_add_task_button",
+                                emptyStateCTAButton
+                            )
+                        }
                     }
                 )
             }
@@ -140,7 +170,16 @@ fun AllTaskScreen(
                             modifier,
                             item,
                             onClick = {
-                                actions.gotoTaskDetails(item.id)
+                                actions.gotoTaskDetails(item.id).run {
+                                    // log event to firebase
+                                    val aboutBundle = bundleOf(
+                                        "task_item_card" to "Clicked Task Item Card from All Task"
+                                    )
+                                    viewModel.firebaseLogEvent(
+                                        "all_task_task_item_card",
+                                        aboutBundle
+                                    )
+                                }
                             },
                             onCheckboxChange = {
                                 viewModel.updateStatus(item.id, it)
@@ -159,7 +198,17 @@ fun AllTaskScreen(
                     callToAction = stringResource(R.string.text_add_a_task),
                     ScreenState.ERROR,
                     actions = {
-                        actions.gotoAddTask.invoke(defaultUrgency, defaultImportance)
+                        actions.gotoAddTask.invoke(defaultUrgency, defaultImportance).run {
+                            // log event to firebase
+                            val errorBundle = bundleOf(
+                                "all_task_error" to "${result.exception}"
+                            )
+
+                            viewModel.firebaseLogEvent(
+                                "all_task_error",
+                                errorBundle
+                            )
+                        }
                     }
                 )
             }

@@ -27,6 +27,7 @@ import androidx.compose.foundation.lazy.LazyVerticalGrid
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -38,6 +39,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import androidx.core.os.bundleOf
+import com.google.firebase.analytics.FirebaseAnalytics
 import dev.spikeysanju.einsen.R
 import dev.spikeysanju.einsen.components.EinsenInputTextFieldWithoutHint
 import dev.spikeysanju.einsen.components.EmojiPlaceHolderBottomSheet
@@ -69,6 +72,19 @@ fun AllEmojiScreen(
 
     // Emoji List state
     val result = viewModel.emoji.collectAsState().value
+
+    LaunchedEffect(
+        key1 = Unit,
+        block = {
+            // log event to firebase
+            val allEmojiComposable = bundleOf(
+                FirebaseAnalytics.Param.SCREEN_NAME to "All Emoji Screen",
+                FirebaseAnalytics.Param.SCREEN_CLASS to "AllEmojiScreen.kt"
+            )
+
+            viewModel.firebaseLogEvent("all_emoji_screen", allEmojiComposable)
+        }
+    )
 
     Column {
 

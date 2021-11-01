@@ -34,7 +34,9 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
 import androidx.compose.material.TopAppBar
+import androidx.compose.material.rememberScaffoldState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -52,6 +54,8 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.core.os.bundleOf
+import com.google.firebase.analytics.FirebaseAnalytics
 import dev.spikeysanju.einsen.R
 import dev.spikeysanju.einsen.components.EinsenInputTextField
 import dev.spikeysanju.einsen.components.EinsenStepSlider
@@ -81,8 +85,9 @@ fun EditTaskScreen(modifier: Modifier, viewModel: MainViewModel, actions: MainAc
     // slider points
     val points = listOf("0", "1", "2", "3", "4")
 
-    // List and bottom sheet state
+    // List, Scaffold and bottom sheet state
     val listState = rememberLazyListState()
+    val scaffoldState = rememberScaffoldState()
 
     // All Task State
     var taskID by rememberSaveable { mutableStateOf(0) }
@@ -98,7 +103,18 @@ fun EditTaskScreen(modifier: Modifier, viewModel: MainViewModel, actions: MainAc
     var createdAtState by remember { mutableStateOf(0L) }
     val updatedAtState by remember { mutableStateOf(System.currentTimeMillis()) }
 
+    LaunchedEffect(key1 = Unit) {
+        // log event to firebase
+        val editTaskComposable = bundleOf(
+            FirebaseAnalytics.Param.SCREEN_NAME to "Edit Task Screen",
+            FirebaseAnalytics.Param.SCREEN_CLASS to "EditTaskScreen.kt"
+        )
+
+        viewModel.firebaseLogEvent("dashboard_screen", editTaskComposable)
+    }
+
     Scaffold(
+        scaffoldState = scaffoldState,
         topBar = {
             TopAppBar(
                 title = {
@@ -133,7 +149,17 @@ fun EditTaskScreen(modifier: Modifier, viewModel: MainViewModel, actions: MainAc
                     callToAction = stringResource(R.string.text_add_a_task),
                     ScreenState.EMPTY,
                     actions = {
-                        actions.gotoAddTask.invoke(0, 0)
+                        actions.gotoAddTask.invoke(0, 0).run {
+                            // log event to firebase
+                            val emptyStateCTAButton = bundleOf(
+                                "empty_state_add_task" to "Clicked empty state Add Task button from Edit Task"
+                            )
+
+                            viewModel.firebaseLogEvent(
+                                "edit_task_empty_state_add_task_button",
+                                emptyStateCTAButton
+                            )
+                        }
                     }
                 )
             }
@@ -147,7 +173,14 @@ fun EditTaskScreen(modifier: Modifier, viewModel: MainViewModel, actions: MainAc
                     callToAction = stringResource(R.string.text_add_a_task),
                     ScreenState.ERROR,
                     actions = {
-                        actions.gotoAddTask.invoke(0, 0)
+                        actions.gotoAddTask.invoke(0, 0).run {
+                            // log event to firebase
+                            val errorBundle = bundleOf(
+                                "task_error" to "${taskResult.exception}"
+                            )
+
+                            viewModel.firebaseLogEvent("edit_task_error", errorBundle)
+                        }
                     }
                 )
             }
@@ -166,7 +199,6 @@ fun EditTaskScreen(modifier: Modifier, viewModel: MainViewModel, actions: MainAc
             is SingleViewState.Success -> {
 
                 // update the task state with latest value
-
                 with(taskResult.task) {
                     taskID = this.id
                     titleState = this.title
@@ -187,10 +219,8 @@ fun EditTaskScreen(modifier: Modifier, viewModel: MainViewModel, actions: MainAc
                 the [EmojiState]
                  */
                 val currentEmoji = viewModel.currentEmoji.collectAsState().value
-                emojiState = if (currentEmoji.isEmpty()) {
+                emojiState = currentEmoji.ifEmpty {
                     taskResult.task.emoji
-                } else {
-                    currentEmoji
                 }
 
                 LazyColumn(state = listState, contentPadding = PaddingValues(bottom = 24.dp)) {
@@ -206,7 +236,17 @@ fun EditTaskScreen(modifier: Modifier, viewModel: MainViewModel, actions: MainAc
                                 emoji = emojiState,
                                 onSelect = {
                                     scope.launch {
-                                        actions.gotoAllEmoji.invoke()
+                                        actions.gotoAllEmoji.invoke().run {
+                                            // log event to firebase
+                                            val emojiBundle = bundleOf(
+                                                "all_emoji_bottom_sheet" to "Clicked All Emoji placeholder to open Emoji BottomSheet"
+                                            )
+
+                                            viewModel.firebaseLogEvent(
+                                                "emoji_bottom_sheet",
+                                                emojiBundle
+                                            )
+                                        }
                                     }
                                 }
                             )
@@ -313,11 +353,23 @@ fun EditTaskScreen(modifier: Modifier, viewModel: MainViewModel, actions: MainAc
 
                             when {
                                 titleState.isEmpty() && descriptionState.isEmpty() || categoryState.isEmpty() -> {
-                                    showToast(context, "Please fill all the fields & save the task")
+                                    scope.launch {
+                                        scaffoldState.snackbarHostState.showSnackbar("Please fill all the fields & save the task")
+                                    }
                                 }
                                 else -> {
                                     viewModel.insertTask(task).run {
+
                                         showToast(context, "Task updated successfully!")
+                                        // log event to firebase
+                                        val updateTaskBundle = bundleOf(
+                                            "update_task_button" to "Clicked Update Task button to update the task"
+                                        )
+
+                                        viewModel.firebaseLogEvent(
+                                            "update_task_save_button",
+                                            updateTaskBundle
+                                        )
                                         actions.upPress.invoke()
                                     }
                                 }

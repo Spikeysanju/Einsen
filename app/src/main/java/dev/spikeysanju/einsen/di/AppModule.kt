@@ -21,6 +21,7 @@ package dev.spikeysanju.einsen.di
 
 import android.content.Context
 import androidx.room.Room
+import com.google.firebase.analytics.FirebaseAnalytics
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -53,4 +54,10 @@ object AppModule {
             EinsenDatabase::class.java,
             "task-db"
         ).fallbackToDestructiveMigration().build()
+
+    @Singleton
+    @Provides
+    fun provideFirebaseAnalytics(@ApplicationContext context: Context): FirebaseAnalytics {
+        return FirebaseAnalytics.getInstance(context)
+    }
 }

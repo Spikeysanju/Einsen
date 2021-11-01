@@ -95,7 +95,12 @@ fun NavGraph(toggleTheme: () -> Unit) {
                     factory = HiltViewModelFactory(LocalContext.current, it)
                 )
                 viewModel.getAllTask()
-                DashboardScreen(EinsenModifier.modifier, viewModel, actions, toggleTheme)
+                DashboardScreen(
+                    EinsenModifier.modifier,
+                    viewModel,
+                    actions,
+                    toggleTheme
+                )
             }
 
             /**
@@ -225,7 +230,8 @@ fun NavGraph(toggleTheme: () -> Unit) {
                     modifier = EinsenModifier.modifier,
                     title = title,
                     url = url,
-                    actions = actions
+                    actions = actions,
+                    viewModel
                 )
             }
 

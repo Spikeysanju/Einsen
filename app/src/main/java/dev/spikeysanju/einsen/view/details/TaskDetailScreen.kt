@@ -44,6 +44,7 @@ import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
 import androidx.compose.material.TopAppBar
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -58,6 +59,8 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.core.app.ShareCompat
+import androidx.core.os.bundleOf
+import com.google.firebase.analytics.FirebaseAnalytics
 import dev.spikeysanju.einsen.R
 import dev.spikeysanju.einsen.components.BottomCTA
 import dev.spikeysanju.einsen.components.ChipView
@@ -75,7 +78,24 @@ import dev.spikeysanju.einsen.view.viewmodel.MainViewModel
 import java.util.*
 
 @Composable
-fun TaskDetailsScreen(modifier: Modifier, viewModel: MainViewModel, action: MainActions) {
+fun TaskDetailsScreen(
+    modifier: Modifier,
+    viewModel: MainViewModel,
+    action: MainActions
+) {
+
+    LaunchedEffect(key1 = Unit) {
+        // log event to firebase
+        val taskDetailsComposableBundle = bundleOf(
+            FirebaseAnalytics.Param.SCREEN_NAME to "Task Details Screen",
+            FirebaseAnalytics.Param.SCREEN_CLASS to "TaskDetailsScreen.kt"
+        )
+
+        viewModel.firebaseLogEvent(
+            "task_details_screen",
+            taskDetailsComposableBundle
+        )
+    }
 
     val activity = LocalContext.current as Activity
 
@@ -135,11 +155,31 @@ fun TaskDetailsScreen(modifier: Modifier, viewModel: MainViewModel, action: Main
 
             BottomCTA(
                 onEdit = {
-                    action.gotoEditTask(taskState.id)
+                    action.gotoEditTask(taskState.id).run {
+                        // log event to firebase
+                        val editTaskBundle = bundleOf(
+                            "edit_task_button" to "Clicked Edit Task button to edit the task"
+                        )
+
+                        viewModel.firebaseLogEvent(
+                            "task_details_edit_task_button",
+                            editTaskBundle
+                        )
+                    }
                 },
                 onDelete = {
                     viewModel.deleteTaskByID(taskState.id).run {
-                        action.upPress.invoke()
+                        action.upPress.invoke().run {
+                            // log event to firebase
+                            val deleteTaskBundle = bundleOf(
+                                "delete_task_button" to "Clicked Delete Task button to delete the task"
+                            )
+
+                            viewModel.firebaseLogEvent(
+                                "task_details_delete_task_button",
+                                deleteTaskBundle
+                            )
+                        }
                     }
                 },
                 onShare = {
@@ -152,10 +192,31 @@ fun TaskDetailsScreen(modifier: Modifier, viewModel: MainViewModel, action: Main
                         taskState.category,
                         taskState.priority.name,
                         createdAt,
-                    )
+                    ).run {
+
+                        // log event to firebase
+                        val editTaskBundle = bundleOf(
+                            "share_task_button" to "Clicked Share Task button to share the task"
+                        )
+
+                        viewModel.firebaseLogEvent(
+                            "task_details_share_task_button",
+                            editTaskBundle
+                        )
+                    }
                 },
                 onButtonChange = {
-                    viewModel.updateStatus(taskState.id, !taskState.isCompleted)
+                    viewModel.updateStatus(taskState.id, !taskState.isCompleted).run {
+                        // log event to firebase
+                        val updateStatusBundle = bundleOf(
+                            "update_task_button" to "Clicked Update Task button to update the status of the task"
+                        )
+
+                        viewModel.firebaseLogEvent(
+                            "task_details_share_task_button",
+                            updateStatusBundle
+                        )
+                    }
                 },
                 title = buttonTitle, icon = buttonIcon, color = buttonColor
             )
@@ -277,7 +338,17 @@ fun TaskDetailsScreen(modifier: Modifier, viewModel: MainViewModel, action: Main
                     callToAction = stringResource(R.string.text_add_a_task),
                     ScreenState.EMPTY,
                     actions = {
-                        action.gotoAddTask.invoke(0, 0)
+                        action.gotoAddTask.invoke(0, 0).run {
+                            // log event to firebase
+                            val emptyStateCTAButton = bundleOf(
+                                "empty_state_add_task" to "Clicked empty state Add Task button from Task Details"
+                            )
+
+                            viewModel.firebaseLogEvent(
+                                "task_details_empty_state_add_task_button",
+                                emptyStateCTAButton
+                            )
+                        }
                     }
                 )
             }
@@ -291,7 +362,17 @@ fun TaskDetailsScreen(modifier: Modifier, viewModel: MainViewModel, action: Main
                     callToAction = stringResource(R.string.text_add_a_task),
                     ScreenState.ERROR,
                     actions = {
-                        action.gotoAddTask.invoke(0, 0)
+                        action.gotoAddTask.invoke(0, 0).run {
+                            // log event to firebase
+                            val errorBundle = bundleOf(
+                                "task_details_error" to "${result.exception}"
+                            )
+
+                            viewModel.firebaseLogEvent(
+                                "task_details_error",
+                                errorBundle
+                            )
+                        }
                     }
                 )
             }
