@@ -42,6 +42,18 @@ android {
         vectorDrawables {
             useSupportLibrary = true
         }
+
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments.plusAssign(
+                    hashMapOf(
+                        "room.schemaLocation" to "$projectDir/schemas",
+                        "room.incremental" to "true",
+                        "room.expandProjection" to "true"
+                    )
+                )
+            }
+        }
     }
 
     lint {
@@ -49,7 +61,14 @@ android {
         abortOnError = true
     }
     buildTypes {
+
+        debug {
+            versionNameSuffix = ".dev"
+            isDebuggable = true
+        }
+
         release {
+            isDebuggable = false
             isMinifyEnabled = true
             isShrinkResources = true
             proguardFiles(
@@ -58,6 +77,7 @@ android {
             )
         }
     }
+
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11
