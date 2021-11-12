@@ -19,7 +19,6 @@
 
 package dev.spikeysanju.einsen.model.emoji
 
-
 import androidx.annotation.Keep
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
