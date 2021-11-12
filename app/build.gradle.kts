@@ -22,7 +22,7 @@ plugins {
     id("kotlin-android")
     id("kotlin-kapt")
     id("dagger.hilt.android.plugin")
-    kotlin("plugin.serialization") version "1.4.0"
+    kotlin("plugin.serialization") version "1.5.31"
     id("com.google.gms.google-services")
     id("com.google.firebase.crashlytics")
 }

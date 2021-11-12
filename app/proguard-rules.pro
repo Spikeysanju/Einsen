@@ -18,4 +18,14 @@
 
 # If you keep the line number information, uncomment this to
 # hide the original source file name.
-#-renamesourcefileattribute SourceFile
+-renamesourcefileattribute SourceFile
+
+-keepattributes *Annotation*, InnerClasses
+-dontnote kotlinx.serialization.SerializationKt
+-keep,includedescriptorclasses class dev.spikeysanju.einsen.**$$serializer { *; }
+-keepclassmembers class dev.spikeysanju.einsen.** {
+    *** Companion;
+}
+-keepclasseswithmembers class dev.spikeysanju.einsen.** {
+    kotlinx.serialization.KSerializer serializer(...);
+}
