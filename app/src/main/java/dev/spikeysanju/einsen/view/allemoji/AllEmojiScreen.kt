@@ -122,7 +122,7 @@ fun AllEmojiScreen(
                         AnimationViewState(
                             title = stringResource(R.string.text_no_emoji_description),
                             description = "Please try searching with another term.\n  Ex -> star_struck",
-                            callToAction = "Retry Search",
+                            callToAction = stringResource(R.string.text_retry),
                             screenState = ScreenState.ERROR,
                             actions = {
                                 scope.launch {

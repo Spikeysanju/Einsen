@@ -19,23 +19,19 @@
 
 package dev.spikeysanju.einsen.model.emoji
 
-import androidx.annotation.NonNull
-import androidx.room.ColumnInfo
-import androidx.room.Entity
-import androidx.room.PrimaryKey
+import androidx.annotation.Keep
+import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
-@Entity(tableName = "emojis")
+@Keep
 @Serializable
 data class EmojiItem(
-    @NonNull
-    @PrimaryKey(autoGenerate = false)
-    @ColumnInfo(name = "emoji")
+    @SerialName("emoji")
     val emoji: String,
-    @ColumnInfo(name = "description")
+    @SerialName("description")
     val description: String,
-    @ColumnInfo(name = "category")
+    @SerialName("category")
     val category: String,
-    @ColumnInfo(name = "aliases")
+    @SerialName("aliases")
     val aliases: List<String>
 )

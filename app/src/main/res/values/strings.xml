@@ -80,5 +80,6 @@
     <string name="text_four">4</string>
     <string name="text_search_emoji">Search Emoji...</string>
     <string name="text_go_back">Go Back!</string>
+    <string name="text_retry">Retry Search</string>
 
 </resources>

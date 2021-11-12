@@ -22,7 +22,7 @@ plugins {
     id("kotlin-android")
     id("kotlin-kapt")
     id("dagger.hilt.android.plugin")
-    kotlin("plugin.serialization") version "1.4.0"
+    kotlin("plugin.serialization") version "1.5.31"
     id("com.google.gms.google-services")
     id("com.google.firebase.crashlytics")
 }
@@ -35,8 +35,8 @@ android {
         applicationId = "dev.spikeysanju.einsen"
         minSdk = 21
         targetSdk = 30
-        versionCode = 2
-        versionName = "v1.0.0-alpha02"
+        versionCode = 3
+        versionName = "v1.0.0-alpha03"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
