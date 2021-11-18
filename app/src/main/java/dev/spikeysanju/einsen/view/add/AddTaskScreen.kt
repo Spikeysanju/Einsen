@@ -213,6 +213,18 @@ fun AddTaskScreen(
                 }
             }
 
+            // Due Date Time
+            item {
+                Spacer(modifier = modifier.height(24.dp))
+                EinsenInputTextField(
+                    title = stringResource(R.string.text_category),
+                    value = taskState.category,
+                    readOnly = true
+                ) {
+                    taskState = taskState.copy(category = it)
+                }
+            }
+
             val titleStyle = TextStyle(
                 fontSize = 16.sp,
                 fontFamily = Sailec,

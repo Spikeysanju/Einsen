@@ -69,6 +69,7 @@ fun EinsenInputTextField(
     modifier: Modifier = Modifier,
     title: String,
     value: String,
+    readOnly: Boolean = false,
     onValueChanged: (String) -> Unit
 ) {
     var textState by rememberSaveable { mutableStateOf("") }
@@ -83,6 +84,7 @@ fun EinsenInputTextField(
                 .fillMaxWidth()
                 .padding(start = 20.dp, end = 20.dp),
             value = value,
+            readOnly = readOnly,
             onValueChange = {
                 textState = it
                 when (textState.isEmpty()) {
