@@ -19,6 +19,9 @@
 
 package dev.spikeysanju.einsen.view.add
 
+import androidx.activity.ComponentActivity
+import androidx.appcompat.app.AppCompatActivity
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -54,12 +57,21 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.core.os.bundleOf
+import androidx.fragment.app.FragmentActivity
+import androidx.navigation.NavHost
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
+import com.google.android.material.datepicker.MaterialDatePicker
 import com.google.firebase.analytics.FirebaseAnalytics
+import dev.spikeysanju.einsen.MainActivity
 import dev.spikeysanju.einsen.R
 import dev.spikeysanju.einsen.components.EinsenInputTextField
 import dev.spikeysanju.einsen.components.EinsenStepSlider
 import dev.spikeysanju.einsen.components.EmojiPlaceHolder
 import dev.spikeysanju.einsen.components.PrimaryButton
+import dev.spikeysanju.einsen.components.showDatePicker
+import dev.spikeysanju.einsen.components.showTimePicker
 import dev.spikeysanju.einsen.model.task.Priority
 import dev.spikeysanju.einsen.model.task.task
 import dev.spikeysanju.einsen.navigation.MainActions
@@ -67,9 +79,11 @@ import dev.spikeysanju.einsen.ui.theme.Sailec
 import dev.spikeysanju.einsen.ui.theme.einsenColors
 import dev.spikeysanju.einsen.ui.theme.typography
 import dev.spikeysanju.einsen.utils.calculatePriority
+import dev.spikeysanju.einsen.utils.formatCalendar
 import dev.spikeysanju.einsen.utils.showToast
 import dev.spikeysanju.einsen.view.viewmodel.MainViewModel
 import kotlinx.coroutines.launch
+import java.util.*
 
 @Composable
 fun AddTaskScreen(
@@ -213,16 +227,23 @@ fun AddTaskScreen(
                 }
             }
 
+
             // Due Date Time
             item {
                 Spacer(modifier = modifier.height(24.dp))
                 EinsenInputTextField(
-                    title = stringResource(R.string.text_category),
-                    value = taskState.category,
-                    readOnly = true
-                ) {
-                    taskState = taskState.copy(category = it)
-                }
+                    modifier = Modifier.clickable {
+                       val calendar = Calendar.getInstance()
+                        context.showDatePicker(calendar){
+                            context.showTimePicker(it){ timeCalendar ->
+                                taskState = taskState.copy(due = formatCalendar(timeCalendar, "dd MM yyyy hh:mm aa"))
+                            }
+                        }
+                    },
+                    title = stringResource(R.string.text_due_date_time),
+                    value = taskState.due,
+                    readOnly = true, enabled = false, {}
+                )
             }
 
             val titleStyle = TextStyle(

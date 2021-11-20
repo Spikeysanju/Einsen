@@ -56,6 +56,7 @@
     <string name="text_title">Title</string>
     <string name="text_description">Description</string>
     <string name="text_category">Category</string>
+    <string name="text_due_date_time">Due Date Time</string>
     <string name="text_importance">Importance</string>
     <string name="text_save_task">Save Task</string>
     <string name="text_urgency">Urgency</string>
