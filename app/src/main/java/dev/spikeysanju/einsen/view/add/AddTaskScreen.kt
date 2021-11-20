@@ -220,7 +220,6 @@ fun AddTaskScreen(
                 }
             }
 
-
             // Due Date Time
             item {
                 Spacer(modifier = modifier.height(24.dp))

@@ -51,7 +51,6 @@ class DateValidator() : CalendarConstraints.DateValidator {
         } else endDate == -1L && date >= startDate
     }
 
-
     override fun describeContents(): Int {
         return 0
     }
@@ -65,5 +64,4 @@ class DateValidator() : CalendarConstraints.DateValidator {
             return arrayOfNulls(size)
         }
     }
-
 }

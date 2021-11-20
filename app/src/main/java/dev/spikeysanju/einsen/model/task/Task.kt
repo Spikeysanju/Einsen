@@ -52,7 +52,7 @@ data class Task(
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "id")
     val id: Int = 0
-){
+) {
     fun getWorkerId() = "reminder_$id"
 }
 

@@ -32,7 +32,6 @@ import dagger.assisted.AssistedInject
 import dev.spikeysanju.einsen.R
 import dev.spikeysanju.einsen.data.local.db.TaskDao
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.single
 import kotlinx.coroutines.withContext
 
 const val ARG_ID = "arg_id"
@@ -78,7 +77,6 @@ class ReminderWorker @AssistedInject constructor(
             builder.setAutoCancel(true)
 
             notificationManager.notify(task.id, builder.build())
-
         }
         return Result.success()
     }

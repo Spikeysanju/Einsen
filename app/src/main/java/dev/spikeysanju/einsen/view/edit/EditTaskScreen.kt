@@ -293,7 +293,6 @@ fun EditTaskScreen(modifier: Modifier, viewModel: MainViewModel, actions: MainAc
                         }
                     }
 
-
                     // Due Date Time
                     item {
                         Spacer(modifier = modifier.height(24.dp))

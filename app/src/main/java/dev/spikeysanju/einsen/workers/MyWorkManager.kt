@@ -51,5 +51,3 @@ fun Context.scheduleReminders(task: Task) {
 fun Context.cancelReminder(task: Task) {
     WorkManager.getInstance(this).cancelUniqueWork(task.getWorkerId())
 }
-
-

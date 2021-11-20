@@ -28,7 +28,6 @@ import dev.spikeysanju.einsen.R
 import dev.spikeysanju.einsen.utils.DateValidator
 import java.util.*
 
-
 fun Context?.showDatePicker(
     defaultCalendar: Calendar,
     onDismiss: (() -> Unit)? = null,
