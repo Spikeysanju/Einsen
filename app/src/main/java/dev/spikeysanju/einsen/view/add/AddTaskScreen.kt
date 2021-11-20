@@ -74,6 +74,7 @@ import dev.spikeysanju.einsen.utils.formatCalendar
 import dev.spikeysanju.einsen.utils.getCalendar
 import dev.spikeysanju.einsen.utils.showToast
 import dev.spikeysanju.einsen.view.viewmodel.MainViewModel
+import dev.spikeysanju.einsen.workers.scheduleReminders
 import kotlinx.coroutines.launch
 import java.util.*
 
@@ -298,7 +299,7 @@ fun AddTaskScreen(
                         }
                         else -> {
                             viewModel.insertTask(taskState).run {
-
+                                context.scheduleReminders(taskState)
                                 showToast(context, "Task added successfully")
 
                                 // log event to firebase
