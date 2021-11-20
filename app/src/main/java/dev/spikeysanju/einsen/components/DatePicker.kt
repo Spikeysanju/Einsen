@@ -20,10 +20,13 @@
 package dev.spikeysanju.einsen.components
 
 import android.content.Context
+import androidx.appcompat.view.ContextThemeWrapper
+import androidx.fragment.app.DialogFragment.STYLE_NORMAL
 import androidx.fragment.app.FragmentActivity
 import com.google.android.material.datepicker.CalendarConstraints
 import com.google.android.material.datepicker.MaterialDatePicker
 import com.google.android.material.timepicker.MaterialTimePicker
+import dev.spikeysanju.einsen.R
 import dev.spikeysanju.einsen.utils.DateValidator
 import java.util.*
 
@@ -41,9 +44,11 @@ fun Context?.showDatePicker(
             .build()
 
         val builder = MaterialDatePicker.Builder.datePicker()
+            .setTheme(R.style.ThemeOverlay_App_DatePicker)
             .setCalendarConstraints(calendarConstraints)
             .setSelection(defaultCalendar.timeInMillis)
             .build()
+
         builder.addOnPositiveButtonClickListener { selectedDate ->
             val newCal = Calendar.getInstance()
             newCal.timeInMillis = selectedDate
