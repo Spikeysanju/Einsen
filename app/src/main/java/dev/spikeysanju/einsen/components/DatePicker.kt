@@ -21,18 +21,27 @@ package dev.spikeysanju.einsen.components
 
 import android.content.Context
 import androidx.fragment.app.FragmentActivity
+import com.google.android.material.datepicker.CalendarConstraints
 import com.google.android.material.datepicker.MaterialDatePicker
 import com.google.android.material.timepicker.MaterialTimePicker
+import dev.spikeysanju.einsen.utils.DateValidator
 import java.util.*
 
 
 fun Context?.showDatePicker(
     defaultCalendar: Calendar,
     onDismiss: (() -> Unit)? = null,
+    minDate: Long = System.currentTimeMillis(),
     onDateSelect: (Calendar) -> Unit
 ) {
     (this as? FragmentActivity)?.supportFragmentManager?.let { manager ->
+
+        val calendarConstraints = CalendarConstraints.Builder().setStart(minDate)
+            .setValidator(DateValidator(minDate))
+            .build()
+
         val builder = MaterialDatePicker.Builder.datePicker()
+            .setCalendarConstraints(calendarConstraints)
             .setSelection(defaultCalendar.timeInMillis)
             .build()
         builder.addOnPositiveButtonClickListener { selectedDate ->

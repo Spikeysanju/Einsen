@@ -19,8 +19,6 @@
 
 package dev.spikeysanju.einsen.view.add
 
-import androidx.activity.ComponentActivity
-import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -57,14 +55,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.core.os.bundleOf
-import androidx.fragment.app.FragmentActivity
-import androidx.navigation.NavHost
-import androidx.navigation.compose.NavHost
-import androidx.navigation.compose.composable
-import androidx.navigation.compose.rememberNavController
-import com.google.android.material.datepicker.MaterialDatePicker
 import com.google.firebase.analytics.FirebaseAnalytics
-import dev.spikeysanju.einsen.MainActivity
 import dev.spikeysanju.einsen.R
 import dev.spikeysanju.einsen.components.EinsenInputTextField
 import dev.spikeysanju.einsen.components.EinsenStepSlider
@@ -80,6 +71,7 @@ import dev.spikeysanju.einsen.ui.theme.einsenColors
 import dev.spikeysanju.einsen.ui.theme.typography
 import dev.spikeysanju.einsen.utils.calculatePriority
 import dev.spikeysanju.einsen.utils.formatCalendar
+import dev.spikeysanju.einsen.utils.getCalendar
 import dev.spikeysanju.einsen.utils.showToast
 import dev.spikeysanju.einsen.view.viewmodel.MainViewModel
 import kotlinx.coroutines.launch
@@ -114,7 +106,7 @@ fun AddTaskScreen(
                 urgency = defaultUrgency
                 importance = defaultImportance
                 priority = Priority.IMPORTANT
-                due = "18/12/1998"
+                due = ""
                 isCompleted = false
             }
         )
@@ -233,10 +225,13 @@ fun AddTaskScreen(
                 Spacer(modifier = modifier.height(24.dp))
                 EinsenInputTextField(
                     modifier = Modifier.clickable {
-                       val calendar = Calendar.getInstance()
-                        context.showDatePicker(calendar){
-                            context.showTimePicker(it){ timeCalendar ->
-                                taskState = taskState.copy(due = formatCalendar(timeCalendar, "dd MM yyyy hh:mm aa"))
+                        val calendar = getCalendar(taskState.due)
+                        context.showDatePicker(calendar) {
+                            calendar.set(Calendar.DAY_OF_MONTH, it.get(Calendar.DAY_OF_MONTH))
+                            calendar.set(Calendar.MONTH, it.get(Calendar.MONTH))
+                            calendar.set(Calendar.YEAR, it.get(Calendar.YEAR))
+                            context.showTimePicker(calendar) { timeCalendar ->
+                                taskState = taskState.copy(due = formatCalendar(timeCalendar))
                             }
                         }
                     },

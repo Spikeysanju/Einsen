@@ -19,10 +19,26 @@
 
 package dev.spikeysanju.einsen.utils
 
+import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.util.*
 
-fun formatCalendar(calendar: java.util.Calendar, dateTimeFormat: String?): String {
+const val DUE_DATE_FORMAT = "dd MMM yyyy hh:mm aa"
+
+fun formatCalendar(calendar: Calendar, dateTimeFormat: String? = DUE_DATE_FORMAT): String {
     val simpleDateFormat = SimpleDateFormat(dateTimeFormat, Locale.getDefault())
     return simpleDateFormat.format(calendar.time)
+}
+
+fun getCalendar(dateTime: String): Calendar {
+    val simpleDateFormat = SimpleDateFormat(DUE_DATE_FORMAT, Locale.getDefault())
+    val cal = Calendar.getInstance()
+    try {
+        simpleDateFormat.parse(dateTime)?.let {
+            cal.time = it
+        }
+    } catch (e: ParseException) {
+        e.printStackTrace()
+    }
+    return cal
 }
