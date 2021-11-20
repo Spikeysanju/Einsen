@@ -20,21 +20,32 @@
 package dev.spikeysanju.einsen.workers
 
 import android.content.Context
+import androidx.work.Data
 import androidx.work.ExistingWorkPolicy
 import androidx.work.OneTimeWorkRequest
 import androidx.work.WorkManager
 import dev.spikeysanju.einsen.model.task.Task
 import dev.spikeysanju.einsen.utils.getCalendar
-import java.util.*
 import java.util.concurrent.TimeUnit
 
 fun Context.scheduleReminders(task: Task) {
     val calendar = getCalendar(task.due)
-    val worker = OneTimeWorkRequest.Builder(ReminderWorker::class.java)
-        .setInitialDelay(calendar.timeInMillis - System.currentTimeMillis(), TimeUnit.MILLISECONDS)
-        .build()
-    WorkManager.getInstance(this)
-        .enqueueUniqueWork(task.getWorkerId(), ExistingWorkPolicy.KEEP, worker)
+    val initialDelay =
+        (calendar.timeInMillis - TimeUnit.HOURS.toMillis(1)) - System.currentTimeMillis()
+    if (initialDelay > 0) {
+        val data = Data.Builder()
+            .putInt(ARG_ID, task.id)
+            .build()
+
+        val worker = OneTimeWorkRequest.Builder(ReminderWorker::class.java)
+            .setInitialDelay(initialDelay, TimeUnit.MILLISECONDS)
+            .setInputData(data)
+            .build()
+        WorkManager.getInstance(this)
+            .enqueueUniqueWork(task.getWorkerId(), ExistingWorkPolicy.REPLACE, worker)
+    } else {
+        cancelReminder(task)
+    }
 }
 
 fun Context.cancelReminder(task: Task) {

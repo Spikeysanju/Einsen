@@ -45,6 +45,9 @@ interface TaskDao {
     @Query("SELECT * FROM task where id=:id")
     fun findByID(id: Int): Flow<Task>
 
+    @Query("SELECT * FROM task where id=:id")
+    fun findTaskByID(id: Int): Task
+
     @Query("UPDATE task set isCompleted= :isCompleted where id=:id")
     suspend fun updateTaskStatus(id: Int, isCompleted: Boolean)
 

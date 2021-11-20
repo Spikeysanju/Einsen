@@ -83,4 +83,9 @@
     <string name="text_go_back">Go Back!</string>
     <string name="text_retry">Retry Search</string>
 
+
+    <!--Notification Channel-->
+    <string name="reminder_channel_id" translatable="false">reminders</string>
+    <string name="reminder_channel_name" translatable="false">Reminders</string>
+
 </resources>

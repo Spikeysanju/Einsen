@@ -27,6 +27,7 @@ buildscript {
     val composeNavigationVersion by extra("2.4.0-alpha03")
     val hiltComposeNavVersion by extra("1.0.0-alpha03")
     val hiltVersion by extra("2.37")
+    val workerVersion by extra("2.7.1")
     val hiltAndroidXVersion by extra("1.0.0-alpha03")
     val roomVersion by extra("2.3.0")
     val dataStoreVersion by extra("1.0.0-beta02")

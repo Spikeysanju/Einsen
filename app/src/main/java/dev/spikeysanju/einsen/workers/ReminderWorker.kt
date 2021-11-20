@@ -19,15 +19,67 @@
 
 package dev.spikeysanju.einsen.workers
 
+import android.app.NotificationChannel
+import android.app.NotificationManager
 import android.content.Context
-import android.util.Log
-import androidx.work.Worker
+import android.os.Build
+import androidx.core.app.NotificationCompat
+import androidx.hilt.work.HiltWorker
+import androidx.work.CoroutineWorker
 import androidx.work.WorkerParameters
+import dagger.assisted.Assisted
+import dagger.assisted.AssistedInject
+import dev.spikeysanju.einsen.R
+import dev.spikeysanju.einsen.data.local.db.TaskDao
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.single
+import kotlinx.coroutines.withContext
 
-class ReminderWorker(context: Context, workerParams: WorkerParameters) :
-    Worker(context, workerParams) {
-    override fun doWork(): Result {
-        Log.d("ReminderWorker", "doWork: Called ${System.currentTimeMillis()}")
+const val ARG_ID = "arg_id"
+
+@HiltWorker
+class ReminderWorker @AssistedInject constructor(
+    @Assisted val context: Context,
+    @Assisted val workerParams: WorkerParameters,
+    private val taskDao: TaskDao,
+    private val notificationManager: NotificationManager
+) :
+    CoroutineWorker(context, workerParams) {
+    override suspend fun doWork(): Result {
+        val reminderId = workerParams.inputData.getInt(ARG_ID, -1)
+        if (reminderId == -1) {
+            return Result.failure()
+        }
+
+        withContext(Dispatchers.IO) {
+
+            val task = taskDao.findTaskByID(reminderId)
+
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                val channel = NotificationChannel(
+                    context.getString(R.string.reminder_channel_id),
+                    context.getString(R.string.reminder_channel_name),
+                    NotificationManager.IMPORTANCE_HIGH,
+                )
+                channel.lockscreenVisibility = NotificationCompat.VISIBILITY_PUBLIC
+                channel.enableVibration(true)
+                channel.setBypassDnd(true)
+                notificationManager.createNotificationChannel(channel)
+            }
+
+            val builder =
+                NotificationCompat.Builder(context, context.getString(R.string.reminder_channel_id))
+            builder.setContentTitle(task.title)
+            builder.setSmallIcon(R.drawable.einsen_logo)
+            builder.setCategory(NotificationCompat.CATEGORY_ALARM)
+            builder.setContentText("Task due time in 1 hour")
+            builder.setVisibility(NotificationCompat.VISIBILITY_PUBLIC)
+            builder.priority = NotificationCompat.PRIORITY_MAX
+            builder.setAutoCancel(true)
+
+            notificationManager.notify(task.id, builder.build())
+
+        }
         return Result.success()
     }
 }

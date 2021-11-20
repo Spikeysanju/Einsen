@@ -20,8 +20,6 @@
 package dev.spikeysanju.einsen.components
 
 import android.content.Context
-import androidx.appcompat.view.ContextThemeWrapper
-import androidx.fragment.app.DialogFragment.STYLE_NORMAL
 import androidx.fragment.app.FragmentActivity
 import com.google.android.material.datepicker.CalendarConstraints
 import com.google.android.material.datepicker.MaterialDatePicker
@@ -34,7 +32,12 @@ import java.util.*
 fun Context?.showDatePicker(
     defaultCalendar: Calendar,
     onDismiss: (() -> Unit)? = null,
-    minDate: Long = System.currentTimeMillis(),
+    minDate: Long = Calendar.getInstance().also {
+        it.set(Calendar.MINUTE, 0)
+        it.set(Calendar.HOUR_OF_DAY, 0)
+        it.set(Calendar.SECOND, 0)
+        it.set(Calendar.MILLISECOND, 0)
+    }.timeInMillis,
     onDateSelect: (Calendar) -> Unit
 ) {
     (this as? FragmentActivity)?.supportFragmentManager?.let { manager ->

@@ -20,6 +20,8 @@
 package dev.spikeysanju.einsen.app
 
 import android.app.Application
+import androidx.hilt.work.HiltWorkerFactory
+import androidx.work.Configuration
 import com.google.firebase.analytics.FirebaseAnalytics
 import dagger.hilt.android.HiltAndroidApp
 import logcat.AndroidLogcatLogger
@@ -27,10 +29,18 @@ import logcat.LogPriority
 import javax.inject.Inject
 
 @HiltAndroidApp
-class EinsenApp : Application() {
+class EinsenApp : Application(), Configuration.Provider {
 
     @Inject
     lateinit var mFirebaseAnalytics: FirebaseAnalytics
+
+    @Inject
+    lateinit var workerFactory: HiltWorkerFactory
+
+    override fun getWorkManagerConfiguration() =
+        Configuration.Builder()
+            .setWorkerFactory(workerFactory)
+            .build()
 
     override fun onCreate() {
         super.onCreate()
