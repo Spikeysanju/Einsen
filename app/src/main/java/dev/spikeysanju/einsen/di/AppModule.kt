@@ -19,6 +19,7 @@
 
 package dev.spikeysanju.einsen.di
 
+import android.app.NotificationManager
 import android.content.Context
 import androidx.room.Room
 import com.google.firebase.analytics.FirebaseAnalytics
@@ -59,5 +60,11 @@ object AppModule {
     @Provides
     fun provideFirebaseAnalytics(@ApplicationContext context: Context): FirebaseAnalytics {
         return FirebaseAnalytics.getInstance(context)
+    }
+
+    @Singleton
+    @Provides
+    fun provideNotificationManager(@ApplicationContext context: Context): NotificationManager {
+        return context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
     }
 }

@@ -75,6 +75,7 @@ import dev.spikeysanju.einsen.utils.viewstate.SingleViewState
 import dev.spikeysanju.einsen.view.animationviewstate.AnimationViewState
 import dev.spikeysanju.einsen.view.animationviewstate.ScreenState
 import dev.spikeysanju.einsen.view.viewmodel.MainViewModel
+import dev.spikeysanju.einsen.workers.cancelReminder
 import java.util.*
 
 @Composable
@@ -83,6 +84,8 @@ fun TaskDetailsScreen(
     viewModel: MainViewModel,
     action: MainActions
 ) {
+
+    val context = LocalContext.current
 
     LaunchedEffect(key1 = Unit) {
         // log event to firebase
@@ -169,6 +172,7 @@ fun TaskDetailsScreen(
                 },
                 onDelete = {
                     viewModel.deleteTaskByID(taskState.id).run {
+                        context.cancelReminder(taskState)
                         action.upPress.invoke().run {
                             // log event to firebase
                             val deleteTaskBundle = bundleOf(

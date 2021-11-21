@@ -19,6 +19,7 @@
 
 package dev.spikeysanju.einsen.view.edit
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -61,6 +62,8 @@ import dev.spikeysanju.einsen.components.EinsenInputTextField
 import dev.spikeysanju.einsen.components.EinsenStepSlider
 import dev.spikeysanju.einsen.components.EmojiPlaceHolder
 import dev.spikeysanju.einsen.components.PrimaryButton
+import dev.spikeysanju.einsen.components.showDatePicker
+import dev.spikeysanju.einsen.components.showTimePicker
 import dev.spikeysanju.einsen.model.task.Priority
 import dev.spikeysanju.einsen.model.task.task
 import dev.spikeysanju.einsen.navigation.MainActions
@@ -68,12 +71,16 @@ import dev.spikeysanju.einsen.ui.theme.Sailec
 import dev.spikeysanju.einsen.ui.theme.einsenColors
 import dev.spikeysanju.einsen.ui.theme.typography
 import dev.spikeysanju.einsen.utils.calculatePriority
+import dev.spikeysanju.einsen.utils.formatCalendar
+import dev.spikeysanju.einsen.utils.getCalendar
 import dev.spikeysanju.einsen.utils.showToast
 import dev.spikeysanju.einsen.utils.viewstate.SingleViewState
 import dev.spikeysanju.einsen.view.animationviewstate.AnimationViewState
 import dev.spikeysanju.einsen.view.animationviewstate.ScreenState
 import dev.spikeysanju.einsen.view.viewmodel.MainViewModel
+import dev.spikeysanju.einsen.workers.scheduleReminders
 import kotlinx.coroutines.launch
+import java.util.*
 
 @Composable
 fun EditTaskScreen(modifier: Modifier, viewModel: MainViewModel, actions: MainActions) {
@@ -97,7 +104,7 @@ fun EditTaskScreen(modifier: Modifier, viewModel: MainViewModel, actions: MainAc
     var emojiState by remember { mutableStateOf("") }
     var urgencyState by remember { mutableStateOf(0) }
     var importanceState by remember { mutableStateOf(0) }
-    var dueState by remember { mutableStateOf("18/12/1998") }
+    var dueState by remember { mutableStateOf("") }
     var priorityState by remember { mutableStateOf(Priority.IMPORTANT) }
     var isCompletedState by remember { mutableStateOf(false) }
     var createdAtState by remember { mutableStateOf(0L) }
@@ -286,6 +293,27 @@ fun EditTaskScreen(modifier: Modifier, viewModel: MainViewModel, actions: MainAc
                         }
                     }
 
+                    // Due Date Time
+                    item {
+                        Spacer(modifier = modifier.height(24.dp))
+                        EinsenInputTextField(
+                            modifier = Modifier.clickable {
+                                val calendar = getCalendar(dueState)
+                                context.showDatePicker(calendar) {
+                                    calendar.set(Calendar.DAY_OF_MONTH, it.get(Calendar.DAY_OF_MONTH))
+                                    calendar.set(Calendar.MONTH, it.get(Calendar.MONTH))
+                                    calendar.set(Calendar.YEAR, it.get(Calendar.YEAR))
+                                    context.showTimePicker(calendar) { timeCalendar ->
+                                        dueState = formatCalendar(timeCalendar)
+                                    }
+                                }
+                            },
+                            title = stringResource(R.string.text_due_date_time),
+                            value = dueState,
+                            readOnly = true, enabled = false, {}
+                        )
+                    }
+
                     val titleStyle = TextStyle(
                         fontSize = 16.sp,
                         fontFamily = Sailec,
@@ -360,6 +388,7 @@ fun EditTaskScreen(modifier: Modifier, viewModel: MainViewModel, actions: MainAc
                                 else -> {
                                     viewModel.insertTask(task).run {
 
+                                        context.scheduleReminders(task)
                                         showToast(context, "Task updated successfully!")
                                         // log event to firebase
                                         val updateTaskBundle = bundleOf(

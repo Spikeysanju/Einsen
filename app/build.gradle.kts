@@ -166,5 +166,8 @@ dependencies {
 
     // Square Logcat
     implementation("com.squareup.logcat:logcat:${rootProject.extra["logcatVersion"]}")
+
+    // Worker + Coroutine
+    implementation("androidx.work:work-runtime-ktx:${rootProject.extra["workerVersion"]}")
 }
 

@@ -56,6 +56,7 @@
     <string name="text_title">Title</string>
     <string name="text_description">Description</string>
     <string name="text_category">Category</string>
+    <string name="text_due_date_time">Due Date Time</string>
     <string name="text_importance">Importance</string>
     <string name="text_save_task">Save Task</string>
     <string name="text_urgency">Urgency</string>
@@ -81,5 +82,10 @@
     <string name="text_search_emoji">Search Emoji...</string>
     <string name="text_go_back">Go Back!</string>
     <string name="text_retry">Retry Search</string>
+
+
+    <!--Notification Channel-->
+    <string name="reminder_channel_id" translatable="false">reminders</string>
+    <string name="reminder_channel_name" translatable="false">Reminders</string>
 
 </resources>
