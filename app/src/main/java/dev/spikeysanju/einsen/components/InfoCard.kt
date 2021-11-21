@@ -38,6 +38,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import dev.spikeysanju.einsen.R
 import dev.spikeysanju.einsen.ui.theme.einsenColors
@@ -87,5 +88,15 @@ fun InfoCard(title: String, value: String, modifier: Modifier) {
                 textAlign = TextAlign.Center
             )
         }
+    }
+}
+
+@Preview(name = "Info card", group = "Card")
+@Composable
+fun InfoCardPreview() {
+    Column {
+        InfoCard(title = "Urgency", value = "2", modifier = Modifier)
+        Spacer(modifier = Modifier.height(12.dp))
+        InfoCard(title = "Importance", value = "2", modifier = Modifier)
     }
 }

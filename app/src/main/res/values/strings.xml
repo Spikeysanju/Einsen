@@ -30,6 +30,7 @@
     <string name="text_about">About</string>
     <string name="text_allTask">All Task</string>
     <string name="text_taskDetails">Task Details</string>
+    <string name="text_project">My Project</string>
 
     <!--    Empty State -->
     <string name="text_no_task_title">No tasks yet</string>

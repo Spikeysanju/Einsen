@@ -20,7 +20,9 @@
 package dev.spikeysanju.einsen.components
 
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
@@ -39,6 +41,7 @@ import androidx.compose.ui.focus.FocusDirection
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import dev.spikeysanju.einsen.ui.theme.einsenColors
 import dev.spikeysanju.einsen.ui.theme.typography
@@ -185,3 +188,25 @@ fun textFieldColors() = TextFieldDefaults.textFieldColors(
     placeholderColor = einsenColors.black,
     disabledPlaceholderColor = einsenColors.black
 )
+
+@Preview(name = "Text Input Field", group = "Input")
+@Composable
+fun TextInputPreview() {
+    Column {
+        EinsenInputTextField(
+            title = "Title", value = "Einsen Architecture",
+            onValueChanged = {
+                // value change action goes here
+            }
+        )
+
+        Spacer(modifier = Modifier.height(12.dp))
+
+        EinsenInputTextFieldWithoutHint(
+            title = "Description", value = "Einsen Architecture is really cool!",
+            onValueChanged = {
+                // value change action goes here
+            }
+        )
+    }
+}

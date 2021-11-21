@@ -38,7 +38,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import dev.spikeysanju.einsen.ui.theme.einsenColors
 import dev.spikeysanju.einsen.ui.theme.typography
 import dev.spikeysanju.einsen.utils.coloredShadow
 
@@ -94,5 +96,51 @@ fun DashboardCardItem(
         }
         Spacer(modifier = modifier.width(16.dp))
         Text(text = count, style = typography.h2, color = Color.White)
+    }
+}
+
+@Preview(name = "Dashboard Eisenhower matrix cards ", group = "Card")
+@Composable
+fun DashboardPreview() {
+    Column {
+        InfoCard(title = "Urgency", value = "2", modifier = Modifier)
+
+        DashboardCardItem(
+            title = "Do it now",
+            description = "Important & Urgent",
+            count = "13",
+            color = einsenColors.success
+        ) {
+            // click action goes here
+        }
+        Spacer(modifier = Modifier.height(12.dp))
+        DashboardCardItem(
+            title = "Decide when to do",
+            description = "Important not Urgent",
+            count = "17",
+            color = einsenColors.calm
+        ) {
+            // click action goes here
+        }
+
+        Spacer(modifier = Modifier.height(12.dp))
+        DashboardCardItem(
+            title = "Delegate it",
+            description = "Urgent not Important",
+            count = "03",
+            color = einsenColors.err
+        ) {
+            // click action goes here
+        }
+
+        Spacer(modifier = Modifier.height(12.dp))
+        DashboardCardItem(
+            title = "Dump it",
+            description = "Not Important & Not Urgent",
+            count = "11",
+            color = einsenColors.warning
+        ) {
+            // click action goes here
+        }
     }
 }

@@ -48,8 +48,10 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import dev.spikeysanju.einsen.model.task.Priority
 import dev.spikeysanju.einsen.model.task.Task
 import dev.spikeysanju.einsen.ui.theme.Sailec
 import dev.spikeysanju.einsen.ui.theme.einsenColors
@@ -198,5 +200,31 @@ fun EisenCheckBox(value: Boolean, onValueChanged: (Boolean) -> Unit) {
             colors.onPrimary,
             colors.onPrimary.copy(0.3F)
         )
+    )
+}
+
+@Preview(name = "Task Item Card", group = "Card")
+@Composable
+fun TaskItemCardPreview() {
+    TaskItemCard(
+        task = Task(
+            "Einsen Architecture",
+            "Einsen app architecture demo works needs to be done on coming monday!",
+            "Android",
+            "\uD83D\uDD25",
+            3,
+            4,
+            Priority.IMPORTANT,
+            "18/12/1998",
+            false,
+            2,
+            4,
+            1,
+            1,
+            1
+        ), onClick = { /*TODO*/ },
+        onCheckboxChange = {
+            // check box change logic goes here
+        }
     )
 }

@@ -23,6 +23,9 @@ import androidx.compose.animation.animateContentSize
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -31,6 +34,8 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import dev.spikeysanju.einsen.ui.theme.einsenColors
 
@@ -58,5 +63,49 @@ fun ChipView(
             style = MaterialTheme.typography.overline,
             color = einsenColors.white
         )
+    }
+}
+
+/**
+ * This component helps to show the category for each Task of this app.
+ * @param title
+ * @param onClick
+ */
+@Composable
+fun SmallChipView(
+    modifier: Modifier = Modifier,
+    title: String,
+    color: Color,
+    onClick: () -> Unit
+) {
+    Box(
+        modifier = modifier
+            .wrapContentWidth()
+            .animateContentSize()
+            .clickable(onClick = onClick)
+            .clip(RoundedCornerShape(12.dp))
+            .background(color = color.copy(0.10F))
+    ) {
+        Text(
+            text = title, modifier = modifier.padding(4.dp),
+            style = MaterialTheme.typography.overline,
+            color = color
+        )
+    }
+}
+
+@Preview(name = "Category & Tags views", group = "Chip")
+@Composable
+fun ChipViewPreview() {
+
+    Column {
+        SmallChipView(title = "Einsen", color = einsenColors.calm) {
+            // onclick action
+        }
+        Spacer(modifier = Modifier.height(12.dp))
+
+        ChipView(title = "Einsen") {
+            // onclick action
+        }
     }
 }

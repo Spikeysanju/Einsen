@@ -46,6 +46,7 @@ buildscript {
     val logcatVersion by extra("0.1")
     val googleServiceVersion by extra("4.3.10")
     val crashlyticsVersion by extra("2.8.0")
+    val constraintLayout by extra("1.0.0-rc02")
 
     repositories {
         google()

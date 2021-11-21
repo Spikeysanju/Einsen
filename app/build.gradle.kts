@@ -101,6 +101,13 @@ android {
     composeOptions {
         kotlinCompilerExtensionVersion = rootProject.extra["composeVersion"] as String
     }
+
+    packagingOptions {
+        // Multiple dependency bring these files in. Exclude them to enable
+        // our test APK to build (has no effect on our AARs)
+        resources.excludes += "/META-INF/AL2.0"
+        resources.excludes += "/META-INF/LGPL2.1"
+    }
 }
 dependencies {
 
@@ -124,6 +131,9 @@ dependencies {
     implementation("com.google.firebase:firebase-crashlytics-ktx")
     implementation("com.google.firebase:firebase-analytics-ktx")
 
+
+    // Constraint layout
+    implementation("androidx.constraintlayout:constraintlayout-compose:${rootProject.extra["constraintLayout"]}")
 
     // compose navigation
     implementation("androidx.navigation:navigation-compose:${rootProject.extra["composeNavigationVersion"]}")

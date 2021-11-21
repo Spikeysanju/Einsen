@@ -22,6 +22,7 @@ package dev.spikeysanju.einsen.components
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -38,6 +39,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import dev.spikeysanju.einsen.R
 import dev.spikeysanju.einsen.ui.theme.einsenColors
@@ -72,7 +74,8 @@ fun BottomCTA(
     ) {
         Row(
             modifier = modifier.padding(top = 12.dp, bottom = 12.dp, start = 16.dp, end = 16.dp),
-            horizontalArrangement = Arrangement.SpaceAround
+            horizontalArrangement = Arrangement.SpaceAround,
+            verticalAlignment = Alignment.CenterVertically
         ) {
             ActionIcons(onEdit = { onEdit() }, onDelete = { onDelete() }, onShare = { onShare() })
             Spacer(modifier = modifier.width(12.dp))
@@ -127,6 +130,30 @@ fun ActionIcons(
                 contentDescription = stringResource(R.string.text_share_button),
                 tint = einsenColors.icon
             )
+        }
+    }
+}
+
+@Preview(name = "Bottom CTA", group = "Button")
+@Composable
+fun BottomCTA() {
+
+    Column {
+
+        BottomCTA(
+            title = "Complete",
+            icon = painterResource(id = R.drawable.ic_check),
+            color = einsenColors.black,
+            onEdit = { },
+            onDelete = { },
+            onShare = { }
+        ) {
+        }
+
+        Spacer(modifier = Modifier.height(12.dp))
+
+        ActionIcons(onEdit = { /*TODO*/ }, onDelete = { /*TODO*/ }) {
+            // on share action goes here
         }
     }
 }

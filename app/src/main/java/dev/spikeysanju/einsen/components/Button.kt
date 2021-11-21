@@ -19,6 +19,7 @@
 
 package dev.spikeysanju.einsen.components
 
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -30,12 +31,16 @@ import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.Icon
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.painter.Painter
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import dev.spikeysanju.einsen.R
 import dev.spikeysanju.einsen.ui.theme.einsenColors
 import dev.spikeysanju.einsen.ui.theme.typography
 /**
@@ -60,7 +65,7 @@ fun PrimaryButton(modifier: Modifier = Modifier, title: String, onclick: () -> U
     ) {
         Text(
             text = title,
-            style = typography.subtitle2,
+            style = typography.subtitle1,
             textAlign = TextAlign.Center,
             color = einsenColors.white
         )
@@ -103,5 +108,26 @@ fun PrimaryButtonWithIcon(
             textAlign = TextAlign.Center,
             color = Color.White
         )
+    }
+}
+
+@Preview(name = "Primary & Primary Button with Icon", group = "Button")
+@Composable
+fun ButtonPreview() {
+
+    Column(modifier = Modifier.fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontally) {
+
+        PrimaryButtonWithIcon(
+            title = "Save Information",
+            icon = painterResource(id = R.drawable.ic_check),
+            onclick = { },
+            color = einsenColors.button
+        )
+
+        Spacer(modifier = Modifier.height(12.dp))
+
+        PrimaryButton(title = "Save Task") {
+            // onclick action goes here
+        }
     }
 }

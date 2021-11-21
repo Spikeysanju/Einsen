@@ -43,6 +43,7 @@ import dev.spikeysanju.einsen.view.allemoji.AllEmojiScreen
 import dev.spikeysanju.einsen.view.dashboard.DashboardScreen
 import dev.spikeysanju.einsen.view.details.TaskDetailsScreen
 import dev.spikeysanju.einsen.view.edit.EditTaskScreen
+import dev.spikeysanju.einsen.view.project.ProjectScreen
 import dev.spikeysanju.einsen.view.splash.SplashScreen
 import dev.spikeysanju.einsen.view.task.AllTaskScreen
 import dev.spikeysanju.einsen.view.viewmodel.MainViewModel
@@ -76,13 +77,23 @@ fun NavGraph(toggleTheme: () -> Unit) {
 
     ModalBottomSheetLayout(bottomSheetNavigator) {
 
-        AnimatedNavHost(navController, startDestination = Screen.Splash.route) {
+        AnimatedNavHost(navController, startDestination = Screen.Project.route) {
 
             /**
              * Navigates to [SplashScreen].
              */
             composable(Screen.Splash.route) {
                 SplashScreen(EinsenModifier.modifier, actions)
+            }
+
+            /**
+             * Navigates to [Project].
+             */
+            composable(
+                Screen.Project.route
+            ) {
+                val viewModel = hiltViewModel<MainViewModel>(it)
+                ProjectScreen(EinsenModifier.modifier, viewModel, actions, toggleTheme)
             }
 
             /**
