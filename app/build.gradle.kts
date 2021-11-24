@@ -131,10 +131,6 @@ dependencies {
     implementation("com.google.firebase:firebase-crashlytics-ktx")
     implementation("com.google.firebase:firebase-analytics-ktx")
 
-
-    // Constraint layout
-    implementation("androidx.constraintlayout:constraintlayout-compose:${rootProject.extra["constraintLayout"]}")
-
     // compose navigation
     implementation("androidx.navigation:navigation-compose:${rootProject.extra["composeNavigationVersion"]}")
     implementation("androidx.hilt:hilt-navigation-compose:${rootProject.extra["hiltComposeNavVersion"]}")
