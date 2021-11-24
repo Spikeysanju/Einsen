@@ -40,7 +40,6 @@ object PersistenceModule {
     @Provides
     fun provideTaskDao(database: EinsenDatabase): TaskDao = database.getTaskDao()
 
-
     @Singleton
     @Provides
     fun provideAppDatabase(@ApplicationContext context: Context): EinsenDatabase =
