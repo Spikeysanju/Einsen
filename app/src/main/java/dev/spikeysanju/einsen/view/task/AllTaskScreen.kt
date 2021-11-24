@@ -121,7 +121,9 @@ fun AllTaskScreen(
                     tint = MaterialTheme.colors.onSecondary
                 )
             }
-        }, modifier = modifier.background(einsenColors.bg)) {
+        },
+        modifier = modifier.background(einsenColors.bg)
+    ) {
 
         when (val result = viewModel.feed.collectAsState().value) {
             ViewState.Loading -> {
@@ -164,7 +166,8 @@ fun AllTaskScreen(
                         start = 16.dp,
                         top = 16.dp,
                         end = 16.dp
-                    ), modifier = modifier
+                    ),
+                    modifier = modifier
                         .fillMaxSize()
                         .background(einsenColors.bg)
                 ) {

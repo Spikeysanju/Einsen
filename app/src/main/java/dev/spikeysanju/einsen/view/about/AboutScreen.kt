@@ -122,9 +122,11 @@ fun AboutScreen(modifier: Modifier, viewModel: MainViewModel, actions: MainActio
                 },
                 backgroundColor = einsenColors.bg, elevation = 0.dp
             )
-        }, modifier = modifier
+        },
+        modifier = modifier
             .fillMaxSize()
-            .background(einsenColors.bg)) {
+            .background(einsenColors.bg)
+    ) {
         val listState = rememberLazyListState()
         LazyColumn(
             state = listState,

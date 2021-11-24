@@ -58,7 +58,8 @@ fun ItemWorkspaceCard(
         Column(
             modifier = modifier
                 .fillMaxWidth()
-                .padding(24.dp), horizontalAlignment = Alignment.Start
+                .padding(24.dp),
+            horizontalAlignment = Alignment.Start
         ) {
             EmojiTextView(emoji = emoji)
             Spacer(modifier = modifier.height(12.dp))

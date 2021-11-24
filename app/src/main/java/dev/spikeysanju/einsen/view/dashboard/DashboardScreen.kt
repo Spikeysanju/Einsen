@@ -136,7 +136,8 @@ fun DashboardScreen(
                             tint = einsenColors.black
                         )
                     }
-                }, backgroundColor = einsenColors.bg, elevation = 0.dp
+                },
+                backgroundColor = einsenColors.bg, elevation = 0.dp
             )
         },
         floatingActionButton = {

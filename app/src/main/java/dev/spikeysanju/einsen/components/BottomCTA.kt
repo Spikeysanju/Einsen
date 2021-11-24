@@ -152,13 +152,14 @@ fun BottomCTA() {
 
         Spacer(modifier = Modifier.height(12.dp))
 
-        ActionIcons(onEdit = {
-            // on edit action goes here
-
-        }, onDelete = {
-            // on delete action goes here
-
-        }) {
+        ActionIcons(
+            onEdit = {
+                // on edit action goes here
+            },
+            onDelete = {
+                // on delete action goes here
+            }
+        ) {
             // on share action goes here
         }
     }
