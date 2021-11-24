@@ -19,7 +19,9 @@
 
 package dev.spikeysanju.einsen.view.task
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
@@ -82,7 +84,7 @@ fun AllTaskScreen(
                         style = typography.h6,
                         textAlign = TextAlign.Start,
                         color = einsenColors.black,
-                        modifier = modifier.padding(start = 16.dp)
+                        modifier = modifier.padding(start = 16.dp),
                     )
                 },
                 navigationIcon = {
@@ -94,7 +96,7 @@ fun AllTaskScreen(
                         )
                     }
                 },
-                backgroundColor = einsenColors.background, elevation = 0.dp
+                backgroundColor = einsenColors.bg, elevation = 0.dp
             )
         },
         floatingActionButton = {
@@ -119,8 +121,7 @@ fun AllTaskScreen(
                     tint = MaterialTheme.colors.onSecondary
                 )
             }
-        }
-    ) {
+        }, modifier = modifier.background(einsenColors.bg)) {
 
         when (val result = viewModel.feed.collectAsState().value) {
             ViewState.Loading -> {
@@ -163,7 +164,9 @@ fun AllTaskScreen(
                         start = 16.dp,
                         top = 16.dp,
                         end = 16.dp
-                    )
+                    ), modifier = modifier
+                        .fillMaxSize()
+                        .background(einsenColors.bg)
                 ) {
                     itemsIndexed(result.task) { index: Int, item: Task ->
                         TaskItemCard(

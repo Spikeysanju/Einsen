@@ -19,6 +19,7 @@
 
 package dev.spikeysanju.einsen.view.allemoji
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
@@ -45,6 +46,7 @@ import dev.spikeysanju.einsen.R
 import dev.spikeysanju.einsen.components.EinsenInputTextFieldWithoutHint
 import dev.spikeysanju.einsen.components.EmojiPlaceHolderBottomSheet
 import dev.spikeysanju.einsen.navigation.MainActions
+import dev.spikeysanju.einsen.ui.theme.einsenColors
 import dev.spikeysanju.einsen.utils.viewstate.EmojiViewState
 import dev.spikeysanju.einsen.view.animationviewstate.AnimationViewState
 import dev.spikeysanju.einsen.view.animationviewstate.ScreenState
@@ -86,7 +88,7 @@ fun AllEmojiScreen(
         }
     )
 
-    Column {
+    Column(modifier = modifier.background(einsenColors.bg)) {
 
         // Title
         BottomSheetTitle()
@@ -105,6 +107,7 @@ fun AllEmojiScreen(
         LazyVerticalGrid(
             state = listState,
             modifier = modifier
+                .background(einsenColors.bg)
                 .weight(1f)
                 .align(Alignment.CenterHorizontally),
             cells = GridCells.Adaptive(minSize = gridSize)

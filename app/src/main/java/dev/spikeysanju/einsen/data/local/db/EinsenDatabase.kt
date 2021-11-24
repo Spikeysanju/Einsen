@@ -23,7 +23,7 @@ import androidx.room.Database
 import androidx.room.RoomDatabase
 import dev.spikeysanju.einsen.model.task.Task
 
-@Database(entities = [Task::class], version = 2, exportSchema = true)
+@Database(entities = [Task::class], version = 3, exportSchema = true)
 abstract class EinsenDatabase : RoomDatabase() {
     abstract fun getTaskDao(): TaskDao
 }

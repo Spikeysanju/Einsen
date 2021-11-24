@@ -220,8 +220,6 @@ fun TaskItemCardPreview() {
             2,
             4,
             1,
-            1,
-            1
         ), onClick = { /*TODO*/ },
         onCheckboxChange = {
             // check box change logic goes here

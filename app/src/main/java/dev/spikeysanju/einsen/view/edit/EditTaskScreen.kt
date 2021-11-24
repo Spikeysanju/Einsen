@@ -19,11 +19,13 @@
 
 package dev.spikeysanju.einsen.view.edit
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -142,7 +144,7 @@ fun EditTaskScreen(modifier: Modifier, viewModel: MainViewModel, actions: MainAc
                         )
                     }
                 },
-                backgroundColor = einsenColors.background, elevation = 0.dp
+                backgroundColor = einsenColors.bg, elevation = 0.dp
             )
         }
     ) {
@@ -230,7 +232,15 @@ fun EditTaskScreen(modifier: Modifier, viewModel: MainViewModel, actions: MainAc
                     taskResult.task.emoji
                 }
 
-                LazyColumn(state = listState, contentPadding = PaddingValues(bottom = 24.dp)) {
+                LazyColumn(
+                    state = listState,
+                    contentPadding = PaddingValues(bottom = 24.dp),
+                    modifier = modifier
+                        .fillMaxSize()
+                        .background(
+                            einsenColors.bg
+                        )
+                ) {
 
                     // Emoji
                     item {

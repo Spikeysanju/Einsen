@@ -77,7 +77,7 @@ fun NavGraph(toggleTheme: () -> Unit) {
 
     ModalBottomSheetLayout(bottomSheetNavigator) {
 
-        AnimatedNavHost(navController, startDestination = Screen.Project.route) {
+        AnimatedNavHost(navController, startDestination = Screen.Dashboard.route) {
 
             /**
              * Navigates to [SplashScreen].

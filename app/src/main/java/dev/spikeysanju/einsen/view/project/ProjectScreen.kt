@@ -19,8 +19,10 @@
 
 package dev.spikeysanju.einsen.view.project
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.GridCells
@@ -118,7 +120,7 @@ fun ProjectScreen(
                         )
                     }
                 },
-                backgroundColor = einsenColors.background, elevation = 0.dp
+                backgroundColor = einsenColors.bg, elevation = 0.dp
             )
         },
         floatingActionButton = {
@@ -150,7 +152,10 @@ fun ProjectScreen(
 
         // workspace dashboard layout goes here
         LazyVerticalGrid(
-            cells = GridCells.Adaptive(minSize = gridSize)
+            cells = GridCells.Adaptive(minSize = gridSize),
+            modifier
+                .fillMaxSize()
+                .background(einsenColors.bg)
         ) {
 
             item {

@@ -19,6 +19,7 @@
 
 package dev.spikeysanju.einsen.workers
 
+import android.app.Notification
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.content.Context
@@ -68,11 +69,15 @@ class ReminderWorker @AssistedInject constructor(
 
             val builder =
                 NotificationCompat.Builder(context, context.getString(R.string.reminder_channel_id))
-            builder.setContentTitle(task.title)
-            builder.setSmallIcon(R.drawable.einsen_logo)
-            builder.setCategory(NotificationCompat.CATEGORY_ALARM)
-            builder.setContentText("Task due time in 1 hour")
-            builder.setVisibility(NotificationCompat.VISIBILITY_PUBLIC)
+                    .apply {
+                        setContentTitle(task.title)
+                        setSmallIcon(R.drawable.einsen_logo)
+                        setCategory(NotificationCompat.CATEGORY_ALARM)
+                        setContentText("Task due time in 1 hour")
+                        setVisibility(NotificationCompat.VISIBILITY_PUBLIC)
+                        setDefaults(Notification.DEFAULT_SOUND)
+                        setDefaults(Notification.DEFAULT_VIBRATE)
+                    }
             builder.priority = NotificationCompat.PRIORITY_MAX
             builder.setAutoCancel(true)
 

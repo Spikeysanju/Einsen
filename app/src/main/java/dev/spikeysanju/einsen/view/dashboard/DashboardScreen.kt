@@ -19,9 +19,11 @@
 
 package dev.spikeysanju.einsen.view.dashboard
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
@@ -134,8 +136,7 @@ fun DashboardScreen(
                             tint = einsenColors.black
                         )
                     }
-                },
-                backgroundColor = einsenColors.background, elevation = 0.dp
+                }, backgroundColor = einsenColors.bg, elevation = 0.dp
             )
         },
         floatingActionButton = {
@@ -220,7 +221,15 @@ fun DashboardScreen(
                 delegateCount = delegate.count { it.priority.name == Priority.DELEGATE.name }
                 dumpCount = dump.count { it.priority.name == Priority.DUMP.name }
 
-                LazyColumn(state = listState, contentPadding = PaddingValues(bottom = 100.dp)) {
+                LazyColumn(
+                    state = listState,
+                    contentPadding = PaddingValues(bottom = 100.dp),
+                    modifier = modifier
+                        .background(
+                            einsenColors.bg
+                        )
+                        .fillMaxSize()
+                ) {
 
                     item {
                         DashboardCardItem(

@@ -25,11 +25,11 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -53,18 +53,16 @@ fun ItemWorkspaceCard(
             .clickable {
                 onCardClick()
             },
-        backgroundColor = einsenColors.card, shape = RoundedCornerShape(24.dp)
+        backgroundColor = einsenColors.card, shape = RoundedCornerShape(24.dp), elevation = 0.dp
     ) {
         Column(
             modifier = modifier
-                .wrapContentWidth()
-                .padding(24.dp)
+                .fillMaxWidth()
+                .padding(24.dp), horizontalAlignment = Alignment.Start
         ) {
-
-            EmojiPlaceHolderSmall(emoji = emoji) {
-            }
+            EmojiTextView(emoji = emoji)
             Spacer(modifier = modifier.height(12.dp))
-            Text(text = title, style = typography.subtitle1, color = einsenColors.black)
+            Text(text = title, style = typography.h6, color = einsenColors.black)
             Spacer(modifier = modifier.height(12.dp))
             Text(text = itemCount, style = typography.caption, color = einsenColors.black)
             Spacer(modifier = modifier.height(16.dp))

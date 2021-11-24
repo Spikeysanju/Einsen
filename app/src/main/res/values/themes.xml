@@ -38,8 +38,8 @@
     </style>
 
     <style name="ThemeOverlay.App.DatePicker" parent="ThemeOverlay.MaterialComponents.MaterialCalendar">
-        <item name="colorPrimary">@color/white_100</item>
-        <item name="colorOnPrimary">@color/black</item>
+        <item name="colorPrimary">@color/black</item>
+        <item name="colorOnPrimary">@color/white_100</item>
         <item name="colorOnSurface">@color/black</item>
         <!-- Customize text field of the text input mode. -->
         <item name="buttonBarPositiveButtonStyle">@style/ButtonOverlay</item>

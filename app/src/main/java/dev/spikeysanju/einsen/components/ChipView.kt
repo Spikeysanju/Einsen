@@ -87,7 +87,8 @@ fun SmallChipView(
             .background(color = color.copy(0.10F))
     ) {
         Text(
-            text = title, modifier = modifier.padding(4.dp),
+            text = title,
+            modifier = modifier.padding(start = 6.dp, end = 6.dp, top = 4.dp, bottom = 4.dp),
             style = MaterialTheme.typography.overline,
             color = color
         )

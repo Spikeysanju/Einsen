@@ -29,6 +29,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -139,7 +140,7 @@ fun TaskDetailsScreen(
                         )
                     }
                 },
-                backgroundColor = einsenColors.background, elevation = 0.dp
+                backgroundColor = einsenColors.bg, elevation = 0.dp
             )
         },
         bottomBar = {
@@ -233,7 +234,10 @@ fun TaskDetailsScreen(
             is SingleViewState.Success -> {
 
                 LazyColumn(
-                    modifier = modifier.padding(start = 16.dp, end = 16.dp),
+                    modifier = modifier
+                        .fillMaxSize()
+                        .background(einsenColors.bg)
+                        .padding(start = 16.dp, end = 16.dp),
                     state = listState,
                     contentPadding = PaddingValues(top = 16.dp, bottom = 100.dp)
                 ) {

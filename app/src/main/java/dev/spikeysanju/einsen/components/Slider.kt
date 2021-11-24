@@ -104,8 +104,8 @@ fun EinsenStepSlider(
             valueRange = 0f..points.size.minus(1).toFloat(),
             steps = points.size.minus(2),
             colors = SliderDefaults.colors(
-                thumbColor = colors.primary,
-                activeTrackColor = colors.primary,
+                thumbColor = einsenColors.card,
+                activeTrackColor = einsenColors.card,
                 inactiveTrackColor = colors.primaryVariant,
                 disabledThumbColor = colors.secondaryVariant
             ),

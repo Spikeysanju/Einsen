@@ -19,6 +19,7 @@
 
 package dev.spikeysanju.einsen.view.animationviewstate
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -58,6 +59,7 @@ fun AnimationViewState(
     Column(
         modifier = modifier
             .fillMaxSize()
+            .background(einsenColors.bg)
             .wrapContentSize(Alignment.Center),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
