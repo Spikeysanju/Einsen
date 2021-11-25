@@ -73,8 +73,7 @@ object AppTheme {
             updateColorsFrom(colors)
         }
 
-
-        /// overwrite the existing values here
+        // / overwrite the existing values here
         CompositionLocalProvider(
             LocalColors provides rememberColors,
             LocalTypography provides typography,
@@ -83,5 +82,4 @@ object AppTheme {
             content()
         }
     }
-
 }

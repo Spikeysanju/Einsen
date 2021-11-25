@@ -89,9 +89,7 @@ class AppColors(
         error = other.error
         isLight = other.isLight
     }
-
 }
-
 
 // light mode color themes
 private val lightPrimaryColor = Color(0xFF066EF7)
@@ -137,7 +135,6 @@ fun lightColors(
     error = error,
     isLight = true
 )
-
 
 fun darkColors(
     primary: Color = darkPrimaryColor,

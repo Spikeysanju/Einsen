@@ -27,7 +27,6 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
 import dev.spikeysanju.einsen.R
 
-
 val sailec = FontFamily(
     Font(R.font.sailec_regular),
     Font(R.font.sailec_medium, FontWeight.SemiBold),
