@@ -35,8 +35,8 @@ android {
         applicationId = "dev.spikeysanju.einsen"
         minSdk = 21
         targetSdk = 30
-        versionCode = 3
-        versionName = "v1.0.0-alpha03"
+        versionCode = 4
+        versionName = "v1.0.0-alpha04"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
