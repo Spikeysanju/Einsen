@@ -55,7 +55,7 @@ fun EmojiPlaceHolder(modifier: Modifier = Modifier, emoji: String, onSelect: () 
     ) {
         Text(
             text = emoji,
-            style = AppTheme.typography.h2,
+            style = AppTheme.typography.bigTitle,
             textAlign = TextAlign.Center,
             color = AppTheme.colors.text
         )
