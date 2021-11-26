@@ -74,12 +74,17 @@ fun BottomCTA(
         contentAlignment = Alignment.Center
     ) {
         Row(
-            modifier = modifier.padding(top = 12.dp, bottom = 12.dp, start = 16.dp, end = 16.dp),
+            modifier = modifier.padding(
+                top = AppTheme.dimensions.paddingLarge,
+                bottom = AppTheme.dimensions.paddingLarge,
+                start = AppTheme.dimensions.paddingXL,
+                end = AppTheme.dimensions.paddingXL
+            ),
             horizontalArrangement = Arrangement.SpaceAround,
             verticalAlignment = Alignment.CenterVertically
         ) {
             ActionIcons(onEdit = { onEdit() }, onDelete = { onDelete() }, onShare = { onShare() })
-            Spacer(modifier = modifier.width(12.dp))
+            Spacer(modifier = modifier.width(AppTheme.dimensions.paddingLarge))
 
             Row(modifier = modifier.fillMaxWidth(), Arrangement.End) {
                 PrimaryButtonWithIcon(

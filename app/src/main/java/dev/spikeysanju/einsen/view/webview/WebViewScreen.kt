@@ -82,7 +82,7 @@ fun WebViewScreen(
                         style = AppTheme.typography.h2,
                         textAlign = TextAlign.Start,
                         color = AppTheme.colors.text,
-                        modifier = modifier.padding(start = 16.dp)
+                        modifier = modifier.padding(start = AppTheme.dimensions.paddingXL)
                     )
                 },
                 navigationIcon = {

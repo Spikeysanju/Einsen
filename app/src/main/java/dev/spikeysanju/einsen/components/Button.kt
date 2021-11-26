@@ -56,7 +56,7 @@ fun PrimaryButton(modifier: Modifier = Modifier, title: String, onclick: () -> U
             .fillMaxWidth()
             .height(54.dp)
             .clip(RoundedCornerShape(60.dp))
-            .padding(start = 20.dp, end = 20.dp),
+            .padding(start = AppTheme.dimensions.paddingXL, end = AppTheme.dimensions.paddingXL),
         onClick = { onclick() },
         colors = ButtonDefaults.buttonColors(
             backgroundColor = AppTheme.colors.primary,
@@ -100,7 +100,7 @@ fun PrimaryButtonWithIcon(
             tint = Color.White
         )
 
-        Spacer(modifier = modifier.width(12.dp))
+        Spacer(modifier = modifier.width(AppTheme.dimensions.paddingLarge))
 
         Text(
             text = title,
@@ -124,7 +124,7 @@ fun ButtonPreview() {
             color = AppTheme.colors.primary
         )
 
-        Spacer(modifier = Modifier.height(12.dp))
+        Spacer(modifier = Modifier.height(AppTheme.dimensions.paddingLarge))
 
         PrimaryButton(title = "Save Task") {
             // onclick action goes here

@@ -138,7 +138,7 @@ fun AddTaskScreen(
                         style = AppTheme.typography.h2,
                         textAlign = TextAlign.Start,
                         color = AppTheme.colors.text,
-                        modifier = modifier.padding(start = 16.dp)
+                        modifier = modifier.padding(start = AppTheme.dimensions.paddingLarge)
                     )
                 },
                 navigationIcon = {
@@ -158,7 +158,7 @@ fun AddTaskScreen(
 
         LazyColumn(
             state = listState,
-            contentPadding = PaddingValues(bottom = AppTheme.dimensions.paddingExtraLarge),
+            contentPadding = PaddingValues(bottom = AppTheme.dimensions.paddingXXL),
             modifier = modifier
                 .background(
                     AppTheme.colors.background
@@ -168,7 +168,7 @@ fun AddTaskScreen(
 
             // Emoji
             item {
-                Spacer(modifier = modifier.height(AppTheme.dimensions.paddingExtraLarge))
+                Spacer(modifier = modifier.height(AppTheme.dimensions.paddingXXL))
                 Box(
                     modifier = modifier.fillMaxWidth(),
                     contentAlignment = Alignment.Center
@@ -193,7 +193,7 @@ fun AddTaskScreen(
 
             // Title
             item {
-                Spacer(modifier = modifier.height(AppTheme.dimensions.paddingExtraLarge))
+                Spacer(modifier = modifier.height(AppTheme.dimensions.paddingXXL))
                 EinsenInputTextField(
                     title = stringResource(R.string.text_title),
                     value = taskState.title
@@ -204,7 +204,7 @@ fun AddTaskScreen(
 
             // Description
             item {
-                Spacer(modifier = modifier.height(AppTheme.dimensions.paddingExtraLarge))
+                Spacer(modifier = modifier.height(AppTheme.dimensions.paddingXXL))
                 EinsenInputTextField(
                     title = stringResource(R.string.text_description),
                     value = taskState.description
@@ -215,7 +215,7 @@ fun AddTaskScreen(
 
             // Category
             item {
-                Spacer(modifier = modifier.height(AppTheme.dimensions.paddingExtraLarge))
+                Spacer(modifier = modifier.height(AppTheme.dimensions.paddingXXL))
                 EinsenInputTextField(
                     title = stringResource(R.string.text_category),
                     value = taskState.category
@@ -226,7 +226,7 @@ fun AddTaskScreen(
 
             // Due Date Time
             item {
-                Spacer(modifier = modifier.height(AppTheme.dimensions.paddingExtraLarge))
+                Spacer(modifier = modifier.height(AppTheme.dimensions.paddingXXL))
                 EinsenInputTextField(
                     modifier = Modifier.clickable {
                         val calendar = getCalendar(taskState.due)
@@ -247,11 +247,11 @@ fun AddTaskScreen(
 
             // Urgency
             item {
-                Spacer(modifier = modifier.height(AppTheme.dimensions.paddingExtraLarge))
+                Spacer(modifier = modifier.height(AppTheme.dimensions.paddingXXL))
                 Column(
                     modifier = modifier.padding(
-                        start = AppTheme.dimensions.paddingExtraLarge,
-                        end = AppTheme.dimensions.paddingExtraLarge
+                        start = AppTheme.dimensions.paddingXXL,
+                        end = AppTheme.dimensions.paddingXXL
                     )
                 ) {
                     Text(
@@ -269,11 +269,11 @@ fun AddTaskScreen(
 
             // Importance
             item {
-                Spacer(modifier = modifier.height(AppTheme.dimensions.paddingExtraLarge))
+                Spacer(modifier = modifier.height(AppTheme.dimensions.paddingXXL))
                 Column(
                     modifier = modifier.padding(
-                        start = AppTheme.dimensions.paddingExtraLarge,
-                        end = AppTheme.dimensions.paddingExtraLarge
+                        start = AppTheme.dimensions.paddingXXL,
+                        end = AppTheme.dimensions.paddingXXL
                     )
                 ) {
                     Text(
@@ -291,7 +291,7 @@ fun AddTaskScreen(
 
             // Save Task CTA
             item {
-                Spacer(modifier = modifier.height(36.dp))
+                Spacer(modifier = modifier.height(AppTheme.dimensions.paddingXXXL))
                 PrimaryButton(title = stringResource(R.string.text_save_task)) {
 
                     // calculate the average value by adding urgency + priority / 2

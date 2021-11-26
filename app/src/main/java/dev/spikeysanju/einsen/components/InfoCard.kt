@@ -38,7 +38,6 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
 import dev.spikeysanju.einsen.R
 import dev.spikeysanju.einsen.ui.theme.apptheme.AppTheme
 
@@ -52,7 +51,7 @@ import dev.spikeysanju.einsen.ui.theme.apptheme.AppTheme
 fun InfoCard(title: String, value: String, modifier: Modifier) {
     Box(
         modifier = modifier
-            .clip(RoundedCornerShape(12.dp))
+            .clip(RoundedCornerShape(AppTheme.shapes.shapeLarge))
             .background(color = AppTheme.colors.card)
             .padding(
                 AppTheme.dimensions.paddingLarge

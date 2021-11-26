@@ -28,7 +28,6 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Text
@@ -39,7 +38,6 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
 import dev.spikeysanju.einsen.ui.theme.apptheme.AppTheme
 import dev.spikeysanju.einsen.utils.coloredShadow
 
@@ -62,21 +60,21 @@ fun DashboardCardItem(
 ) {
     val gradientBrush = Brush.verticalGradient(listOf(color.copy(.8F), color), startY = 10F)
 
-    Spacer(modifier = modifier.height(AppTheme.dimensions.paddingExtraLarge))
+    Spacer(modifier = modifier.height(AppTheme.dimensions.paddingXXL))
 
     Row(
         modifier = modifier
             .fillMaxWidth()
-            .padding(start = 16.dp, end = 16.dp)
+            .padding(start = AppTheme.dimensions.paddingXL, end = AppTheme.dimensions.paddingXL)
             .coloredShadow(
                 color,
                 alpha = 0.4F,
-                borderRadius = AppTheme.dimensions.paddingExtraLarge,
+                borderRadius = AppTheme.dimensions.paddingXXL,
                 shadowRadius = AppTheme.dimensions.paddingMedium,
-                offsetX = 0.dp,
-                offsetY = 4.dp
+                offsetX = AppTheme.dimensions.paddingNone,
+                offsetY = AppTheme.dimensions.paddingSmall
             )
-            .clip(RoundedCornerShape(24.dp))
+            .clip(RoundedCornerShape(AppTheme.shapes.shapeXL))
             .background(brush = gradientBrush)
             .clickable {
                 onClick()
@@ -87,14 +85,17 @@ fun DashboardCardItem(
         Column(
             modifier = modifier
                 .wrapContentWidth()
-                .padding(top = 36.dp, bottom = 36.dp)
+                .padding(
+                    top = AppTheme.dimensions.paddingXXXL,
+                    bottom = AppTheme.dimensions.paddingXXXL
+                )
                 .align(Alignment.CenterVertically)
         ) {
             Text(text = title, style = AppTheme.typography.h2, color = Color.White)
-            Spacer(modifier = modifier.height(16.dp))
+            Spacer(modifier = modifier.height(AppTheme.dimensions.paddingXL))
             Text(text = description, style = AppTheme.typography.subtitle, color = Color.White)
         }
-        Spacer(modifier = modifier.width(16.dp))
+        Spacer(modifier = modifier.height(AppTheme.dimensions.paddingXL))
         Text(text = count, style = AppTheme.typography.bigTitle, color = Color.White)
     }
 }
@@ -113,7 +114,7 @@ fun DashboardPreview() {
         ) {
             // click action goes here
         }
-        Spacer(modifier = Modifier.height(12.dp))
+        Spacer(modifier = Modifier.height(AppTheme.dimensions.paddingLarge))
         DashboardCardItem(
             title = "Decide when to do",
             description = "Important not Urgent",
@@ -123,7 +124,7 @@ fun DashboardPreview() {
             // click action goes here
         }
 
-        Spacer(modifier = Modifier.height(12.dp))
+        Spacer(modifier = Modifier.height(AppTheme.dimensions.paddingLarge))
         DashboardCardItem(
             title = "Delegate it",
             description = "Urgent not Important",
@@ -133,7 +134,7 @@ fun DashboardPreview() {
             // click action goes here
         }
 
-        Spacer(modifier = Modifier.height(12.dp))
+        Spacer(modifier = Modifier.height(AppTheme.dimensions.paddingLarge))
         DashboardCardItem(
             title = "Dump it",
             description = "Not Important & Not Urgent",

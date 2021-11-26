@@ -99,7 +99,7 @@ fun AllTaskScreen(
         },
         floatingActionButton = {
             FloatingActionButton(
-                modifier = modifier.padding(30.dp),
+                modifier = modifier.padding(AppTheme.dimensions.paddingXXXL),
                 onClick = {
                     actions.gotoAddTask.invoke(defaultUrgency, defaultImportance).run {
                         // log event to firebase

@@ -27,6 +27,8 @@ import dev.spikeysanju.einsen.ui.theme.color.AppColors
 import dev.spikeysanju.einsen.ui.theme.color.LocalColors
 import dev.spikeysanju.einsen.ui.theme.dimensions.AppDimensions
 import dev.spikeysanju.einsen.ui.theme.dimensions.LocalDimensions
+import dev.spikeysanju.einsen.ui.theme.shape.AppShapes
+import dev.spikeysanju.einsen.ui.theme.shape.LocalShapes
 import dev.spikeysanju.einsen.ui.theme.typography.AppTypography
 import dev.spikeysanju.einsen.ui.theme.typography.LocalTypography
 
@@ -57,6 +59,14 @@ object AppTheme {
         get() = LocalDimensions.current
 
     /**
+     * Get [LocalShapes] from the AppShapes
+     */
+    val shapes: AppShapes
+        @Composable
+        @ReadOnlyComposable
+        get() = LocalShapes.current
+
+    /**
      * [Einsen] application custom theme
      */
     @Composable
@@ -64,6 +74,7 @@ object AppTheme {
         colors: AppColors = AppTheme.colors,
         typography: AppTypography = AppTheme.typography,
         dimensions: AppDimensions = AppTheme.dimensions,
+        shapes: AppShapes = AppTheme.shapes,
         content: @Composable () -> Unit
     ) {
 
@@ -77,7 +88,8 @@ object AppTheme {
         CompositionLocalProvider(
             LocalColors provides rememberColors,
             LocalTypography provides typography,
-            LocalDimensions provides dimensions
+            LocalDimensions provides dimensions,
+            LocalShapes provides shapes
         ) {
             content()
         }

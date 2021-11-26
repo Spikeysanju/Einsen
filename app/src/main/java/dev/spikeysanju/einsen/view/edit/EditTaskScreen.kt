@@ -126,7 +126,7 @@ fun EditTaskScreen(modifier: Modifier, viewModel: MainViewModel, actions: MainAc
                         style = AppTheme.typography.h1,
                         textAlign = TextAlign.Start,
                         color = AppTheme.colors.text,
-                        modifier = Modifier.padding(start = 16.dp)
+                        modifier = Modifier.padding(start = AppTheme.dimensions.paddingXL)
                     )
                 },
                 navigationIcon = {
@@ -228,7 +228,7 @@ fun EditTaskScreen(modifier: Modifier, viewModel: MainViewModel, actions: MainAc
 
                 LazyColumn(
                     state = listState,
-                    contentPadding = PaddingValues(bottom = AppTheme.dimensions.paddingExtraLarge),
+                    contentPadding = PaddingValues(bottom = AppTheme.dimensions.paddingXXL),
                     modifier = modifier
                         .fillMaxSize()
                         .background(
@@ -238,7 +238,7 @@ fun EditTaskScreen(modifier: Modifier, viewModel: MainViewModel, actions: MainAc
 
                     // Emoji
                     item {
-                        Spacer(modifier = modifier.height(AppTheme.dimensions.paddingExtraLarge))
+                        Spacer(modifier = modifier.height(AppTheme.dimensions.paddingXXL))
                         Box(
                             modifier = Modifier.fillMaxWidth(),
                             contentAlignment = Alignment.Center
@@ -266,7 +266,7 @@ fun EditTaskScreen(modifier: Modifier, viewModel: MainViewModel, actions: MainAc
 
                     // Title
                     item {
-                        Spacer(modifier = modifier.height(AppTheme.dimensions.paddingExtraLarge))
+                        Spacer(modifier = modifier.height(AppTheme.dimensions.paddingXXL))
                         EinsenInputTextField(
                             title = stringResource(R.string.text_title),
                             value = titleState
@@ -277,7 +277,7 @@ fun EditTaskScreen(modifier: Modifier, viewModel: MainViewModel, actions: MainAc
 
                     // Description
                     item {
-                        Spacer(modifier = modifier.height(AppTheme.dimensions.paddingExtraLarge))
+                        Spacer(modifier = modifier.height(AppTheme.dimensions.paddingXXL))
                         EinsenInputTextField(
                             title = stringResource(R.string.text_description),
                             value = descriptionState
@@ -288,7 +288,7 @@ fun EditTaskScreen(modifier: Modifier, viewModel: MainViewModel, actions: MainAc
 
                     // Category
                     item {
-                        Spacer(modifier = modifier.height(AppTheme.dimensions.paddingExtraLarge))
+                        Spacer(modifier = modifier.height(AppTheme.dimensions.paddingXXL))
                         EinsenInputTextField(
                             title = stringResource(R.string.text_category),
                             value = categoryState
@@ -299,7 +299,7 @@ fun EditTaskScreen(modifier: Modifier, viewModel: MainViewModel, actions: MainAc
 
                     // Due Date Time
                     item {
-                        Spacer(modifier = modifier.height(AppTheme.dimensions.paddingExtraLarge))
+                        Spacer(modifier = modifier.height(AppTheme.dimensions.paddingXXL))
                         EinsenInputTextField(
                             modifier = Modifier.clickable {
                                 val calendar = getCalendar(dueState)
@@ -323,11 +323,11 @@ fun EditTaskScreen(modifier: Modifier, viewModel: MainViewModel, actions: MainAc
 
                     // Urgency
                     item {
-                        Spacer(modifier = modifier.height(AppTheme.dimensions.paddingExtraLarge))
+                        Spacer(modifier = modifier.height(AppTheme.dimensions.paddingXXL))
                         Column(
                             modifier = Modifier.padding(
-                                start = AppTheme.dimensions.paddingExtraLarge,
-                                end = AppTheme.dimensions.paddingExtraLarge
+                                start = AppTheme.dimensions.paddingXXL,
+                                end = AppTheme.dimensions.paddingXXL
                             )
                         ) {
                             Text(
@@ -345,11 +345,11 @@ fun EditTaskScreen(modifier: Modifier, viewModel: MainViewModel, actions: MainAc
 
                     // Importance
                     item {
-                        Spacer(modifier = modifier.height(AppTheme.dimensions.paddingExtraLarge))
+                        Spacer(modifier = modifier.height(AppTheme.dimensions.paddingXXL))
                         Column(
                             modifier = Modifier.padding(
-                                start = AppTheme.dimensions.paddingExtraLarge,
-                                end = AppTheme.dimensions.paddingExtraLarge
+                                start = AppTheme.dimensions.paddingXXL,
+                                end = AppTheme.dimensions.paddingXXL
                             )
                         ) {
                             Text(
@@ -357,7 +357,7 @@ fun EditTaskScreen(modifier: Modifier, viewModel: MainViewModel, actions: MainAc
                                 style = AppTheme.typography.subtitle,
                                 color = AppTheme.colors.text
                             )
-                            Spacer(modifier = Modifier.height(12.dp))
+                            Spacer(modifier = Modifier.height(AppTheme.dimensions.paddingLarge))
 
                             EinsenStepSlider(modifier, points, importanceState.toFloat()) {
                                 importanceState = it
@@ -368,7 +368,7 @@ fun EditTaskScreen(modifier: Modifier, viewModel: MainViewModel, actions: MainAc
                     // Update Task CTA
                     item {
 
-                        Spacer(modifier = Modifier.height(36.dp))
+                        Spacer(modifier = Modifier.height(AppTheme.dimensions.paddingXXL))
                         PrimaryButton(title = stringResource(R.string.text_save_task)) {
 
                             // calculate the average value by adding urgency + priority / 2
@@ -426,9 +426,9 @@ fun EditTaskScreen(modifier: Modifier, viewModel: MainViewModel, actions: MainAc
 internal fun BottomSheetTitle() {
     Text(
         modifier = Modifier.padding(
-            start = 16.dp,
-            top = 16.dp,
-            bottom = AppTheme.dimensions.paddingExtraLarge
+            start = AppTheme.dimensions.paddingXL,
+            top = AppTheme.dimensions.paddingXL,
+            bottom = AppTheme.dimensions.paddingXXL
         ),
         text = stringResource(R.string.tetxt_choose_emoji),
         style = AppTheme.typography.h1,

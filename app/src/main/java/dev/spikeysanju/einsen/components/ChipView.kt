@@ -36,7 +36,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
 import dev.spikeysanju.einsen.ui.theme.apptheme.AppTheme
 
 /**
@@ -55,11 +54,17 @@ fun ChipView(
             .wrapContentWidth()
             .animateContentSize()
             .clickable(onClick = onClick)
-            .clip(RoundedCornerShape(12.dp))
+            .clip(RoundedCornerShape(AppTheme.shapes.shapeLarge))
             .background(AppTheme.colors.primary)
     ) {
         Text(
-            text = title, modifier = modifier.padding(12.dp, 6.dp, 12.dp, 6.dp),
+            text = title,
+            modifier = modifier.padding(
+                AppTheme.dimensions.paddingLarge,
+                AppTheme.dimensions.paddingSmall,
+                AppTheme.dimensions.paddingLarge,
+                AppTheme.dimensions.paddingSmall
+            ),
             style = AppTheme.typography.overline,
             color = AppTheme.colors.white
         )
@@ -83,12 +88,17 @@ fun SmallChipView(
             .wrapContentWidth()
             .animateContentSize()
             .clickable(onClick = onClick)
-            .clip(RoundedCornerShape(12.dp))
+            .clip(RoundedCornerShape(AppTheme.shapes.shapeLarge))
             .background(color = color.copy(0.10F))
     ) {
         Text(
             text = title,
-            modifier = modifier.padding(start = 6.dp, end = 6.dp, top = 4.dp, bottom = 4.dp),
+            modifier = modifier.padding(
+                start = AppTheme.dimensions.paddingSmall,
+                end = AppTheme.dimensions.paddingSmall,
+                top = AppTheme.dimensions.paddingSmall,
+                bottom = AppTheme.dimensions.paddingSmall
+            ),
             style = MaterialTheme.typography.overline,
             color = color
         )

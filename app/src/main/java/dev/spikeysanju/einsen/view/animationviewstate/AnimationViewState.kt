@@ -119,15 +119,15 @@ fun LottieAnimationPlaceHolder(
         modifier = modifier
             .fillMaxWidth()
             .padding(
-                start = AppTheme.dimensions.paddingExtraLarge,
-                end = AppTheme.dimensions.paddingExtraLarge
+                start = AppTheme.dimensions.paddingXXL,
+                end = AppTheme.dimensions.paddingXXL
             ),
         style = AppTheme.typography.body,
         maxLines = 3,
         textAlign = TextAlign.Center,
         color = AppTheme.colors.text.copy(.7F)
     )
-    Spacer(modifier = modifier.height(AppTheme.dimensions.paddingExtraLarge))
+    Spacer(modifier = modifier.height(AppTheme.dimensions.paddingXXL))
     Button(
         onClick = { actions() },
         colors = ButtonDefaults.buttonColors(

@@ -141,7 +141,7 @@ fun DashboardScreen(
         floatingActionButton = {
 
             FloatingActionButton(
-                modifier = modifier.padding(30.dp),
+                modifier = modifier.padding(AppTheme.dimensions.paddingXXXL),
                 onClick = {
                     actions.gotoAddTask.invoke(0, 0).run {
                         // log event to firebase

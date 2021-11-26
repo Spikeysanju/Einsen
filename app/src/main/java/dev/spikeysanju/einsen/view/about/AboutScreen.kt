@@ -61,6 +61,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.core.os.bundleOf
 import com.google.firebase.analytics.FirebaseAnalytics
 import dev.spikeysanju.einsen.BuildConfig
@@ -107,7 +108,7 @@ fun AboutScreen(modifier: Modifier, viewModel: MainViewModel, actions: MainActio
                         style = AppTheme.typography.h2,
                         textAlign = TextAlign.Start,
                         color = AppTheme.colors.text,
-                        modifier = modifier.padding(start = 16.dp)
+                        modifier = modifier.padding(start = AppTheme.dimensions.paddingXL)
                     )
                 },
                 navigationIcon = {
@@ -129,7 +130,7 @@ fun AboutScreen(modifier: Modifier, viewModel: MainViewModel, actions: MainActio
         val listState = rememberLazyListState()
         LazyColumn(
             state = listState,
-            contentPadding = PaddingValues(16.dp),
+            contentPadding = PaddingValues(AppTheme.dimensions.paddingXL),
             modifier = modifier
                 .fillMaxSize()
                 .background(
@@ -151,7 +152,7 @@ fun AboutScreen(modifier: Modifier, viewModel: MainViewModel, actions: MainActio
             }
 
             item {
-                Spacer(modifier = modifier.height(AppTheme.dimensions.paddingExtraLarge))
+                Spacer(modifier = modifier.height(AppTheme.dimensions.paddingXXL))
                 val (version, code) = getVersionCodeAndName()
                 TitleAndDescription(
                     modifier,
@@ -161,7 +162,7 @@ fun AboutScreen(modifier: Modifier, viewModel: MainViewModel, actions: MainActio
             }
 
             item {
-                Spacer(modifier = modifier.height(AppTheme.dimensions.paddingExtraLarge))
+                Spacer(modifier = modifier.height(AppTheme.dimensions.paddingXXL))
                 TitleAndDescription(
                     title = stringResource(R.string.text_attribution_and_license),
                     description = stringResource(
@@ -174,7 +175,7 @@ fun AboutScreen(modifier: Modifier, viewModel: MainViewModel, actions: MainActio
                 url = stringResource(id = R.string.text_repo_link)
                 title = stringResource(id = R.string.text_visit)
 
-                Spacer(modifier = modifier.height(AppTheme.dimensions.paddingExtraLarge))
+                Spacer(modifier = modifier.height(AppTheme.dimensions.paddingXXL))
                 TitleAndURL(
                     title = stringResource(R.string.text_visit),
                     url = url,
@@ -212,11 +213,11 @@ fun TitleAndDescription(modifier: Modifier = Modifier, title: String, descriptio
             color = AppTheme.colors.text,
             fontWeight = FontWeight.Bold
         )
-        Spacer(modifier = modifier.height(8.dp))
+        Spacer(modifier = modifier.height(AppTheme.dimensions.paddingMedium))
         CompositionLocalProvider(values = arrayOf(LocalContentAlpha provides ContentAlpha.disabled)) {
             Text(
                 text = description,
-                style = AppTheme.typography.subtitle,
+                style = AppTheme.typography.body,
                 color = AppTheme.colors.text
             )
         }
@@ -236,7 +237,7 @@ fun TitleAndURL(modifier: Modifier = Modifier, title: String, url: String, onCli
             color = AppTheme.colors.text,
             fontWeight = FontWeight.Bold
         )
-        Spacer(modifier = modifier.height(8.dp))
+        Spacer(modifier = modifier.height(AppTheme.dimensions.paddingMedium))
         CompositionLocalProvider(values = arrayOf(LocalContentAlpha provides ContentAlpha.disabled)) {
             Text(
                 text = AnnotatedString(
@@ -246,6 +247,7 @@ fun TitleAndURL(modifier: Modifier = Modifier, title: String, url: String, onCli
                         fontFamily = FontFamily(
                             Font(R.font.avenir_medium, FontWeight.Medium)
                         ),
+                        fontSize = 14.sp,
                         textDecoration = TextDecoration.Underline
                     )
                 ),

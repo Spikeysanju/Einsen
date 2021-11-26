@@ -43,7 +43,6 @@ import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
 import dev.spikeysanju.einsen.ui.theme.apptheme.AppTheme
 
 /**
@@ -86,7 +85,10 @@ fun EinsenInputTextField(
         TextField(
             modifier = modifier
                 .fillMaxWidth()
-                .padding(start = 20.dp, end = 20.dp),
+                .padding(
+                    start = AppTheme.dimensions.paddingXL,
+                    end = AppTheme.dimensions.paddingXL
+                ),
             value = value,
             readOnly = readOnly,
             enabled = enabled,
@@ -136,7 +138,11 @@ fun EinsenInputTextField(
                 errorMessage,
                 style = AppTheme.typography.caption,
                 color = AppTheme.colors.error,
-                modifier = modifier.padding(top = 12.dp, start = 16.dp, end = 16.dp)
+                modifier = modifier.padding(
+                    top = AppTheme.dimensions.paddingLarge,
+                    start = AppTheme.dimensions.paddingXL,
+                    end = AppTheme.dimensions.paddingLarge
+                )
             )
         }
     }
@@ -156,7 +162,10 @@ fun EinsenInputTextFieldWithoutHint(
         TextField(
             modifier = modifier
                 .fillMaxWidth()
-                .padding(start = 20.dp, end = 20.dp),
+                .padding(
+                    start = AppTheme.dimensions.paddingXL,
+                    end = AppTheme.dimensions.paddingXL
+                ),
             value = value,
             onValueChange = {
                 onValueChanged(it)
@@ -200,7 +209,7 @@ fun TextInputPreview() {
             }
         )
 
-        Spacer(modifier = Modifier.height(12.dp))
+        Spacer(modifier = Modifier.height(AppTheme.dimensions.paddingLarge))
 
         EinsenInputTextFieldWithoutHint(
             title = "Description", value = "Einsen Architecture is really cool!",

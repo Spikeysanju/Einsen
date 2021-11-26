@@ -258,14 +258,14 @@ fun TaskDetailsScreen(
                                 modifier = modifier
                                     .fillMaxWidth()
                                     .padding(
-                                        start = 16.dp,
-                                        end = 16.dp,
-                                        bottom = AppTheme.dimensions.paddingExtraLarge,
-                                        top = AppTheme.dimensions.paddingExtraLarge
+                                        start = AppTheme.dimensions.paddingXL,
+                                        end = AppTheme.dimensions.paddingXL,
+                                        bottom = AppTheme.dimensions.paddingXXL,
+                                        top = AppTheme.dimensions.paddingXXL
                                     )
                             ) {
 
-                                Spacer(modifier = modifier.height(AppTheme.dimensions.paddingExtraLarge))
+                                Spacer(modifier = modifier.height(AppTheme.dimensions.paddingXXL))
 
                                 // Emoji view
                                 Box(
@@ -279,7 +279,7 @@ fun TaskDetailsScreen(
                                     )
                                 }
 
-                                Spacer(modifier = modifier.height(16.dp))
+                                Spacer(modifier = modifier.height(AppTheme.dimensions.paddingXL))
 
                                 // Category chip
                                 ChipView(
@@ -289,7 +289,7 @@ fun TaskDetailsScreen(
                                     }
                                 )
 
-                                Spacer(modifier = modifier.height(16.dp))
+                                Spacer(modifier = modifier.height(AppTheme.dimensions.paddingXL))
 
                                 // Title
                                 Text(
@@ -299,7 +299,7 @@ fun TaskDetailsScreen(
                                     color = AppTheme.colors.text
                                 )
 
-                                Spacer(modifier = modifier.height(AppTheme.dimensions.paddingExtraLarge))
+                                Spacer(modifier = modifier.height(AppTheme.dimensions.paddingXXL))
 
                                 // Description
                                 Text(
@@ -309,7 +309,7 @@ fun TaskDetailsScreen(
                                     color = AppTheme.colors.text
                                 )
 
-                                Spacer(modifier = modifier.height(AppTheme.dimensions.paddingExtraLarge))
+                                Spacer(modifier = modifier.height(AppTheme.dimensions.paddingXXL))
 
                                 // Priority score card
                                 Row(

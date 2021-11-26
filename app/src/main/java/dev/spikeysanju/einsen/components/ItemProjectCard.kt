@@ -48,16 +48,18 @@ fun ItemWorkspaceCard(
     Card(
         modifier = modifier
             .fillMaxWidth()
-            .padding(12.dp)
+            .padding(AppTheme.dimensions.paddingLarge)
             .clickable {
                 onCardClick()
             },
-        backgroundColor = AppTheme.colors.card, shape = RoundedCornerShape(24.dp), elevation = 0.dp
+        backgroundColor = AppTheme.colors.card,
+        shape = RoundedCornerShape(AppTheme.shapes.shapeXL),
+        elevation = 0.dp
     ) {
         Column(
             modifier = modifier
                 .fillMaxWidth()
-                .padding(24.dp),
+                .padding(AppTheme.dimensions.paddingXXL),
             horizontalAlignment = Alignment.Start
         ) {
             EmojiTextView(emoji = emoji)
@@ -69,7 +71,7 @@ fun ItemWorkspaceCard(
                 style = AppTheme.typography.caption,
                 color = AppTheme.colors.text
             )
-            Spacer(modifier = modifier.height(16.dp))
+            Spacer(modifier = modifier.height(AppTheme.dimensions.paddingXL))
             SmallChipView(title = tag, color = AppTheme.colors.information) {
                 onChipViewClick()
             }

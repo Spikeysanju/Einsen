@@ -19,12 +19,15 @@
 
 package dev.spikeysanju.einsen.ui.theme.shape
 
-import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.Shapes
+import androidx.compose.runtime.staticCompositionLocalOf
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 
-val Shapes = Shapes(
-    small = RoundedCornerShape(4.dp),
-    medium = RoundedCornerShape(4.dp),
-    large = RoundedCornerShape(12.dp),
+data class AppShapes(
+    val shapeSmall: Dp = 4.dp,
+    val shapeMedium: Dp = 8.dp,
+    val shapeLarge: Dp = 12.dp,
+    val shapeXL: Dp = 24.dp
 )
+
+internal val LocalShapes = staticCompositionLocalOf { AppShapes() }

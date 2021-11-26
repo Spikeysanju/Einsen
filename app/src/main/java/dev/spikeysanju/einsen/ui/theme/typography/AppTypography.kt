@@ -87,4 +87,4 @@ data class AppTypography(
 
 )
 
-val LocalTypography = staticCompositionLocalOf { AppTypography() }
+internal val LocalTypography = staticCompositionLocalOf { AppTypography() }
