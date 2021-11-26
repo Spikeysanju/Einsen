@@ -35,8 +35,8 @@ android {
         applicationId = "dev.spikeysanju.einsen"
         minSdk = 21
         targetSdk = 30
-        versionCode = 3
-        versionName = "v1.0.0-alpha03"
+        versionCode = 4
+        versionName = "v1.0.0-alpha04"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
@@ -101,6 +101,13 @@ android {
     composeOptions {
         kotlinCompilerExtensionVersion = rootProject.extra["composeVersion"] as String
     }
+
+    packagingOptions {
+        // Multiple dependency bring these files in. Exclude them to enable
+        // our test APK to build (has no effect on our AARs)
+        resources.excludes += "/META-INF/AL2.0"
+        resources.excludes += "/META-INF/LGPL2.1"
+    }
 }
 dependencies {
 
@@ -123,7 +130,6 @@ dependencies {
     implementation(platform("com.google.firebase:firebase-bom:29.0.0"))
     implementation("com.google.firebase:firebase-crashlytics-ktx")
     implementation("com.google.firebase:firebase-analytics-ktx")
-
 
     // compose navigation
     implementation("androidx.navigation:navigation-compose:${rootProject.extra["composeNavigationVersion"]}")

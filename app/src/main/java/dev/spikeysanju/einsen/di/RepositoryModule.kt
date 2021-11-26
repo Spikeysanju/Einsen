@@ -19,29 +19,21 @@
 
 package dev.spikeysanju.einsen.di
 
-import android.app.NotificationManager
-import android.content.Context
-import com.google.firebase.analytics.FirebaseAnalytics
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
-import dagger.hilt.android.qualifiers.ApplicationContext
-import dagger.hilt.components.SingletonComponent
-import javax.inject.Singleton
+import dagger.hilt.android.components.ViewModelComponent
+import dagger.hilt.android.scopes.ViewModelScoped
+import dev.spikeysanju.einsen.data.local.db.TaskDao
+import dev.spikeysanju.einsen.repository.MainRepository
 
 @Module
-@InstallIn(SingletonComponent::class)
-object AppModule {
+@InstallIn(ViewModelComponent::class)
+object RepositoryModule {
 
-    @Singleton
     @Provides
-    fun provideFirebaseAnalytics(@ApplicationContext context: Context): FirebaseAnalytics {
-        return FirebaseAnalytics.getInstance(context)
-    }
-
-    @Singleton
-    @Provides
-    fun provideNotificationManager(@ApplicationContext context: Context): NotificationManager {
-        return context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+    @ViewModelScoped
+    fun provideRepository(taskDao: TaskDao): MainRepository {
+        return MainRepository(taskDao = taskDao)
     }
 }

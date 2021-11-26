@@ -17,13 +17,17 @@
  *
  */
 
-package dev.spikeysanju.einsen.data.local.db
+package dev.spikeysanju.einsen.ui.theme.shape
 
-import androidx.room.Database
-import androidx.room.RoomDatabase
-import dev.spikeysanju.einsen.model.task.Task
+import androidx.compose.runtime.staticCompositionLocalOf
+import androidx.compose.ui.unit.Dp
+import androidx.compose.ui.unit.dp
 
-@Database(entities = [Task::class], version = 3, exportSchema = true)
-abstract class EinsenDatabase : RoomDatabase() {
-    abstract fun getTaskDao(): TaskDao
-}
+data class AppShapes(
+    val shapeSmall: Dp = 4.dp,
+    val shapeMedium: Dp = 8.dp,
+    val shapeLarge: Dp = 12.dp,
+    val shapeXL: Dp = 24.dp
+)
+
+internal val LocalShapes = staticCompositionLocalOf { AppShapes() }

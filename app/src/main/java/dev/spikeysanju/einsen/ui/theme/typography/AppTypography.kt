@@ -17,9 +17,9 @@
  *
  */
 
-package dev.spikeysanju.einsen.ui.theme
+package dev.spikeysanju.einsen.ui.theme.typography
 
-import androidx.compose.material.Typography
+import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
@@ -27,81 +27,64 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
 import dev.spikeysanju.einsen.R
 
-val Sailec = FontFamily(
+val sailec = FontFamily(
     Font(R.font.sailec_regular),
     Font(R.font.sailec_medium, FontWeight.SemiBold),
     Font(R.font.sailec_bold, FontWeight.Bold)
 )
 
-// Set of Material typography styles to start with
-val typography = Typography(
+data class AppTypography(
 
-    h1 = TextStyle(
-        fontFamily = Sailec,
-        fontWeight = FontWeight.Bold,
-        fontSize = 80.sp
-    ),
-
-    h2 = TextStyle(
-        fontFamily = Sailec,
+    val bigTitle: TextStyle = TextStyle(
+        fontFamily = sailec,
         fontWeight = FontWeight.Bold,
         fontSize = 48.sp
     ),
-    h3 = TextStyle(
-        fontFamily = Sailec,
-        fontWeight = FontWeight.Normal,
-        fontSize = 36.sp
-    ),
-    h4 = TextStyle(
-        fontFamily = Sailec,
-        fontWeight = FontWeight.W600,
-        fontSize = 30.sp
-    ),
-    h5 = TextStyle(
-        fontFamily = Sailec,
+
+    val h1: TextStyle = TextStyle(
+        fontFamily = sailec,
         fontWeight = FontWeight.Bold,
-        fontSize = 24.sp
+        fontSize = 24.sp,
     ),
-    h6 = TextStyle(
-        fontFamily = Sailec,
+
+    val h2: TextStyle = TextStyle(
+        fontFamily = sailec,
         fontWeight = FontWeight.Bold,
         fontSize = 20.sp
     ),
-    subtitle1 = TextStyle(
-        fontFamily = Sailec,
-        fontWeight = FontWeight.Normal,
+
+    val subtitle: TextStyle = TextStyle(
+        fontFamily = sailec,
+        fontWeight = FontWeight.SemiBold,
         fontSize = 16.sp
     ),
-    subtitle2 = TextStyle(
-        fontFamily = Sailec,
-        fontWeight = FontWeight.W500,
-        fontSize = 14.sp
-    ),
-    body1 = TextStyle(
-        fontFamily = Sailec,
+
+    val body: TextStyle = TextStyle(
+        fontFamily = sailec,
         fontWeight = FontWeight.Normal,
-        fontSize = 16.sp,
+        fontSize = 14.sp,
         lineHeight = 24.sp
     ),
-    body2 = TextStyle(
-        fontFamily = Sailec,
-        fontSize = 14.sp,
-        lineHeight = 20.sp
-    ),
-    button = TextStyle(
-        fontFamily = Sailec,
-        fontWeight = FontWeight.W500,
+
+    val button: TextStyle = TextStyle(
+        fontFamily = sailec,
+        fontWeight = FontWeight.Bold,
         fontSize = 14.sp
     ),
-    caption = TextStyle(
-        fontFamily = Sailec,
+
+    val caption: TextStyle = TextStyle(
+        fontFamily = sailec,
         fontWeight = FontWeight.Normal,
         fontSize = 12.sp
     ),
-    overline = TextStyle(
-        fontFamily = Sailec,
-        fontWeight = FontWeight.W500,
-        fontSize = 12.sp
 
+    val overline: TextStyle = TextStyle(
+        fontFamily = sailec,
+        fontWeight = FontWeight.SemiBold,
+        fontSize = 10.sp,
+        letterSpacing = 1.25.sp
     )
+
 )
+
+internal val LocalTypography = staticCompositionLocalOf { AppTypography() }

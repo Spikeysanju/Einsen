@@ -30,4 +30,8 @@
     <color name="white_200">#EEEEEE</color>
     <color name="white_300">#F4F4F4</color>
     <color name="white_400">#F4F7FD</color>
+
+    // dark mode color
+    <color name="black_dark">#162544</color>
+    <color name="bg">#0C1B3A</color>
 </resources>

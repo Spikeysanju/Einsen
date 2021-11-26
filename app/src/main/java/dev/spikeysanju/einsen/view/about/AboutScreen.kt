@@ -20,11 +20,13 @@
 package dev.spikeysanju.einsen.view.about
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -59,13 +61,13 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.core.os.bundleOf
 import com.google.firebase.analytics.FirebaseAnalytics
 import dev.spikeysanju.einsen.BuildConfig
 import dev.spikeysanju.einsen.R
 import dev.spikeysanju.einsen.navigation.MainActions
-import dev.spikeysanju.einsen.ui.theme.einsenColors
-import dev.spikeysanju.einsen.ui.theme.typography
+import dev.spikeysanju.einsen.ui.theme.apptheme.AppTheme
 import dev.spikeysanju.einsen.view.viewmodel.MainViewModel
 import java.net.URLEncoder
 import java.nio.charset.StandardCharsets
@@ -103,10 +105,10 @@ fun AboutScreen(modifier: Modifier, viewModel: MainViewModel, actions: MainActio
                 title = {
                     Text(
                         text = stringResource(id = R.string.text_about),
-                        style = typography.h6,
+                        style = AppTheme.typography.h2,
                         textAlign = TextAlign.Start,
-                        color = einsenColors.black,
-                        modifier = modifier.padding(start = 16.dp)
+                        color = AppTheme.colors.text,
+                        modifier = modifier.padding(start = AppTheme.dimensions.paddingXL)
                     )
                 },
                 navigationIcon = {
@@ -114,17 +116,27 @@ fun AboutScreen(modifier: Modifier, viewModel: MainViewModel, actions: MainActio
                         Icon(
                             painter = painterResource(id = R.drawable.ic_back),
                             contentDescription = stringResource(R.string.back_button),
-                            tint = einsenColors.black
+                            tint = AppTheme.colors.primary
                         )
                     }
                 },
-                backgroundColor = einsenColors.background, elevation = 0.dp
+                backgroundColor = AppTheme.colors.background, elevation = 0.dp
             )
-        }
-
+        },
+        modifier = modifier
+            .fillMaxSize()
+            .background(AppTheme.colors.background)
     ) {
         val listState = rememberLazyListState()
-        LazyColumn(state = listState, contentPadding = PaddingValues(16.dp)) {
+        LazyColumn(
+            state = listState,
+            contentPadding = PaddingValues(AppTheme.dimensions.paddingXL),
+            modifier = modifier
+                .fillMaxSize()
+                .background(
+                    AppTheme.colors.background
+                )
+        ) {
 
             item {
 
@@ -140,7 +152,7 @@ fun AboutScreen(modifier: Modifier, viewModel: MainViewModel, actions: MainActio
             }
 
             item {
-                Spacer(modifier = modifier.height(24.dp))
+                Spacer(modifier = modifier.height(AppTheme.dimensions.paddingXXL))
                 val (version, code) = getVersionCodeAndName()
                 TitleAndDescription(
                     modifier,
@@ -150,7 +162,7 @@ fun AboutScreen(modifier: Modifier, viewModel: MainViewModel, actions: MainActio
             }
 
             item {
-                Spacer(modifier = modifier.height(24.dp))
+                Spacer(modifier = modifier.height(AppTheme.dimensions.paddingXXL))
                 TitleAndDescription(
                     title = stringResource(R.string.text_attribution_and_license),
                     description = stringResource(
@@ -163,7 +175,7 @@ fun AboutScreen(modifier: Modifier, viewModel: MainViewModel, actions: MainActio
                 url = stringResource(id = R.string.text_repo_link)
                 title = stringResource(id = R.string.text_visit)
 
-                Spacer(modifier = modifier.height(24.dp))
+                Spacer(modifier = modifier.height(AppTheme.dimensions.paddingXXL))
                 TitleAndURL(
                     title = stringResource(R.string.text_visit),
                     url = url,
@@ -197,13 +209,17 @@ fun TitleAndDescription(modifier: Modifier = Modifier, title: String, descriptio
     ) {
         Text(
             text = title,
-            style = typography.subtitle1,
-            color = einsenColors.black,
+            style = AppTheme.typography.subtitle,
+            color = AppTheme.colors.text,
             fontWeight = FontWeight.Bold
         )
-        Spacer(modifier = modifier.height(8.dp))
+        Spacer(modifier = modifier.height(AppTheme.dimensions.paddingMedium))
         CompositionLocalProvider(values = arrayOf(LocalContentAlpha provides ContentAlpha.disabled)) {
-            Text(text = description, style = typography.subtitle2, color = einsenColors.black)
+            Text(
+                text = description,
+                style = AppTheme.typography.body,
+                color = AppTheme.colors.text
+            )
         }
     }
 }
@@ -217,20 +233,21 @@ fun TitleAndURL(modifier: Modifier = Modifier, title: String, url: String, onCli
     ) {
         Text(
             text = title,
-            style = typography.subtitle1,
-            color = einsenColors.black,
+            style = AppTheme.typography.subtitle,
+            color = AppTheme.colors.text,
             fontWeight = FontWeight.Bold
         )
-        Spacer(modifier = modifier.height(8.dp))
+        Spacer(modifier = modifier.height(AppTheme.dimensions.paddingMedium))
         CompositionLocalProvider(values = arrayOf(LocalContentAlpha provides ContentAlpha.disabled)) {
             Text(
                 text = AnnotatedString(
                     text = url,
                     spanStyle = SpanStyle(
-                        color = einsenColors.calm,
+                        color = AppTheme.colors.information,
                         fontFamily = FontFamily(
                             Font(R.font.avenir_medium, FontWeight.Medium)
                         ),
+                        fontSize = 14.sp,
                         textDecoration = TextDecoration.Underline
                     )
                 ),

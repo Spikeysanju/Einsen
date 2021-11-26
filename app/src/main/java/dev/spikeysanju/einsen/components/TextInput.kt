@@ -19,8 +19,11 @@
 
 package dev.spikeysanju.einsen.components
 
+import android.content.res.Configuration.UI_MODE_NIGHT_YES
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
@@ -39,9 +42,8 @@ import androidx.compose.ui.focus.FocusDirection
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.unit.dp
-import dev.spikeysanju.einsen.ui.theme.einsenColors
-import dev.spikeysanju.einsen.ui.theme.typography
+import androidx.compose.ui.tooling.preview.Preview
+import dev.spikeysanju.einsen.ui.theme.apptheme.AppTheme
 
 /**
  * This customer Label component with helps to show the label for the input field of this app.
@@ -52,9 +54,9 @@ import dev.spikeysanju.einsen.ui.theme.typography
 fun EinsenLabelView(title: String) {
     Text(
         text = title,
-        style = typography.caption,
+        style = AppTheme.typography.caption,
         textAlign = TextAlign.Start,
-        color = einsenColors.black
+        color = AppTheme.colors.text
     )
 }
 
@@ -83,7 +85,10 @@ fun EinsenInputTextField(
         TextField(
             modifier = modifier
                 .fillMaxWidth()
-                .padding(start = 20.dp, end = 20.dp),
+                .padding(
+                    start = AppTheme.dimensions.paddingXL,
+                    end = AppTheme.dimensions.paddingXL
+                ),
             value = value,
             readOnly = readOnly,
             enabled = enabled,
@@ -103,7 +108,7 @@ fun EinsenInputTextField(
             },
 
             label = { EinsenLabelView(title = title) },
-            textStyle = typography.body1,
+            textStyle = AppTheme.typography.body,
             colors = textFieldColors(),
             keyboardOptions = KeyboardOptions(imeAction = ImeAction.Next),
             keyboardActions = KeyboardActions(
@@ -131,9 +136,13 @@ fun EinsenInputTextField(
         if (errorState) {
             Text(
                 errorMessage,
-                style = typography.caption,
-                color = einsenColors.err,
-                modifier = modifier.padding(top = 12.dp, start = 16.dp, end = 16.dp)
+                style = AppTheme.typography.caption,
+                color = AppTheme.colors.error,
+                modifier = modifier.padding(
+                    top = AppTheme.dimensions.paddingLarge,
+                    start = AppTheme.dimensions.paddingXL,
+                    end = AppTheme.dimensions.paddingLarge
+                )
             )
         }
     }
@@ -153,14 +162,17 @@ fun EinsenInputTextFieldWithoutHint(
         TextField(
             modifier = modifier
                 .fillMaxWidth()
-                .padding(start = 20.dp, end = 20.dp),
+                .padding(
+                    start = AppTheme.dimensions.paddingXL,
+                    end = AppTheme.dimensions.paddingXL
+                ),
             value = value,
             onValueChange = {
                 onValueChanged(it)
             },
 
             label = { EinsenLabelView(title = title) },
-            textStyle = typography.body1,
+            textStyle = AppTheme.typography.body,
             colors = textFieldColors(),
             keyboardOptions = KeyboardOptions(imeAction = ImeAction.Search),
             keyboardActions = KeyboardActions(
@@ -176,12 +188,34 @@ fun EinsenInputTextFieldWithoutHint(
 
 @Composable
 fun textFieldColors() = TextFieldDefaults.textFieldColors(
-    textColor = einsenColors.black,
-    focusedLabelColor = einsenColors.black,
-    focusedIndicatorColor = einsenColors.black,
-    unfocusedIndicatorColor = einsenColors.background,
-    cursorColor = einsenColors.black,
-    backgroundColor = einsenColors.card,
-    placeholderColor = einsenColors.black,
-    disabledPlaceholderColor = einsenColors.black
+    textColor = AppTheme.colors.text,
+    focusedLabelColor = AppTheme.colors.text,
+    focusedIndicatorColor = AppTheme.colors.text,
+    unfocusedIndicatorColor = AppTheme.colors.card,
+    cursorColor = AppTheme.colors.text,
+    backgroundColor = AppTheme.colors.card,
+    placeholderColor = AppTheme.colors.card,
+    disabledPlaceholderColor = AppTheme.colors.card
 )
+
+@Preview(name = "Text Input Field", group = "Input", uiMode = UI_MODE_NIGHT_YES)
+@Composable
+fun TextInputPreview() {
+    Column {
+        EinsenInputTextField(
+            title = "Title", value = "Einsen Architecture",
+            onValueChanged = {
+                // value change action goes here
+            }
+        )
+
+        Spacer(modifier = Modifier.height(AppTheme.dimensions.paddingLarge))
+
+        EinsenInputTextFieldWithoutHint(
+            title = "Description", value = "Einsen Architecture is really cool!",
+            onValueChanged = {
+                // value change action goes here
+            }
+        )
+    }
+}

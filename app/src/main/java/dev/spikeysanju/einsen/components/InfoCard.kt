@@ -29,7 +29,6 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.MaterialTheme.typography
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -38,9 +37,9 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.unit.dp
+import androidx.compose.ui.tooling.preview.Preview
 import dev.spikeysanju.einsen.R
-import dev.spikeysanju.einsen.ui.theme.einsenColors
+import dev.spikeysanju.einsen.ui.theme.apptheme.AppTheme
 
 /**
  * This component helps to show Importance & Priority in CardView.
@@ -52,9 +51,11 @@ import dev.spikeysanju.einsen.ui.theme.einsenColors
 fun InfoCard(title: String, value: String, modifier: Modifier) {
     Box(
         modifier = modifier
-            .clip(RoundedCornerShape(12.dp))
-            .background(color = einsenColors.card)
-            .padding(12.dp),
+            .clip(RoundedCornerShape(AppTheme.shapes.shapeLarge))
+            .background(color = AppTheme.colors.card)
+            .padding(
+                AppTheme.dimensions.paddingLarge
+            ),
         contentAlignment = Alignment.Center
     ) {
         Column(
@@ -71,21 +72,31 @@ fun InfoCard(title: String, value: String, modifier: Modifier) {
             Text(
                 text = builder.toString(),
                 modifier = Modifier.fillMaxWidth(),
-                color = einsenColors.black,
-                style = typography.subtitle1,
+                color = AppTheme.colors.text,
+                style = AppTheme.typography.subtitle,
                 fontWeight = FontWeight.W600,
                 textAlign = TextAlign.Center
             )
 
-            Spacer(modifier = Modifier.height(4.dp))
+            Spacer(modifier = Modifier.height(AppTheme.dimensions.paddingSmall))
 
             Text(
-                text = title,
+                text = title.uppercase(),
                 modifier = Modifier.fillMaxWidth(),
-                color = einsenColors.black.copy(.7f),
-                style = typography.overline,
+                color = AppTheme.colors.text.copy(.7f),
+                style = AppTheme.typography.overline,
                 textAlign = TextAlign.Center
             )
         }
+    }
+}
+
+@Preview(name = "Info card", group = "Card")
+@Composable
+fun InfoCardPreview() {
+    Column {
+        InfoCard(title = "Urgency", value = "2", modifier = Modifier)
+        Spacer(modifier = Modifier.height(AppTheme.dimensions.paddingMedium))
+        InfoCard(title = "Importance", value = "2", modifier = Modifier)
     }
 }

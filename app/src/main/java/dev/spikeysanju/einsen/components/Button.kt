@@ -19,6 +19,7 @@
 
 package dev.spikeysanju.einsen.components
 
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -30,14 +31,18 @@ import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.Icon
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.painter.Painter
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import dev.spikeysanju.einsen.ui.theme.einsenColors
-import dev.spikeysanju.einsen.ui.theme.typography
+import dev.spikeysanju.einsen.R
+import dev.spikeysanju.einsen.ui.theme.apptheme.AppTheme
+
 /**
  * This component helps to perform call to action of this app.
  * @param title
@@ -51,18 +56,18 @@ fun PrimaryButton(modifier: Modifier = Modifier, title: String, onclick: () -> U
             .fillMaxWidth()
             .height(54.dp)
             .clip(RoundedCornerShape(60.dp))
-            .padding(start = 20.dp, end = 20.dp),
+            .padding(start = AppTheme.dimensions.paddingXL, end = AppTheme.dimensions.paddingXL),
         onClick = { onclick() },
         colors = ButtonDefaults.buttonColors(
-            backgroundColor = einsenColors.button,
-            contentColor = einsenColors.white
+            backgroundColor = AppTheme.colors.primary,
+            contentColor = AppTheme.colors.white
         ),
     ) {
         Text(
             text = title,
-            style = typography.subtitle2,
+            style = AppTheme.typography.button,
             textAlign = TextAlign.Center,
-            color = einsenColors.white
+            color = AppTheme.colors.white
         )
     }
 }
@@ -86,7 +91,7 @@ fun PrimaryButtonWithIcon(
         onClick = { onclick() },
         colors = ButtonDefaults.buttonColors(
             backgroundColor = color,
-            contentColor = Color.White
+            contentColor = AppTheme.colors.white
         )
     ) {
         Icon(
@@ -95,13 +100,34 @@ fun PrimaryButtonWithIcon(
             tint = Color.White
         )
 
-        Spacer(modifier = modifier.width(12.dp))
+        Spacer(modifier = modifier.width(AppTheme.dimensions.paddingLarge))
 
         Text(
             text = title,
-            style = typography.subtitle2,
+            style = AppTheme.typography.button,
             textAlign = TextAlign.Center,
             color = Color.White
         )
+    }
+}
+
+@Preview(name = "Primary & Primary Button with Icon", group = "Button")
+@Composable
+fun ButtonPreview() {
+
+    Column(modifier = Modifier.fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontally) {
+
+        PrimaryButtonWithIcon(
+            title = "Save Information",
+            icon = painterResource(id = R.drawable.ic_check),
+            onclick = { },
+            color = AppTheme.colors.primary
+        )
+
+        Spacer(modifier = Modifier.height(AppTheme.dimensions.paddingLarge))
+
+        PrimaryButton(title = "Save Task") {
+            // onclick action goes here
+        }
     }
 }

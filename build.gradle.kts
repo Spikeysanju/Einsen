@@ -19,14 +19,14 @@
 
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 buildscript {
-    val composeVersion by extra("1.0.2")
+    val composeVersion by extra("1.0.5")
     val composeActivityVersion by extra("1.3.0-beta02")
     val ktxCoreVersion by extra("1.5.0")
     val lifeCycleVersion by extra("2.3.1")
     val materialVersion by extra("1.3.0")
     val composeNavigationVersion by extra("2.4.0-alpha03")
     val hiltComposeNavVersion by extra("1.0.0-alpha03")
-    val hiltVersion by extra("2.37")
+    val hiltVersion by extra("2.38.1")
     val workerVersion by extra("2.7.1")
     val hiltAndroidXVersion by extra("1.0.0-alpha03")
     val roomVersion by extra("2.3.0")
@@ -35,7 +35,7 @@ buildscript {
     val hiltComposeVersion by extra("1.0.0-alpha03")
     val hiltCompilerVersion by extra("1.0.0")
     val jdbcVersion by extra("3.36.0.3")
-    val kotlinVersion by extra("1.5.21")
+    val kotlinVersion by extra("1.5.31")
     val systemUIControllerVersion by extra("0.17.0")
     val expressoVersion by extra("3.3.0")
     val kotlinSerializationVersion by extra("1.2.1")
@@ -46,6 +46,7 @@ buildscript {
     val logcatVersion by extra("0.1")
     val googleServiceVersion by extra("4.3.10")
     val crashlyticsVersion by extra("2.8.0")
+    val constraintLayout by extra("1.0.0-rc02")
 
     repositories {
         google()
@@ -53,7 +54,7 @@ buildscript {
     }
 
     dependencies {
-        classpath("com.android.tools.build:gradle:7.2.0-alpha02")
+        classpath("com.android.tools.build:gradle:7.2.0-alpha05")
         classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:${kotlinVersion}")
         classpath("com.google.dagger:hilt-android-gradle-plugin:${hiltVersion}")
         classpath("com.google.gms:google-services:${googleServiceVersion}")
@@ -79,4 +80,8 @@ allprojects {
             ktlint("0.41.0").userData(mapOf("disabled_rules" to "no-wildcard-imports"))
         }
     }
+}
+
+tasks.register(name = "type", type = Delete::class) {
+    delete(rootProject.buildDir)
 }

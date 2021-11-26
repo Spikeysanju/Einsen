@@ -19,6 +19,7 @@
 
 package dev.spikeysanju.einsen.view.animationviewstate
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -43,8 +44,7 @@ import com.airbnb.lottie.compose.LottieConstants
 import com.airbnb.lottie.compose.animateLottieCompositionAsState
 import com.airbnb.lottie.compose.rememberLottieComposition
 import dev.spikeysanju.einsen.R
-import dev.spikeysanju.einsen.ui.theme.einsenColors
-import dev.spikeysanju.einsen.ui.theme.typography
+import dev.spikeysanju.einsen.ui.theme.apptheme.AppTheme
 
 @Composable
 fun AnimationViewState(
@@ -58,6 +58,7 @@ fun AnimationViewState(
     Column(
         modifier = modifier
             .fillMaxSize()
+            .background(AppTheme.colors.background)
             .wrapContentSize(Alignment.Center),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
@@ -108,30 +109,33 @@ fun LottieAnimationPlaceHolder(
     Text(
         text = title,
         modifier = modifier.fillMaxWidth(),
-        style = typography.h6,
+        style = AppTheme.typography.h2,
         textAlign = TextAlign.Center,
-        color = einsenColors.black
+        color = AppTheme.colors.text
     )
-    Spacer(modifier = modifier.height(8.dp))
+    Spacer(modifier = modifier.height(AppTheme.dimensions.paddingMedium))
     Text(
         text = description,
         modifier = modifier
             .fillMaxWidth()
-            .padding(start = 24.dp, end = 24.dp),
-        style = typography.body2,
+            .padding(
+                start = AppTheme.dimensions.paddingXXL,
+                end = AppTheme.dimensions.paddingXXL
+            ),
+        style = AppTheme.typography.body,
         maxLines = 3,
         textAlign = TextAlign.Center,
-        color = einsenColors.black.copy(.7F)
+        color = AppTheme.colors.text.copy(.7F)
     )
-    Spacer(modifier = modifier.height(24.dp))
+    Spacer(modifier = modifier.height(AppTheme.dimensions.paddingXXL))
     Button(
         onClick = { actions() },
         colors = ButtonDefaults.buttonColors(
-            backgroundColor = einsenColors.black,
-            contentColor = einsenColors.white
+            backgroundColor = AppTheme.colors.primary,
+            contentColor = AppTheme.colors.white
         )
     ) {
-        Text(text = callToAction)
+        Text(text = callToAction, style = AppTheme.typography.button)
     }
 }
 

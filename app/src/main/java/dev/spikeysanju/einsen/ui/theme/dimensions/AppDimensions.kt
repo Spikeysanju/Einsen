@@ -17,14 +17,20 @@
  *
  */
 
-package dev.spikeysanju.einsen.ui.theme
+package dev.spikeysanju.einsen.ui.theme.dimensions
 
-import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.Shapes
+import androidx.compose.runtime.staticCompositionLocalOf
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 
-val Shapes = Shapes(
-    small = RoundedCornerShape(4.dp),
-    medium = RoundedCornerShape(4.dp),
-    large = RoundedCornerShape(12.dp)
+data class AppDimensions(
+    val paddingNone: Dp = 0.dp,
+    val paddingSmall: Dp = 4.dp,
+    val paddingMedium: Dp = 8.dp,
+    val paddingLarge: Dp = 12.dp,
+    val paddingXL: Dp = 16.dp,
+    val paddingXXL: Dp = 24.dp,
+    val paddingXXXL: Dp = 36.dp
 )
+
+internal val LocalDimensions = staticCompositionLocalOf { AppDimensions() }

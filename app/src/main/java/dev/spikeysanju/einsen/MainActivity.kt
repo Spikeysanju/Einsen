@@ -35,8 +35,9 @@ import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import dagger.hilt.android.AndroidEntryPoint
 import dev.spikeysanju.einsen.data.local.datastore.ThemeManager
 import dev.spikeysanju.einsen.navigation.NavGraph
-import dev.spikeysanju.einsen.ui.theme.EinsenTheme
-import dev.spikeysanju.einsen.ui.theme.einsenColors
+import dev.spikeysanju.einsen.ui.theme.apptheme.AppTheme.AppTheme
+import dev.spikeysanju.einsen.ui.theme.color.darkColors
+import dev.spikeysanju.einsen.ui.theme.color.lightColors
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -67,7 +68,7 @@ class MainActivity : AppCompatActivity() {
         val darkMode by themeManager.uiModeFlow.collectAsState(initial = isSystemInDarkTheme())
 
         /**
-         * Set UI Mode accordingly
+         * Change UI Mode on toggle
          */
         val toggleTheme: () -> Unit = {
             lifecycleScope.launch {
@@ -75,8 +76,10 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        EinsenTheme(darkTheme = darkMode) {
-            Surface(color = einsenColors.bg) {
+        val colors = if (darkMode) darkColors() else lightColors()
+
+        AppTheme(colors = colors) {
+            Surface(color = dev.spikeysanju.einsen.ui.theme.apptheme.AppTheme.colors.background) {
                 SetStatusBarColor()
                 NavGraph(toggleTheme)
             }
@@ -100,7 +103,7 @@ class MainActivity : AppCompatActivity() {
 fun SetStatusBarColor() {
     // Remember a SystemUiController
     val systemUiController = rememberSystemUiController()
-    val color = einsenColors.bg
+    val color = dev.spikeysanju.einsen.ui.theme.apptheme.AppTheme.colors.background
 
     /**
      *  Update all of the system bar colors to be transparent, and use
@@ -114,6 +117,6 @@ fun SetStatusBarColor() {
 @Preview(showBackground = true)
 @Composable
 fun DefaultPreview() {
-    EinsenTheme {
+    AppTheme {
     }
 }

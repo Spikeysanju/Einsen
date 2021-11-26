@@ -22,6 +22,7 @@ package dev.spikeysanju.einsen.components
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -38,9 +39,10 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import dev.spikeysanju.einsen.R
-import dev.spikeysanju.einsen.ui.theme.einsenColors
+import dev.spikeysanju.einsen.ui.theme.apptheme.AppTheme
 
 /**
  * This component helps to perform action for each task like Edit, Delete & Share task of this app.
@@ -63,19 +65,26 @@ fun BottomCTA(
     onShare: () -> Unit,
     onButtonChange: () -> Unit
 ) {
+
     Box(
         modifier = modifier
             .fillMaxWidth()
             .height(80.dp)
-            .background(einsenColors.card),
+            .background(AppTheme.colors.card),
         contentAlignment = Alignment.Center
     ) {
         Row(
-            modifier = modifier.padding(top = 12.dp, bottom = 12.dp, start = 16.dp, end = 16.dp),
-            horizontalArrangement = Arrangement.SpaceAround
+            modifier = modifier.padding(
+                top = AppTheme.dimensions.paddingLarge,
+                bottom = AppTheme.dimensions.paddingLarge,
+                start = AppTheme.dimensions.paddingXL,
+                end = AppTheme.dimensions.paddingXL
+            ),
+            horizontalArrangement = Arrangement.SpaceAround,
+            verticalAlignment = Alignment.CenterVertically
         ) {
             ActionIcons(onEdit = { onEdit() }, onDelete = { onDelete() }, onShare = { onShare() })
-            Spacer(modifier = modifier.width(12.dp))
+            Spacer(modifier = modifier.width(AppTheme.dimensions.paddingLarge))
 
             Row(modifier = modifier.fillMaxWidth(), Arrangement.End) {
                 PrimaryButtonWithIcon(
@@ -109,7 +118,7 @@ fun ActionIcons(
             Icon(
                 painter = painterResource(id = R.drawable.ic_edit),
                 contentDescription = stringResource(R.string.text_edit_button),
-                tint = einsenColors.icon
+                tint = AppTheme.colors.primary
             )
         }
 
@@ -117,7 +126,7 @@ fun ActionIcons(
             Icon(
                 painter = painterResource(id = R.drawable.ic_delete),
                 contentDescription = stringResource(R.string.text_delete_button),
-                tint = einsenColors.icon
+                tint = AppTheme.colors.primary
             )
         }
 
@@ -125,8 +134,39 @@ fun ActionIcons(
             Icon(
                 painter = painterResource(id = R.drawable.ic_share),
                 contentDescription = stringResource(R.string.text_share_button),
-                tint = einsenColors.icon
+                tint = AppTheme.colors.primary
             )
+        }
+    }
+}
+
+@Preview(name = "Bottom CTA", group = "Button")
+@Composable
+fun BottomCTA() {
+
+    Column {
+
+        BottomCTA(
+            title = "Complete",
+            icon = painterResource(id = R.drawable.ic_check),
+            color = AppTheme.colors.black,
+            onEdit = { },
+            onDelete = { },
+            onShare = { }
+        ) {
+        }
+
+        Spacer(modifier = Modifier.height(AppTheme.dimensions.paddingMedium))
+
+        ActionIcons(
+            onEdit = {
+                // on edit action goes here
+            },
+            onDelete = {
+                // on delete action goes here
+            }
+        ) {
+            // on share action goes here
         }
     }
 }
