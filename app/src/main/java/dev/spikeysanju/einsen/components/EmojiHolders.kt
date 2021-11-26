@@ -36,8 +36,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import dev.spikeysanju.einsen.ui.theme.einsenColors
-import dev.spikeysanju.einsen.ui.theme.typography
+import dev.spikeysanju.einsen.ui.theme.apptheme.AppTheme
 
 /**
  * This component helps to show Emoji with Rounded background - larger version.
@@ -50,15 +49,15 @@ fun EmojiPlaceHolder(modifier: Modifier = Modifier, emoji: String, onSelect: () 
         modifier = modifier
             .size(100.dp)
             .clip(CircleShape)
-            .background(einsenColors.card)
+            .background(AppTheme.colors.card)
             .clickable { onSelect() },
         contentAlignment = Alignment.Center
     ) {
         Text(
             text = emoji,
-            style = typography.h2,
+            style = AppTheme.typography.h2,
             textAlign = TextAlign.Center,
-            color = einsenColors.text
+            color = AppTheme.colors.text
         )
     }
 }
@@ -78,13 +77,13 @@ fun EmojiPlaceHolderSmall(
         modifier = modifier
             .size(50.dp)
             .clip(CircleShape)
-            .background(einsenColors.card)
+            .background(AppTheme.colors.card)
             .clickable { onSelect(emoji) },
         contentAlignment = Alignment.Center
     ) {
         Text(
             text = emoji,
-            style = typography.h5,
+            style = AppTheme.typography.h1,
             textAlign = TextAlign.Center
         )
     }
@@ -110,7 +109,8 @@ fun EmojiPlaceHolderBottomSheet(
     ) {
         Text(
             text = emoji,
-            style = typography.h5,
+            style = AppTheme.typography.h1,
+            color = AppTheme.colors.text,
             textAlign = TextAlign.Center
         )
     }
@@ -124,19 +124,19 @@ fun EmojiHolderPreview() {
             // onclick action goes here
         }
 
-        Spacer(modifier = Modifier.height(12.dp))
+        Spacer(modifier = Modifier.height(AppTheme.dimensions.paddingLarge))
 
         EmojiPlaceHolderSmall(emoji = "\uD83D\uDD25") {
             // onclick action goes here
         }
 
-        Spacer(modifier = Modifier.height(12.dp))
+        Spacer(modifier = Modifier.height(AppTheme.dimensions.paddingLarge))
 
         EmojiPlaceHolderBottomSheet(emoji = "\uD83D\uDD25") {
             // onclick action geos here
         }
 
-        Spacer(modifier = Modifier.height(12.dp))
+        Spacer(modifier = Modifier.height(AppTheme.dimensions.paddingLarge))
 
         EmojiTextView(emoji = "\uD83D\uDD25")
     }

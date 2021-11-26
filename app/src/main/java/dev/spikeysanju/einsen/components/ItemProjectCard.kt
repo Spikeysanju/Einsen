@@ -33,8 +33,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import dev.spikeysanju.einsen.ui.theme.einsenColors
-import dev.spikeysanju.einsen.ui.theme.typography
+import dev.spikeysanju.einsen.ui.theme.apptheme.AppTheme
 
 @Composable
 fun ItemWorkspaceCard(
@@ -53,7 +52,7 @@ fun ItemWorkspaceCard(
             .clickable {
                 onCardClick()
             },
-        backgroundColor = einsenColors.card, shape = RoundedCornerShape(24.dp), elevation = 0.dp
+        backgroundColor = AppTheme.colors.card, shape = RoundedCornerShape(24.dp), elevation = 0.dp
     ) {
         Column(
             modifier = modifier
@@ -62,12 +61,16 @@ fun ItemWorkspaceCard(
             horizontalAlignment = Alignment.Start
         ) {
             EmojiTextView(emoji = emoji)
-            Spacer(modifier = modifier.height(12.dp))
-            Text(text = title, style = typography.h6, color = einsenColors.black)
-            Spacer(modifier = modifier.height(12.dp))
-            Text(text = itemCount, style = typography.caption, color = einsenColors.black)
+            Spacer(modifier = modifier.height(AppTheme.dimensions.paddingLarge))
+            Text(text = title, style = AppTheme.typography.h2, color = AppTheme.colors.text)
+            Spacer(modifier = modifier.height(AppTheme.dimensions.paddingLarge))
+            Text(
+                text = itemCount,
+                style = AppTheme.typography.caption,
+                color = AppTheme.colors.text
+            )
             Spacer(modifier = modifier.height(16.dp))
-            SmallChipView(title = tag, color = einsenColors.calm) {
+            SmallChipView(title = tag, color = AppTheme.colors.information) {
                 onChipViewClick()
             }
         }

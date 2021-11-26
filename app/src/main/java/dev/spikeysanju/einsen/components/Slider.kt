@@ -25,7 +25,6 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material.MaterialTheme.colors
 import androidx.compose.material.Slider
 import androidx.compose.material.SliderDefaults
 import androidx.compose.runtime.Composable
@@ -40,7 +39,7 @@ import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import dev.spikeysanju.einsen.ui.theme.einsenColors
+import dev.spikeysanju.einsen.ui.theme.apptheme.AppTheme
 
 /**
  * This customer slider component helps to show the slider with step indicator.
@@ -65,7 +64,7 @@ fun EinsenStepSlider(
     val lineHeightPx = with(LocalDensity.current) { lineHeightDp.toPx() }
     val canvasHeight = 50.dp
     val textPaint = android.graphics.Paint().apply {
-        color = einsenColors.black.toArgb()
+        color = AppTheme.colors.text.toArgb()
         textAlign = android.graphics.Paint.Align.CENTER
         this.textSize = textSize
     }
@@ -104,10 +103,10 @@ fun EinsenStepSlider(
             valueRange = 0f..points.size.minus(1).toFloat(),
             steps = points.size.minus(2),
             colors = SliderDefaults.colors(
-                thumbColor = einsenColors.card,
-                activeTrackColor = einsenColors.card,
-                inactiveTrackColor = colors.primaryVariant,
-                disabledThumbColor = colors.secondaryVariant
+                thumbColor = AppTheme.colors.primary,
+                activeTrackColor = AppTheme.colors.primary,
+                inactiveTrackColor = AppTheme.colors.black.copy(0.1F),
+                disabledThumbColor = AppTheme.colors.black.copy(0.1F)
             ),
             onValueChange = {
                 setSliderValue(it)

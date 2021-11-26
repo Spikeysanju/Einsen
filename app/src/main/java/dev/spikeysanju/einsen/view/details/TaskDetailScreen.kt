@@ -40,7 +40,6 @@ import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
-import androidx.compose.material.MaterialTheme.colors
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
 import androidx.compose.material.TopAppBar
@@ -70,8 +69,7 @@ import dev.spikeysanju.einsen.components.InfoCard
 import dev.spikeysanju.einsen.model.task.Priority
 import dev.spikeysanju.einsen.model.task.task
 import dev.spikeysanju.einsen.navigation.MainActions
-import dev.spikeysanju.einsen.ui.theme.einsenColors
-import dev.spikeysanju.einsen.ui.theme.typography
+import dev.spikeysanju.einsen.ui.theme.apptheme.AppTheme
 import dev.spikeysanju.einsen.utils.viewstate.SingleViewState
 import dev.spikeysanju.einsen.view.animationviewstate.AnimationViewState
 import dev.spikeysanju.einsen.view.animationviewstate.ScreenState
@@ -125,9 +123,9 @@ fun TaskDetailsScreen(
                 title = {
                     Text(
                         text = stringResource(id = R.string.text_taskDetails),
-                        style = typography.h6,
+                        style = AppTheme.typography.h2,
                         textAlign = TextAlign.Start,
-                        color = einsenColors.black,
+                        color = AppTheme.colors.text,
                         modifier = modifier.padding(start = 16.dp)
                     )
                 },
@@ -136,16 +134,16 @@ fun TaskDetailsScreen(
                         Icon(
                             painter = painterResource(id = R.drawable.ic_back),
                             contentDescription = stringResource(R.string.back_button),
-                            tint = einsenColors.black
+                            tint = AppTheme.colors.primary
                         )
                     }
                 },
-                backgroundColor = einsenColors.bg, elevation = 0.dp
+                backgroundColor = AppTheme.colors.background, elevation = 0.dp
             )
         },
         bottomBar = {
 
-            val buttonColor by animateColorAsState(if (taskState.isCompleted) einsenColors.err else einsenColors.success)
+            val buttonColor by animateColorAsState(if (taskState.isCompleted) AppTheme.colors.error else AppTheme.colors.success)
 
             val buttonTitle = when (taskState.isCompleted) {
                 true -> stringResource(id = R.string.text_incomplete)
@@ -236,7 +234,7 @@ fun TaskDetailsScreen(
                 LazyColumn(
                     modifier = modifier
                         .fillMaxSize()
-                        .background(einsenColors.bg)
+                        .background(AppTheme.colors.background)
                         .padding(start = 16.dp, end = 16.dp),
                     state = listState,
                     contentPadding = PaddingValues(top = 16.dp, bottom = 100.dp)
@@ -252,7 +250,7 @@ fun TaskDetailsScreen(
                                 .fillMaxWidth()
                                 .wrapContentHeight()
                                 .clip(RoundedCornerShape(12.dp))
-                                .background(einsenColors.card),
+                                .background(AppTheme.colors.card),
                             contentAlignment = Alignment.TopCenter
                         ) {
 
@@ -262,12 +260,12 @@ fun TaskDetailsScreen(
                                     .padding(
                                         start = 16.dp,
                                         end = 16.dp,
-                                        bottom = 24.dp,
-                                        top = 24.dp
+                                        bottom = AppTheme.dimensions.paddingExtraLarge,
+                                        top = AppTheme.dimensions.paddingExtraLarge
                                     )
                             ) {
 
-                                Spacer(modifier = modifier.height(24.dp))
+                                Spacer(modifier = modifier.height(AppTheme.dimensions.paddingExtraLarge))
 
                                 // Emoji view
                                 Box(
@@ -296,22 +294,22 @@ fun TaskDetailsScreen(
                                 // Title
                                 Text(
                                     text = task.title,
-                                    style = typography.h5,
+                                    style = AppTheme.typography.h1,
                                     textAlign = TextAlign.Start,
-                                    color = colors.onPrimary
+                                    color = AppTheme.colors.text
                                 )
 
-                                Spacer(modifier = modifier.height(24.dp))
+                                Spacer(modifier = modifier.height(AppTheme.dimensions.paddingExtraLarge))
 
                                 // Description
                                 Text(
                                     text = task.description,
-                                    style = typography.body1,
+                                    style = AppTheme.typography.body,
                                     textAlign = TextAlign.Start,
-                                    color = colors.onPrimary
+                                    color = AppTheme.colors.text
                                 )
 
-                                Spacer(modifier = modifier.height(24.dp))
+                                Spacer(modifier = modifier.height(AppTheme.dimensions.paddingExtraLarge))
 
                                 // Priority score card
                                 Row(
@@ -325,7 +323,7 @@ fun TaskDetailsScreen(
                                         modifier = weight
                                     )
 
-                                    Spacer(modifier = modifier.width(12.dp))
+                                    Spacer(modifier = modifier.width(AppTheme.dimensions.paddingLarge))
 
                                     InfoCard(
                                         title = stringResource(R.string.text_importance),

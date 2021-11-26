@@ -29,7 +29,6 @@ import androidx.compose.material.FloatingActionButton
 import androidx.compose.material.FloatingActionButtonDefaults
 import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
-import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
 import androidx.compose.material.TopAppBar
@@ -49,8 +48,7 @@ import dev.spikeysanju.einsen.R
 import dev.spikeysanju.einsen.components.TaskItemCard
 import dev.spikeysanju.einsen.model.task.Task
 import dev.spikeysanju.einsen.navigation.MainActions
-import dev.spikeysanju.einsen.ui.theme.einsenColors
-import dev.spikeysanju.einsen.ui.theme.typography
+import dev.spikeysanju.einsen.ui.theme.apptheme.AppTheme
 import dev.spikeysanju.einsen.utils.viewstate.ViewState
 import dev.spikeysanju.einsen.view.animationviewstate.AnimationViewState
 import dev.spikeysanju.einsen.view.animationviewstate.ScreenState
@@ -81,9 +79,9 @@ fun AllTaskScreen(
                 title = {
                     Text(
                         text = stringResource(id = R.string.text_allTask),
-                        style = typography.h6,
+                        style = AppTheme.typography.h2,
                         textAlign = TextAlign.Start,
-                        color = einsenColors.black,
+                        color = AppTheme.colors.text,
                         modifier = modifier.padding(start = 16.dp),
                     )
                 },
@@ -92,11 +90,11 @@ fun AllTaskScreen(
                         Icon(
                             painter = painterResource(id = R.drawable.ic_back),
                             contentDescription = stringResource(R.string.back_button),
-                            tint = einsenColors.black
+                            tint = AppTheme.colors.primary
                         )
                     }
                 },
-                backgroundColor = einsenColors.bg, elevation = 0.dp
+                backgroundColor = AppTheme.colors.background, elevation = 0.dp
             )
         },
         floatingActionButton = {
@@ -111,18 +109,18 @@ fun AllTaskScreen(
                         viewModel.firebaseLogEvent("all_task_add_button", aboutBundle)
                     }
                 },
-                backgroundColor = MaterialTheme.colors.onPrimary,
-                contentColor = MaterialTheme.colors.background,
+                backgroundColor = AppTheme.colors.primary,
+                contentColor = AppTheme.colors.text,
                 elevation = FloatingActionButtonDefaults.elevation(12.dp)
             ) {
                 Icon(
                     Icons.Filled.Add,
                     contentDescription = stringResource(id = R.string.text_addTask),
-                    tint = MaterialTheme.colors.onSecondary
+                    tint = AppTheme.colors.white
                 )
             }
         },
-        modifier = modifier.background(einsenColors.bg)
+        modifier = modifier.background(AppTheme.colors.background)
     ) {
 
         when (val result = viewModel.feed.collectAsState().value) {
@@ -169,7 +167,7 @@ fun AllTaskScreen(
                     ),
                     modifier = modifier
                         .fillMaxSize()
-                        .background(einsenColors.bg)
+                        .background(AppTheme.colors.background)
                 ) {
                     itemsIndexed(result.task) { index: Int, item: Task ->
                         TaskItemCard(

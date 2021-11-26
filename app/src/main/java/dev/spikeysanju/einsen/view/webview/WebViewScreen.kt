@@ -44,8 +44,7 @@ import androidx.core.os.bundleOf
 import com.google.firebase.analytics.FirebaseAnalytics
 import dev.spikeysanju.einsen.R
 import dev.spikeysanju.einsen.navigation.MainActions
-import dev.spikeysanju.einsen.ui.theme.einsenColors
-import dev.spikeysanju.einsen.ui.theme.typography
+import dev.spikeysanju.einsen.ui.theme.apptheme.AppTheme
 import dev.spikeysanju.einsen.view.viewmodel.MainViewModel
 
 @Composable
@@ -80,9 +79,9 @@ fun WebViewScreen(
                 title = {
                     Text(
                         text = title,
-                        style = typography.h6,
+                        style = AppTheme.typography.h2,
                         textAlign = TextAlign.Start,
-                        color = einsenColors.black,
+                        color = AppTheme.colors.text,
                         modifier = modifier.padding(start = 16.dp)
                     )
                 },
@@ -91,17 +90,17 @@ fun WebViewScreen(
                         Icon(
                             painter = painterResource(id = R.drawable.ic_back),
                             contentDescription = stringResource(R.string.back_button),
-                            tint = einsenColors.black
+                            tint = AppTheme.colors.primary
                         )
                     }
                 },
-                backgroundColor = einsenColors.bg, elevation = 0.dp
+                backgroundColor = AppTheme.colors.background, elevation = 0.dp
             )
         }
     ) {
         Box(
             modifier = modifier
-                .background(einsenColors.bg)
+                .background(AppTheme.colors.background)
                 .fillMaxSize()
         ) {
             WebPagePreview(url = url)

@@ -17,7 +17,7 @@
  *
  */
 
-package dev.spikeysanju.einsen.ui.theme
+package dev.spikeysanju.einsen.ui.theme.shape
 
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Shapes

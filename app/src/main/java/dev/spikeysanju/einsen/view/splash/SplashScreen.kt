@@ -33,7 +33,7 @@ import androidx.compose.ui.unit.dp
 import dev.spikeysanju.einsen.R
 import dev.spikeysanju.einsen.components.PulseEffect
 import dev.spikeysanju.einsen.navigation.MainActions
-import dev.spikeysanju.einsen.ui.theme.einsenColors
+import dev.spikeysanju.einsen.ui.theme.apptheme.AppTheme
 import kotlinx.coroutines.delay
 
 @Composable
@@ -41,7 +41,7 @@ fun SplashScreen(modifier: Modifier, actions: MainActions) {
 
     // Animate state
     LaunchedEffect(key1 = true) {
-        delay(2500L)
+        delay(2000L)
         actions.popBackStack.invoke()
         actions.gotoDashboard.invoke()
     }
@@ -51,7 +51,7 @@ fun SplashScreen(modifier: Modifier, actions: MainActions) {
         Box(
             modifier = modifier
                 .fillMaxSize()
-                .background(einsenColors.white),
+                .background(AppTheme.colors.background),
             contentAlignment = Alignment.Center
         ) {
             Image(

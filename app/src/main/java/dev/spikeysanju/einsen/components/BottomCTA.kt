@@ -42,7 +42,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import dev.spikeysanju.einsen.R
-import dev.spikeysanju.einsen.ui.theme.einsenColors
+import dev.spikeysanju.einsen.ui.theme.apptheme.AppTheme
 
 /**
  * This component helps to perform action for each task like Edit, Delete & Share task of this app.
@@ -65,11 +65,12 @@ fun BottomCTA(
     onShare: () -> Unit,
     onButtonChange: () -> Unit
 ) {
+
     Box(
         modifier = modifier
             .fillMaxWidth()
             .height(80.dp)
-            .background(einsenColors.card),
+            .background(AppTheme.colors.card),
         contentAlignment = Alignment.Center
     ) {
         Row(
@@ -112,7 +113,7 @@ fun ActionIcons(
             Icon(
                 painter = painterResource(id = R.drawable.ic_edit),
                 contentDescription = stringResource(R.string.text_edit_button),
-                tint = einsenColors.icon
+                tint = AppTheme.colors.primary
             )
         }
 
@@ -120,7 +121,7 @@ fun ActionIcons(
             Icon(
                 painter = painterResource(id = R.drawable.ic_delete),
                 contentDescription = stringResource(R.string.text_delete_button),
-                tint = einsenColors.icon
+                tint = AppTheme.colors.primary
             )
         }
 
@@ -128,7 +129,7 @@ fun ActionIcons(
             Icon(
                 painter = painterResource(id = R.drawable.ic_share),
                 contentDescription = stringResource(R.string.text_share_button),
-                tint = einsenColors.icon
+                tint = AppTheme.colors.primary
             )
         }
     }
@@ -143,14 +144,14 @@ fun BottomCTA() {
         BottomCTA(
             title = "Complete",
             icon = painterResource(id = R.drawable.ic_check),
-            color = einsenColors.black,
+            color = AppTheme.colors.black,
             onEdit = { },
             onDelete = { },
             onShare = { }
         ) {
         }
 
-        Spacer(modifier = Modifier.height(12.dp))
+        Spacer(modifier = Modifier.height(AppTheme.dimensions.paddingMedium))
 
         ActionIcons(
             onEdit = {

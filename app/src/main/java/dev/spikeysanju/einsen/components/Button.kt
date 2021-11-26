@@ -41,8 +41,8 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import dev.spikeysanju.einsen.R
-import dev.spikeysanju.einsen.ui.theme.einsenColors
-import dev.spikeysanju.einsen.ui.theme.typography
+import dev.spikeysanju.einsen.ui.theme.apptheme.AppTheme
+
 /**
  * This component helps to perform call to action of this app.
  * @param title
@@ -59,15 +59,15 @@ fun PrimaryButton(modifier: Modifier = Modifier, title: String, onclick: () -> U
             .padding(start = 20.dp, end = 20.dp),
         onClick = { onclick() },
         colors = ButtonDefaults.buttonColors(
-            backgroundColor = einsenColors.button,
-            contentColor = einsenColors.white
+            backgroundColor = AppTheme.colors.primary,
+            contentColor = AppTheme.colors.white
         ),
     ) {
         Text(
             text = title,
-            style = typography.subtitle1,
+            style = AppTheme.typography.button,
             textAlign = TextAlign.Center,
-            color = einsenColors.white
+            color = AppTheme.colors.white
         )
     }
 }
@@ -91,7 +91,7 @@ fun PrimaryButtonWithIcon(
         onClick = { onclick() },
         colors = ButtonDefaults.buttonColors(
             backgroundColor = color,
-            contentColor = Color.White
+            contentColor = AppTheme.colors.white
         )
     ) {
         Icon(
@@ -104,7 +104,7 @@ fun PrimaryButtonWithIcon(
 
         Text(
             text = title,
-            style = typography.subtitle2,
+            style = AppTheme.typography.button,
             textAlign = TextAlign.Center,
             color = Color.White
         )
@@ -121,7 +121,7 @@ fun ButtonPreview() {
             title = "Save Information",
             icon = painterResource(id = R.drawable.ic_check),
             onclick = { },
-            color = einsenColors.button
+            color = AppTheme.colors.primary
         )
 
         Spacer(modifier = Modifier.height(12.dp))

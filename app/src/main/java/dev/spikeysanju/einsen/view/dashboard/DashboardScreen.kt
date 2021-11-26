@@ -32,7 +32,6 @@ import androidx.compose.material.FloatingActionButton
 import androidx.compose.material.FloatingActionButtonDefaults
 import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
-import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
 import androidx.compose.material.TopAppBar
@@ -56,8 +55,7 @@ import dev.spikeysanju.einsen.R
 import dev.spikeysanju.einsen.components.DashboardCardItem
 import dev.spikeysanju.einsen.model.task.Priority
 import dev.spikeysanju.einsen.navigation.MainActions
-import dev.spikeysanju.einsen.ui.theme.einsenColors
-import dev.spikeysanju.einsen.ui.theme.typography
+import dev.spikeysanju.einsen.ui.theme.apptheme.AppTheme
 import dev.spikeysanju.einsen.utils.viewstate.ViewState
 import dev.spikeysanju.einsen.view.animationviewstate.AnimationViewState
 import dev.spikeysanju.einsen.view.animationviewstate.ScreenState
@@ -88,8 +86,8 @@ fun DashboardScreen(
                     Text(
                         text = stringResource(id = R.string.text_my_dashboard),
                         textAlign = TextAlign.Start,
-                        style = typography.h5,
-                        color = einsenColors.black
+                        style = AppTheme.typography.h1,
+                        color = AppTheme.colors.text
                     )
                 },
                 actions = {
@@ -109,15 +107,15 @@ fun DashboardScreen(
 
                         Icon(
                             painter = when (isSystemInDarkTheme()) {
-                                true -> painterResource(id = R.drawable.ic_bulb_on)
-                                false -> painterResource(id = R.drawable.ic_bulb_off)
+                                true -> painterResource(id = R.drawable.ic_bulb_off)
+                                false -> painterResource(id = R.drawable.ic_bulb_on)
                             },
                             contentDescription = stringResource(R.string.text_bulb_turn_on),
-                            tint = einsenColors.black
+                            tint = AppTheme.colors.primary
                         )
                     }
 
-                    Spacer(modifier = modifier.width(8.dp))
+                    Spacer(modifier = modifier.width(AppTheme.dimensions.paddingMedium))
 
                     IconButton(
                         onClick = {
@@ -133,11 +131,11 @@ fun DashboardScreen(
                         Icon(
                             painter = painterResource(id = R.drawable.ic_about),
                             contentDescription = stringResource(R.string.text_bulb_turn_on),
-                            tint = einsenColors.black
+                            tint = AppTheme.colors.primary
                         )
                     }
                 },
-                backgroundColor = einsenColors.bg, elevation = 0.dp
+                backgroundColor = AppTheme.colors.background, elevation = 0.dp
             )
         },
         floatingActionButton = {
@@ -154,14 +152,14 @@ fun DashboardScreen(
                         viewModel.firebaseLogEvent("dashboard_add_task_button", addTaskBundle)
                     }
                 },
-                backgroundColor = MaterialTheme.colors.onPrimary,
-                contentColor = MaterialTheme.colors.background,
+                backgroundColor = AppTheme.colors.primary,
+                contentColor = AppTheme.colors.text,
                 elevation = FloatingActionButtonDefaults.elevation(12.dp)
             ) {
                 Icon(
                     Icons.Filled.Add,
                     contentDescription = stringResource(id = R.string.text_addTask),
-                    tint = MaterialTheme.colors.onSecondary
+                    tint = AppTheme.colors.white
                 )
             }
         }
@@ -227,7 +225,7 @@ fun DashboardScreen(
                     contentPadding = PaddingValues(bottom = 100.dp),
                     modifier = modifier
                         .background(
-                            einsenColors.bg
+                            AppTheme.colors.background
                         )
                         .fillMaxSize()
                 ) {
@@ -237,7 +235,7 @@ fun DashboardScreen(
                             title = stringResource(R.string.text_do_it_now),
                             description = stringResource(R.string.text_important_and_urgent),
                             count = urgentCount.toString(),
-                            color = einsenColors.success,
+                            color = AppTheme.colors.success,
                             onClick = {
                                 actions.gotoAllTask(Priority.URGENT).run {
                                     // log event to firebase
@@ -259,7 +257,7 @@ fun DashboardScreen(
                             title = stringResource(R.string.text_decide_when_todo),
                             description = stringResource(R.string.text_important_not_urgent),
                             count = importantCount.toString(),
-                            color = einsenColors.calm,
+                            color = AppTheme.colors.information,
                             onClick = {
                                 actions.gotoAllTask(Priority.IMPORTANT).run {
                                     // log event to firebase
@@ -281,7 +279,7 @@ fun DashboardScreen(
                             title = stringResource(R.string.text_delegate_it),
                             description = stringResource(R.string.text_urgent_not_important),
                             count = delegateCount.toString(),
-                            color = einsenColors.err,
+                            color = AppTheme.colors.error,
                             onClick = {
                                 actions.gotoAllTask(Priority.DELEGATE).run {
                                     // log event to firebase
@@ -303,7 +301,7 @@ fun DashboardScreen(
                             title = stringResource(R.string.text_dump_it),
                             description = stringResource(R.string.text_not_important_not_urgent),
                             count = dumpCount.toString(),
-                            color = einsenColors.warning,
+                            color = AppTheme.colors.warning,
                             onClick = {
                                 actions.gotoAllTask(Priority.DUMP).run {
                                     // log event to firebase

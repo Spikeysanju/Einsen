@@ -40,8 +40,7 @@ import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import dev.spikeysanju.einsen.ui.theme.einsenColors
-import dev.spikeysanju.einsen.ui.theme.typography
+import dev.spikeysanju.einsen.ui.theme.apptheme.AppTheme
 import dev.spikeysanju.einsen.utils.coloredShadow
 
 /**
@@ -63,7 +62,8 @@ fun DashboardCardItem(
 ) {
     val gradientBrush = Brush.verticalGradient(listOf(color.copy(.8F), color), startY = 10F)
 
-    Spacer(modifier = modifier.height(24.dp))
+    Spacer(modifier = modifier.height(AppTheme.dimensions.paddingExtraLarge))
+
     Row(
         modifier = modifier
             .fillMaxWidth()
@@ -71,8 +71,8 @@ fun DashboardCardItem(
             .coloredShadow(
                 color,
                 alpha = 0.4F,
-                borderRadius = 10.dp,
-                shadowRadius = 24.dp,
+                borderRadius = AppTheme.dimensions.paddingExtraLarge,
+                shadowRadius = AppTheme.dimensions.paddingMedium,
                 offsetX = 0.dp,
                 offsetY = 4.dp
             )
@@ -90,12 +90,12 @@ fun DashboardCardItem(
                 .padding(top = 36.dp, bottom = 36.dp)
                 .align(Alignment.CenterVertically)
         ) {
-            Text(text = title, style = typography.h6, color = Color.White)
+            Text(text = title, style = AppTheme.typography.h2, color = Color.White)
             Spacer(modifier = modifier.height(16.dp))
-            Text(text = description, style = typography.subtitle1, color = Color.White)
+            Text(text = description, style = AppTheme.typography.subtitle, color = Color.White)
         }
         Spacer(modifier = modifier.width(16.dp))
-        Text(text = count, style = typography.h2, color = Color.White)
+        Text(text = count, style = AppTheme.typography.bigTitle, color = Color.White)
     }
 }
 
@@ -109,7 +109,7 @@ fun DashboardPreview() {
             title = "Do it now",
             description = "Important & Urgent",
             count = "13",
-            color = einsenColors.success
+            color = AppTheme.colors.success
         ) {
             // click action goes here
         }
@@ -118,7 +118,7 @@ fun DashboardPreview() {
             title = "Decide when to do",
             description = "Important not Urgent",
             count = "17",
-            color = einsenColors.calm
+            color = AppTheme.colors.information
         ) {
             // click action goes here
         }
@@ -128,7 +128,7 @@ fun DashboardPreview() {
             title = "Delegate it",
             description = "Urgent not Important",
             count = "03",
-            color = einsenColors.err
+            color = AppTheme.colors.error
         ) {
             // click action goes here
         }
@@ -138,7 +138,7 @@ fun DashboardPreview() {
             title = "Dump it",
             description = "Not Important & Not Urgent",
             count = "11",
-            color = einsenColors.warning
+            color = AppTheme.colors.warning
         ) {
             // click action goes here
         }

@@ -66,8 +66,7 @@ import com.google.firebase.analytics.FirebaseAnalytics
 import dev.spikeysanju.einsen.BuildConfig
 import dev.spikeysanju.einsen.R
 import dev.spikeysanju.einsen.navigation.MainActions
-import dev.spikeysanju.einsen.ui.theme.einsenColors
-import dev.spikeysanju.einsen.ui.theme.typography
+import dev.spikeysanju.einsen.ui.theme.apptheme.AppTheme
 import dev.spikeysanju.einsen.view.viewmodel.MainViewModel
 import java.net.URLEncoder
 import java.nio.charset.StandardCharsets
@@ -105,9 +104,9 @@ fun AboutScreen(modifier: Modifier, viewModel: MainViewModel, actions: MainActio
                 title = {
                     Text(
                         text = stringResource(id = R.string.text_about),
-                        style = typography.h6,
+                        style = AppTheme.typography.h2,
                         textAlign = TextAlign.Start,
-                        color = einsenColors.black,
+                        color = AppTheme.colors.text,
                         modifier = modifier.padding(start = 16.dp)
                     )
                 },
@@ -116,16 +115,16 @@ fun AboutScreen(modifier: Modifier, viewModel: MainViewModel, actions: MainActio
                         Icon(
                             painter = painterResource(id = R.drawable.ic_back),
                             contentDescription = stringResource(R.string.back_button),
-                            tint = einsenColors.black
+                            tint = AppTheme.colors.primary
                         )
                     }
                 },
-                backgroundColor = einsenColors.bg, elevation = 0.dp
+                backgroundColor = AppTheme.colors.background, elevation = 0.dp
             )
         },
         modifier = modifier
             .fillMaxSize()
-            .background(einsenColors.bg)
+            .background(AppTheme.colors.background)
     ) {
         val listState = rememberLazyListState()
         LazyColumn(
@@ -134,7 +133,7 @@ fun AboutScreen(modifier: Modifier, viewModel: MainViewModel, actions: MainActio
             modifier = modifier
                 .fillMaxSize()
                 .background(
-                    einsenColors.bg
+                    AppTheme.colors.background
                 )
         ) {
 
@@ -152,7 +151,7 @@ fun AboutScreen(modifier: Modifier, viewModel: MainViewModel, actions: MainActio
             }
 
             item {
-                Spacer(modifier = modifier.height(24.dp))
+                Spacer(modifier = modifier.height(AppTheme.dimensions.paddingExtraLarge))
                 val (version, code) = getVersionCodeAndName()
                 TitleAndDescription(
                     modifier,
@@ -162,7 +161,7 @@ fun AboutScreen(modifier: Modifier, viewModel: MainViewModel, actions: MainActio
             }
 
             item {
-                Spacer(modifier = modifier.height(24.dp))
+                Spacer(modifier = modifier.height(AppTheme.dimensions.paddingExtraLarge))
                 TitleAndDescription(
                     title = stringResource(R.string.text_attribution_and_license),
                     description = stringResource(
@@ -175,7 +174,7 @@ fun AboutScreen(modifier: Modifier, viewModel: MainViewModel, actions: MainActio
                 url = stringResource(id = R.string.text_repo_link)
                 title = stringResource(id = R.string.text_visit)
 
-                Spacer(modifier = modifier.height(24.dp))
+                Spacer(modifier = modifier.height(AppTheme.dimensions.paddingExtraLarge))
                 TitleAndURL(
                     title = stringResource(R.string.text_visit),
                     url = url,
@@ -209,13 +208,17 @@ fun TitleAndDescription(modifier: Modifier = Modifier, title: String, descriptio
     ) {
         Text(
             text = title,
-            style = typography.subtitle1,
-            color = einsenColors.black,
+            style = AppTheme.typography.subtitle,
+            color = AppTheme.colors.text,
             fontWeight = FontWeight.Bold
         )
         Spacer(modifier = modifier.height(8.dp))
         CompositionLocalProvider(values = arrayOf(LocalContentAlpha provides ContentAlpha.disabled)) {
-            Text(text = description, style = typography.subtitle2, color = einsenColors.black)
+            Text(
+                text = description,
+                style = AppTheme.typography.subtitle,
+                color = AppTheme.colors.text
+            )
         }
     }
 }
@@ -229,8 +232,8 @@ fun TitleAndURL(modifier: Modifier = Modifier, title: String, url: String, onCli
     ) {
         Text(
             text = title,
-            style = typography.subtitle1,
-            color = einsenColors.black,
+            style = AppTheme.typography.subtitle,
+            color = AppTheme.colors.text,
             fontWeight = FontWeight.Bold
         )
         Spacer(modifier = modifier.height(8.dp))
@@ -239,7 +242,7 @@ fun TitleAndURL(modifier: Modifier = Modifier, title: String, url: String, onCli
                 text = AnnotatedString(
                     text = url,
                     spanStyle = SpanStyle(
-                        color = einsenColors.calm,
+                        color = AppTheme.colors.information,
                         fontFamily = FontFamily(
                             Font(R.font.avenir_medium, FontWeight.Medium)
                         ),

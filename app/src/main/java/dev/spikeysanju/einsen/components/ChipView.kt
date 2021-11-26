@@ -37,7 +37,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import dev.spikeysanju.einsen.ui.theme.einsenColors
+import dev.spikeysanju.einsen.ui.theme.apptheme.AppTheme
 
 /**
  * This component helps to show the category for each Task of this app.
@@ -56,12 +56,12 @@ fun ChipView(
             .animateContentSize()
             .clickable(onClick = onClick)
             .clip(RoundedCornerShape(12.dp))
-            .background(einsenColors.button)
+            .background(AppTheme.colors.primary)
     ) {
         Text(
             text = title, modifier = modifier.padding(12.dp, 6.dp, 12.dp, 6.dp),
-            style = MaterialTheme.typography.overline,
-            color = einsenColors.white
+            style = AppTheme.typography.overline,
+            color = AppTheme.colors.white
         )
     }
 }
@@ -100,10 +100,10 @@ fun SmallChipView(
 fun ChipViewPreview() {
 
     Column {
-        SmallChipView(title = "Einsen", color = einsenColors.calm) {
+        SmallChipView(title = "Einsen", color = AppTheme.colors.information) {
             // onclick action
         }
-        Spacer(modifier = Modifier.height(12.dp))
+        Spacer(modifier = Modifier.height(AppTheme.dimensions.paddingLarge))
 
         ChipView(title = "Einsen") {
             // onclick action

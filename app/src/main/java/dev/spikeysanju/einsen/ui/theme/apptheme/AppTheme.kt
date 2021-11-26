@@ -17,7 +17,7 @@
  *
  */
 
-package dev.spikeysanju.einsen.ui.theme.theme
+package dev.spikeysanju.einsen.ui.theme.apptheme
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider

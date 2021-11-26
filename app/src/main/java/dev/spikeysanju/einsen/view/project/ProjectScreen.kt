@@ -31,7 +31,6 @@ import androidx.compose.material.FloatingActionButton
 import androidx.compose.material.FloatingActionButtonDefaults
 import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
-import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
 import androidx.compose.material.TopAppBar
@@ -50,8 +49,7 @@ import androidx.core.os.bundleOf
 import dev.spikeysanju.einsen.R
 import dev.spikeysanju.einsen.components.ItemWorkspaceCard
 import dev.spikeysanju.einsen.navigation.MainActions
-import dev.spikeysanju.einsen.ui.theme.einsenColors
-import dev.spikeysanju.einsen.ui.theme.typography
+import dev.spikeysanju.einsen.ui.theme.apptheme.AppTheme
 import dev.spikeysanju.einsen.view.viewmodel.MainViewModel
 
 @Composable
@@ -71,8 +69,8 @@ fun ProjectScreen(
                     Text(
                         text = stringResource(id = R.string.text_project),
                         textAlign = TextAlign.Start,
-                        style = typography.h5,
-                        color = einsenColors.black
+                        style = AppTheme.typography.h2,
+                        color = AppTheme.colors.text
                     )
                 },
                 actions = {
@@ -96,11 +94,11 @@ fun ProjectScreen(
                                 false -> painterResource(id = R.drawable.ic_bulb_off)
                             },
                             contentDescription = stringResource(R.string.text_bulb_turn_on),
-                            tint = einsenColors.black
+                            tint = AppTheme.colors.primary
                         )
                     }
 
-                    Spacer(modifier = modifier.width(8.dp))
+                    Spacer(modifier = modifier.width(AppTheme.dimensions.paddingMedium))
 
                     IconButton(
                         onClick = {
@@ -116,11 +114,11 @@ fun ProjectScreen(
                         Icon(
                             painter = painterResource(id = R.drawable.ic_about),
                             contentDescription = stringResource(R.string.text_bulb_turn_on),
-                            tint = einsenColors.black
+                            tint = AppTheme.colors.primary
                         )
                     }
                 },
-                backgroundColor = einsenColors.bg, elevation = 0.dp
+                backgroundColor = AppTheme.colors.background, elevation = 0.dp
             )
         },
         floatingActionButton = {
@@ -137,14 +135,14 @@ fun ProjectScreen(
                         viewModel.firebaseLogEvent("project_add_workspace_button", addTaskBundle)
                     }
                 },
-                backgroundColor = MaterialTheme.colors.onPrimary,
-                contentColor = MaterialTheme.colors.background,
+                backgroundColor = AppTheme.colors.primary,
+                contentColor = AppTheme.colors.text,
                 elevation = FloatingActionButtonDefaults.elevation(12.dp)
             ) {
                 Icon(
                     Icons.Filled.Add,
                     contentDescription = stringResource(id = R.string.text_addTask),
-                    tint = MaterialTheme.colors.onSecondary
+                    tint = AppTheme.colors.white
                 )
             }
         }
@@ -155,7 +153,7 @@ fun ProjectScreen(
             cells = GridCells.Adaptive(minSize = gridSize),
             modifier
                 .fillMaxSize()
-                .background(einsenColors.bg)
+                .background(AppTheme.colors.background)
         ) {
 
             item {

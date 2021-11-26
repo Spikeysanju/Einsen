@@ -32,10 +32,9 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Checkbox
 import androidx.compose.material.CheckboxDefaults
-import androidx.compose.material.MaterialTheme.colors
-import androidx.compose.material.MaterialTheme.shapes
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
@@ -53,9 +52,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import dev.spikeysanju.einsen.model.task.Priority
 import dev.spikeysanju.einsen.model.task.Task
-import dev.spikeysanju.einsen.ui.theme.Sailec
-import dev.spikeysanju.einsen.ui.theme.einsenColors
-import dev.spikeysanju.einsen.ui.theme.typography
+import dev.spikeysanju.einsen.ui.theme.apptheme.AppTheme
+import dev.spikeysanju.einsen.ui.theme.typography.sailec
 
 /**
  * This component is used to show all the task item of this app.
@@ -72,7 +70,7 @@ fun TaskItemCard(
     onCheckboxChange: (Boolean) -> Unit
 ) {
 
-    Spacer(modifier = modifier.height(12.dp))
+    Spacer(modifier = modifier.height(AppTheme.dimensions.paddingLarge))
     Row(
         modifier = modifier.fillMaxWidth(),
         verticalAlignment = Alignment.CenterVertically,
@@ -92,7 +90,7 @@ fun TaskItemCard(
             }
         )
 
-        Spacer(modifier = modifier.width(12.dp))
+        Spacer(modifier = modifier.width(AppTheme.dimensions.paddingLarge))
 
         /**
          * Emoji + (title + category)
@@ -100,8 +98,8 @@ fun TaskItemCard(
         Row(
             modifier = modifier
                 .fillMaxWidth()
-                .clip(shape = shapes.large)
-                .background(einsenColors.card)
+                .clip(RoundedCornerShape(AppTheme.dimensions.paddingLarge))
+                .background(AppTheme.colors.card)
                 .clickable { onClick() },
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.Start
@@ -111,7 +109,7 @@ fun TaskItemCard(
              * Emoji Text View
              */
             EmojiTextView(emoji = task.emoji)
-            Spacer(modifier = modifier.width(12.dp))
+            Spacer(modifier = modifier.width(AppTheme.dimensions.paddingLarge))
 
             /**
              * Title + category
@@ -126,21 +124,17 @@ fun TaskItemCard(
                         true -> TextStyle(
                             textDecoration = TextDecoration.LineThrough,
                             fontSize = 16.sp,
-                            fontFamily = Sailec,
+                            fontFamily = sailec,
                             fontWeight = FontWeight.SemiBold
                         )
-                        false -> TextStyle(
-                            fontSize = 16.sp,
-                            fontFamily = Sailec,
-                            fontWeight = FontWeight.SemiBold
-                        )
+                        false -> AppTheme.typography.subtitle
                     },
-                    color = einsenColors.black,
+                    color = AppTheme.colors.text,
                     maxLines = 1,
                     overflow = TextOverflow.Ellipsis
                 )
 
-                Spacer(modifier = modifier.height(12.dp))
+                Spacer(modifier = modifier.height(AppTheme.dimensions.paddingLarge))
 
                 Text(
                     text = task.category,
@@ -148,12 +142,12 @@ fun TaskItemCard(
                         true -> TextStyle(
                             textDecoration = TextDecoration.LineThrough,
                             fontSize = 12.sp,
-                            fontFamily = Sailec,
+                            fontFamily = sailec,
                             fontWeight = FontWeight.Normal
                         )
-                        false -> typography.caption
+                        false -> AppTheme.typography.caption
                     },
-                    color = einsenColors.black.copy(.7f)
+                    color = AppTheme.colors.text.copy(.7f)
                 )
             }
         }
@@ -169,15 +163,15 @@ fun EmojiTextView(modifier: Modifier = Modifier, emoji: String) {
     Box(
         modifier = modifier
             .size(80.dp)
-            .padding(12.dp)
+            .padding(AppTheme.dimensions.paddingLarge)
             .clip(CircleShape)
             .clickable { }
-            .background(einsenColors.bg)
+            .background(AppTheme.colors.background)
     ) {
         Text(
             text = emoji,
-            color = einsenColors.black,
-            style = typography.subtitle1,
+            color = AppTheme.colors.text,
+            style = AppTheme.typography.subtitle,
             textAlign = TextAlign.Center,
             modifier = modifier.align(Alignment.Center)
         )
@@ -197,8 +191,9 @@ fun EisenCheckBox(value: Boolean, onValueChanged: (Boolean) -> Unit) {
             onValueChanged(it)
         },
         colors = CheckboxDefaults.colors(
-            colors.onPrimary,
-            colors.onPrimary.copy(0.3F)
+            uncheckedColor = AppTheme.colors.primary,
+            checkedColor = AppTheme.colors.primary,
+            checkmarkColor = AppTheme.colors.white
         )
     )
 }

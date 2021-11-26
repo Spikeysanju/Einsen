@@ -46,7 +46,7 @@ import dev.spikeysanju.einsen.R
 import dev.spikeysanju.einsen.components.EinsenInputTextFieldWithoutHint
 import dev.spikeysanju.einsen.components.EmojiPlaceHolderBottomSheet
 import dev.spikeysanju.einsen.navigation.MainActions
-import dev.spikeysanju.einsen.ui.theme.einsenColors
+import dev.spikeysanju.einsen.ui.theme.apptheme.AppTheme
 import dev.spikeysanju.einsen.utils.viewstate.EmojiViewState
 import dev.spikeysanju.einsen.view.animationviewstate.AnimationViewState
 import dev.spikeysanju.einsen.view.animationviewstate.ScreenState
@@ -88,7 +88,7 @@ fun AllEmojiScreen(
         }
     )
 
-    Column(modifier = modifier.background(einsenColors.bg)) {
+    Column(modifier = modifier.background(AppTheme.colors.background)) {
 
         // Title
         BottomSheetTitle()
@@ -107,7 +107,7 @@ fun AllEmojiScreen(
         LazyVerticalGrid(
             state = listState,
             modifier = modifier
-                .background(einsenColors.bg)
+                .background(AppTheme.colors.background)
                 .weight(1f)
                 .align(Alignment.CenterHorizontally),
             cells = GridCells.Adaptive(minSize = gridSize)

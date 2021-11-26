@@ -30,6 +30,8 @@ class AppColors(
     text: Color,
     card: Color,
     background: Color,
+    white: Color,
+    black: Color,
     info: Color,
     warning: Color,
     success: Color,
@@ -47,6 +49,12 @@ class AppColors(
         private set
 
     var background by mutableStateOf(background)
+        private set
+
+    var white by mutableStateOf(white)
+        private set
+
+    var black by mutableStateOf(black)
         private set
 
     var information by mutableStateOf(info)
@@ -69,13 +77,15 @@ class AppColors(
         text: Color = this.text,
         card: Color = this.card,
         background: Color = this.background,
+        white: Color = this.white,
+        black: Color = this.black,
         info: Color = this.information,
         warning: Color = this.warning,
         success: Color = this.success,
         error: Color = this.error,
         isLight: Boolean = this.isLight
     ): AppColors = AppColors(
-        primary, text, card, background, info, warning, success, error, isLight
+        primary, text, card, background, white, black, info, warning, success, error, isLight
     )
 
     fun updateColorsFrom(other: AppColors) {
@@ -83,6 +93,8 @@ class AppColors(
         text = other.text
         card = other.card
         background = other.background
+        white = other.white
+        black = other.black
         information = other.information
         warning = other.warning
         success = other.success
@@ -92,10 +104,14 @@ class AppColors(
 }
 
 // light mode color themes
-private val lightPrimaryColor = Color(0xFF066EF7)
+private val lightPrimaryColor = Color(0xFF000000)
 private val lightTextColor = Color(0xFF000000)
 private val lightCardColor = Color(0xFFFFFFFF)
 private val lightBackgroundColor = Color(0xFFF6F9FF)
+
+// neutral color
+private val white = Color(0xFFFFFFFF)
+private val black = Color(0xFF000000)
 
 // state color for light theme
 private val lightErrorColor = Color(0xFFEB5757)
@@ -104,10 +120,10 @@ private val lightSuccessColor = Color(0xFF6FCF97)
 private val lightInformationColor = Color(0xFF006AF6)
 
 // dark mode color themes
-private val darkPrimaryColor = Color(0xFF066EF7)
-private val darkTextColor = Color(0xFF000000)
-private val darkCardColor = Color(0xFFFFFFFF)
-private val darkBackgroundColor = Color(0xFFF6F9FF)
+private val darkPrimaryColor = Color(0xFFFFFFFF)
+private val darkTextColor = Color(0xFFFFFFFF)
+private val darkCardColor = Color(0xFF0C1B3A)
+private val darkBackgroundColor = Color(0xFF162544)
 
 // state color for dark theme
 private val darkErrorColor = Color(0xFFEB5757)
@@ -120,6 +136,8 @@ fun lightColors(
     text: Color = lightTextColor,
     card: Color = lightCardColor,
     background: Color = lightBackgroundColor,
+    whiteLight: Color = white,
+    blackLight: Color = black,
     info: Color = lightInformationColor,
     warning: Color = lightWarningColor,
     success: Color = lightSuccessColor,
@@ -129,6 +147,8 @@ fun lightColors(
     text = text,
     card = card,
     background = background,
+    white = whiteLight,
+    black = blackLight,
     info = info,
     warning = warning,
     success = success,
@@ -137,23 +157,27 @@ fun lightColors(
 )
 
 fun darkColors(
-    primary: Color = darkPrimaryColor,
-    text: Color = darkTextColor,
-    card: Color = darkCardColor,
-    background: Color = darkBackgroundColor,
-    info: Color = darkInformationColor,
-    warning: Color = darkWarningColor,
-    success: Color = darkSuccessColor,
-    error: Color = darkErrorColor
+    primaryDark: Color = darkPrimaryColor,
+    textDark: Color = darkTextColor,
+    cardDark: Color = darkCardColor,
+    backgroundDark: Color = darkBackgroundColor,
+    whiteDark: Color = black,
+    blackDark: Color = whiteDark,
+    infoDark: Color = darkInformationColor,
+    warningDark: Color = darkWarningColor,
+    successDark: Color = darkSuccessColor,
+    errorDark: Color = darkErrorColor
 ): AppColors = AppColors(
-    primary = primary,
-    text = text,
-    card = card,
-    background = background,
-    info = info,
-    warning = warning,
-    success = success,
-    error = error,
+    primary = primaryDark,
+    text = textDark,
+    card = cardDark,
+    background = backgroundDark,
+    white = whiteDark,
+    black = blackDark,
+    info = infoDark,
+    warning = warningDark,
+    success = successDark,
+    error = errorDark,
     isLight = false
 )
 

@@ -34,6 +34,13 @@ val sailec = FontFamily(
 )
 
 data class AppTypography(
+
+    val bigTitle: TextStyle = TextStyle(
+        fontFamily = sailec,
+        fontWeight = FontWeight.Bold,
+        fontSize = 48.sp
+    ),
+
     val h1: TextStyle = TextStyle(
         fontFamily = sailec,
         fontWeight = FontWeight.Bold,
@@ -46,10 +53,17 @@ data class AppTypography(
         fontSize = 20.sp
     ),
 
+    val subtitle: TextStyle = TextStyle(
+        fontFamily = sailec,
+        fontWeight = FontWeight.SemiBold,
+        fontSize = 16.sp
+    ),
+
     val body: TextStyle = TextStyle(
         fontFamily = sailec,
         fontWeight = FontWeight.Normal,
-        fontSize = 14.sp
+        fontSize = 14.sp,
+        lineHeight = 24.sp
     ),
 
     val button: TextStyle = TextStyle(
@@ -67,7 +81,8 @@ data class AppTypography(
     val overline: TextStyle = TextStyle(
         fontFamily = sailec,
         fontWeight = FontWeight.SemiBold,
-        fontSize = 10.sp
+        fontSize = 10.sp,
+        letterSpacing = 1.25.sp
     )
 
 )
