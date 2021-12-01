@@ -4,6 +4,9 @@ import einsen.spikeysanju.dev.data.repository.task.TaskRepository
 import einsen.spikeysanju.dev.data.request.task.CreateTaskRequest
 import einsen.spikeysanju.dev.utils.ServiceResult
 
+/**
+ * Class responsible to verify our Task CRUD request and returns appropriate result.
+ */
 class TaskService(
     private val taskRepository: TaskRepository
 ) {
@@ -45,6 +48,21 @@ class TaskService(
     private suspend fun updateTask(taskId: String, task: CreateTaskRequest): ServiceResult {
         taskRepository.updateTask(taskId, task).run {
             return ServiceResult.Success(this)
+        }
+    }
+
+    suspend fun verifyAndDeleteTask(userId: String, taskId: String): ServiceResult {
+        return when {
+            !taskRepository.verifyTaskExistence(taskId) -> ServiceResult.Error("Task with $taskId doesn't exists")
+            !taskRepository.verifyTaskIsOfUser(userId, taskId) -> ServiceResult.Error("This is none of your task")
+            else -> deleteTask(taskId)
+        }
+    }
+
+    private suspend fun deleteTask(taskId: String): ServiceResult {
+        taskRepository.deleteTask(taskId).run {
+            return if (this) ServiceResult.Success("Success") else
+                ServiceResult.Error("Error deleting task with $taskId id. Please try again later")
         }
     }
 }

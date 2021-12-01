@@ -17,3 +17,4 @@ local.properties
 # Project exclude paths
 /api/.gradle/
 /api/.idea/
+/api/build/

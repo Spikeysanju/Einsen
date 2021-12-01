@@ -32,7 +32,7 @@ fun Route.createTask(
                     EinsenResponse(true, data = TaskResponse(result.message))
                 )
                 is ServiceResult.Error -> call.respond(
-                    HttpStatusCode.BadRequest,
+                    HttpStatusCode.OK,
                     EinsenResponse<Unit>(false, result.message)
                 )
             }

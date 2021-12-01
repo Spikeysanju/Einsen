@@ -6,6 +6,9 @@ import org.jetbrains.exposed.sql.Database
 import org.jetbrains.exposed.sql.SchemaUtils
 import org.jetbrains.exposed.sql.transactions.transaction
 
+/**
+ * To initialize connection with our DB
+ */
 fun initializeDatabase(databaseConfig: DatabaseConfig) {
     val tables = arrayOf(UserTable, TaskTable)
 

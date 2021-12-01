@@ -24,16 +24,8 @@ fun Route.updateTask(
                 return@put
             }
 
-            val userId = call.parameters["userId"] ?: return@put
+            val userId = call.userId
             val taskId = call.parameters["taskId"] ?: return@put
-
-            if (userId != call.userId) {
-                call.respond(
-                    HttpStatusCode.BadRequest,
-                    EinsenResponse<Unit>(false, "Please use the Bearer token of the User Id mentioned.")
-                )
-                return@put
-            }
 
             when (val result = service.validateAndUpdateTask(userId, taskId, response)) {
                 is ServiceResult.Success -> call.respond(
@@ -41,7 +33,7 @@ fun Route.updateTask(
                     EinsenResponse(true, data = TaskResponse(result.message))
                 )
                 is ServiceResult.Error -> call.respond(
-                    HttpStatusCode.BadRequest,
+                    HttpStatusCode.OK,
                     EinsenResponse<Unit>(false, result.message)
                 )
             }

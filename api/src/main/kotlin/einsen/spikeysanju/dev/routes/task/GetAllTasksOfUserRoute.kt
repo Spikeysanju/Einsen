@@ -20,8 +20,8 @@ fun Route.getAllTasksOfUser(
 
             if (userId != call.userId) {
                 call.respond(
-                    HttpStatusCode.BadRequest,
-                    EinsenResponse<Unit>(false, message = "Please use the Bearer token of the User Id mentioned.")
+                    HttpStatusCode.OK,
+                    EinsenResponse<Unit>(false, additionalMessage = "Please use the Bearer token of the User Id mentioned.")
                 )
                 return@get
             }

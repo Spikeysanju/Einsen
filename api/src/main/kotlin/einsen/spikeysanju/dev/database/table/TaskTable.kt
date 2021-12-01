@@ -10,7 +10,7 @@ object TaskTable : UUIDTable() {
     var description = text("description")
     var category = varchar("category", length = 50)
     var emoji = varchar("emoji", length = 10)
-    var urgency = integer("urgency")
+    var urgency = integer("urgency",)
     var importance = integer("importance")
     var priority = integer("priority")
     var due = varchar("due", length = 50)
