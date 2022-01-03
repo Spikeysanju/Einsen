@@ -4,16 +4,23 @@ val logbackVersion: String by project
 val koinVersion: String by project
 val postgresVersion: String by project
 
-@Suppress("SpellCheckingInspection")
 plugins {
     application
     kotlin("jvm") version "1.6.0"
     id("org.jetbrains.kotlin.plugin.serialization") version "1.6.0"
-    id("org.jlleitschuh.gradle.ktlint") version "10.2.0"
+    id("org.jlleitschuh.gradle.ktlint") version "10.2.1"
 }
 
-group = "einsen.spikeysanju.dev"
-version = "0.0.1"
+allprojects {
+    group = "einsen.spikeysanju.dev"
+    version = "0.0.1"
+
+    repositories {
+        mavenCentral()
+        maven { setUrl("https://dl.bintray.com/kotlin/ktor") }
+    }
+}
+
 application {
     mainClass.set("io.ktor.server.netty.EngineMain")
 }
@@ -22,7 +29,6 @@ repositories {
     mavenCentral()
 }
 
-@Suppress("SpellCheckingInspection")
 dependencies {
     // Ktor
     implementation("io.ktor:ktor-server-core:$ktorVersion")
@@ -47,11 +53,5 @@ dependencies {
     implementation("io.insert-koin:koin-logger-slf4j:$koinVersion")
 
     // Coroutines
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.2-native-mt")
-
-    ktlint("com.pinterest:ktlint:0.43.0") {
-        attributes {
-            attribute(Bundling.BUNDLING_ATTRIBUTE, objects.named(Bundling.EXTERNAL))
-        }
-    }
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.0-native-mt")
 }
