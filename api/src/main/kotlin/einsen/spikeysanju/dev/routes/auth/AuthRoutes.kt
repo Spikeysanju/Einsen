@@ -26,11 +26,14 @@ fun Route.registerAuthenticationRoutes(
         when (val result = service.validateCredentialsForLogin(response.username, response.password)) {
             is ServiceResult.Success -> call.respond(
                 HttpStatusCode.OK,
-                EinsenResponse(true, data = AuthResponse(userId ?: return@post, result.message))
+                EinsenResponse(
+                    success = true,
+                    additionalMessage = "Login Successful.",
+                    data = AuthResponse(userId ?: return@post, result.message)
+                )
             )
             is ServiceResult.Error -> call.respond(
-                HttpStatusCode.OK,
-                EinsenResponse<Unit>(false, result.message)
+                HttpStatusCode.OK, EinsenResponse<Unit>(false, result.message)
             )
         }
     }
@@ -43,8 +46,7 @@ fun Route.registerAuthenticationRoutes(
         when (val result = service.validateCredentialsForRegistration(response.username, response.password)) {
             is ServiceResult.Success -> call.respond(HttpStatusCode.OK, EinsenResponse<Unit>(true, result.message))
             is ServiceResult.Error -> call.respond(
-                HttpStatusCode.OK,
-                EinsenResponse<Unit>(false, result.message)
+                HttpStatusCode.OK, EinsenResponse<Unit>(false, result.message)
             )
         }
     }
